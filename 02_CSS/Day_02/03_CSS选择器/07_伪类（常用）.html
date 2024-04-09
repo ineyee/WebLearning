@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div:hover {
+      color: #ff0000ff;
+    }
+
+    .content:hover {
+      color: #ff0000ff;
+    }
+
+    a:link {
+      color: #ff0000ff;
+    }
+
+    a:visited {
+      color: #00ff00ff;
+    }
+
+    a:focus {
+      color: #0000ffff;
+    }
+
+    a:hover {
+      color: #ffff00ff;
+    }
+
+    a:active {
+      color: #00ffffff;
+    }
+  </style>
+</head>
+<body>
+  <!-- 
+    伪类是选择器的一种，实际开发中一般用来给【元素的某种特定状态】设置样式
+    选择器:状态名 {
+
+    }
+    
+    比如：
+    * 给a元素的link状态设置样式：未访问的链接
+    * 给a元素的visited状态设置样式：已访问的链接
+    * 给a元素的focus状态设置样式：被选中时（在网页里按tab键可以切换选中的元素）
+    * 给a元素的hover状态设置样式：鼠标悬浮在元素上面
+    * 给a元素的active状态设置样式：鼠标在元素上面按下去了且没松开手
+
+    不过需要注意的是：
+    * hover必须写在link、visited、focus后面才能完全生效
+    * active必须写在hover后面才能完全生效
+    * 所以推荐的顺序是：link、visited、focus、hover、active
+
+    此外：
+    * link、visited只能用在a元素身上
+    * focus还可以用在input这类能被选中的元素身上
+    * hover、active还可以用在其它很多元素身上
+   -->
+
+  <!-- 假设我们有个需求是把鼠标hover到div元素和p元素上时，字体变红，就得用伪类来实现 -->
+   <div>我是div元素</div>
+   <p class="content">我是p元素</p>
+
+   <!-- 我们把上面4个状态用在a元素身上演示一下 -->
+   <a href="https://www.baidu.com">百度一下</a>
+</body>
+</html>
