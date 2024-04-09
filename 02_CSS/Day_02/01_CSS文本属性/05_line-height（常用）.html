@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .for-font {
+      background-color: #ff0000ff;
+      width: 200px;
+      /* 整个p元素的高度 */
+      height: 400px; 
+
+      /* 某一行文字的高度 */
+      line-height: 1.8em;
+    }
+
+    .box {
+      background-color: #00ff00ff;
+      width: 200px;
+      /* 整个p元素的高度 */
+      height: 200px; 
+    }
+
+    .box-center {
+      background-color: #0000ffff;
+      width: 200px;
+      /* 整个p元素的高度 */
+      height: 200px; 
+
+      line-height: 200px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 
+    一、line-height属性是用来设置文本的【行高】的——变着法也就是在设置文本的【行间距】，行高可以简单的理解为【一行文字】所占据的高度
+
+    严格来说line-height是两行文字基线（baseline）之间的距离——行间距，我们都知道写英文的时候有四条线，它们分别是：
+    这是第一行文字：
+    ___________顶线（top）
+    ___________中线（middle）
+    ___________基线（baseline）
+    ___________底线（bottom）
+    这是第二行文字：
+    ___________顶线（top）
+    ___________中线（middle）
+    ___________基线（baseline）
+    ___________底线（bottom）
+
+    所以我们设置line-height其实不是在设置某一行文字内的行高，而是在设置相邻两行文字之间的间距，但是因为线条之间的相对关系，两条基线之间的距离恰好就等于两条顶线之间的距离——即一行文字的高度，因此我们才常说line-height是用来设置文本的【行高】的，但我们也常说line-height是用来设置文本的【行间距】的，这两种说法都是对的
+
+    （line-height - 字体的大小） / 2 = 上间距和下间距
+   -->
+   <div class="for-font">
+    所以我们设置line-height其实不是在设置某一行文字内的行高，而是在设置相邻两行文字之间的间距，但是因为线条之间的相对关系，两条基线之间的距离恰好就等于两条顶线之间的距离——即一行文字的高度，因此我们才常说line-height是用来设置文本的【行高】的，但我们也常说line-height是用来设置文本的【行间距】的，这两种说法都是对的
+   <div/>
+
+   <!-- 
+    二、line-height除了设置行高/行间距以外，还有另外一个非常有用的应用场景就是【文本竖向居中显示】，文本之外的其它元素竖向居中显示就不能用这个了，要用到布局相关的了，我们后续再说
+
+    比如说我们有个div，它的高度是100px，它里面有一行文本，那一行文本默认的行高就是包裹住文字那么小一行的高度，因此它在竖向肯定是不居中的，但【如果我们把div一行文本的行高给它设置成跟div本身的高度一样高】，那文本自然就会居中显示了
+    -->
+    <div class="box">
+      Hello World!
+    </div>
+
+    <div class="box-center">
+      Hello World!
+    </div>
+</body>
+</html>
