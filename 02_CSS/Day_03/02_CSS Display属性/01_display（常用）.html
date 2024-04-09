@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      background-color: red;
+    }
+
+    .change1 {
+      display: inline;
+    }
+
+    span {
+      background-color: green;
+    }
+
+    .change2 {
+      display: block;
+    }
+
+    .change3 {
+      display: inline-block;
+
+      width: 100px;
+      height: 100px;
+    }
+
+    .change4 {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- 
+    块级元素的display属性值默认为block
+    行内级元素的display属性值默认为inline
+    我们可以手动设置元素的display属性来修改元素的level
+
+    display属性的取值有4个：
+    1、block：让元素显示为块级元素
+      * 块级元素的宽度默认撑满一行，高度包裹内容 
+      * 但是块级元素可以设置宽度和高度，也就是说对于块级元素来说width和height属性是生效的；不过就算我们给它们设置了宽度和高度，它们还是会独占一行，也就是说宽度虽然变小了，但是margin会变大，因为它们的margin-right=auto
+    2、inline：让元素显示为行内级元素
+      * 行内级元素的宽高默认都是包裹内容
+      * 而且行内级元素不可以设置宽度和高度，也就是说对于行内级元素来说width和height属性是无效的；我们没法改变它们的宽高，它们的宽高完全是由内容决定的（包裹内容）；但是img元素虽然是个行内级元素，但是它可以设置宽高，主要是因为img元素是个可替换元素，我们设置的其实是替换后资源的宽高，包括我们后面会学到的input元素、video元素都可以设置宽高，它们都是行内元素，但也都是可替换元素
+    3、inline-block：让元素同时具备行内级、块级元素的特征
+      * inline在前面就意味着这种元素首先是行内级元素，也就是说不会独占一行，它的宽高默认都是包裹内容
+      * 但是block在后面就是为了让这个元素具备块级元素的特性——可以设置宽高
+    4、none：隐藏元素，并且使用这种隐藏方式，元素不会占据任何空间，在界面上就跟完全不存在一样，但它依然存在于HTML的结构里
+   -->
+
+    <!-- 1、比如span元素原本是行内级元素，我们可以把它改成块级元素 -->
+    <span>我是span元素</span>
+    <span class="change2">我也是span元素</span>
+
+    <!-- 2、比如div元素原本是块级元素，我们可以把它改成行内级元素 -->
+    <div>我是div元素</div>
+    <div class="change1">我也是div元素</div>
+
+    <!-- 3、行内块级元素 -->
+    <div>我是div元素</div>
+    <div class="change3">我也是div元素</div>
+
+    <!-- 4、隐藏元素 -->
+    <div class="change4">我也是div元素</div>
+</body>
+</html>

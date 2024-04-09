@@ -10,8 +10,13 @@
       color: #ff0000ff;
     }
 
+    /* 伪元素都是行内元素，所以如果我们想设置它们的宽高，就必须先把它们搞成行内块级元素 */
     .item::after {
       content: url("https://picsum.photos/20/20");
+
+      display: inline-block;
+      width: 10px;
+      height: 10px;
     }
   </style>
 </head>
