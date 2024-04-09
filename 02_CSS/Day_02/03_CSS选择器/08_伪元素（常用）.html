@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .item::before {
+      content: "1";
+      color: #ff0000ff;
+    }
+
+    .item::after {
+      content: url("https://picsum.photos/20/20");
+    }
+  </style>
+</head>
+<body>
+  <!-- 
+    伪元素是选择器的一种，实际开发中一般用来给【元素内容的某一部分】设置样式
+    选择器::伪元素名 {
+      content: xxx（注意：就算没内容，也千万不要省略这个属性，否则东西有可能显示不出来）
+    }
+    
+    比如：
+    * ::before：用来在一个元素内容之前插入其它内容（可以是文字、图片地址、类似消息小红点那种视图也行）
+    * ::after：用来在一个元素内容之后插入其它内容（可以是文字、图片地址、类似消息小红点那种视图也行）
+   -->
+
+   <div class="item">我是div元素</div>
+   <div class="item">我也是div元素</div>
+   <div class="item">我还是div元素</div>
+</body>
+</html>
