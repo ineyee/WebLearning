@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      background-color: red;
+      
+      width: 200px;
+      height: 200px;
+
+      box-shadow: 5px 5px 10px 5px green, 10px 10px 10px 5px blue;
+    }
+  </style>
+</head>
+<body>
+  <!-- 
+    box-shadow用来设置一个或多个阴影，参数顺序如下：
+    1、offset-x：阴影在x轴方向上的偏移量
+    2、offset-y：阴影在y轴方向上的偏移量
+    3、blur-radius：阴影的模糊半径，如果阴影没有模糊效果，会是很生硬的色块，因此都会设置模糊效果
+    4、spread-radius：阴影的外溢半径，设置了123的话阴影一般是朝固定的方向——x、y的缘故，不可能四周都有阴影效果，所以如果你想四周都有，那就得再搞一下扩散让阴影溢出到没有的方向
+    5、color：阴影的颜色
+   -->
+   <div class="box"></div>
+</body>
+</html>
