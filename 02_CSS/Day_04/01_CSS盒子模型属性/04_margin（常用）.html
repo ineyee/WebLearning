@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .external {
+      background-color: red;
+      
+      width: 200px;
+      height: 200px;
+    }
+
+    .internal {
+      background-color: green;
+      
+      width: 100px;
+      height: 100px;
+
+      /* 
+      块级元素的横向居中：
+      0px是上下间距，auto是左右间距、所以会平均分配给左右、从而横向居中
+       */
+      margin: 0px auto;
+    }
+  </style>
+</head>
+<body>
+  <!-- 
+    一、外边距margin用来设置元素与元素之间的间距，尤指兄弟元素之间，设置元素跟父元素之间的间距最好不要用元素的margin来做、虽然可以但是会出现上下传递的问题、推荐用父元素的padding来做、虽然也会出现问题、但是从语义上来说最好用padding来做）：
+    1、margin
+      * 写1个值就是四个边全部设置为这个值，margin: 10px;
+      * 写2个值就是竖向横向分别设置，margin: 10px 20px;
+      * 写4个值就是顺时针分别设置，margin: 10px 20px 10px 20px;
+    2、margin-top
+    3、margin-right
+    4、margin-bottom
+    5、margin-left
+   -->
+
+   <!-- 
+    二、margin的上下传递问题
+    margin的上下传递问题发生在【父子元素】之间，即当【块级元素】和父元素的【top或bottom重合】时 + 我们通过【margin】来设置某个元素距离父元素的间距时，margin-top和margin-bottom不会生效，而是会传递给父视图，反而给父视图设置上下边距，margin-left和margin-right不会发生传递
+
+    常见的解决办法就是设置一下父元素的overflow: auto;，或者直接按我们推荐的，设置父子元素之间的间距不要用margin，用padding来做
+    -->
+
+    <!-- 
+     三、margin的上下折叠问题
+     margin的上下折叠问题会发生在【兄弟元素】之间，【竖向相邻的两个块级元素】margin-bottom和margin-top可能会合并成一个margin、取较大的那个值，margin-left和margin-right不会发生折叠
+
+     常见的解决办法就是只设置一个元素的margin，不要分开设置两个元素的margin
+     -->
+
+     <!-- 
+      四、块级元素的横向居中问题
+      我们之前学过可以用text-align来做行内级元素的横向居中，但是块级元素的横向居中怎么做呢？那就是margin: 0px auto;
+      -->
+      <div class="external">
+        <div class="internal">
+        </div>
+      </div>
+</body>
+</html>
