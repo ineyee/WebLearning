@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      background-color: red;
+      width: 100px;
+      height: 100px;
+    }
+
+    .box1 {
+      background-color: green;
+      /* 块级元素无论你设置什么宽度，它其实还是独占一行的，所以会尽量地往大占，所以我们得搞成行内块级元素才能达到想要的效果，反过来行内元素则是会尽量地往小占来包裹元素 */
+      display: inline-block;
+      min-width: 100px;
+      max-width: 200px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 
+    1、设置宽高：我们设置元素的宽高其实是在设置【内容】的宽高，注意行内级元素是无法设置宽高的
+    * width
+    * height
+
+    width和height的默认值是auto，即交给浏览器去自己决定多宽多高
+   -->
+   <div class="box"></div>
+
+   <!-- 
+    2、设置最大最小宽高：
+    * min-width
+    * min-height
+    * max-width
+    * max-height
+    -->
+    <div class="box1">div</div>
+    <br>
+    <div class="box1">我是div元素我是div元素我是div元素</div>
+</body>
+</html>
