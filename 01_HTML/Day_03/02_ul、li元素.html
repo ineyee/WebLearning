@@ -8,37 +8,37 @@
     .reset {
       padding: 0px;
       margin: 0px;
-      /* 去掉前面的序号 */
+      /* 去掉前面的· */
       list-style: none;
     }
   </style>
 </head>
 <body>
   <!--
-    有序列表：ol、li元素
-    * ol是ordered list的缩写，li是list item的缩写
-    * ol元素的子元素只能是li，我们要在li元素里再放我们自己的元素
+    无序列表：ul、li元素
+    * ul是unordered list的缩写，li是list item的缩写
+    * ul元素的子元素只能是li，我们要在li元素里再放我们自己的元素
   -->
 
   <!--
-    我们会发现ol、li元素默认给我们添加了一些padding和margin，同时还在前面添加了1、2、3...这种序号
+    我们会发现ul、li元素默认给我们添加了一些padding和margin，同时还在前面添加了·
     但实际开发中我们已经不会再用到这么丑的样式了，所以总是把它们reset掉，然后再自主添加自己想要的样式
   -->
-  <ol>
+  <ul>
     <li>科比</li>
     <li>乔丹</li>
     <li>汤普森</li>
     <li>库里</li>
     <li>塔图姆</li>
-  </ol>
+  </ul>
 
   <!-- reset后 -->
-  <ol class="reset">
+  <ul class="reset">
     <li>科比</li>
     <li>乔丹</li>
     <li>汤普森</li>
     <li>库里</li>
     <li>塔图姆</li>
-  </ol>
+  </ul>
 </body>
 </html>
