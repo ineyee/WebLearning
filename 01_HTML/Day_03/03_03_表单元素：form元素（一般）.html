@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+  #feedback {
+    /* 禁掉拖动改变大小 */
+    resize: none;
+
+    width: 200px;
+    height: 100px;
+  }
+  </style>
+</head>
+<body>
+  <!--
+    form元素的用途就是作为其它表单元素的父元素来使用，这样就可以把整个表单作为一个整体来进行操作，比如：
+    1、对整个表单的数据进行提交
+    2、对整个表单的数据进行重置
+
+    比如这是我们的完整接口：
+    http://mosapi.auditoryworks.co:1339/v1/feedbacks?account=18888888888&feedback="不错挺好用的"
+    1、action属性就是请求的地址
+    2、form里面每个表单元素的name和value就是请求的参数
+    3、method属性就是请求方式
+    4、target属性就是指发起请求时要不要打开一个新标签页，跟a元素那里一样的
+
+    但实际开发中，我们很少这样来做请求了，都是类似客户端那种做法了
+  -->
+  <form action="http://mosapi.auditoryworks.co:1339/v1/feedbacks" method="post" target="_blank">
+    <div>
+      <label for="account">
+        <span>账号：</span>
+        <input type="text" name="account" placeholder="请输入账号">
+      </label>
+    </div>
+
+    <div>
+      <label for="feedback">
+        <p>反馈：</p>
+        <textarea name="feedback" id="feedback" placeholder="请输入反馈"></textarea>
+      </label>
+    </div>
+
+    <dir>
+      <input type="submit">
+      <input type="reset">
+    </dir>
+  </form>
+</body>
+</html>
