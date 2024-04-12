@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+  #feedback {
+    /* 禁掉拖动改变大小 */
+    resize: none;
+
+    width: 200px;
+    height: 100px;
+  }
+  </style>
+</head>
+<body>
+  <!--
+    textarea元素类似于UITextView，是一个多行文本输入框
+    1、默认情况下textarea是可以拖动改变大小的，我们可以给它禁掉
+    2、cols：当我们不想给输入框宽度时，也可以指定输入框一行能显示多少个字符（字符到底是什么也不太明确）来变相指定宽度
+    3、rows：当我们不想给输入框高度时，也可以指定输入框能显示几行来变相指定高度
+  -->
+  <div>
+    <label for="feedback">
+      <p>反馈：</p>
+      <textarea name="feedback" id="feedback" placeholder="请输入反馈"></textarea>
+    </label>
+  </div>
+</body>
+</html>
