@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!--
+    一、input元素可以用来实现很多控件，主要由它的type属性决定：
+    1、text（默认）：单行文本输入框
+    2、password：单行密文输入框
+    3、button：按钮
+    4、submit：定义提交按钮，点击提交处于同一个form父元素下所有的表单值到服务器
+    5、reset：定义重置按钮，点击重置处于同一个form父元素下所有的表单值为默认值
+    6、radio：单选框，只能选择其中的一个，如性别男女那种
+      * 只有name属性的值相同，才会有单选效果
+    7、checkbox：复选框，可以选择其中的多个，如多选答案那种
+      * 只有name属性的值相同，真正提交数据时才会有多选效果——即多个value会属于同一个key
+    6、date：日期选择器（年月日）
+    7、time：时间选择器（时分）
+    8、datetime-local：日期时间选择器（年月日时分）
+    9、file：文件上传
+  -->
+  <div>
+    <input type="text" placeholder="请输入账号" name="account">
+    <input type="password" placeholder="请输入密码" name="password">
+  </div>
+  <div>
+    <input type="button" value="登录">
+    <!-- input type=button|submit|reset等价于button元素，用啥都行 -->
+    <button>登录</button>
+  </div>
+  <div>
+    <!-- input type=button|submit|reset等价于button元素，用啥都行 -->
+    <input type="submit">
+    <input type="reset">
+    <button type="submit">提交</button>
+    <button type="reset">重置</button>
+  </div>
+  <div>
+    <input type="radio">
+    <input type="checkbox">
+  </div>
+  <div>
+    <input type="date">
+    <input type="time">
+    <input type="datetime-local">
+  </div>
+  <div>
+    <input type="file">
+  </div>
+
+  <br>
+
+  <!--
+    二、input元素的其它属性：
+    1、placeholder：type=text|password时，占位文本
+    2、autofocus：type=text|password时，是否默认选中
+    3、checked：type=radio|checkbox时，是否默认选中
+    4、readonly：可选中可交互，但是不能输入
+    5、disabled：不可选中不可交互
+    6、name：提交数据给服务器时，params的key，如account、password这种东西，这样我们在点击提交按钮时，就会自动找到name所对应元素的value属性的值，跟这里的name代表的key拼接起来传递给服务器
+    7、value：input元素的内容
+  -->
+  <div>
+    <input type="text" placeholder="请输入账号">
+  </div>
+  <div>
+    <input type="text" autofocus>
+    <input type="checkbox" checked>
+  </div>
+  <div>
+    <input type="text" readonly>
+    <input type="text" disabled>
+  </div>
+  <div>
+    <input type="text" name="account" value="18888888888">
+  </div>
+
+  <br>
+
+  <!--
+    三、lable元素 + input元素使用范式
+    label元素经常用来跟input元素组合使用，用来表示input的标题
+    这样组合后label就可以跟input绑定在一起，用户点击lable就可以选中对应的input了，同时点击输入框也可以弹出浏览器记住的账号密码
+  -->
+  <!-- 这种常规的写法，只能点击输入框才能激活输入框 -->
+  <div>
+    账号：<input type="text" placeholder="请输入账号">
+  </div>
+  <div>
+    密码：<input type="text" placeholder="请输入密码">
+  </div>
+  <!-- 如果我们想点击前面的文本也能激活输入框，就可以使用label+input组合，固定写法 -->
+  <div>
+    <label for="account">
+      账号：<input id="account" type="text" placeholder="请输入账号">
+    </label>
+  </div>
+  <div>
+    <label for="password">
+      密码：<input id="password" type="text" placeholder="请输入密码">
+    </label>
+  </div>
+
+  <!--
+    四、label元素 + 单选框、复选框的使用范式
+    效果同上
+  -->
+  <div>
+    <span>性别：</span>
+    <label for="secrect">
+      <input id="secrect" type="radio" name="gender" value="0">保密
+    </label>
+    <label for="male">
+      <input id="male" type="radio" name="gender" value="1">男
+    </label>
+    <label for="female">
+      <input id="female" type="radio" name="gender" value="2">女
+    </label>
+  </div>
+
+  <div>
+    <span>哪项是大球运动：</span>
+    <label for="lq">
+      <input id="lq" type="checkbox" name="sports" value="0">🏀
+    </label>
+    <label for="zq">
+      <input id="zq" type="checkbox" name="sports" value="1">⚽️
+    </label>
+    <label for="pq">
+      <input id="pq" type="checkbox" name="sports" value="3">🏐
+    </label>
+    <label for="ppq">
+      <input id="ppq" type="checkbox" name="sports" value="4">🏓
+    </label>
+  </div>
+</body>
+</html>
