@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 第1步：导入阿里iconfont帮我们配好的css文件 -->
+  <link rel="stylesheet" href="iconfonts/iconfont.css">
+
+  <style>
+    /*
+    第一步：先把字体图标文件给导入进来
+    */
+    @font-face {
+      font-family: "iconfont";
+      src: url(iconfonts/iconfont.ttf);
+    }
+
+    /*
+    第二步：设置字体图标的样式
+    */
+    .iconfont_custom {
+      font-family: "iconfont" !important;
+
+      /* 去掉斜体 */
+      font-style: normal;
+      /* 改变图标颜色 */
+      color: red;
+      /* 改变图标大小 */
+      font-size: 50px;
+    }
+
+    /* 通过专门的类去负责多元素之间有区别的样式 */
+    .icon-music {
+      color: red;
+      font-size: 30px;
+    }
+    .icon-musicforbid {
+      color: green;
+      font-size: 40px;
+    }
+    .icon-videofill {
+      color: blue;
+      font-size: 50px;
+    }
+    .icon-video {
+      color: orange;
+      font-size: 60px;
+    }
+  </style>
+</head>
+<body>
+  <!--
+    阿里iconfont：https://www.iconfont.cn/
+
+    我们设置一些图标的时候可以直接用图片，还可以用字体图标——.ttf文件，相对于图片来说字体图标有如下好处：
+    1、放大不会失真
+    2、可以在代码里任意切换颜色
+    3、文件相对比较小
+  -->
+
+  <!--
+  第三步：使用i元素展示字体图标——通过字符实体的方式，当然我们也可以用span、div等元素来展示，但i元素一般就是用来展示图标用的——我们可以把i元素看作是icon的缩写，这里要挂一下class以便知道要使用哪个family的字体图标
+  我们的字体图标文件里有4个图标，对应的字符实体分别为：
+  -->
+  <div>
+    <i class="iconfont_custom">&#xe796;</i>
+    <i class="iconfont_custom">&#xe60d;</i>
+    <i class="iconfont_custom">&#xe6a3;</i>
+    <i class="iconfont_custom">&#xe6bf;</i>
+  </div>
+
+
+  <!--
+    但其实当我们从iconfont把字体图标文件给下载下来之后，同时也会下载下来一个.css文件，阿里iconfont网站已经给我们配好了上面两步放在.css文件了，我们只需要把这个文件也拖到项目里并且导入进来，执行第三步的展示即可
+  -->
+  <!--
+    第2步：使用i元素展示图标
+    * 这里要挂一下class以便知道要使用哪个family的字体图标，这个class就是css文件里阿里给我们配好的那个class
+    * 此外这里不通过字符实体来展示了，因为字体实体的不语义化，阿里是通过伪元素的方式来让我们使用的，更加语义化，我们只需要给i元素加相应的class即可，i元素不给内容就会只展示相应类的伪元素的内容了
+    * 当然如果我们想修改某些图标的样式，那就只通过每个图标自己对应的特殊类去设置就可以了，而不要通过它们的公共类iconfont去设置，【这是一个非常重要的编程技巧，多个元素之间共同的样式我们可以给它们抽取一个公共类（当然不是其它语言里父类的概念，但作用是类似的）出来设置，至于它们单独的样式可以再给它们挂一个专门的类（当然不是其它语言里子类的概念，但作用是类似的）去单独设置】
+  -->
+  <div>
+    <!-- 实际使用其实就是给i元素挂两个class这么简单即可 -->
+    <i class="iconfont icon-music"></i>
+    <i class="iconfont icon-musicforbid"></i>
+    <i class="iconfont icon-videofill"></i>
+    <i class="iconfont icon-video"></i>
+  </div>
+</body>
+</html>
