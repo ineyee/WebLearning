@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .bar {
+      background-color: #00000088;
+
+      /* 固定定位 */
+      position: fixed;
+      bottom: 0px;
+    }
+
+    .right {
+      background-color: #ff000088;
+
+      /* 固定定位 */
+      position: fixed;
+      right: 50px;
+      bottom: 100px;
+    }
+  </style>
+</head>
+<body>
+  <!--
+    固定定位是指：
+    * 把元素的position属性设置成fixed
+    * 然后我们就可以通过元素的top、right、bottom、left设置元素的位置了
+    * 【那设置的这4个值参照点是谁呢？是相对于浏览器视口ViewPort——即body元素的】
+
+    固定定位的应用场景主要就是：
+    * 网页里某个元素是【固定在某个位置不动的】、无论网页是上下滚动还是左右滚动、还是放大缩小窗口，比如网页右边的置顶按钮、客服按钮这种
+  -->
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+  <div>我是一首歌</div>
+
+  <div class="bar">
+    <span>上一曲</span>
+    <span>播放/暂停</span>
+    <span>下一曲</span>
+  </div>
+
+  <div class="right">
+    <div>置顶</div>
+    <div>客服</div>
+  </div>
+</body>
+</html>
