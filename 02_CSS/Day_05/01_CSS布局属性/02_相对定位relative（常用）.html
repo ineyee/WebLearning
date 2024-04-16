@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .dot {
+      background-color: red;
+
+      /* 行内级元素是不可以设置宽高的，这里设置为行内块级元素 */
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    
+    .dot1 {
+      background-color: red;
+
+      /* 行内级元素是不可以设置宽高的，这里设置为行内块级元素 */
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+
+      /* 脱标：相对定位 */
+      position: relative;
+      top: -10px;
+      left: -8px;
+    }
+
+    .topIndex {
+      font-size: 10px;
+
+      /* 脱标：相对定位 */
+      position: relative;
+      top: -6px;
+      left: -4px;
+    }
+  </style>
+</head>
+<body>
+  <!--
+    相对定位是指：
+    * 把元素的position属性设置成relative
+    * 然后我们就可以通过元素的top、right、bottom、left设置元素的位置了
+    * 那设置的这4个值参照点是谁呢？是相对于元素脱标之前的原始位置的左上角点来说的
+
+    相对定位的应用场景主要就是：
+    * 对元素原来的位置不太满意，需要进行【小幅微调】的，如右上角消息小圆点这种
+  -->
+  <div>
+    <span>新消息</span>
+    <span class="dot"></span>
+    <span>我是对照</span>
+  </div>
+
+  <div>
+    <span>新消息</span>
+    <span class="dot1"></span>
+    <span>我是对照</span>
+  </div>
+
+  <div>
+    <span>3</span>
+    <span class="topIndex">2</span>
+    <span>+</span>
+    <span>2</span>
+    <span class="topIndex">3</span>
+    <span>=</span>
+    <span>17</span>
+  </div>
+</body>
+</html>
