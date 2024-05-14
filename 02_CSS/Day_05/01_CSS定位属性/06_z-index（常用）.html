@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 三个div共有的属性 */
+    .item {
+      width: 100px;
+      height: 100px;
+
+      position: absolute;
+    }
+
+    .box1 {
+      background-color: red;
+
+      top: 0px;
+      left: 0px;
+
+      z-index: 1;
+    }
+
+    .box2 {
+      background-color: green;
+
+      top: 20px;
+      left: 20px;
+
+      z-index: 0;
+    }
+
+    .box3 {
+      background-color: blue;
+
+      top: 40px;
+      left: 40px;
+
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <!--
+    z-index用来设置定位元素在z轴上的index，注意：
+    1、它只对定位元素生效，也就是说我们必须设置一下元素的position属性，然后才能使用z-index属性
+    2、可以是负值，值越小越靠下
+    3、一般用来搞处于同一层级的兄弟元素之间的z-index
+  -->
+  <div class="item box1"></div>
+  <div class="item box2"></div>
+  <div class="item box3"></div>
+</body>
+</html>
