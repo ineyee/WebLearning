@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container {
+      background-color: red;
+
+      width: 666px;
+      height: 666px;
+
+      /* 采用flex布局 */
+      display: flex;
+      /* container主轴 */
+      /* flex-direction: row; */
+      /* flex-direction: row-reverse; */
+      /* flex-direction: column; */
+      flex-direction: column-reverse;
+    }
+
+    .item {
+      width: 100px;
+      height: 100px;
+    }
+
+    .item1 {
+      background-color: orange;
+    }
+
+    .item2 {
+      background-color: yellow;
+    }
+
+    .item3 {
+      background-color: green;
+    }
+  </style>
+</head>
+<body>
+  <!--
+    flex-direction用来设置container主轴的方向，决定了item的排列方式，取值为：
+    1、row（默认）
+    2、row-reverse
+    3、column
+    4、column-reverse
+  -->
+  <div class="container">
+    <div class="item item1">1</div>
+    <div class="item item2">2</div>
+    <div class="item item3">3</div>
+  </div>
+</body>
+</html>
