@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container {
+      background-color: red;
+
+      width: 666px;
+      height: 666px;
+
+      display: flex;
+      /* flex-wrap: nowrap; */
+      flex-wrap: wrap;
+      /* flex-wrap: wrap-reverse; */
+    }
+
+    .item {
+      width: 100px;
+      height: 100px;
+    }
+
+    .item1 {
+      background-color: orange;
+    }
+
+    .item2 {
+      background-color: yellow;
+    }
+
+    .item3 {
+      background-color: green;
+    }
+  </style>
+</head>
+<body>
+  <!--
+    默认情况下，一个container只有一条主轴，所有的item都会沿着这条主轴自动排列下去，但是如果item太多了，后面的item放不下了，这些item就会被自动压缩，如果我们不想这些item被自动压缩，怎么办呢？用flex-wrap，取值为：
+    1、nowrap（默认）：不换行、压缩
+    2、wrap：换行
+    3、wrap-reverse：换行、反转
+  -->
+  <div class="container">
+    <div class="item item1">1</div>
+    <div class="item item2">2</div>
+    <div class="item item3">3</div>
+    <div class="item item1">4</div>
+    <div class="item item2">5</div>
+    <div class="item item3">6</div>
+    <div class="item item1">7</div>
+    <div class="item item2">8</div>
+    <div class="item item3">9</div>
+  </div>
+</body>
+</html>

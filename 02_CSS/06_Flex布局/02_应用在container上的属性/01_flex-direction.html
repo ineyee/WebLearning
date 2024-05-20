@@ -16,8 +16,8 @@
       /* container主轴 */
       /* flex-direction: row; */
       /* flex-direction: row-reverse; */
-      /* flex-direction: column; */
-      flex-direction: column-reverse;
+      flex-direction: column;
+      /* flex-direction: column-reverse; */
     }
 
     .item {
@@ -41,10 +41,10 @@
 <body>
   <!--
     flex-direction用来设置container主轴的方向，决定了item的排列方式，取值为：
-    1、row（默认）
-    2、row-reverse
-    3、column
-    4、column-reverse
+    1、row（默认）：主轴 = 横向
+    2、row-reverse：主轴 = 横向反转
+    3、column：主轴 = 竖向
+    4、column-reverse：主轴 = 竖向反转
   -->
   <div class="container">
     <div class="item item1">1</div>
