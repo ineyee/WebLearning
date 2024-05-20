@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container {
+      background-color: red;
+
+      width: 666px;
+      height: 666px;
+
+      /* 采用flex布局 */
+      display: flex;
+      /* 换行 */
+      flex-wrap: wrap;
+      /* 主轴多行时侧轴的对齐方式 */
+      /* align-content: flex-start; */
+      /* align-content: flex-end; */
+      /* align-content: center; */
+      /* align-content: space-between; */
+      /* align-content: space-evenly; */
+      align-content: space-around;
+      /* align-content: stretch; */
+    }
+
+    .item {
+      width: 100px;
+      height: 100px;
+    }
+
+    .item1 {
+      background-color: orange;
+    }
+
+    .item2 {
+      background-color: yellow;
+    }
+
+    .item3 {
+      background-color: green;
+    }
+  </style>
+</head>
+<body>
+  <!--
+    align-content用来设置主轴多行时侧轴的对齐方式，也就是说只有flex-wrap设置为wrap或wrap-reverse时才生效，取值为：
+    1、flex-start（默认）：上对齐
+    2、flex-end：下对齐
+    3、center：居中对齐
+    4、normal/stretch（默认）：当不设置height属性或height属性值为auto时，侧轴上撑满父视图
+    5、space-between：上下两边没有space，剩余space平均分配插入到item中间
+    6、space-evenly：上下两边有space，剩余space平均分配插入到上下两边和item中间
+    7、space-around：上下两边有space，但是上下两边的space是item中间的space的一半
+  -->
+  <div class="container">
+    <div class="item item1">1</div>
+    <div class="item item2">2</div>
+    <div class="item item3">3</div>
+    <div class="item item1">4</div>
+    <div class="item item2">5</div>
+    <div class="item item3">6</div>
+    <div class="item item1">7</div>
+    <div class="item item2">8</div>
+    <div class="item item3">9</div>
+  </div>
+</body>
+</html>
