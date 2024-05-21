@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container {
+      background-color: red;
+
+      width: 666px;
+      height: 666px;
+
+      /* 采用flex布局 */
+      display: flex;
+      /* 侧轴的对齐方式 */
+      align-items: center;
+    }
+
+    .item {
+      width: 100px;
+      height: 100px;
+    }
+
+    .item1 {
+      background-color: orange;
+    }
+
+    .item2 {
+      background-color: yellow;
+
+      /* 侧轴的对齐方式 */
+      align-self: flex-start;
+    }
+
+    .item3 {
+      background-color: green;
+    }
+  </style>
+</head>
+<body>
+  <!--
+    align-self用来设置主轴单行时、某个item在侧轴的对齐方式，它会覆盖掉container的align-items属性，取值为：
+    1、flex-start：上对齐
+    2、flex-end：下对齐
+    3、center：居中对齐
+    4、normal/stretch：当不设置height属性或height属性值为auto时，侧轴上撑满父视图
+    5、auto（默认）：由container的align-items属性来决定
+  -->
+  <div class="container">
+    <div class="item item1">1</div>
+    <div class="item item2">2</div>
+    <div class="item item3">3</div>
+  </div>
+</body>
+</html>
