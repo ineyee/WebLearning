@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container {
+      background-color: red;
+
+      width: 666px;
+      height: 666px;
+
+      /* 采用flex布局 */
+      display: flex;
+    }
+
+    .item {
+      width: 100px;
+      height: 100px;
+    }
+
+    .item1 {
+      background-color: orange;
+    }
+
+    .item2 {
+      background-color: yellow;
+      /* 默认会压缩，这个item不压缩 */
+      flex-shrink: 0;
+    }
+
+    .item3 {
+      background-color: green;
+    }
+  </style>
+</head>
+<body>
+  <!--
+    当container主轴上被item挤满了放不下时，flex-shrink属性才会生效，否则不生效，它决定了item如何压缩来保证能放得下，类似于Flutter里的Flexible Widget + fit属性 = FlexFit.loose、Flexible Widget：
+    1、默认值为1，代表当container主轴上被item挤满了放不下时，item会等比例压缩来保证能放得下
+    2、我们可以设置为0，代表item不压缩，这样挤满了放不下时就可能会溢出container了
+    3、我们可以设置为任意其它正整数，这样item就会按比例压缩来保证能放得下
+    4、注意：item就算压缩了，但是也不会小于它的min-width/min-height
+  -->
+  <div class="container">
+    <div class="item item1">1</div>
+    <div class="item item2">2</div>
+    <div class="item item3">3</div>
+    <div class="item item1">1</div>
+    <div class="item item2">2</div>
+    <div class="item item3">3</div>
+    <div class="item item1">1</div>
+    <div class="item item2">2</div>
+    <div class="item item3">3</div>
+  </div>
+</body>
+</html>
