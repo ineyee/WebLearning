@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container {
+      background-color: red;
+
+      width: 666px;
+      height: 666px;
+
+      /* 采用flex布局 */
+      display: flex;
+    }
+
+    .item {
+      width: 100px;
+      height: 100px;
+    }
+
+    .item1 {
+      background-color: orange;
+    }
+
+    .item2 {
+      background-color: yellow;
+      /* 撑满剩余空间 */
+      flex-grow: 1;
+    }
+
+    .item3 {
+      background-color: green;
+    }
+  </style>
+</head>
+<body>
+  <!--
+    当container主轴上有剩余空间时，flex-grow属性才会生效，否则不生效，它决定了item如何扩展来占据剩余空间，类似于Flutter里的Expandend Widget或Flexible Widget + fit属性 = FlexFit.tight（其实Expandend Widget的本质就是封装了Flexible Widget + fit属性 = FlexFit.tight）：
+    1、默认值为0，代表item不扩展
+    2、我们可以设置为任意其它正整数，这样就会把剩余空间按比例分配给相应的item了
+    3、注意：item就算扩展了，但是也不会大于它的max-width/max-height
+  -->
+  <div class="container">
+    <div class="item item1">1</div>
+    <div class="item item2">2</div>
+    <div class="item item3">3</div>
+  </div>
+</body>
+</html>
