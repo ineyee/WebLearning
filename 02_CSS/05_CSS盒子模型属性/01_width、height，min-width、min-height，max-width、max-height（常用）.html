@@ -1,49 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    .box {
+    .block_default {
       background-color: red;
-      width: 100px;
+    }
+
+    .block_width_height {
+      background-color: orange;
+
+      width: 600px;
       height: 100px;
     }
 
-    .box1 {
+    .inline_default {
+      background-color: yellow;
+    }
+
+    .inline_nonreplace_width_height {
       background-color: green;
-      /* 块级元素无论你设置什么宽度，它其实还是独占一行的，所以会尽量地往大占，所以我们得搞成行内块级元素才能达到想要的效果，反过来行内元素则是会尽量地往小占来包裹元素 */
+
+      width: 200px;
+      height: 100px;
+    }
+
+    .inline_replace_width_height {
+      background-color: blue;
+
+      width: 200px;
+      height: 100px;
+    }
+
+    .inline_block_default {
       display: inline-block;
-      min-width: 100px;
-      max-width: 200px;
+
+      background-color: purple;
+    }
+
+    .inline_block_width_height {
+      display: inline-block;
+
+      background-color: red;
+
+      width: 600px;
+      height: 100px;
     }
   </style>
 </head>
+
 <body>
-  <!-- 
-    1、设置宽高：
-    * width
-    * height
+  <!--
+    1、块级元素：如h、p、div元素等
+    * 块级元素默认情况下，宽度撑满一行、高度包裹内容
+    * 块级元素可以设置宽高，也就是说对于块级元素来说设置width和height属性是生效的；不过就算我们给它们设置了宽高，它们还是会独占一行——因为并没有改变它们是块级元素的本质，也就是说虽然它的宽度变小了，但是它的margin会变大，因为它们的margin-right=auto
+  -->
+  <div class="block_default">
+    块级元素默认情况下，宽度撑满一行、高度包裹内容
+  </div>
+  <div class="block_width_height">
+    块级元素可以设置宽高，也就是说对于块级元素来说设置width和height属性是生效的；不过就算我们给它们设置了宽高，它们还是会独占一行——因为并没有改变它们是块级元素的本质，也就是说虽然它的宽度变小了，但是它的margin会变大，因为它们的margin-right=auto
+  </div>
 
-    width和height的默认值是auto，即交给浏览器去自己决定多宽多高
-   -->
-   <div class="box"></div>
+  <!--
+    2、行内级元素：如img、a、span元素等
+    * 行内级元素默认情况下，宽度包裹内容、高度包裹内容
+    * 行内级非替换元素不可以设置宽高，也就是说对于行内级非替换元素来说设置width和height属性是不生效的，它们的宽高只能由内容决定——即包裹内容
+    * 行内级替换元素可以设置宽高，也就是说对于行内级替换元素来说设置width和height属性是生效的
+  -->
+  <span class="inline_default">
+    行内级元素默认情况下，宽度包裹内容、高度包裹内容
+  </span>
+  <span class="inline_nonreplace_width_height">
+    行内级非替换元素不可以设置宽高，也就是说对于行内级非替换元素来说设置width和height属性是不生效的，它们的宽高只能由内容决定——即包裹内容
+  </span>
+  <img class="inline_default" src="00_概述.jpg" alt="00_概述">
+  <img class="inline_replace_width_height" src="00_概述.jpg" alt="00_概述">
 
-   <!-- 
-    2、设置最大最小宽高：
-    * min-width
-    * min-height
-    * max-width
-    * max-height
-    -->
-    <div class="box1">div</div>
-    <br>
-    <div class="box1">我是div元素我是div元素我是div元素</div>
+  <!--
+    3、行内块级元素：元素同时具备行内级元素和块级元素的特征
+    * “行内级”在前面，就意味着这种元素首先是个行内级元素，因此行内块级元素默认情况下，宽度包裹内容、高度包裹内容
+    * 但是后面又有一个“块级”，就意味着这种元素可以设置宽高，也就是说对于行内块级元素来说设置width和height属性是生效的；并且因为它已经变成了一个行内级元素，所以它不会再独占一行了
+  -->
+  <div class="inline_block_default">
+    “行内级”在前面，就意味着这种元素首先是个行内级元素，因此行内块级元素默认情况下，宽度包裹内容、高度包裹内容
+  </div>
+  <div class="inline_block_width_height">
+    但是后面又有一个“块级”，就意味着这种元素可以设置宽高，也就是说对于行内块级元素来说设置width和height属性是生效的；并且因为它已经变成了一个行内级元素，所以它不会再独占一行了
+  </div>
 
-    <!-- 
-    3、盒子模型请注意：
-    给【行内级非替换元素】设置宽高是压根不会生效的
-    -->
+  <!--
+    4、flex container元素：flex container元素还是区分块级元素和行内级元素的
+    * display值为flex的就是块级元素，因此默认情况下宽度撑满一行、高度包裹它所有的flex item，可以设置宽高
+    * display值为inline-flex的就是行内级元素，因此默认情况下宽度包裹它所有的flex item、高度包裹它所有的flex item，不可以设置宽高、宽高只能是包裹它的它所有的flex item
+  -->
+
+  <!--
+    5、flex item元素：flex item将不再区分是块级元素还是行内级元素
+    * 默认情况下，宽度包裹内容、高度包裹内容
+    * 但是可以设置宽高
+  -->
 </body>
+
 </html>
