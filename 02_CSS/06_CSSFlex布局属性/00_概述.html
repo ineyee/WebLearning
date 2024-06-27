@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    一、Flex布局是什么？
+    Flex布局是一种横向布局子元素或竖向布局子元素的一维布局，一定要注意【Flex布局是用来布局子元素的，而不是用来布局元素本身的】，也就是说【Flex布局不影响父元素的行为，只会影响子元素的行为】
+
+    当flex-direction为row时，它就是横向布局子元素，类似于Flutter里的Row元素
+    当flex-direction为column时，它就是竖向布局子元素，类似于Flutter里的Column元素
+    
+    之所以称它为一维布局，是因为它只能要么横向布局子元素、要么竖向布局子元素，不能同时横向布局子元素和竖向布局子元素
+    与之对应的有个Grid布局，它就是二维布局，类似于Flutter里的GridView元素，但是因为新兴的Grid布局对浏览器的兼容性较差，所以现在我们主要还是用Flex布局
+  -->
+
+  <!--
+    二、为什么需要Flex布局？
+    长久以来，CSS里面并没有一种真正用来横向布局子元素或竖向布局子元素的方案，默认情况下子元素都是从上到下、从左到右按标准流进行定位和布局的，或者我们也可以通过修改定位方式和布局方式来对元素进行一些特殊的定位和布局
+    
+    但是无论如何，子元素的横向对齐和竖向对齐都是非常难实现的
+    又比如我们想实现无论怎么拖动父元素的宽高，所有的子元素都能等分父元素的宽高
+    ...
+    
+    于是出现了Flex布局
+  -->
+
+  <!--
+    三、怎么使用Flex布局？
+    把父元素的display属性设置成flex或inline-flex，然后就可以尽情去使用flex布局相关的属性了
+  -->
+</body>
+
+</html>

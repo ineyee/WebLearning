@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,9 +36,10 @@
     }
   </style>
 </head>
+
 <body>
   <!--
-    当container主轴上被item挤满了放不下时，flex-shrink属性才会生效，否则不生效，它决定了item如何压缩来保证能放得下，类似于Flutter里的Flexible Widget + fit属性 = FlexFit.loose、Flexible Widget：
+    当container主轴上被item挤满了放不下时，flex-shrink属性才会生效，否则不生效，它决定了item如何压缩来保证能放得下，类似于Flutter里的Flexible Widget + fit属性 = FlexFit.loose：
     1、默认值为1，代表当container主轴上被item挤满了放不下时，item会等比例压缩来保证能放得下
     2、我们可以设置为0，代表item不压缩，这样挤满了放不下时就可能会溢出container了
     3、我们可以设置为任意其它正整数，这样item就会按比例压缩来保证能放得下
@@ -55,4 +57,5 @@
     <div class="item item3">3</div>
   </div>
 </body>
+
 </html>

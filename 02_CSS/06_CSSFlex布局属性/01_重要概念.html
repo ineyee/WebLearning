@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    一、flex container和flex item
+    当我们把一个元素的display属性设置为flex或inline-flex时，这个元素就是flex container
+    flex container里的直接子元素就是flex item
+
+    此处再强调一遍，一定要注意【Flex布局是用来布局子元素的，而不是用来布局元素本身的】，也就是说【Flex布局不影响父元素的行为，只会影响子元素的行为】，所以：
+    * flex container元素：flex container元素仍然是区分块级元素和行内级元素的
+      * display值为flex的就是块级元素
+        * 因此默认情况下宽度撑满一行、高度包裹它所有的flex item
+        * 可以设置宽高
+      * display值为inline-flex的就是行内级元素
+        * 因此默认情况下宽度包裹它所有的flex item、高度包裹它所有的flex item
+        * 不可以设置宽高、宽高只能是包裹它所有的flex item
+    * flex item元素：flex item元素将不再区分是块级元素还是行内级元素
+      * flex item的定位将完全由flex container的属性来控制
+      * flex item的大小
+        * 默认情况下宽度包裹内容、高度包裹内容
+        * 但是可以设置宽高
+  -->
+
+  <!--
+    二、flex container的主轴和侧轴
+    每个flex container都有两个轴，一个是主轴、一个是侧轴
+    默认情况下主轴 = 横向、侧轴 = 竖向，我们可以通过flex-direction属性来设置主轴 = 横向反转 | 主轴 = 竖向 | 主轴 = 竖向反转
+    flex item总是沿主轴方向进行排列的
+  -->
+</body>
+
+</html>

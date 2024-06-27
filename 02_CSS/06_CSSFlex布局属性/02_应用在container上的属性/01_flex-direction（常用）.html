@@ -6,18 +6,18 @@
   <title>Document</title>
   <style>
     .container {
-      background-color: red;
-
       width: 666px;
       height: 666px;
 
+      background-color: red;
+
       /* 采用flex布局 */
       display: flex;
-      /* 侧轴的对齐方式 */
-      /* align-items: flex-start; */
-      /* align-items: flex-end; */
-      align-items: center;
-      /* align-items: stretch; */
+      /* container主轴 */
+      /* flex-direction: row; */
+      /* flex-direction: row-reverse; */
+      flex-direction: column;
+      /* flex-direction: column-reverse; */
     }
 
     .item {
@@ -40,11 +40,11 @@
 </head>
 <body>
   <!--
-    align-items用来设置主轴单行时侧轴的对齐方式，取值为：
-    1、flex-start：上对齐
-    2、flex-end：下对齐
-    3、center：居中对齐
-    4、normal/stretch（默认）：当不设置height属性或height属性值为auto时，侧轴上撑满父视图
+    flex-direction用来设置container主轴的方向，决定了item的排列方式，其实就是我们要用Row元素还是Column元素，取值为：
+    1、row（默认）：主轴 = 横向
+    2、row-reverse：主轴 = 横向反转
+    3、column：主轴 = 竖向
+    4、column-reverse：主轴 = 竖向反转
   -->
   <div class="container">
     <div class="item item1">1</div>
