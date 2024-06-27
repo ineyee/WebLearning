@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,40 +8,38 @@
   <style>
     /* 三个div共有的属性 */
     .item {
+      position: absolute;
+
       width: 100px;
       height: 100px;
-
-      position: absolute;
     }
 
     .box1 {
-      background-color: red;
-
       top: 0px;
       left: 0px;
-
       z-index: 1;
+
+      background-color: red;
     }
 
     .box2 {
-      background-color: green;
-
       top: 20px;
       left: 20px;
-
       z-index: 0;
+
+      background-color: green;
     }
 
     .box3 {
-      background-color: blue;
-
       top: 40px;
       left: 40px;
-
       z-index: -1;
+
+      background-color: blue;
     }
   </style>
 </head>
+
 <body>
   <!--
     z-index用来设置定位元素在z轴上的index，注意：
@@ -52,4 +51,5 @@
   <div class="item box2"></div>
   <div class="item box3"></div>
 </body>
+
 </html>

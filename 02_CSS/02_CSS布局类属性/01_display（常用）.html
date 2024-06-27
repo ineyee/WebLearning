@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      background-color: red;
+    }
+
+    .change1 {
+      display: inline;
+    }
+
+    span {
+      background-color: green;
+    }
+
+    .change2 {
+      display: block;
+    }
+
+    .change3 {
+      display: inline-block;
+
+      width: 100px;
+      height: 100px;
+    }
+
+    .change4 {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    display属性决定了元素的默认大小及元素能否手动设置大小，取值有4个：
+    1、block：让元素变成一个块级元素
+    * 块级元素默认情况下，宽度撑满一行、高度包裹内容
+    * 块级元素可以设置宽高，也就是说对于块级元素来说设置width和height属性是生效的；不过就算我们给它们设置了宽高，它们还是会独占一行——因为并没有改变它们是块级元素的本质，也就是说虽然它的宽度变小了，但是它的margin会变大，因为它们的margin-right=auto
+
+    2、inline：让元素变成一个行内级元素
+    * 行内级元素默认情况下，宽度包裹内容、高度包裹内容
+    * 行内级非替换元素不可以设置宽高，也就是说对于行内级非替换元素来说设置width和height属性是不生效的，它们的宽高只能由内容决定——即包裹内容
+    * 行内级替换元素可以设置宽高，也就是说对于行内级替换元素来说设置width和height属性是生效的
+
+    3、inline-block：让元素同时具备行内级、块级元素的特征
+    * “行内级”在前面，就意味着这种元素首先是个行内级元素，因此行内块级元素默认情况下，宽度包裹内容、高度包裹内容
+    * 但是后面又有一个“块级”，就意味着这种元素可以设置宽高，也就是说对于行内块级元素来说设置width和height属性是生效的；并且因为它已经变成了一个行内级元素，所以它不会再独占一行了
+
+    4、none：隐藏元素，并且使用这种隐藏方式，元素不会占据任何空间，在界面上就跟完全不存在一样，但它依然存在于HTML的结构里
+  -->
+
+  <!-- 1、比如span元素原本是行内级元素，我们可以把它改成块级元素 -->
+  <span>我是span元素</span>
+  <span class="change2">我也是span元素</span>
+
+  <!-- 2、比如div元素原本是块级元素，我们可以把它改成行内级元素 -->
+  <div>我是div元素</div>
+  <div class="change1">我也是div元素</div>
+
+  <!-- 3、行内块级元素 -->
+  <div>我是div元素</div>
+  <div class="change3">我也是div元素</div>
+
+  <!-- 4、隐藏元素 -->
+  <div class="change4">我也是div元素</div>
+</body>
+
+</html>

@@ -1,40 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
     .grandpa {
-      background-color: red;
+      /* 相对定位：子绝祖相 */
+      position: relative;
 
       width: 600px;
       height: 400px;
 
-      /* 相对定位：子绝祖相 */
-      position: relative;
+      background-color: red;
     }
 
     .father {
-      background-color: green;
-
       width: 300px;
       height: 200px;
+
+      background-color: green;
     }
 
     .child {
-      background-color: blue;
-
-      width: 100px;
-      height: 50px;
-
       /* 绝对定位，因为父元素不是脱标元素，所以是相对于爷元素来说的 */
       position: absolute;
       right: 10px;
       bottom: 10px;
+
+      width: 100px;
+      height: 50px;
+
+      background-color: blue;
     }
   </style>
 </head>
+
 <body>
   <!--
     绝对定位是指：
@@ -45,7 +47,7 @@
     绝对定位的应用场景主要就是：
     * 网页里某个元素是【固定在它祖先视图里某个位置不动的】
     * 去细细体会一下绝对定位和固定定位的应用场景的区别，固定定位的应用场景是“网页里某个元素是【固定在整个网页里某个位置不动的】”，而绝对定位的应用场景是“网页里某个元素是【固定在它祖先视图里某个位置不动的】”，而上面我们说到如果绝对定位没有脱标祖先元素，那它的效果是跟固定定位一模一样的，因此这种情况下我们还用啥绝对定位，直接用固定定位就好了，我们就更加明确地约束了绝对定位的应用场景
-    * 并且实际开发中我们都是让祖先元素脱标成相对定位而不要脱标成其它几种定位方式，因为相对定位不会影响祖先元素其它兄弟元素的布局，而一旦把祖先元素脱标成其它定位就会影响祖先元素其它兄弟元素的布局，这就是我们常说的：【子绝祖相】
+    * 并且实际开发中如果我们要做绝对定位，也都是让祖先元素脱标成相对定位而不要脱标成其它几种定位方式，因为相对定位不会影响祖先元素其它兄弟元素的布局，而一旦把祖先元素脱标成其它定位就会影响祖先元素其它兄弟元素的布局，这就是我们常说的：【子绝祖相】
   -->
   <div class="grandpa">
     <div class="father">
@@ -53,4 +55,5 @@
     </div>
   </div>
 </body>
+
 </html>

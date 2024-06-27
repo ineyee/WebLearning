@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,9 @@
   <style>
     .box {
       background-color: red;
-      background-image: url("https://picsum.photos/200/300/?blur");
+      background-image: url("https://picsum.photos/100/200/");
 
-      /* 
+      /*
       背景图片没有元素大时，是否平铺：
       1、repeat（默认）：平铺
       2、repeat-x：仅横向平铺
@@ -18,16 +19,16 @@
       */
       background-repeat: no-repeat;
 
-      /* 
+      /*
       背景图片和元素大小不完全一致时的缩放方式：
       1、auto（默认）：以背景图片本身的大小显示
       2、contain：图片等比例缩放，直到撑满元素的宽度或高度其中之一时就停止缩放，因此图片会完全显示在元素中（这也是为啥叫contain的原因），但是元素会有部分空白
       3、cover：图片等比例缩放，直到撑满元素的宽度和高度时就停止缩放，因此图片会完全覆盖住元素（这也是为什么叫cover的原因），但是图片可能会被截断
       4、横向拉伸百分比 竖向拉伸百分比：图片不是等比例缩放，图片会完全覆盖元素，但是图片会被拉伸，如“background-size: 100% 100%;”就是拉伸图片填充整个元素
       */
-      background-size: contain;
+      background-size: auto;
 
-      /* 
+      /*
       设置背景图片在元素中的位置：offset-x offset-y
       1、可以直接设置px：100px 100px
       2、也可以设置一些设定好的值：left、center、right | top、center、bottom
@@ -39,22 +40,20 @@
     }
   </style>
 </head>
-<body>
-  <!-- 
-    background-image用来设置元素的背景图片
-   -->
-   <div class="box">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</div>
 
-   <!-- 
+<body>
+  <!--
+    background-image用来设置元素的背景图片
+  -->
+  <div class="box">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</div>
+
+  <!--
     background-image属性和img元素对比：
     1、性质：background-image仅仅是一个CSS样式，而img是一个HTML元素
-    2、图片是否占据空间：background-image的图片仅仅是在元素所占用的空间上盖上去了，而img元素实打实地占据空间
-    3、浏览器右键能否直接查看图片地址：background-image的图片是嵌在CSS里的、不能直接查看，而img元素可以直接查看图片地址
-    4、是否支持CSS Sprite（精灵图）：background-image支持，img不支持
-
-    img，是网页内容的重要组成部分，比如广告图片、LOGO图片、文章配图、产品图片等
-    background-image，可有可无。有，能让网页更加美观；没有，也不影响用户获取网页的完整信息
-    因此，内容性的图片必须用img，美化网页性的图片可以用background-image
-    -->
+    2、是否支持精灵图：background-image支持，img不支持
+    3、图片是否占据空间：background-image的图片仅仅是在元素所占用的空间上盖上去了，而img元素实打实地占据空间
+    4、浏览器网页里右键能否直接查看图片地址：background-image的图片是嵌在CSS里的、不能直接查看，而img元素可以直接查看图片地址
+  -->
 </body>
+
 </html>

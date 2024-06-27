@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
     .header {
-      background-color: red;
-
       /* 设置为粘性定位 */
       position: sticky;
       /* 当相应的元素滚动到跟顶部的距离为0时，就粘在那儿 */
       top: 0px;
+
+      background-color: red;
     }
   </style>
 </head>
+
 <body>
   <!--
     粘性定位是指：
     * 把元素的position属性设置成sticky
     * 然后我们就可以通过元素的top、right、bottom、left设置元素在满足什么阈值时粘在那儿了
-    * 我们可以把粘性定位看做是相对定位和绝对定位的结合体，也就是说不满足阈值时，元素就像相对定位一样该怎么表现就怎么表现，而一旦达到某个阈值，元素就会像绝对定位或绝对定位一样粘在在父视图的某个位置了，很早以前没有这个属性值的时候，做这种效果就是通过相对定位 + 监听滚动值 + 绝对定位来实现的
-    * 至于设置的4个值是相对于谁，是相对于最临近的 + 可滚动的 + 祖先元素的视口——viewport
+    * 【那设置的这4个值参照点是谁呢？是相对于最临近的 + 可滚动的 + 祖先元素的视口——viewport】
 
     粘性定位的应用场景主要就是：
     * 类似于iOS里TableView的sticky header，也就是说界面滚动到某个阈值时，header就悬浮在那里了
@@ -130,4 +131,5 @@
     <li></li>
   </ul>
 </body>
+
 </html>
