@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,36 +15,40 @@
     因为我们要用很多个元素来展示很多个小图片，但其实这些元素加载的都是同一张大图片——精灵图，所以我们把这个样式给它们抽离成一个公共类sprite，然后至于每个要加载精灵图的哪一部分，这个就给它们挂单独的类去设置样式
     */
     .sprite {
+      /* 将来展示图片的元素肯定是要设置宽高的，此处我们统一给它们搞成inline-block才能设置宽高 */
+      display: inline-block;
+
       /* 加载精灵图 */
       background-image: url(sprites/sprite.png);
       /* 以免精灵图比元素size还小，去掉平铺效果 */
       background-repeat: no-repeat;
-
-      /* 将来展示图片的元素肯定是要设置宽高的，此处我们统一给它们搞成inline-block才能设置宽高 */
-      display: inline-block;
     }
 
     /* 这些信息都是通过下面那个网站获取到的，直接复制过来就行了 */
     .hot {
+      /* hot小图片的宽高 */
+      width: 26px;
+      height: 13px;
+
       /* hot小图片在精灵图的坐标 */
       background-position: -192px 0px;
-      /* hot小图片的宽高 */
-	    width: 26px;
-	    height: 13px;
     }
-  
+
     .logo {
-      background-position: 0 -19px;
       width: 157px;
-	    height: 33px;
+      height: 33px;
+
+      background-position: 0 -19px;
     }
   </style>
 </head>
+
 <body>
   <!--
     获取精灵图里小图片的信息：http://www.spritecow.com/
 
-    当我们的项目里有一堆小图片时，我们当然可以把这些小图片一张一张搞到项目里。不过我们还可以把这些小图片给搞成一张大图片搞到项目里，然后利用CSS样式的background-position属性来设置背景图片的偏移量，从而显示大图片的某一个部分——即某张小图片，这张大图片就是所谓的精灵图，相对于一堆小图片来说精灵图有如下好处：
+    当我们的项目里有一堆小图片时，我们当然可以把这些小图片一张一张搞到项目里
+    不过我们还可以把这些小图片给搞成一张大图片搞到项目里，然后利用CSS的background-image属性、background-repeat属性、background-position属性来设置显示这张大图片里的某一张小图片，这张大图片就是所谓的精灵图，相对于一堆小图片来说精灵图有如下好处：
     1、大大减少网页里http请求的次数，减轻服务器的压力，加快网页的响应速度（本来一张小图片就是一个http请求，那50张小图片就得发送50个请求，搞成精灵图只需要发送一个请求）
     2、通常来说可以减少图片的总体积
     3、减少图片命名的困扰
@@ -52,4 +57,5 @@
   <i class="sprite hot"></i>
   <i class="sprite logo"></i>
 </body>
+
 </html>

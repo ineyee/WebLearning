@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,7 @@
 
   <style>
     /*
-    第一步：先把字体图标文件给导入进来
+      第一步：先把字体图标文件给导入进来
     */
     @font-face {
       font-family: "iconfont";
@@ -17,38 +18,42 @@
     }
 
     /*
-    第二步：设置字体图标的样式
+      第二步：设置字体图标的样式
     */
     .iconfont_custom {
       font-family: "iconfont" !important;
 
-      /* 去掉斜体 */
-      font-style: normal;
-      /* 改变图标颜色 */
-      color: red;
       /* 改变图标大小 */
       font-size: 50px;
+      /* 改变图标颜色 */
+      color: red;
+      /* 去掉斜体 */
+      font-style: normal;
     }
 
     /* 通过专门的类去负责多元素之间有区别的样式 */
     .icon-music {
-      color: red;
       font-size: 30px;
+      color: red;
     }
+
     .icon-musicforbid {
-      color: green;
       font-size: 40px;
+      color: green;
     }
+
     .icon-videofill {
-      color: blue;
       font-size: 50px;
+      color: blue;
     }
+
     .icon-video {
-      color: orange;
       font-size: 60px;
+      color: orange;
     }
   </style>
 </head>
+
 <body>
   <!--
     阿里iconfont：https://www.iconfont.cn/
@@ -88,4 +93,5 @@
     <i class="iconfont icon-video"></i>
   </div>
 </body>
+
 </html>
