@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box1 {
+      width: 100px;
+      height: 50px;
+
+      background-color: red;
+    }
+
+    .box1:hover {
+      transform: translate(100px, 50px);
+    }
+
+    .box2 {
+      width: 100px;
+      height: 50px;
+
+      background-color: orange;
+    }
+
+    .box2:hover {
+      transform: scale(2, 0.5);
+    }
+
+    .box3 {
+      width: 100px;
+      height: 50px;
+
+      background-color: yellow;
+    }
+
+    .box3:hover {
+      transform: rotate(45deg);
+    }
+
+    .box4 {
+      width: 100px;
+      height: 50px;
+
+      background-color: green;
+    }
+
+    .box4:hover {
+      transform: scale(2, 0.5) rotate(45deg);
+      transform-origin: left top;
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    transform属性用来对一个元素进行某些形变，如平移、缩放、旋转等，取值有：
+    1、none（默认）：不进行任何形变
+    2、形变函数 | 形变函数列表[形变函数1 形变函数2 ...]
+      * translate(xpx|x百分比, ypx|y百分比)：平移函数（当使用百分比时，相对的是item自身的宽高）
+      * scale(xdouble|x百分比, ydouble|y百分比)：缩放函数（当使用百分比时，相对的是item自身的宽高）
+      * rotate(90deg)：旋转函数（CSS里主要用的是角度degree这个单位，正数为顺时针，负数为逆时针）
+      * transform-origin(center|left|right|x百分比 center|top|bottom|y百分比)：设置scale和rotate的原点（当使用百分比时，相对的是item自身的宽高）
+
+    注意：
+    * 并非所有的元素都能进行形变，通常行内级元素不能进行形变
+    * transform属性不是必然跟动画挂钩，它只是能用于做动画而已。换句话说，transform属性仅仅是可动画属性中的一种，比如width、height、background-color等也都是可动画属性
+  -->
+  <div class="box1"></div>
+  <br>
+  <div class="box2"></div>
+  <br>
+  <div class="box3"></div>
+  <br>
+  <div class="box4"></div>
+</body>
+
+</html>

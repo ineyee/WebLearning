@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .one {
+      color: red !important;
+    }
+
+    .two {
+      color: orange;
+    }
+
+    .three {
+      color: yellow;
+    }
+
+    .four {
+      color: green;
+    }
+
+    #cyan {
+      color: cyan;
+    }
+
+    .five {
+      color: blue;
+    }
+
+    div {
+      color: purple;
+    }
+
+    div {
+      color: pink;
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    一、所谓层叠性是指：
+    1、对于同一个元素的同一个属性，我们可以通过不同的选择器给它反复设置
+    2、那么这个被反复设置的属性就会一层一层盖上去，但最终只有一个会生效，那到底哪个会生效呢？
+      * 首先判断属性的权重，权重高的生效
+      * 当属性的权重相同时，后设置的生效
+  -->
+
+  <!--
+    二、属性的权重比较
+    1、用!important修饰的属性，权重为：10000
+    2、使用内联样式的属性，权重为：1000
+    3、使用id选择器的属性，权重为：100
+    4、使用类选择器、伪类选择器的属性，权重为：10
+    5、使用元素选择器、伪元素选择器的属性，权重为：1
+    6、使用通用选择器的属性，权重为：0
+  -->
+
+  <!-- 1、!important修饰，所以显示红色 -->
+  <div class="one two">我是div元素</div>
+  <!-- 2、内联样式，所以显示黑色 -->
+  <div class="three" style="color: black;">我是div元素</div>
+  <!-- 3、id选择器，所以显示青色 -->
+  <div id="cyan" class="four">我是div元素</div>
+  <!-- 4、类选择器，所以显示蓝色 -->
+  <div class="five">我是div元素</div>
+  <!-- 5、元素选择器，所以显示粉色 -->
+  <div>我是div元素</div>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+
+      background-color: red;
+    }
+
+    .hidden {
+      overflow: hidden;
+    }
+
+    .scroll {
+      overflow: scroll;
+    }
+
+    .auto {
+      overflow: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 
+    overflow属性用来控制内容溢出时的行为，取值为：
+    1、visible（默认）：可见
+    2、hidden：不显示，截断
+    3、scroll：显示，滚动查看，无论溢出不溢出都会显示滚动条
+    4、auto：会自动在visible和scroll之间切换，只有溢出时才会显示滚动条
+   -->
+
+  <div>
+    史蒂夫·乔布斯（Steve Jobs，1955年2月24日—2011年10月5日），美国发明家、企业家，苹果公司联合创始人，曾任苹果公司首席执行官。
+    乔布斯创造的Macintosh、iPhone等产品先后开启了图形界面PC及移动互联网时代，后者亦改变了智能手机的概念，iPod则改变了人们听音乐的方式。乔布斯对个人电脑、手机、平板电脑、数字出版等产业以及全球通讯、娱乐和生活方式的改变具有深远影响。
+    [22] [25]
+  </div>
+
+  <br><br><br><br><br><br><br><br><br><br>
+
+  <div class="hidden">
+    史蒂夫·乔布斯（Steve Jobs，1955年2月24日—2011年10月5日），美国发明家、企业家，苹果公司联合创始人，曾任苹果公司首席执行官。
+    乔布斯创造的Macintosh、iPhone等产品先后开启了图形界面PC及移动互联网时代，后者亦改变了智能手机的概念，iPod则改变了人们听音乐的方式。乔布斯对个人电脑、手机、平板电脑、数字出版等产业以及全球通讯、娱乐和生活方式的改变具有深远影响。
+    [22] [25]
+  </div>
+
+  <br>
+
+  <div class="scroll">
+    史蒂夫·乔布斯（Steve Jobs，1955年2月24日—2011年10月5日），美国发明家、企业家，苹果公司联合创始人，曾任苹果公司首席执行官。
+    乔布斯创造的Macintosh、iPhone等产品先后开启了图形界面PC及移动互联网时代，后者亦改变了智能手机的概念，iPod则改变了人们听音乐的方式。乔布斯对个人电脑、手机、平板电脑、数字出版等产业以及全球通讯、娱乐和生活方式的改变具有深远影响。
+    [22] [25]
+  </div>
+
+  <br>
+
+  <div class="auto">
+    史蒂夫·乔布斯（Steve Jobs，1955年2月24日—2011年10月5日），美国发明家、企业家，苹果公司联合创始人，曾任苹果公司首席执行官。
+    乔布斯创造的Macintosh、iPhone等产品先后开启了图形界面PC及移动互联网时代，后者亦改变了智能手机的概念，iPod则改变了人们听音乐的方式。乔布斯对个人电脑、手机、平板电脑、数字出版等产业以及全球通讯、娱乐和生活方式的改变具有深远影响。
+    [22] [25]
+  </div>
+</body>
+
+</html>

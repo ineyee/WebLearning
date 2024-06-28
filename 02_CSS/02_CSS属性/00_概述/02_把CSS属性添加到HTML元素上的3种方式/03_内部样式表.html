@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    h1 {
+      color: red;
+    }
+
+    .p1 {
+      font-size: 30px;
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    内部样式表是指我们把样式统一放到head元素的style元素里
+
+    1、多个CSS样式之间用分号;隔开，建议每个CSS样式后面都加上分号;
+    2、内部样式表可以解决过多的内联样式导致HTML代码过于臃肿的问题
+    3、那样式怎么挂到元素身上去呢？这里就要用到选择器了，选择器有很多，我们这里先用一下元素选择器和类选择器
+  -->
+  <h1>我是h1元素</h1>
+  <h1>我也是h1元素</h1>
+
+  <p class="p1">我是p元素</p>
+  <p>我也是p元素</p>
+</body>
+
+</html>

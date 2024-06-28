@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .cursor-default {
+      cursor: default;
+    }
+
+    .cursor-pointer {
+      cursor: pointer;
+    }
+
+    .cursor-text {
+      cursor: text;
+    }
+
+    .cursor-none {
+      cursor: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 
+    cursor属性用来控制鼠标指针放在当前元素上时的显示样式，取值为：
+    1、auto（默认）：由浏览器自己决定
+    2、default：一个小箭头，网页里没有交互的区域一般会显示小箭头
+    3、pointer：一只小手，一般能点击的元素我们应该显示小手，比如a元素默认就是小手
+    4、text：一条竖线，一般是文本输入框会显示一条竖线，比如input输入框
+    5、none：不显示任何东西
+   -->
+
+  <span class="cursor-default">小箭头</span>
+  <span class="cursor-pointer">小手</span>
+  <span class="cursor-text">竖线</span>
+  <span class="cursor-none">啥都不显示</span>
+</body>
+
+</html>
