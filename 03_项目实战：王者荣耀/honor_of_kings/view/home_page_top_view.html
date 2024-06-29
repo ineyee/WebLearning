@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>home_page_top_view</title>
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <style>
+    .container {
+      /* 盒子模型类属性 */
+      box-sizing: border-box;
+      height: 42px;
+      border-bottom-width: 1px;
+      border-bottom-color: #f5f5f5;
+      border-bottom-style: solid;
+
+      /* flex布局类属性 */
+      display: flex;
+      justify-content: center;
+    }
+
+    .container .row {
+      /* 盒子模型类属性 */
+      width: 980px;
+      height: 41px;
+
+      /* flex布局类属性 */
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .container .row .left_row {
+      /* flex布局类属性 */
+      display: flex;
+    }
+
+    .container .row .right_row {
+      /* flex布局类属性 */
+      display: flex;
+
+      /* 文本类属性，让文本垂直居中，两个子元素都会继承 */
+      line-height: 41px;
+    }
+
+    .container .row .left_row .tencent_game {
+      /* 盒子模型类属性 */
+      width: 150px;
+
+      /* 背景类属性 */
+      background-image: url("../img/tencent_game.png");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
+
+      /*
+      文本类属性
+      我们通常用这种方式来偏移走不需要用户看到的文本，但是又能保留下来让搜索引擎做SEO优化
+      */
+      text-indent: -9999px;
+    }
+
+    .container .row .left_row .recommend_game {
+      /* 盒子模型类属性 */
+      width: 230px;
+      height: 40px;
+    }
+
+    .container .row .right_row .growth_guard {
+      /* flex布局类属性 */
+      display: flex;
+      align-items: center;
+    }
+
+    .container .row .right_row .growth_guard::before {
+      content: "";
+
+      /* 盒子模型类属性 */
+      width: 30px;
+      height: 30px;
+
+      /* 背景类属性 */
+      background: url('../img/title_sprite.png') no-repeat -30px 0px;
+    }
+
+    .container .row .right_row .hot_game {
+      /* 盒子模型类属性 */
+      margin-left: 20px;
+
+      /* flex布局类属性 */
+      display: flex;
+      align-items: center;
+    }
+
+    .container .row .right.row .hot_game::after {
+      content: "";
+
+      /* 盒子模型类属性 */
+      width: 30px;
+      height: 30px;
+
+      /* 背景类属性 */
+      background: url('../img/title_sprite.png') no-repeat 0px 0px;
+
+      /* 显隐性类属性 */
+      opacity: 0.1;
+
+      /* 形变类属性 */
+      transform: rotate(90deg);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="left_row">
+        <!-- 这里的“腾讯游戏”其实用户是看不到的，只是为了搜索引擎做SEO优化 -->
+        <a class="tencent_game" href="#">腾讯游戏</a>
+        <img class="recommend_game" src="../img/recommend_game.jpg" alt="推荐游戏">
+      </div>
+      <div class="right_row">
+        <a class="growth_guard" href="#">成长守护平台</a>
+        <a class="hot_game" href="#">腾讯游戏热门推荐</a>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

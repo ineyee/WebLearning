@@ -1,7 +1,12 @@
-/* 样式重置文件 */
+/* 重置样式文件 */
 
 /* 重置掉自带的padding、margin */
-body {
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, li {
   padding: 0px;
   margin: 0px;
+}
+
+/* 重置掉自带的下划线 */
+a {
+  text-decoration: none;
 }
