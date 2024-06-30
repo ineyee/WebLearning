@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/reset.css">
   <style>
-    .container {
+    .outer_container {
       /* 盒子模型类属性 */
       box-sizing: border-box;
       height: 42px;
@@ -21,7 +21,7 @@
       justify-content: center;
     }
 
-    .container .row {
+    .outer_container .outer_row {
       /* 盒子模型类属性 */
       width: 980px;
       height: 41px;
@@ -31,12 +31,12 @@
       justify-content: space-between;
     }
 
-    .container .row .left_row {
+    .outer_container .outer_row .left_row {
       /* flex布局类属性 */
       display: flex;
     }
 
-    .container .row .right_row {
+    .outer_container .outer_row .right_row {
       /* flex布局类属性 */
       display: flex;
 
@@ -44,7 +44,7 @@
       line-height: 41px;
     }
 
-    .container .row .left_row .tencent_game {
+    .outer_container .outer_row .left_row .tencent_game {
       /* 盒子模型类属性 */
       width: 150px;
 
@@ -61,19 +61,19 @@
       text-indent: -9999px;
     }
 
-    .container .row .left_row .recommend_game {
+    .outer_container .outer_row .left_row .recommend_game {
       /* 盒子模型类属性 */
       width: 230px;
       height: 40px;
     }
 
-    .container .row .right_row .growth_guard {
+    .outer_container .outer_row .right_row .growth_guard {
       /* flex布局类属性 */
       display: flex;
       align-items: center;
     }
 
-    .container .row .right_row .growth_guard::before {
+    .outer_container .outer_row .right_row .growth_guard::before {
       content: "";
 
       /* 盒子模型类属性 */
@@ -84,7 +84,7 @@
       background: url('../img/title_sprite.png') no-repeat -30px 0px;
     }
 
-    .container .row .right_row .hot_game {
+    .outer_container .outer_row .right_row .hot_game {
       /* 盒子模型类属性 */
       margin-left: 20px;
 
@@ -93,7 +93,7 @@
       align-items: center;
     }
 
-    .container .row .right.row .hot_game::after {
+    .outer_container .outer_row .right_row .hot_game::after {
       content: "";
 
       /* 盒子模型类属性 */
@@ -113,8 +113,8 @@
 </head>
 
 <body>
-  <div class="container">
-    <div class="row">
+  <div class="outer_container">
+    <div class="outer_row">
       <div class="left_row">
         <!-- 这里的“腾讯游戏”其实用户是看不到的，只是为了搜索引擎做SEO优化 -->
         <a class="tencent_game" href="#">腾讯游戏</a>
