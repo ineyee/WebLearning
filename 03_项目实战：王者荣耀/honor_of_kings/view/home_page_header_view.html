@@ -20,12 +20,11 @@
     }
 
     .outer_container .outer_row {
-      width: 1300px;
-
       display: flex;
       align-items: center;
     }
 
+    /* ul里的li都是壳子，真正的事情交给li里面的a去做 */
     /* a元素才是honor_of_kings的本质，这里只是个壳子，所以我们通常的做法就是给外面的壳子取个类名，a元素再取类名的话就重复了、因此a元素会直接用元素选择器 */
     .outer_container .outer_row .honor_of_kings {
       /* 为了把a元素变成flex item、从而能设置大小，其它的东西都交给a元素自己去设置、因为a元素才是本质、这只是个壳子 */
@@ -53,6 +52,7 @@
       align-self: stretch;
     }
 
+    /* ul里的li都是壳子，真正的事情交给li里面的a去做 */
     /* a元素才是item_column的本质，这里只是个壳子，所以我们通常的做法就是给外面的壳子取个类名，a元素再取类名的话就重复了、因此a元素会直接用元素选择器 */
     .outer_container .outer_row .navi_row .item_column {
       /* 为了把a元素变成flex item、从而能设置大小，其它的东西都交给a元素自己去设置、因为a元素才是本质、这只是个壳子 */
@@ -150,7 +150,7 @@
 
 <body>
   <div class="outer_container">
-    <div class="outer_row">
+    <div class="header_wrapper outer_row">
       <!--
         网站的主logo一般都会用h1标签包裹一个a标签来做
         h1标签是为了搜索引擎做SEO优化
