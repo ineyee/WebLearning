@@ -19,7 +19,7 @@ li {
 /* 重置掉img元素的vertical-align，否则图片下面可能会有条线 */
 img {
   vertical-align: top;
-}
+} 
 
 /* 重置掉自带的下划线 */
 a {

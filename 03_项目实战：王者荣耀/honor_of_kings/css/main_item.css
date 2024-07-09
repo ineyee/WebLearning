@@ -1,0 +1,416 @@
+/*
+这里采用BEM命名法
+*/
+
+/* header部分 */
+.header {
+  margin-bottom: 16px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__principal {
+  width: 140px;
+  height: 26px;
+
+  display: flex;
+  align-items: center;
+}
+
+.header__principal__icon {
+  background-image: url("../img/index.png");
+  background-repeat: no-repeat;
+}
+
+.header__principal__icon__content {
+  width: 22px;
+  height: 23px;
+  margin-right: 11px;
+
+  background-position: -1px -107px;
+}
+
+.header__principal__icon__match {
+  width: 30px;
+  height: 34px;
+  margin-right: 3px;
+
+  background-position: 0px -180px;
+}
+
+.header__principal__icon__skin {
+  width: 18px;
+  height: 25px;
+  margin-right: 3px;
+
+  background-position: -1px -144px;
+}
+
+.header__principal__icon__schedule {
+  width: 23px;
+  height: 23px;
+  margin-right: 3px;
+
+  background-position: -157px -107px;
+}
+
+.header__principal__title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #323235;
+}
+
+.header__acceory {
+  color: #999999;
+
+  display: flex;
+  align-items: center;
+}
+
+.header__acceory:hover {
+  color: #f3c258;
+}
+
+.header__acceory__icon {
+  width: 14px;
+  height: 14px;
+
+  background-image: url("../img/index.png");
+  background-repeat: no-repeat;
+  background-position: -252px 0px;
+}
+
+.header__acceory__title {
+  margin-left: 8px;
+}
+
+/* segment_control部分 */
+.segment_control {
+  height: 32px;
+  margin-bottom: 13px;
+
+  background-color: #f5f5f5;
+
+  display: flex;
+}
+
+.segment_control__item {
+  box-sizing: border-box;
+  height: 32px;
+  border-bottom: 3px transparent solid;
+  margin-bottom: 5px;
+
+  color: #999999;
+  text-align: center;
+  line-height: 29px;
+
+  cursor: pointer;
+}
+
+.segment_control__item__evenly {
+  flex: 1;
+}
+
+.segment_control__item__wrap {
+  padding: 0px 27px;
+}
+
+.segment_control__item:hover,
+.segment_control__item--active {
+  border-bottom: 3px #f3c258 solid;
+
+  color: #333333;
+}
+
+.segment_control__line {
+  width: 1px;
+  height: 20px;
+  margin: 5px 0px;
+
+  background-color: #e1e1e1;
+}
+
+/* keyword_list部分 */
+.keyword_list {
+  padding: 0px 8px 9px 8px;
+
+  display: flex;
+  /* 内容过多时换行 */
+  flex-wrap: wrap;
+
+  cursor: pointer;
+}
+
+.keyword_list__item {
+  height: 24px;
+  padding: 0px 8px 0px 8px;
+  margin-right: 8px;
+  margin-bottom: 5px;
+  border: 1px #e5e5e5 solid;
+  border-radius: 10px;
+
+  background-color: #f5f5f5;
+
+  text-align: center;
+  line-height: 24px;
+}
+
+.keyword_list__item:hover,
+.keyword_list__item--active {
+  border-color: #f3c258;
+
+  background-color: #f3c258;
+
+  color: white;
+}
+
+/* video_list */
+.video_list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.video_list__item {
+  /* 子绝父相 */
+  position: relative;
+
+  width: 209px;
+  height: 175px;
+  margin: 0px 12px 30px 0px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* 我们这里当然也可以用justify-content: space-between，但这里不是完全平分的，所以用一下结构伪类选择器 */
+.video_list__item:nth-child(4n) {
+  margin-right: 0px;
+}
+
+/*
+.video_list__item > .video_list__item__mask，代表给video_list__item的直接后代子元素video_list__item__mask添加样式
+
+.video_list__item:hover > .video_list__item__mask，代表给video_list__item hover时的直接后代子元素video_list__item__mask添加样式
+
+注意:hover是动态伪类选择器，它也是一种选择器，也就是说.video_list__item:hover跟video_list__item都是选择器，因此是可以这么用的——也就是某个元素处于某种状态时的选择器
+*/
+.video_list__item:hover>.video_list__item__mask {
+  /* hover item时，显示mask；但是visibility不是可动画属性，所以我们换做opacity */
+  /* visibility: visible; */
+  opacity: 1;
+}
+
+.video_list__item__img {
+  height: 125px;
+
+  border-radius: 2px;
+}
+
+.video_list__item__info {
+  /* 子绝父相，别忘了父元素，否则会相对body元素 */
+  position: absolute;
+  top: 104px;
+  right: 0px;
+  left: 0px;
+
+  height: 22px;
+  padding: 0 10px;
+  border-radius: 0px 0px 2px 2px;
+
+  background-color: rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  align-items: center;
+}
+
+.video_list__item__info__watch__icon {
+  width: 12px;
+  height: 12px;
+
+  background-image: url("../img/index.png");
+  background-repeat: no-repeat;
+  background-position: -256px -64px;
+}
+
+.video_list__item__info__watch__number {
+  padding-left: 5px;
+
+  font-size: 12px;
+  color: white;
+}
+
+.video_list__item__mask {
+  /* 子绝父相，别忘了父元素，否则会相对body元素 */
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+
+  height: 127px;
+  border-radius: 2px;
+
+  background-color: rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* 默认情况下，隐藏；hover item时，显示；但是visibility不是可动画属性，所以我们换做opacity */
+  /* visibility: hidden; */
+  opacity: 0;
+
+  transition-property: all;
+  transition-duration: 400ms;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
+}
+
+.video_list__item__mask__play {
+  width: 40px;
+  height: 40px;
+
+  background-image: url("../img/index.png");
+  background-repeat: no-repeat;
+  background-position: -192px -64px;
+}
+
+.video_list__item__title {
+  height: 40px;
+  margin-top: 10px;
+
+  color: #333333;
+}
+
+/* 英雄/皮肤部分 */
+.new_hero {
+  height: 224px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.new_hero__img {
+  height: 156px;
+  border-radius: 2px;
+}
+
+.new_hero__info {
+  height: 47px;
+  border: 1px #e5e5e5 solid;
+  border-top: none;
+  border-radius: 0px 0px 2px 2px;
+  padding: 10px 15px;
+}
+
+.new_hero__info__title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333333;
+}
+
+.new_hero__info __date {
+  font-size: 12px;
+  color: #999999;
+}
+
+.hero_imgs {
+  height: 173px;
+  padding-top: 10px;
+  margin-bottom: 12px;
+
+  display: flex;
+
+}
+
+.hero_imgs__item {
+  position: relative;
+
+  width: 68px;
+  margin-right: 7px;
+
+  cursor: pointer;
+}
+
+.hero_imgs__item:nth-child(4n) {
+  margin-right: 0px;
+}
+
+.hero_imgs__item:hover>.hero_imgs__item__mask {
+  opacity: 1;
+}
+
+.hero_imgs__item__mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-color: rgba(0, 0, 0, 0.88);
+
+  color: #f3c258;
+  text-align: center;
+  line-height: 68px;
+  /* 单列文本从上往下写，如果过多的话从右往左一列一列 */
+  writing-mode: vertical-rl;
+
+  opacity: 0;
+
+  transition-property: all;
+  transition-duration: 400ms;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
+}
+
+/* KPL赛程部分 */
+.match_schedule__list {
+  width: 100%;
+  margin-bottom: 21px;
+
+  text-align: center;
+}
+
+.match_schedule__list__header {
+  width: 83px;
+
+  color: #999999;
+  text-align: center;
+}
+
+.match_schedule__list__item {
+  height: 67px;
+}
+
+.match_schedule__list__item__date {
+  width: 80px;
+
+  font-size: 12px;
+  color: #333333;
+  text-align: center;
+}
+
+.match_schedule__list__item__team {
+  width: 79px;
+}
+
+.match_schedule__list__item__team__img {
+  width: 25px;
+  height: 25px;
+  margin-bottom: 5px;
+}
+
+.match_schedule__list__item__team__name {
+  color: #333333;
+  text-align: center;
+}
+
+.match_schedule__list__item__vs {
+  width: 43px;
+
+  color: #f3c258;
+  text-align: center;
+}
