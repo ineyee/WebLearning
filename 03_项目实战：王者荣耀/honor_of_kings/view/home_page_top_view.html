@@ -64,7 +64,7 @@
 
     .outer_container .outer_row .left_row .old_game_small {
       position: relative;
-    
+
       /* 盒子模型类属性 */
       width: 230px;
       height: 40px;
@@ -104,12 +104,16 @@
     }
 
     .outer_container .outer_row .right_row .hot_game {
+      position: relative;
+
       /* 盒子模型类属性 */
       margin-left: 20px;
 
       /* flex布局类属性 */
       display: flex;
       align-items: center;
+
+      cursor: pointer;
     }
 
     .outer_container .outer_row .right_row .hot_game::after {
@@ -127,6 +131,26 @@
 
       /* 形变类属性 */
       transform: rotate(90deg);
+    }
+
+    .outer_container .outer_row .right_row .hot_game .hot_game__drop_menu {
+      position: absolute;
+      top: 42px;
+      right: 10px;
+
+      width: 1020px;
+      height: 704px;
+
+      opacity: 0;
+
+      transition-property: all;
+      transition-duration: 400ms;
+      transition-timing-function: ease-in-out;
+      transition-delay: 0s;
+    }
+
+    .outer_container .outer_row .right_row .hot_game:hover .hot_game__drop_menu {
+      opacity: 1;
     }
   </style>
 </head>
@@ -146,10 +170,15 @@
       </div>
       <div class="right_row">
         <a class="growth_guard" href="#">成长守护平台</a>
-        <a class="hot_game" href="#">腾讯游戏热门推荐</a>
+        <div class="hot_game">
+          <div>腾讯游戏热门推荐</>
+            <!-- 下拉菜单，hover谁就把下拉菜单作为谁的子元素 -->
+            <iframe class="hot_game__drop_menu" src="https://game.gtimg.cn/images/js/title/title_game_rank.html"
+              frameborder="0"></iframe>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 </body>
 
 </html>
