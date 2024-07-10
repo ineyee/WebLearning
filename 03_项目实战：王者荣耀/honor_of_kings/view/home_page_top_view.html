@@ -44,6 +44,8 @@
     }
 
     .outer_container .outer_row .left_row .tencent_game {
+      z-index: 101;
+
       /* 盒子模型类属性 */
       width: 150px;
 
@@ -60,10 +62,28 @@
       text-indent: -9999px;
     }
 
-    .outer_container .outer_row .left_row .recommend_game {
+    .outer_container .outer_row .left_row .old_game_small {
+      position: relative;
+    
       /* 盒子模型类属性 */
       width: 230px;
       height: 40px;
+    }
+
+    .outer_container .outer_row .left_row .old_game_small:hover .old_game_big {
+      visibility: visible;
+    }
+
+    .outer_container .outer_row .left_row .old_game_big {
+      position: absolute;
+      left: -140px;
+      z-index: 100;
+
+      /* 盒子模型类属性 */
+      width: 970px;
+      height: 185px;
+
+      visibility: hidden;
     }
 
     .outer_container .outer_row .right_row .growth_guard {
@@ -117,7 +137,12 @@
       <div class="left_row">
         <!-- 这里的“腾讯游戏”其实用户是看不到的，只是为了搜索引擎做SEO优化 -->
         <a class="tencent_game" href="#">腾讯游戏</a>
-        <img class="recommend_game" src="../img/recommend_game.jpg" alt="推荐游戏">
+        <div class="old_game_small">
+          <img src="../img/old_games_small.jpg" alt="">
+          <a href="#">
+            <img class="old_game_big" src="../img/old_games_big.jpg"></img>
+          </a>
+        </div>
       </div>
       <div class="right_row">
         <a class="growth_guard" href="#">成长守护平台</a>
