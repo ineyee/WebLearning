@@ -145,6 +145,68 @@
       font-size: 14px;
       color: #858792;
     }
+
+    .drop_menu {
+      position: absolute;
+      top: 83px;
+      left: 0;
+
+      width: 100%;
+      height: 0px;
+
+      background-color: rgba(0, 0, 0, 0.7);
+
+      transition-property: all;
+      transition-duration: 400ms;
+      transition-timing-function: ease-in-out;
+      transition-delay: 0s;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      /* 高度为0时，内容默认是会显示的，这里隐藏掉 */
+      overflow: hidden;
+    }
+
+    .outer_container:hover .drop_menu {
+      height: 285px;
+    }
+
+    .drop_menu__content {
+      width: 890px;
+      height: 240px;
+      padding: 15px 0 30px 50px;
+
+      display: flex;
+    }
+
+    .drop_menu__content__list {
+      width: 110px;
+      padding-top: 2px;
+    }
+
+    .drop_menu__content__item {
+      height: 30px;
+
+      text-align: center;
+      line-height: 30px;
+
+      /* 目的是让里面的a元素撑满item，否则小手又是不显示 */
+      display: flex;
+    }
+
+    .drop_menu__content__item>a {
+      /* 上面“display: flex;”只是保证高度撑满 + 能设置宽高，这里宽度撑满item */
+      width: 100%;
+      /* a元素统一设置过样式，颜色是#333333 */
+      color: #c9c9dd;
+    }
+
+    .drop_menu__content__item:hover>a {
+      color: #f3c258;
+      text-decoration: underline;
+    }
   </style>
 </head>
 
@@ -209,6 +271,153 @@
           <a class="username" href="#">欢迎登录</a>
           <div class="history">登录后查看游戏战绩</div>
         </div>
+      </div>
+    </div>
+    <!--
+      做下拉菜单：
+      1、hover谁就把下拉菜单作为谁的子元素
+      2、子绝父相，千万不能在标准流搞下拉菜单、因为下拉菜单会把其它元素给顶跑
+      3、可以用visibility（无动画）、opaque（有动画）、height（有动画）来做下拉菜单
+      -->
+    <div class="drop_menu">
+      <div class="drop_menu__content">
+        <ul class="drop_menu__content__list">
+          <li class="drop_menu__content__item">
+            <a href="#">版本介绍</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">游戏介绍</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">英雄资料</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">爆料站</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">世界观体验站</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">游戏壁纸</a>
+          </li>
+        </ul>
+        <ul class="drop_menu__content__list">
+          <li class="drop_menu__content__item">
+            <a href="#">攻略中心</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">开放素材库</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">内容创作平台</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">手语打法参考</a>
+          </li>
+        </ul>
+        <ul class="drop_menu__content__list">
+          <li class="drop_menu__content__item">
+            <a href="#">KPL</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">王者世冠KIC</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">K甲联赛</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">挑战者杯</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">全国大赛</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">高校联赛</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">赛事数据</a>
+          </li>
+        </ul>
+        <ul class="drop_menu__content__list">
+          <li class="drop_menu__content__item">
+            <a href="#">荣耀·传承</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">王者文化站</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">万千世界</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">王者觉悟</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">星光殿堂</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">IP共创计划</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">商户特权</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">龙翼王者卡</a>
+          </li>
+        </ul>
+        <ul class="drop_menu__content__list">
+          <li class="drop_menu__content__item">
+            <a href="#">创意互动营</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">王者营地</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">微信圈子</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">官方微博</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">微信公众号</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">手Q订阅号</a>
+          </li>
+        </ul>
+        <ul class="drop_menu__content__list">
+          <li class="drop_menu__content__item">
+            <a href="#">腾讯游戏防沉迷</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">成长守护环境</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">对局环境情报站</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">客服专区</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">礼包兑换</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">自助服务</a>
+          </li>
+        </ul>
+        <ul class="drop_menu__content__list">
+          <li class="drop_menu__content__item">
+            <a href="#">王者荣耀 星之破晓</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">王者荣耀世界</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">代号:启程</a>
+          </li>
+          <li class="drop_menu__content__item">
+            <a href="#">王者万象棋</a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>

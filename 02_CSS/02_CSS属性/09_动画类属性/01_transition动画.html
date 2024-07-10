@@ -13,7 +13,7 @@
       background-color: red;
 
       /*
-      设置一下哪些属性需要添加动画效果
+      设置一下哪些属性需要添加动画效果，把动画添加在元素本身上意味着只要元素的某个属性发生变化就会有动画
 
       如果这里要动画的属性过多，一个一个写起来麻烦，那实际开发中我们经常会直接写一个all
       */
@@ -36,6 +36,15 @@
       background-color: orange;
       /* 平移 */
       transform: translate(100px, 0px);
+
+      /*
+      而如果把动画添加在元素的hover状态上，就意味着只有元素处于hover状态时才会有某个动画，离开就没了
+      一个典型的例子就是下拉菜单，如果我们通过高度变化来做动画，那添加在元素上，则无论高度从0变成100、还是100变成0都会有动画，因为这都属于是高度在变化，而如果加到hover状态上，那就只有hover元素时、下拉菜单高度从0变成100时才有动画，一旦不hover，下拉菜单的高度就会立马变成0从而消失、没有动画
+      */
+      /* transition-property: all;
+      transition-duration: 2s;
+      transition-timing-function: ease-in-out;
+      transition-delay: 0s; */
     }
   </style>
 </head>
