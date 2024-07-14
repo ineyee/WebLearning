@@ -1,0 +1,114 @@
+.social_media {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  margin-top: -240px;
+
+  width: 254px;
+  height: 494px;
+
+  background-image: url("../../img/social_media_bg.webp");
+  background-repeat: no-repeat;
+  background-position: top left;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.social_media__bubble {
+  width: 165px;
+  height: 145px;
+
+  background: url("../../img/social_media_bubble.webp") no-repeat top center;
+
+  display: flex;
+}
+
+.social_media__bubble__text {
+  position: absolute;
+  left: 12px;
+
+  width: 88px;
+  height: 36px;
+
+  font-size: 14px;
+  font-weight: bold;
+  color: #62401b;
+
+  text-indent: 2px;
+  line-height: 18px;
+
+  overflow: hidden;
+}
+
+.social_media__bubble__first_line {
+  top: 37px;
+}
+
+.social_media__bubble__second_line {
+  top: 57px;
+}
+
+.social_media__list {
+  position: absolute;
+  top: 145px;
+  left: 85px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.social_media__list__download_game {
+  width: 117px;
+  height: 132px;
+  padding-top: 2px;
+  margin-top: 1px;
+
+  background-image: url(https://game.gtimg.cn/images/yxzj/web201706/images/comm/floatwindow/r_all2022.png);
+  background-size: 360px 569px;
+  background-repeat: no-repeat;
+  background-position: -243px 0;
+
+  display: flex;
+  justify-content: center;
+}
+
+.social_media__list__download_game__qrcode {
+  width: 107px;
+  height: 107px;
+  border-radius: 2px 2px 2px 2px;
+}
+
+.social_media__list__item {
+  width: 117px;
+  height: 38px;
+  margin-top: 1px;
+
+  background-image: url(https://game.gtimg.cn/images/yxzj/web201706/images/comm/floatwindow/r_all2022.png);
+  background-repeat: no-repeat;
+  background-size: 360px 569px;
+}
+
+.social_media__list__item__camp {
+  background-position: -243px -134px;
+}
+
+.social_media__list__item__camp:hover {
+  background-position: -243px -172px;
+}
+
+.social_media__list__item__weibo {
+  background-position: -122px -120px;
+}
+
+.social_media__list__item__weibo:hover {
+  background-position: -122px -240px;
+}
+
+.social_media__list__item__wechat {
+  background-position: -122px -160px;
+}
+
+.social_media__list__item__wechat:hover {
+  background-position: -122px -200px;
+}
