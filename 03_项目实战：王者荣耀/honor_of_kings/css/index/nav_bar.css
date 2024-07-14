@@ -4,6 +4,8 @@
   right: 0px;
   left: 0px;
   z-index: -1;
+
+  min-width: 1300px;
 }
 
 .nav_bar__bg>img {
@@ -16,6 +18,7 @@
   right: 0px;
   left: 0px;
 
+  min-width: 1300px;
   height: 84px;
 
   background-color: #000000;
