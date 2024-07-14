@@ -106,11 +106,14 @@
   position: absolute;
   top: 42px;
   right: 10px;
+  z-index: 101;
 
   width: 1020px;
   height: 704px;
 
-  opacity: 0;
+  opacity: 1;
+  /* 如果只用opacity做显隐，那opacity隐藏时，虽然我们看不见，但元素依然占据空间，也就是说它依然能响应hover等事件，所以我们得配合display来做 */
+  display: none;
 
   transition-property: all;
   transition-duration: 400ms;
@@ -124,4 +127,5 @@
 */
 .header__content__hot_game:hover>.header__content__hot_game__drop_menu {
   opacity: 1;
+  display: block;
 }

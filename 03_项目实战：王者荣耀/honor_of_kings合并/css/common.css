@@ -6,19 +6,6 @@ body {
   color: #333333;
 }
 
-/* 当前网站内绝大多数a元素都是这个样式，抽到这里我们就不用一直重复写了，导入一下就行 */
-a {
-  font-size: 14px;
-  color: #333333;
-}
-
-.header_wrapper {
-  /* wrapper的宽度为1300px */
-  width: 1300px;
-  /* wrapper的子元素横向居中 */
-  margin: 0px auto;
-}
-
 .main_wrapper {
   /* wrapper的宽度为1200px */
   width: 1200px;
