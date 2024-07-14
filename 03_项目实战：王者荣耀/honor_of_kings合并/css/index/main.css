@@ -1,0 +1,9 @@
+.main {
+  /* wrapper的宽度为1200px */
+  width: 1200px;
+  /* 自己要在父元素里居中显示，我们最好不要给body元素设置flex布局 */
+  margin: 83px auto 0px auto;
+
+  display: flex;
+  flex-direction: column;
+}

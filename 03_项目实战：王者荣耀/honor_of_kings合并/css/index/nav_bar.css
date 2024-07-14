@@ -1,6 +1,13 @@
 .nav_bar__bg {
   position: absolute;
-  z-index: 10;
+  top: 42px;
+  right: 0px;
+  left: 0px;
+  z-index: -1;
+}
+
+.nav_bar__bg>img {
+  width: 100%;
 }
 
 .nav_bar {
@@ -8,7 +15,6 @@
   top: 42px;
   right: 0px;
   left: 0px;
-  z-index: 11;
 
   height: 84px;
 

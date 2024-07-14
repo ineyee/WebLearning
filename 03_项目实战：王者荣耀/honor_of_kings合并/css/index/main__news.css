@@ -1,0 +1,175 @@
+.main__news {
+  height: 342px;
+
+  background-image: url("../../img/news_bg.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  display: flex;
+}
+
+.main__news__cycle {
+  width: 605px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.main__news__cycle__img_list {
+  width: 604px;
+  height: 298px;
+
+  display: flex;
+
+  overflow: hidden;
+}
+
+.main__news__cycle__img_list__item {
+  display: flex;
+}
+
+.main__news__cycle__img_list__item>a {
+  width: 604px;
+}
+
+.main__news__cycle__title_list {
+  width: 604px;
+  height: 44px;
+
+  background-color: #323235;
+
+  display: flex;
+}
+
+.main__news__cycle__title_list__item {
+  display: flex;
+}
+
+.main__news__cycle__title_list__item>div {
+  width: 120.8px;
+
+  font-size: 14px;
+  color: #b1b2be;
+  text-align: center;
+  line-height: 44px;
+
+  cursor: pointer;
+}
+
+.main__news__cycle__title_list__item>div:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+
+  color: #f3c258;
+}
+
+.main__news__news_center {
+  padding: 0px 17px;
+
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  overflow: hidden;
+}
+
+.main__news__news_center__title_list {
+  height: 48px;
+  border-bottom: 1px #000000 solid;
+
+  display: flex;
+}
+
+.main__news__news_center__title_list__item {
+  display: flex;
+}
+
+.main__news__news_center__title_list__item>div,
+.main__news__news_center__title_list__item>a {
+  width: 52px;
+  height: 45px;
+
+  color: #b8b9c5;
+  text-align: center;
+  line-height: 44px;
+
+  cursor: pointer;
+}
+
+/* 这里用到了或选择器来做某些情况下的样式一致 */
+.main__news__news_center__title_list__item:hover>div,
+.main__news__news_center__title_list__item:hover>a,
+.main__news__news_center__title_list__item--active>div {
+  color: #f3c258;
+
+  border-bottom: 3px #f3c258 solid;
+}
+
+.main__news__news_center__title_list__item__more:hover>a {
+  color: #b8b9c5;
+
+  border-bottom: 3px transparent solid;
+}
+
+.main__news__news_center__notice {
+  height: 36px;
+  padding: 0px 15px;
+  margin-top: 18px;
+  margin-bottom: 11px;
+
+  background-color: #414046;
+
+  font-size: 18px;
+  color: #f3c258;
+  line-height: 36px;
+}
+
+.main__news__news_center__news_list {
+  display: flex;
+  flex-direction: column;
+}
+
+.main__news__news_center__news_list__item {
+  margin-bottom: 11px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main__news__news_center__news_list__item>a {
+  margin-right: 20px;
+
+  flex: 1;
+
+  color: #b8b9c5;
+}
+
+.main__news__news_center__news_list__item>div {
+  font-size: 12px;
+  color: #999999;
+}
+
+.main__news__download {
+  width: 236px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.main__news__download__download {
+  height: 128px;
+
+  background: url("../../img/index.png") no-repeat 0px -219px;
+}
+
+.main__news__download__guard {
+  height: 106px;
+
+  background: url("../../img/index.png") no-repeat 0px -350px;
+}
+
+.main__news__download__experience {
+  height: 108px;
+
+  background: url("../../img/index.png") no-repeat 0px -461px;
+}
