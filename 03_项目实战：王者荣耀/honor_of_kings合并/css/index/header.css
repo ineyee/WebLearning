@@ -1,0 +1,127 @@
+/* 采用BEM命名法 */
+.header {
+  height: 41px;
+  border-bottom-width: 1px;
+  border-bottom-color: #f5f5f5;
+  border-bottom-style: solid;
+
+  display: flex;
+  justify-content: center;
+}
+
+.header__content {
+  width: 980px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__content__tencent_game {
+  z-index: 101;
+
+  width: 150px;
+
+  background-image: url("../../img/tencent_game.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  /* 我们通常用这种方式来偏移走不需要用户看到的文本，但是又能保留下来让搜索引擎做SEO优化 */
+  text-indent: -9999px;
+}
+
+.header__content__old_game_small {
+  /* 子绝父相 */
+  position: relative;
+
+  width: 230px;
+  height: 40px;
+}
+
+.header__content__old_game_big {
+  /* 子绝父相 */
+  position: absolute;
+  left: -140px;
+  z-index: 100;
+
+  width: 970px;
+  height: 185px;
+
+  visibility: hidden;
+}
+
+/*
+  这种组合的优先使用直接后代选择器，精准选择
+  除非有很多这种后代要干同样的事再使用所有后代选择器，批量选择
+*/
+.header__content__old_game_small:hover>.header__content__old_game_big {
+  visibility: visible;
+}
+
+.header__content__flex_grow {
+  flex-grow: 1;
+}
+
+.header__content__growth_guard {
+  display: flex;
+  align-items: center;
+}
+
+.header__content__growth_guard::before {
+  content: "";
+
+  width: 30px;
+  height: 30px;
+
+  background: url('../../img/title_sprite.png') no-repeat -30px 0px;
+}
+
+.header__content__hot_game {
+  /* 子绝父相 */
+  position: relative;
+
+  margin-left: 20px;
+
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.header__content__hot_game::after {
+  content: "";
+
+  width: 30px;
+  height: 30px;
+
+  background: url('../../img/title_sprite.png') no-repeat 0px 0px;
+
+  opacity: 0.1;
+
+  transform: rotate(90deg);
+}
+
+.header__content__hot_game__drop_menu {
+  /* 子绝父相 */
+  position: absolute;
+  top: 42px;
+  right: 10px;
+
+  width: 1020px;
+  height: 704px;
+
+  opacity: 0;
+
+  transition-property: all;
+  transition-duration: 400ms;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
+}
+
+/*
+  这种组合的优先使用直接后代选择器，精准选择
+  除非有很多这种后代要干同样的事再使用所有后代选择器，批量选择
+*/
+.header__content__hot_game:hover>.header__content__hot_game__drop_menu {
+  opacity: 1;
+}

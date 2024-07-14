@@ -1,0 +1,58 @@
+<!-- 每个网站都有一个index.html，它是该网站的入口页  -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/index/header.css">
+</head>
+
+<body>
+  <!-- header -->
+  <div class="header">
+    <div class="header__content">
+      <!-- 这里的“腾讯游戏”其实用户是看不到的，只是为了搜索引擎做SEO优化 -->
+      <a class="header__content__tencent_game" href="https://game.qq.com/?ADTAG=IED.InnerCop.gameWeb.topNav"
+        target="_blank">
+        腾讯游戏
+      </a>
+      <!--
+        做下拉菜单：
+        1、hover谁就把下拉菜单作为谁的子元素
+        2、子绝父相，千万不能在标准流搞下拉菜单、因为下拉菜单会把其它元素给顶跑
+        3、可以用visibility（无动画）、opaque（有动画）、height（有动画）来做下拉菜单
+      -->
+      <div class="header__content__old_game_small">
+        <img src="img/old_games_small.jpg" alt="">
+        <a class="header__content__old_game_big" href="https://cfhd.cf.qq.com" target="_blank">
+          <img src="img/old_games_big.jpg" alt="">
+        </a>
+      </div>
+      <div class="header__content__flex_grow"></div>
+      <a class="header__content__growth_guard" href="https://jiazhang.qq.com/" target="_blank">
+        成长守护平台
+      </a>
+      <div class="header__content__hot_game">
+        <div>
+          腾讯游戏热门推荐
+        </div>
+        <!--
+            做下拉菜单：
+            1、hover谁就把下拉菜单作为谁的子元素
+            2、子绝父相，千万不能在标准流搞下拉菜单、因为下拉菜单会把其它元素给顶跑
+            3、可以用visibility（无动画）、opaque（有动画）、height（有动画）来做下拉菜单
+          -->
+        <iframe class="header__content__hot_game__drop_menu"
+          src="https://game.gtimg.cn/images/js/title/title_game_rank.html" frameborder="0">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
