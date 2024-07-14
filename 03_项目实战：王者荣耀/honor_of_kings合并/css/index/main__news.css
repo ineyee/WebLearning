@@ -173,3 +173,49 @@
 
   background: url("../../img/index.png") no-repeat 0px -461px;
 }
+
+/* 新闻类型图标的样式，我们直接封装成个伪元素 */
+.news_type::before {
+  content: "";
+
+  /* 无论外界使用的是什么，内部都搞成inline-block，以便能设置宽高 */
+  display: inline-block;
+
+  width: 32px;
+  height: 16px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 2px;
+  margin-right: 2px;
+
+  font-size: 12px;
+  text-align: center;
+  line-height: 16px;
+}
+
+/* 热门新闻类型特有的样式 */
+.news_type_hot::before {
+  content: "热门";
+
+  border-color: #ff3636;
+
+  color: #ff3636;
+}
+
+/* 新闻新闻类型特有的样式 */
+.news_type_new::before {
+  content: "新闻";
+
+  border-color: #1e96ab;
+
+  color: #1e96ab;
+}
+
+/* 公告新闻类型特有的样式 */
+.news_type_notice::before {
+  content: "公告";
+
+  border-color: #f4be19;
+
+  color: #f4be19;
+}
