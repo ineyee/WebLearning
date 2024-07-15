@@ -1,74 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
     /*
-    选中external1 div元素所有后代里的第一个子元素
-    internal11 div元素是它的后代，且是它的第一个子元素，所以会全部点亮
-    internal12 div元素是它的后代，虽然不是第一个子元素，但是internal12 div元素也有自己的第一个子元素，所以3-1会被点亮
+      选中external1 div元素所有后代里的第一个子元素
+      internal11 div元素是它的后代，且是它的第一个子元素，所以会全部点亮
+      internal12 div元素是它的后代，虽然不是第一个子元素，但是internal12 div元素也有自己的第一个子元素，所以3-1会被点亮
     */
     .external1 :nth-child(1) {
       color: #ff0000ff;
     }
 
     /*
-    选中external1 div元素直接后代里的第一个子元素
-    internal21 div元素是它的直接后代，且是它的第一个子元素，所以会全部点亮
+      选中external1 div元素直接后代里的第一个子元素
+      internal21 div元素是它的直接后代，且是它的第一个子元素，所以会全部点亮
     */
     .external2>:nth-child(1) {
       color: #ff0000ff;
     }
 
     /*
-    选中external3 div元素所有后代里的第二个子元素
-    2、1-2、3-2会点亮
+      选中external3 div元素所有后代里的第二个子元素
+      2、1-2、3-2会点亮
     */
     .external3 :nth-child(2) {
       color: #ff0000ff;
     }
 
     /*
-    选中external4 div元素所有后代里的第二个子元素
-    2会点亮
+      选中external4 div元素所有后代里的第二个子元素
+      2会点亮
     */
     .external4>:nth-child(2) {
       color: #ff0000ff;
     }
 
     /*
-    选中external5 div元素所有后代里的前2个子元素
-    1、2会点亮
+      选中external5 div元素所有后代里的前2个子元素
+      1、2会点亮
     */
     .external5>:nth-child(-n + 2) {
       color: #ff0000ff;
     }
 
     /* 
-    选中.external6 div元素所有后代里的 + 第2个 + div类型的子元素
-    1-2元素、2元素会点亮
+      选中.external6 div元素所有后代里的 + 第2个 + div类型的子元素
+      1-2元素、2元素会点亮
     */
     .external6 div:nth-of-type(2) {
       color: #ff0000ff;
     }
+
     /* 
-    而这个因为没有限定类型，所以1-2的div元素和p元素都会点亮
+      而这个因为没有限定类型，所以1-2的div元素和p元素都会点亮
     */
     /* .external6 :nth-child(2) {
       color: #ff0000ff;
     } */
 
     /* 
-    选中.external7 div元素直接后代里的 + 第2个 + div类型的子元素
-    所以只有2元素会点亮
+      选中.external7 div元素直接后代里的 + 第2个 + div类型的子元素
+      所以只有2元素会点亮
     */
     .external7>div:nth-of-type(2) {
       color: #ff0000ff;
     }
   </style>
 </head>
+
 <body>
   <!--
     结构伪类选择器是选择器的一种，分为：
@@ -78,9 +81,11 @@
       * 1.3 后代选择器:nth-child(2n + 1)：用来选中父元素里的奇数元素
       * 1.4 其实:nth-child(...)括号里是个函数，变量是n，n的取值从0、1、2、3...，所以我们可以任意给它一个函数来选中我们想要的元素即可，比如:nth-child(-n + xxx)用来选中前xxx个元素
       * 1.5 如果我们想倒序来选中元素，可以使用对应的：后代选择器:nth-last-child(...)
+      * 当然上面的后代选择器也可以直接写成要选中的子元素所对应的选择器，毕竟父元素的后代选择 = 子元素的选择器
 
     * 2、后代选择器 元素选择器:nth-of-type(...)：n是number的缩写，th是4th、5th这种东西后缀的缩写，因此连起来就是第几个，全部翻译过来就是“第几个某某类型的元素”，跟上面的主要区别其实就是加了一个条件，因此实际开发中一般用来选中父元素里 + 第几个 + 某某类型的子元素，主要应对的是元素交叉存在的场景
       * 如果我们想倒序来选中元素，可以使用对应的：后代选择器 元素选择器:nth-last-of-type(...)
+      * 当然上面的后代选择器也可以直接写成要选中的子元素所对应的选择器，毕竟父元素的后代选择 = 子元素的选择器
     
     * 3、根元素选择器:root，就是html元素
     :root {
@@ -171,52 +176,53 @@
     <div>5 元素</div>
   </div>
 
-    <!-- 案例五 -->
-    <h1>案例五</h1>
-    <div class="external5">
-      <div class="internal51">
-        <div>1-1 元素</div>
-        <div>1-2 元素</div>
-        <div>1-3 元素</div>
-      </div>
-      <div>2 元素</div>
-      <div class="internal52">
-        <div>3-1 元素</div>
-        <div>3-2 元素</div>
-        <div>3-3 元素</div>
-      </div>
-      <div>4 元素</div>
-      <div>5 元素</div>
+  <!-- 案例五 -->
+  <h1>案例五</h1>
+  <div class="external5">
+    <div class="internal51">
+      <div>1-1 元素</div>
+      <div>1-2 元素</div>
+      <div>1-3 元素</div>
     </div>
+    <div>2 元素</div>
+    <div class="internal52">
+      <div>3-1 元素</div>
+      <div>3-2 元素</div>
+      <div>3-3 元素</div>
+    </div>
+    <div>4 元素</div>
+    <div>5 元素</div>
+  </div>
 
-    <!-- 案例六 -->
-    <h1>案例六</h1>
-    <div class="external6">
-      <div class="internal">
-        <div>1-1 元素</div>
-        <div>1-2 元素</div>
-      </div>
-      <p>p1</p>
-      <div>2 元素</div>
-      <h6>h6</h6>
-      <div class="internal">3 元素</div>
-      <div>4 元素</div>
-      <div>5 元素</div>
+  <!-- 案例六 -->
+  <h1>案例六</h1>
+  <div class="external6">
+    <div class="internal">
+      <div>1-1 元素</div>
+      <div>1-2 元素</div>
     </div>
+    <p>p1</p>
+    <div>2 元素</div>
+    <h6>h6</h6>
+    <div class="internal">3 元素</div>
+    <div>4 元素</div>
+    <div>5 元素</div>
+  </div>
 
-    <!-- 案例七 -->
-    <h1>案例七</h1>
-    <div class="external7">
-      <div class="internal">
-        <div>1-1 元素</div>
-        <div>1-2 元素</div>
-      </div>
-      <p>p1</p>
-      <div>2 元素</div>
-      <h6>h6</h6>
-      <div class="internal">3 元素</div>
-      <div>4 元素</div>
-      <div>5 元素</div>
+  <!-- 案例七 -->
+  <h1>案例七</h1>
+  <div class="external7">
+    <div class="internal">
+      <div>1-1 元素</div>
+      <div>1-2 元素</div>
     </div>
+    <p>p1</p>
+    <div>2 元素</div>
+    <h6>h6</h6>
+    <div class="internal">3 元素</div>
+    <div>4 元素</div>
+    <div>5 元素</div>
+  </div>
 </body>
+
 </html>

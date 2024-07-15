@@ -1,29 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
-<body>
-  <!-- 
-    CSS选择器（selector）种类繁多，但它们的目的都是一样的，那就是【找到特定的HTML元素】，进而给这些HTML元素添加样式
 
-    ✅ 1、通用选择器（universal selector）
-    ✅ 2、简单选择器
-      ✅ 元素选择器（type selector）
-      ✅ 类选择器（class selector）
-      ✅ id选择器（id selector）
-    ✅ 3、属性选择器（attribute selector）
-    ✅ 4、后代选择器（descendant selector）
-      ✅ 所有后代选择器
-      ✅ 直接后代选择器
-    ✅ 5、兄弟选择器（sibling combinators）
-    ✅ 6、选择器组（combinators）
-      ✅ 交集选择器
-      ✅ 并集选择器
-    ✅ 7、伪类（pseudo-classes）
-    ✅ 8、伪元素（pseudo-elements）
-   -->
+<body>
+  <!--
+    一、CSS选择器（selector）种类繁多，但它们的目的都是一样的，那就是【找到特定的HTML元素】，进而给这些HTML元素添加样式
+    ✅ 代表非常常用
+    1、通用选择器（universal selector）
+    2、简单选择器
+      * ✅ 元素选择器（type selector）
+      * ✅ 类选择器（class selector）
+      * id选择器（id selector）
+    3、属性选择器（attribute selector）
+    4、后代选择器（descendant selector）
+      * 所有后代选择器
+      * ✅ 直接后代选择器
+    5、兄弟选择器（sibling combinators）
+    6、选择器组（combinators）
+      * 且选择器
+      * ✅ 或选择器
+    7、✅ 伪类选择器（pseudo-classes）
+      * ✅ 动态伪类选择器
+      * ✅ 结构伪类选择器
+    8、✅ 伪元素（pseudo-elements）
+  -->
+
+  <!--
+    二、CSS选择器的命名规范
+    1、首先要有意识总体上要采用BEM命名法，参考：https://www.bilibili.com/video/BV12b421v7Mh
+      * B是Block、块，是指一个独立的实体、完全不依赖于其它元素、可以独立存在，如header、nav、main、footer
+      * E是Element、元素，是Block的一部分、依赖于Block而存在、不能独立存在，用双下划线__连接在Block后面，如header__logo、nav__product、main__item、footer__copyright
+      * M是Modifier、修饰，是Block或Element某种特殊状态的一个标记、依赖于Block或Element而存在、不能独立存在，用双中划线--连接在Block或Element后面，如header--active、header__logo--active
+    2、然后按照经典4行布局来实施命名，参考：https://developer.aliyun.com/article/796876
+      * 网页从上往下的B一般就是header、nav、main、footer，但是因为通常情况下网页的各个区域左右都会留一些空白，所以我们一般都会把最外层的B搞成header_wrapper、nav_wrapper、main_wrapper、footer_wrapper来撑满浏览器的宽度
+      * 然后在各个wrapper内部再搞E，header_wrapper__header、nav_wrapper__nav、main_wrapper__main、footer_wrapper__footer来代表真正有效的区域
+      * 接下来就是根据各个B里面的元素和状态来进行语义化的命名了
+  -->
 </body>
+
 </html>

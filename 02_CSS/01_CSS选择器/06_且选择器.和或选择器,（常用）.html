@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    /* 交集选择器 */
+    /* 且选择器 */
     div.box {
       color: #ff0000ff;
     }
 
-    /* 并集选择器 */
-    h1, h2, h3, .content, #h6 {
+    /* 或选择器 */
+    h1,
+    h2,
+    h3,
+    .content,
+    #h6 {
       color: #00ff00ff;
     }
   </style>
 </head>
+
 <body>
-  <!-- 
+  <!--
     选择器组包括：英文的句号.和逗号,
     1、且选择器——交集选择器，需要同时符合【两个选择器】的条件才会被选中
     实际开发中一般用来精准地选中某一个元素，但是因为已经有id选择器了，所以用的也不是特别多
@@ -26,19 +32,20 @@
     }
 
     2、或选择器——并集选择器，只要是选择器【其中之一】就会被选中
-    实际开发中一般用来给多个元素设置相同的样式，用的比较多
+    实际开发中一般用来给多个元素设置相同的样式，尤其使用多
     选择器1, 选择器2, 选择器3 {
 
     }
-   -->
-   <div class="box">我是div元素</div>
-   <p class="box">我是p元素</p>
+  -->
+  <div class="box">我是div元素</div>
+  <p class="box">我是p元素</p>
 
-   <h1>我的h1</h1>
-   <h2>我的h2</h2>
-   <h3>我的h3</h3>
-   <p class="content">我的h4</p>
-   <p class="content">我的h5</p>
-   <p id="h6">我的h6</p>
+  <h1>我的h1</h1>
+  <h2>我的h2</h2>
+  <h3>我的h3</h3>
+  <p class="content">我的h4</p>
+  <p class="content">我的h5</p>
+  <p id="h6">我的h6</p>
 </body>
+
 </html>
