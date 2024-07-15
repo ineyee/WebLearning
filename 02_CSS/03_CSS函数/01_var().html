@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html {
+      --main_color: #f3C258FF;
+
+      --c_000000FF: #000000FF;
+      --c_333333FF: #333333FF;
+      --c_666666FF: #666666FF;
+      --c_999999FF: #999999FF;
+      --c_FFFFFFFF: #FFFFFFFF;
+
+ 
+      --fs_18px: 18px;
+      --fs_16px: 16px;
+      --fs_14px: 14px;
+      --fs_12px: 12px;
+      --fs_10px: 10px;
+    }
+
+    div {
+      width: 100px;
+      height: 100px;
+
+      background-color: var(--main_color);
+
+      font-size: var(--fs_18px);
+      color: var(--c_666666FF);
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    1、我们在编写CSS样式时，除了可以使用现成的CSS属性，还可以自定义CSS属性：
+      * 属性名必须以--开头
+      * 属性值可以是任意有效的CSS值
+
+    2、自定义属性的作用域仅在它所在的选择器内有效，所以为了让整个网页都能用到自定义属性，我们一般都是把自定义属性放到html根元素里去定义
+
+    3、var()函数就是用来使用自定义属性的，var(自定义属性)就可以读取到自定义属性的值
+  -->
+  <div>我是div元素</div>
+</body>
+
+</html>

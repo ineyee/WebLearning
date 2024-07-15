@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    img {
+      width: 536px;
+      height: 354px;
+    }
+
+    .filter {
+      filter: blur(5px);
+    }
+
+    .box {
+      position: relative;
+    }
+
+    .mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      width: 536px;
+      height: 354px;
+
+      backdrop-filter: blur(5px);
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    blur(radius)函数用来对图片或元素做毛玻璃效果，radius是模糊的半径、值越大越模糊，我们通常会把函数值赋值给下面两个属性：
+    * filter：直接应用在图片或元素身上，图片或元素本身会模糊掉
+    * backdrop-filter：应用在mask遮罩层上，图片或元素本身不会模糊，实际开发中这种方式更常用
+  -->
+  <img src="https://picsum.photos/536/354" alt="">
+
+  <img class="filter" src="https://picsum.photos/536/354" alt="">
+
+  <div class="box">
+    <img src="https://picsum.photos/536/354" alt="">
+    <div class="mask"></div>
+  </div>
+</body>
+
+</html>
