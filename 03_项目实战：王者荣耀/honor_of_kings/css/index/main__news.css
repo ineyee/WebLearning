@@ -56,7 +56,8 @@
   cursor: pointer;
 }
 
-.main__news__cycle__title_list__item>div:hover {
+.main__news__cycle__title_list__item>div:hover,
+.main__news__news_center__title_list__item--active>div>div {
   background-color: rgba(255, 255, 255, 0.15);
 
   color: #f3c258;

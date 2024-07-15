@@ -3,7 +3,7 @@
 
 /* 导入其它所有的css文件 */
 @import url(header.css);
-@import url(nav_bar.css);
+@import url(nav.css);
 @import url(main.css);
 @import url(main__link.css);
 @import url(main__news.css);

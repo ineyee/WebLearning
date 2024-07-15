@@ -1,4 +1,4 @@
-.nav_bar__bg {
+.nav__bg {
   position: absolute;
   top: 42px;
   right: 0px;
@@ -8,11 +8,11 @@
   min-width: 1300px;
 }
 
-.nav_bar__bg>img {
+.nav__bg>img {
   width: 100%;
 }
 
-.nav_bar {
+.nav {
   position: absolute;
   top: 42px;
   right: 0px;
@@ -29,7 +29,7 @@
   opacity: 0.8;
 }
 
-.nav_bar__content {
+.nav__content {
   width: 1300px;
 
   display: flex;
@@ -38,13 +38,13 @@
 
 /*
   本来一个a元素搞定的事，为了做SEO优化，我们在外面包了一层h1元素
-  但是我们不能直接把nav_bar__content__honor_of_kings这个类给a元素，否则无论a元素设置多宽多高，都会因为h1元素被挤压地很小
+  但是我们不能直接把nav__content__honor_of_kings这个类给a元素，否则无论a元素设置多宽多高，都会因为h1元素被挤压地很小
 */
-.nav_bar__content__honor_of_kings {
+.nav__content__honor_of_kings {
   display: flex;
 }
 
-.nav_bar__content__honor_of_kings>a {
+.nav__content__honor_of_kings>a {
   width: 200px;
   height: 54px;
 
@@ -57,7 +57,7 @@
   text-indent: -9999px;
 }
 
-.nav_bar__content__nav_list {
+.nav__content__nav_list {
   width: 890px;
   margin-left: 28px;
 
@@ -69,12 +69,12 @@
   ul里的li纯粹就是个中间的过渡壳子、因为ul的子元素只能是li，a元素才是item的本质
   所以我们通常的做法就是给li壳子取个类名，a元素再取类名的话就重复了、因此a元素会直接用元素选择器
 */
-.nav_bar__content__nav_list__item {
+.nav__content__nav_list__item {
   /* 仅仅为了把a元素变成flex item、从而能设置大小，其它的东西都交给a元素自己去设置、因为a元素才是本质、li只是个壳子 */
   display: flex;
 }
 
-.nav_bar__content__nav_list__item>a {
+.nav__content__nav_list__item>a {
   width: 110px;
   height: 64px;
   padding-top: 20px;
@@ -84,12 +84,12 @@
   align-items: center;
 }
 
-.nav_bar__content__nav_list__item>a>.zh_desc {
+.nav__content__nav_list__item>a>.zh_desc {
   font-size: 18px;
   color: #c9c9dd;
 }
 
-.nav_bar__content__nav_list__item>a>.en_desc {
+.nav__content__nav_list__item>a>.en_desc {
   height: 16px;
   padding-top: 5px;
 
@@ -103,19 +103,19 @@
   而”a>.zh_desc:hover“代表zh_desc本身处于hover状态时、zh_desc的行为
   两者是不一样的，这里我们需要的是前者的效果
 */
-.nav_bar__content__nav_list__item>a:hover {
+.nav__content__nav_list__item>a:hover {
   background: url('../../img/index.png') no-repeat 0px 0px;
 }
 
-.nav_bar__content__nav_list__item>a:hover>.zh_desc {
+.nav__content__nav_list__item>a:hover>.zh_desc {
   color: #91763f;
 }
 
-.nav_bar__content__nav_list__item>a:hover>.en_desc {
+.nav__content__nav_list__item>a:hover>.en_desc {
   color: #91763f;
 }
 
-.nav_bar__content__login {
+.nav__content__login {
   width: 182px;
   height: 45px;
 
@@ -123,7 +123,7 @@
   align-items: center;
 }
 
-.nav_bar__content__login__avatar {
+.nav__content__login__avatar {
   box-sizing: border-box;
 
   width: 44px;
@@ -138,7 +138,7 @@
   background-position: center center;
 }
 
-.nav_bar__content__login__info {
+.nav__content__login__info {
   width: 130px;
   height: 45px;
 
@@ -147,19 +147,19 @@
   justify-content: space-between;
 }
 
-.nav_bar__content__login__info__username {
+.nav__content__login__info__username {
   font-size: 14px;
   color: #ffffff;
 }
 
-.nav_bar__content__login__info__history {
+.nav__content__login__info__history {
   height: 21px;
 
   font-size: 14px;
   color: #858792;
 }
 
-.nav_bar__drop_menu {
+.nav__drop_menu {
   position: absolute;
   top: 83px;
   left: 0;
@@ -182,11 +182,11 @@
   overflow: hidden;
 }
 
-.nav_bar:hover>.nav_bar__drop_menu {
+.nav:hover>.nav__drop_menu {
   height: 285px;
 }
 
-.nav_bar__drop_menu__content {
+.nav__drop_menu__content {
   width: 890px;
   height: 240px;
   padding: 15px 0 30px 50px;
@@ -194,7 +194,7 @@
   display: flex;
 }
 
-.nav_bar__drop_menu__content__list {
+.nav__drop_menu__content__list {
   width: 110px;
   padding-top: 2px;
 }
@@ -203,12 +203,12 @@
   ul里的li纯粹就是个中间的过渡壳子、因为ul的子元素只能是li，a元素才是item的本质
   所以我们通常的做法就是给li壳子取个类名，a元素再取类名的话就重复了、因此a元素会直接用元素选择器
 */
-.nav_bar__drop_menu__content__item {
+.nav__drop_menu__content__item {
   /* 仅仅为了把a元素变成flex item、从而能设置大小，其它的东西都交给a元素自己去设置、因为a元素才是本质、li只是个壳子 */
   display: flex;
 }
 
-.nav_bar__drop_menu__content__item>a {
+.nav__drop_menu__content__item>a {
   width: 100%;
   height: 30px;
 
@@ -217,7 +217,7 @@
   line-height: 30px;
 }
 
-.nav_bar__drop_menu__content__item:hover>a {
+.nav__drop_menu__content__item:hover>a {
   color: #f3c258;
   text-decoration: underline;
 }
