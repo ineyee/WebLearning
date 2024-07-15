@@ -129,7 +129,7 @@
 }
 
 .main__item__segment_control__item__evenly {
-  flex: 1;
+  flex-grow: 1;
 }
 
 .main__item__segment_control__item__wrap {

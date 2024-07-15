@@ -140,7 +140,7 @@
 .main__news__news_center__news_list__item>a {
   margin-right: 20px;
 
-  flex: 1;
+  flex-grow: 1;
 
   color: #b8b9c5;
 }

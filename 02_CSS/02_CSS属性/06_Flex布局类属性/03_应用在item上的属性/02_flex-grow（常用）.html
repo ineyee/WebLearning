@@ -44,6 +44,10 @@
     1、默认值为0，代表item不扩展
     2、我们可以设置为任意其它正整数，这样就会把剩余空间按比例分配给相应的item了
     3、注意：item就算扩展了，但是也不会大于它的max-width/max-height
+
+    如果flex-grow: 1达不到我们的效果，那就设置flex: 1
+    flex: 1其实设置了三个值：flex-grow: 1; flex-shrink: 1; flex-basis: 0%;
+    flex-grow: 1只设置了一个值flex-grow: 1; flex-shrink: 1;（默认） flex-basis: auto;（默认）
   -->
   <div class="container">
     <div class="item item1">1</div>

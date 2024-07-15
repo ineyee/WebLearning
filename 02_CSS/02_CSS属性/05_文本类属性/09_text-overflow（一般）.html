@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .clip {
+      width: 100px;
+      height: 100px;
+
+      background-color: red;
+
+      white-space: nowrap;
+      text-overflow: clip;
+
+      overflow: hidden;
+    }
+
+    .ellipsis {
+      width: 100px;
+      height: 100px;
+
+      background-color: blue;
+
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    text-overflow属性用来设置文本溢出时的行为，有如下常见的取值：
+    1、clip（默认）：剪掉溢出的文本
+    2、ellipsis：溢出的文本显示...
+
+    注意：text-overflow属性必须结合white-space: nowrap和overflow: hidden来使用
+  -->
+  <div class="clip">
+    啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+  </div>
+
+  <div class="ellipsis">
+    啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+  </div>
+</body>
+
+</html>
