@@ -1,4 +1,4 @@
-.footer {
+.footer_wrapper {
   height: 362px;
 
   background: url("../../img/footer_bg.webp") no-repeat center 0;
@@ -7,7 +7,7 @@
   justify-content: center;
 }
 
-.footer__content {
+.footer_wrapper__footer {
   width: 1200px;
   padding-top: 80px;
 
@@ -18,7 +18,7 @@
   flex-direction: column;
 }
 
-.footer__content__logos {
+.footer_wrapper__footer__logos {
   height: 66px;
   padding-bottom: 10px;
   border-bottom: 2px #d4d4d4 solid;
@@ -27,7 +27,7 @@
   display: flex;
 }
 
-.footer__content__logos__tencent {
+.footer_wrapper__footer__logos__tencent {
   width: 285px;
   height: 64px;
   margin: 0;
@@ -35,7 +35,7 @@
   background: url(//game.gtimg.cn/images/yxzj/web201605/main/spr.png) no-repeat;
 }
 
-.footer__content__logos__timi {
+.footer_wrapper__footer__logos__timi {
   width: 70px;
   height: 64px;
   margin: 0;
@@ -43,15 +43,15 @@
   background: url(//game.gtimg.cn/images/yxzj/web201605/main/spr.png) no-repeat -285px 0;
 }
 
-.footer__content__texts {
+.footer_wrapper__footer__texts {
   display: flex;
   justify-content: space-between;
 }
 
-.footer__content__texts__warning {
+.footer_wrapper__footer__texts__warning {
   width: 508px;
 }
 
-.footer__content__texts__copyrights {
+.footer_wrapper__footer__texts__copyrights {
   width: 650px;
 }

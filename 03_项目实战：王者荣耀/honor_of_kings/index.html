@@ -17,10 +17,10 @@
 
 <body>
   <!-- header -->
-  <div class="header">
-    <div class="header__content">
+  <div class="header_wrapper">
+    <div class="header_wrapper__header">
       <!-- 这里的“腾讯游戏”其实用户是看不到的，只是为了搜索引擎做SEO优化 -->
-      <a class="header__content__tencent_game" href="https://game.qq.com/?ADTAG=IED.InnerCop.gameWeb.topNav"
+      <a class="header_wrapper__header__tencent_game" href="https://game.qq.com/?ADTAG=IED.InnerCop.gameWeb.topNav"
         target="_blank">
         腾讯游戏
       </a>
@@ -30,17 +30,17 @@
         2、子绝父相，千万不能在标准流搞下拉菜单、因为下拉菜单会把其它元素给顶跑
         3、可以用visibility（无动画）、opaque（有动画）、height（有动画）结合display来做下拉菜单
       -->
-      <div class="header__content__old_game_small">
+      <div class="header_wrapper__header__old_game_small">
         <img src="img/old_games_small.jpg" alt="">
-        <a class="header__content__old_game_big" href="https://cfhd.cf.qq.com" target="_blank">
+        <a class="header_wrapper__header__old_game_big" href="https://cfhd.cf.qq.com" target="_blank">
           <img src="img/old_games_big.jpg" alt="">
         </a>
       </div>
-      <div class="header__content__flex_grow"></div>
-      <a class="header__content__growth_guard" href="https://jiazhang.qq.com/" target="_blank">
+      <div class="header_wrapper__header__flex_grow"></div>
+      <a class="header_wrapper__header__growth_guard" href="https://jiazhang.qq.com/" target="_blank">
         成长守护平台
       </a>
-      <div class="header__content__hot_game">
+      <div class="header_wrapper__header__hot_game">
         <div>
           腾讯游戏热门推荐
         </div>
@@ -50,7 +50,7 @@
             2、子绝父相，千万不能在标准流搞下拉菜单、因为下拉菜单会把其它元素给顶跑
             3、可以用visibility（无动画）、opaque（有动画）、height（有动画）结合display来做下拉菜单
           -->
-        <iframe class="header__content__hot_game__drop_menu"
+        <iframe class="header_wrapper__header__hot_game__drop_menu"
           src="https://game.gtimg.cn/images/js/title/title_game_rank.html" frameborder="0">
         </iframe>
       </div>
@@ -61,21 +61,21 @@
   <div class="nav__bg">
     <img src="img/nav_bg.png" alt="">
   </div>
-  <div class="nav">
-    <div class="nav__content">
+  <div class="nav_wrapper">
+    <div class="nav_wrapper__nav">
       <!--
         网站的主logo一般都会用h1标签包裹一个a标签来做
         h1标签是为了搜索引擎做SEO优化
         a标签是为了鼠标点上去能有个小手，这里的“王者荣耀”其实用户是看不到的，只是为了搜索引擎做SEO优化
       -->
-      <h1 class="nav__content__honor_of_kings">
+      <h1 class="nav_wrapper__nav__honor_of_kings">
         <a href="index.html">
           王者荣耀
         </a>
       </h1>
       <!-- 实际开发中用ul/li也行，直接用div也行 -->
-      <ul class="nav__content__nav_list">
-        <li class="nav__content__nav_list__item">
+      <ul class="nav_wrapper__nav__nav_list">
+        <li class="nav_wrapper__nav__nav_list__item">
           <a href="https://pvp.qq.com/web201605/herolist.shtml" target="_blank">
             <div class="zh_desc">
               游戏资料
@@ -85,7 +85,7 @@
             </div>
           </a>
         </li>
-        <li class="nav__content__nav_list__item">
+        <li class="nav_wrapper__nav__nav_list__item">
           <a href="https://pvp.qq.com/raiders/" target="_blank">
             <div class="zh_desc">
               内容中心
@@ -95,7 +95,7 @@
             </div>
           </a>
         </li>
-        <li class="nav__content__nav_list__item">
+        <li class="nav_wrapper__nav__nav_list__item">
           <a href="https://pvp.qq.com/match/kpl/kingproleague/index.html" target="_blank">
             <div class="zh_desc">
               赛事中心
@@ -105,7 +105,7 @@
             </div>
           </a>
         </li>
-        <li class="nav__content__nav_list__item">
+        <li class="nav_wrapper__nav__nav_list__item">
           <a href="https://pvp.qq.com/cp/a20171023pvppc/" target="_blank">
             <div class="zh_desc">
               百态王者
@@ -115,7 +115,7 @@
             </div>
           </a>
         </li>
-        <li class="nav__content__nav_list__item">
+        <li class="nav_wrapper__nav__nav_list__item">
           <a href="#">
             <div class="zh_desc">
               社区互动
@@ -125,7 +125,7 @@
             </div>
           </a>
         </li>
-        <li class="nav__content__nav_list__item">
+        <li class="nav_wrapper__nav__nav_list__item">
           <a href="#">
             <div class="zh_desc">
               玩家支持
@@ -135,7 +135,7 @@
             </div>
           </a>
         </li>
-        <li class="nav__content__nav_list__item">
+        <li class="nav_wrapper__nav__nav_list__item">
           <a href="#">
             <div class="zh_desc">
               IP新游
@@ -146,11 +146,11 @@
           </a>
         </li>
       </ul>
-      <div class="nav__content__login">
-        <a class="nav__content__login__avatar" href="#"></a>
-        <div class="nav__content__login__info">
-          <a class="nav__content__login__info__username" href="#">欢迎登录</a>
-          <div class="nav__content__login__info__history">登录后查看游戏战绩</div>
+      <div class="nav_wrapper__nav__login">
+        <a class="nav_wrapper__nav__login__avatar" href="#"></a>
+        <div class="nav_wrapper__nav__login__info">
+          <a class="nav_wrapper__nav__login__info__username" href="#">欢迎登录</a>
+          <div class="nav_wrapper__nav__login__info__history">登录后查看游戏战绩</div>
         </div>
       </div>
     </div>
@@ -160,142 +160,142 @@
         2、子绝父相，千万不能在标准流搞下拉菜单、因为下拉菜单会把其它元素给顶跑
         3、可以用visibility（无动画）、opaque（有动画）、height（有动画）结合display来做下拉菜单
       -->
-    <div class="nav__drop_menu">
-      <div class="nav__drop_menu__content">
-        <ul class="nav__drop_menu__content__list">
-          <li class="nav__drop_menu__content__item">
+    <div class="nav_wrapper__drop_menu">
+      <div class="nav_wrapper__drop_menu__content">
+        <ul class="nav_wrapper__drop_menu__content__list">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/cp/a20170829bbgxsm/index.html" target="_blank">版本介绍</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/web201605/introduce.shtml" target="_blank">游戏介绍</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/web201605/herolist.shtml" target="_blank">英雄资料</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/coming/v2/" target="_blank">爆料站</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/ip/index.html?adtag=pvp.pc" target="_blank">世界观体验站</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/web201605/wallpaper.shtml" target="_blank">游戏壁纸</a>
           </li>
         </ul>
-        <ul class="nav__drop_menu__content__list">
-          <li class="nav__drop_menu__content__item">
+        <ul class="nav_wrapper__drop_menu__content__list">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/raiders/" target="_blank">攻略中心</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.icreate.qq.com/login?biz=397&redirect=/index?biz=397" target="_blank">开放素材库</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://yingdi.qq.com/creation/login" target="_blank">内容创作平台</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/cp/a20220914wza/" target="_blank">手语打法参考</a>
           </li>
         </ul>
-        <ul class="nav__drop_menu__content__list">
-          <li class="nav__drop_menu__content__item">
+        <ul class="nav_wrapper__drop_menu__content__list">
+          <li class="drop_menu__content__item">
             <a href="https://pvp.qq.com/match/kpl/kingproleague/index.html" target="_blank">KPL</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/cp/kic2023/index.html?language=cn" target="_blank">王者世冠KIC</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/match/kgl/index.html" target="_blank">K甲联赛</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/match/WCC/KCC2023S1/index.html" target="_blank">挑战者杯</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/cp/a20220328qgds/index.shtml" target="_blank">全国大赛</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/cp/a20220315open/index.shtml" target="_blank">高校联赛</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/matchdata/index.html" target="_blank">赛事数据</a>
           </li>
         </ul>
-        <ul class="nav__drop_menu__content__list">
-          <li class="nav__drop_menu__content__item">
+        <ul class="nav_wrapper__drop_menu__content__list">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/memory/index.html" target="_blank">荣耀·传承</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/history/" target="_blank">王者文化站</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/wonder/" target="_blank">万千世界</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/cp/a20221020wzjwhb/" target="_blank">王者觉悟</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/cp/a20190102starlight/index.html" target="_blank">星光殿堂</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/cp/a20210427ipgzzt/" target="_blank">IP共创计划</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://igame.qq.com/tip/igame-web/privilege-web/#/home" target="_blank">商户特权</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://wangzhe.recogame.com/wangzhe.html" target="_blank">龙翼王者卡</a>
           </li>
         </ul>
-        <ul class="nav__drop_menu__content__list">
-          <li class="nav__drop_menu__content__item">
+        <ul class="nav_wrapper__drop_menu__content__list">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/hdy/p1/index.html" target="_blank">创意互动营</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="#" target="_blank">王者营地</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="#" target="_blank">微信圈子</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="#" target="_blank">官方微博</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="#" target="_blank">微信公众号</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="#" target="_blank">手Q订阅号</a>
           </li>
         </ul>
-        <ul class="nav__drop_menu__content__list">
-          <li class="nav__drop_menu__content__item">
+        <ul class="nav_wrapper__drop_menu__content__list">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://game.qq.com/act/a20210705protect/index.html" target="_blank">腾讯游戏防沉迷</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://jiazhang.qq.com/index.html" target="_blank">成长守护环境</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/cp/a20190909talk/index.html" target="_blank">对局环境情报站</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="#" target="_blank">客服专区</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/web201706/newsdetail.shtml?tid=398886" target="_blank">礼包兑换</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://tool.helper.qq.com/v3/wzry/official_website/index.html" target="_blank">自助服务</a>
           </li>
         </ul>
-        <ul class="nav__drop_menu__content__list">
-          <li class="nav__drop_menu__content__item">
+        <ul class="nav_wrapper__drop_menu__content__list">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://poxiao.qq.com/web20240426/index.html?ADTAG=pvp.nav.hokpc" target="_blank">王者荣耀 星之破晓</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://world.qq.com/?ADTAG=pvp.nav.hokpc" target="_blank">王者荣耀世界</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/web201605/newsDetail.shtml?G_Biz=18&tid=488378" target="_blank">代号:启程</a>
           </li>
-          <li class="nav__drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://wxq.qq.com/?ADTAG=pvp.qqpc" target="_blank">王者万象棋</a>
           </li>
         </ul>
@@ -827,14 +827,15 @@
   </div>
 
   <!-- footer -->
-  <div class="footer">
-    <div class="footer__content">
-      <div class="footer__content__logos">
-        <a class="footer__content__logos__tencent" href="https://ieg.tencent.com/2023/index.html" target="_blank"></a>
-        <a class="footer__content__logos__timi" href="https://timi.qq.com/" target="_blank"></a>
+  <div class="footer_wrapper">
+    <div class="footer_wrapper__footer">
+      <div class="footer_wrapper__footer__logos">
+        <a class="footer_wrapper__footer__logos__tencent" href="https://ieg.tencent.com/2023/index.html"
+          target="_blank"></a>
+        <a class="footer_wrapper__footer__logos__timi" href="https://timi.qq.com/" target="_blank"></a>
       </div>
-      <div class="footer__content__texts">
-        <div class="footer__content__texts__warning">
+      <div class="footer_wrapper__footer__texts">
+        <div class="footer_wrapper__footer__texts__warning">
           <p>
             抵制不良游戏 拒绝盗版游戏 注意自我保护 谨防受骗上当 适度游戏益脑 沉迷游戏伤身 合理安排时间 享受健康生活
           </p>
@@ -842,7 +843,7 @@
             《王者荣耀》全部背景故事发生于架空世界“王者大陆”中。相关人物、地理、事件均为艺术创作，并非正史。若因观看王者故事对相关历史人物产生兴趣，建议查阅正史记载。
           </p>
         </div>
-        <div class="footer__content__texts__copyrights">
+        <div class="footer_wrapper__footer__texts__copyrights">
           <p>
             腾讯互动娱乐 | 服务条款 | 王者荣耀隐私保护指引 | 儿童隐私保护指引 | 腾讯游戏招聘 | 腾讯游戏客服 | 游戏列表 | 广告服务及商务合作
           </p>

@@ -1,5 +1,5 @@
 /* 采用BEM命名法 */
-.header {
+.header_wrapper {
   height: 41px;
   border-bottom-width: 1px;
   border-bottom-color: #f5f5f5;
@@ -9,14 +9,14 @@
   justify-content: center;
 }
 
-.header__content {
+.header_wrapper__header {
   width: 980px;
 
   display: flex;
   justify-content: space-between;
 }
 
-.header__content__tencent_game {
+.header_wrapper__header__tencent_game {
   z-index: 101;
 
   width: 150px;
@@ -30,7 +30,7 @@
   text-indent: -9999px;
 }
 
-.header__content__old_game_small {
+.header_wrapper__header__old_game_small {
   /* 子绝父相 */
   position: relative;
 
@@ -38,7 +38,7 @@
   height: 40px;
 }
 
-.header__content__old_game_big {
+.header_wrapper__header__old_game_big {
   /* 子绝父相 */
   position: absolute;
   left: -140px;
@@ -54,20 +54,20 @@
   这种组合的优先使用直接后代选择器，精准选择
   除非有很多这种后代要干同样的事再使用所有后代选择器，批量选择
 */
-.header__content__old_game_small:hover>.header__content__old_game_big {
+.header_wrapper__header__old_game_small:hover>.header_wrapper__header__old_game_big {
   visibility: visible;
 }
 
-.header__content__flex_grow {
+.header_wrapper__header__flex_grow {
   flex-grow: 1;
 }
 
-.header__content__growth_guard {
+.header_wrapper__header__growth_guard {
   display: flex;
   align-items: center;
 }
 
-.header__content__growth_guard::before {
+.header_wrapper__header__growth_guard::before {
   content: "";
 
   width: 30px;
@@ -76,7 +76,7 @@
   background: url('../../img/title_sprite.png') no-repeat -30px 0px;
 }
 
-.header__content__hot_game {
+.header_wrapper__header__hot_game {
   /* 子绝父相 */
   position: relative;
 
@@ -88,7 +88,7 @@
   cursor: pointer;
 }
 
-.header__content__hot_game::after {
+.header_wrapper__header__hot_game::after {
   content: "";
 
   width: 30px;
@@ -101,7 +101,7 @@
   transform: rotate(90deg);
 }
 
-.header__content__hot_game__drop_menu {
+.header_wrapper__header__hot_game__drop_menu {
   /* 子绝父相 */
   position: absolute;
   top: 42px;
@@ -125,7 +125,7 @@
   这种组合的优先使用直接后代选择器，精准选择
   除非有很多这种后代要干同样的事再使用所有后代选择器，批量选择
 */
-.header__content__hot_game:hover>.header__content__hot_game__drop_menu {
+.header_wrapper__header__hot_game:hover>.header_wrapper__header__hot_game__drop_menu {
   opacity: 1;
   display: block;
 }
