@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
   <!--
     一、input元素可以用来实现很多控件，主要由它的type属性决定：
-    1、text（默认）：单行文本输入框
-    2、password：单行密文输入框
-    3、button：按钮
-    4、submit：定义提交按钮，点击提交处于同一个form父元素下所有的表单值到服务器
-    5、reset：定义重置按钮，点击重置处于同一个form父元素下所有的表单值为默认值
+    1、text（默认）：单行文本输入框——类似于UITextField
+    2、password：单行密文输入框——类似于UITextField
+    ——————————————————————
+    3、button：按钮——类似于UIButton
+    4、submit：定义提交按钮，点击后会把处于同一个form父元素下所有的表单值提交到服务器——类似于UIButton
+    5、reset：定义重置按钮，点击后会把处于同一个form父元素下所有的表单值重置为默认值——类似于UIButton
+    ——————————————————————
     6、radio：单选框，只能选择其中的一个，如性别男女那种
       * 只有name属性的值相同，才会有单选效果
     7、checkbox：复选框，可以选择其中的多个，如多选答案那种
       * 只有name属性的值相同，真正提交数据时才会有多选效果——即多个value会属于同一个key
-    6、date：日期选择器（年月日）
-    7、time：时间选择器（时分）
-    8、datetime-local：日期时间选择器（年月日时分）
-    9、file：文件上传
+    ——————————————————————
+    8、date：日期选择器（年月日）
+    9、time：时间选择器（时分）
+    10、datetime-local：日期时间选择器（年月日时分）
+    ——————————————————————
+    11、file：文件上传
   -->
   <div>
     <input type="text" placeholder="请输入账号" name="account">
@@ -28,11 +34,11 @@
   </div>
   <div>
     <input type="button" value="登录">
-    <!-- input type=button|submit|reset等价于button元素，用啥都行 -->
+    <!-- input元素的type=button|submit|reset <=等价于=> button元素，用啥都行 -->
     <button>登录</button>
   </div>
   <div>
-    <!-- input type=button|submit|reset等价于button元素，用啥都行 -->
+    <!-- input元素的type=button|submit|reset <=等价于=> button元素，用啥都行 -->
     <input type="submit">
     <input type="reset">
     <button type="submit">提交</button>
@@ -137,4 +143,5 @@
     </label>
   </div>
 </body>
+
 </html>
