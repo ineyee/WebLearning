@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .audio_item {
+      width: 666px;
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    一方面我们可以直接像其它元素一样使用audio元素
+    另一方面我们还可以通过JS的API来获取到audio元素从而对它进行控制，例如开始、暂停、监听播放进度、seek播放进度等
+  -->
+
+  <!--
+    属性
+    1、src：音频的地址，网络地址或本地地址
+    2、controls：bool类型，是否显示控制栏（包括开始、暂停、进度条、音量等），不过大多数情况下都是我们自定义控制栏，自带的控制栏有点丑
+    3、autoplay：bool类型，是否自动播放（大多数浏览器要求必须结合muted使用，避免一打开网页就播放声音吓用户一跳）
+    4、muted：bool类型，是否静音播放
+    5、preload：none/metadata/auto，是否预加载音频，none表示不预加载，metadata表示预加载音频的元数据（比如音频时长等），auto表示由浏览器自己决定预加载什么数据（默认）
+    ——————————————————————
+    6、width、height：audio元素的宽高
+  -->
+  <audio class="audio_item" src="http://music.163.com/song/media/outer/url?id=447925558.mp3" controls autoplay muted
+     preload="metadata">
+    <!-- 我们还可以在audio元素里嵌套元素，那么当用户的浏览器不支持audio元素时，就可以给用户提示 -->
+    <div>您当前的浏览器不支持音频播放，请换一个浏览器试试</div>
+  </audio>
+</body>
+
+</html>
