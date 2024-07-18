@@ -1,38 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
-<body>
-  <!-- 
-    img元素：image、图片元素——UIImageView
-    
-    1、默认情况下img元素不会占据整行
-    2、img元素是一个可替换元素，所谓可替换元素是指浏览器会先拿img元素占一个位置，然后去请求src所对应的图片，请求到图片之后，再用图片把img元素所占据的位置给替换掉
 
-    设置图片一般就两种方式：img元素、i元素 + background-image属性
+<body>
+  <!--
+    img元素：image、图片元素——类似于UIImageView
+    
+    1、img元素是个行内级元素，因此默认情况下img元素会宽度包裹内容、高度包裹内容
+    2、img元素是个行内级替换元素，所谓替换元素是指浏览器会先拿img元素占一个位置，然后去请求src所对应的图片，请求到图片之后，再用图片把img元素所占据的位置给替换掉
   -->
 
-  <!-- 
+  <!--
     属性
     1、src：source——源，图片的地址，网络地址或本地地址
     2、alt：alternative——备选的、替代物，当图片加载不成功时，会替换成这一小段文本来显示，加载成功时就不会替换成这段文本了，至于placeholder的那个小图片是浏览器自动给我们弄的；同时屏幕阅读器也会把alt给阅读出来给那些不方便看网页的人听
     3、像宽高、边框之类的属性就不要再用了，后面我们都是用css来做，做到结构和样式分离
-   -->
+  -->
   <img src="https://picsum.photos/seed/picsum/400/300" alt="第一张图片">
   <img src="https://picsum.photos/seed-error/picsum/400/300" alt="第二张图片">
 
-  <!-- 
+  <!--
     绝对路径：absolute path，从根盘符开始找，一直找到对应的资源
 
     相对路径：relative path，从指定的目录开始找，一直找到对应的资源
     ./是当前目录、一般省略不写，../是上一级目录
 
     推荐使用相对路径
-   -->
+  -->
   <img src="/Users/ineyee/Desktop/超赛一.png" alt="超赛一" width="300">
   <img src="../../../../Desktop/超赛一.png" alt="超赛一" width="300">
+
+
+  <!--
+    设置图片一般就两种方式：img元素、background-image属性
+
+    background-image属性和img元素对比：
+    1、性质：background-image仅仅是一个CSS样式，而img是一个HTML元素
+    2、是否支持精灵图：background-image支持，img不支持
+      * 所以显示精灵图必须用background-image
+      * 其它的可以用img
+    3、图片是否占据空间：background-image的图片仅仅是在元素所占用的空间上盖上去了，而img元素实打实地占据空间
+      * 所以类似背景图这种就可以用background-image，元素的background-image和内容相当于自带z-index的层叠效果，直接就展示上去了
+      * 而背景图如果用img来做，我们可能就得用绝对定位和z-index来做类似Stack那种层叠效果，会相对麻烦些
+    4、浏览器网页里右键能否直接查看图片地址：background-image的图片是嵌在CSS里的、不能直接查看，而img元素可以直接查看图片地址
+      * 所以如果不想让用户获取到我们的图片，就可以用background-image
+      * 否则就用img
+  -->
 </body>
+
 </html>

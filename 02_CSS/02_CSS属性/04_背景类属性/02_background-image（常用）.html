@@ -48,16 +48,19 @@
   <div class="box">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</div>
 
   <!--
+    设置图片一般就两种方式：img元素、background-image属性
+
     background-image属性和img元素对比：
     1、性质：background-image仅仅是一个CSS样式，而img是一个HTML元素
     2、是否支持精灵图：background-image支持，img不支持
+      * 所以显示精灵图必须用background-image
+      * 其它的可以用img
     3、图片是否占据空间：background-image的图片仅仅是在元素所占用的空间上盖上去了，而img元素实打实地占据空间
+      * 所以类似背景图这种就可以用background-image，元素的background-image和内容相当于自带z-index的层叠效果，直接就展示上去了
+      * 而背景图如果用img来做，我们可能就得用绝对定位和z-index来做类似Stack那种层叠效果，会相对麻烦些
     4、浏览器网页里右键能否直接查看图片地址：background-image的图片是嵌在CSS里的、不能直接查看，而img元素可以直接查看图片地址
-
-    那什么时候用background-image属性、什么时候用img元素呢？这主要取决于图片是什么类型：
-    1、如果图片是一堆小图标这种，那肯定是搞成精灵图，然后用background-image
-    2、如果图片是非图标类的图片，那就用img元素
-    3、但是有一种特殊情况就是，图片是非图标类的图片，但是元素又必须得用其它元素才行，那就得用background-image，比如一张图片上显示小手、点击跳转到别的地方，此时图片就是非图标类的图片，但是元素又必须得用a元素，因此我们就会a元素 + background-image来实现；当然这也不是绝对的，我们仍然可以用img元素来做，然后比如a元素里嵌套img元素或者给img元素cursor属性；这就看你自己的偏好了
+      * 所以如果不想让用户获取到我们的图片，就可以用background-image
+      * 否则就用img
   -->
 </body>
 

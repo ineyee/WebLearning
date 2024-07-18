@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
-  <!-- 
-    a元素：anchor、锚点元素
-    
-    1、默认情况下a元素不会占据整行
-    2、在网页中我们经常需要点击某个东西跳转到另外一个链接或者点击某个东西当前网页就滚动到相应的标题处，此时我们用a元素，正是因为这个小小的东西指向了另外一个地方，这个小小的东西很像锚点，我们才把它叫作了锚点元素
+  <!--
+    a元素：anchor、锚点元素——类似于UIButton + 点击后跳转到href
+    在网页中我们经常需要点击某个东西跳转到另外一个链接或者点击某个东西后当前网页就滚动到相应的标题处，此时我们用a元素，正是因为这个小小的东西指向了另外一个地方，这个小小的东西很像锚点，我们才把它叫作了锚点元素
+
+    1、a元素是个行内级元素，因此默认情况下a元素会宽度包裹内容、高度包裹内容
+    2、a元素是个行内级非替换元素，所谓非替换元素是指根据内容直接就固定下来的元素，将来也不会被什么东西替换掉
   -->
 
-  <!-- 
+  <!--
     属性
     1、href：hyper text reference，要跳转到的地方
-    2、target：a元素默认是在当前网页内跳转到目标地址
-    _self（默认）：在当前网页内打开目标地址
-    _blank：在新标签内打开目标地址
-    _top、_parent：不常用
-   -->
-   <a href="https://cn.bing.com/" target="_self">必应</a>
-   <a href="07_img元素.html" target="_blank">07_img元素</a>
+    2、target：a元素默认是在当前网页内打开到目标地址
+      * _self（默认）：在当前网页内打开目标地址
+      * _blank：在新标签内打开目标地址
+      * _top、_parent：不常用
+  -->
+  <a href="https://cn.bing.com/" target="_self">必应</a>
+  <a href="06_img元素.html" target="_blank">07_img元素</a>
 
-  <!-- 
+  <!--
     实现页面内的锚点效果：
     1、在要跳转到的元素上添加id
     2、定义a元素，并把a元素的href属性设置为id——”#id“
@@ -45,12 +48,7 @@
     <br><br><br><br><br><br><br><br><br><br><br>
   </p>
 
-  <!-- a元素和img元素的结合使用 -->
-  <a href="https://baike.baidu.com/item/%E9%BE%99%E7%8F%A0/545064" target="_blank">
-    <img src="../../../../Desktop/超赛一.png" alt="超赛一" width="300">
-  </a>
-
-  <!-- 
+  <!--
     a元素的其它url地址：
     1、给个下载地址，点击就是下载
     2、给个邮箱地址，点击就是发送邮件
@@ -60,4 +58,5 @@
   <a href="mailto:">发邮件</a>
   <a href="tel:+">打电话</a>
 </body>
+
 </html>
