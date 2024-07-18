@@ -2,43 +2,44 @@
 <html lang="en">
 
 <!--
-  head元素规定了网页相关的配置信息，我们把这些配置信息称为元数据，常见的配置信息有：
-  1、网页里HTML的编码方式：meta元素
-  2、网页的标题：title元素
-  3、网页的CSS样式
-  4、网页的JS脚本
+  head元素里放的是我们网页的配置信息，我们把这些配置信息称为元数据，常见的配置信息有：
+  1、网页里HTML的编码方式、移动端适配相关、SEO优化相关 ==> meta元素
+  2、网页的标题 ==> title元素，网页的站点图标 ==> link元素
+  3、网页的CSS样式 ==> style元素、link元素
+  4、网页的JS代码 ==> script元素
 -->
-
 <head>
   <!-- 网页里HTML的编码方式，我们一般就是用UTF-8编码，这个如果不设置或设置错误，浏览器解码显示出来就会乱码 -->
   <meta charset="UTF-8">
+
   <!--
     meta元素name属性的值很多，我们介绍几个常用的
   -->
-  <!-- 这个是用来做移动端适配的，我们后面专门说 -->
+  <!-- viewport，视口，这个是用来做移动端适配的，我们后面专门说 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- author，网页的作者 -->
-  <meta name="author" content="ineyee">
-  <!-- Copyright，版权声明 -->
-  <meta name="Copyright" content="ineyee">
-  <!-- robots用于指定各个搜索引擎的  爬虫工具在抓我们网站的数据时，能抓哪些数据不能抓哪些数据，all代表都可以抓，all有利于做SEO优化 -->
+  <!-- robots，用于指定各个搜索引擎的爬虫工具在爬我们网站的数据时，能爬哪些数据不能爬哪些数据，all代表都可以爬，all有利于做SEO优化 -->
   <meta name="robots" content="all">
-  <!-- keywords，与页面内容相关的关键词，使用逗号分隔。某些搜索引擎会进行收录，有利于做SEO优化 -->
-  <meta name="keywords"
-    content="王者荣耀,王者,moba手游,王者荣耀手游,王者手游,王者荣耀官网,王者荣耀官方下载,王者下载,王者荣耀体验服,王者新赛季,王者新版本,王者荣耀更新,王者更新,王者新战令,王者S33,朵莉亚,海诺,海都,王者烟火大会,朵莉亚CP,王者2023世冠,王者世冠,曹操新皮肤,曹操决胜大满贯">
   <!-- description，一段简短而精确的、对网页内容的描述。某些搜索引擎会进行收录，有利于做SEO优化 -->
   <meta name="description"
     content="《王者荣耀》是腾讯天美工作室推出的英雄竞技手游，不是一个人的王者，而是团队的荣耀！5v5王者峡谷PVP对战，领略英雄竞技的酣畅淋漓！丰富的游戏模式等你参与，体验突破传统、英雄竞技新形态！">
+  <!-- keywords，与页面内容相关的关键词，使用逗号分隔。某些搜索引擎会进行收录，有利于做SEO优化 -->
+  <meta name="keywords"
+    content="王者荣耀,王者,moba手游,王者荣耀手游,王者手游,王者荣耀官网,王者荣耀官方下载,王者下载,王者荣耀体验服,王者新赛季,王者新版本,王者荣耀更新,王者更新,王者新战令,王者S33,朵莉亚,海诺,海都,王者烟火大会,朵莉亚CP,王者2023世冠,王者世冠,曹操新皮肤,曹操决胜大满贯">
+  <!-- author，网页的作者 -->
+  <meta name="author" content="ineyee">
+  <!-- Copyright，网页的版权声明 -->
+  <meta name="Copyright" content="ineyee">
 
   <!-- 告知IE浏览器去模仿哪一个浏览器的解析行为 -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <!-- 网页的标题 -->
   <title>我是网页的标题</title>
+
   <!--
     link元素有两大主要的用途：
-    1、导入文件外部的css文件，此时ref = stylesheet
-    2、设置站点图标——也就是网页标题前面那个小图标，此时ref = icon
+    1、导入文件外部的css文件，此时rel = stylesheet
+    2、设置站点图标——也就是网页标题前面那个小图标，此时rel = icon
   -->
   <link rel="icon" href="https://pvp.qq.com/favicon.ico">
 </head>
