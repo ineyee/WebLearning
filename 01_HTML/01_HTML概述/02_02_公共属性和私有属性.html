@@ -33,5 +33,18 @@
     * img元素的alt属性
   -->
   <img src="" alt="图片加载失败时的占位文本">
+
+  <!--
+    3、H5新增了一个自定义的全局属性data-xxx，它通常用来在JS里获取那些在HTML里定义的数据
+  -->
+  <!-- 比如我们在HTML里定义了一些数据ineyee、18、180，然后想在JS里获取到这些数据，那我们就可以把这些数据挂在data-xxx这种自定义的全局属性上 -->
+  <div class="box" data-name="ineyee" data-age="18" data-height="180"></div>
+
+  <script>
+    // 然后在JS代码里先获取到这个元素
+    const boxEl = document.querySelector(".box")
+    // 接下来就可以通过这个元素的dataset属性拿到我们想要的所有数据了
+    console.log(boxEl.dataset)
+  </script>
 </body>
 </htm>
