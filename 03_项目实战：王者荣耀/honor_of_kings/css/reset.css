@@ -32,3 +32,9 @@ ol,
 li {
   list-style: none;
 }
+
+/* 重置掉自带的表格样式 */
+table {
+  /* 边框合并：把中间部分单元格的相邻边框给合并掉，否则会有间距或者双份厚度的边框 */
+  border-collapse: collapse;
+}

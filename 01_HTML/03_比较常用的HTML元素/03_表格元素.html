@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,24 +10,28 @@
       /* 边框合并：把中间部分单元格的相邻边框给合并掉，否则会有间距或者双份厚度的边框 */
       border-collapse: collapse;
     }
+
     /* 这里是个交集选择器，tr里class=head的 */
     tr.head {
       /* 加粗一下标题行 */
       font-weight: bold;
     }
+
     /*
     表格的样式是加在每个td小单元格上的，因为table是给那个大外壳整体加样式，tr是给每一行整体加样式
     */
     td {
-      border: grey 1px solid;
-      text-align: center;
       padding: 10px;
+      border: grey 1px solid;
+
+      text-align: center;
     }
   </style>
 </head>
+
 <body>
   <!--
-    一、和表格相关的元素有（行内级元素）：
+    一、和表格相关的元素有：
     1、table元素：最外层的壳
     2、tr（table row）元素：表格里的每一行
     3、td（table data）元素：一行里的每一列数据
@@ -66,7 +71,7 @@
   <!--
     二、单元格合并，步骤：
     1、确定哪个单元格要进行合并操作，合并操作都是朝右朝下进行的
-    2、确定这个单元格是要合并列——设置colspan属性还是合并行——设置rowspan属性
+    2、确定这个单元格是要合并列——设置colspan属性，还是合并行——设置rowspan属性
     3、确定要合并几列（包含自己这一列）——设置colspan属性的值或几行（包含自己这一行）——设置rowspan属性的值
     4、删掉被合并的那些td元素
   -->
@@ -124,4 +129,5 @@
     </tr>
   </table>
 </body>
+
 </html>
