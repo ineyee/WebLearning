@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    head {
+      width: 100pt;
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    我们在前面编写的CSS中，经常会使用px来表示一个长度或大小，如width: 100px或font-size: 18px，px就是一个长度单位（length units）
+
+    CSS里还有非常多的长度单位，可以分为两类：
+    * 绝对长度单位（absolute length units）
+    * 相对长度单位（relative length units）
+
+    实际开发中，网页开发用绝对长度单位px比较多，移动端开发用相对长度单位vm比较多
+  -->
+
+  <!--
+    一、绝对长度单位
+    绝对长度单位是指那些跟其它任何东西都没有关系、作为一个标准摆在那儿的单位，一般用来设置一些固定大小的东西，如：
+    * cm：厘米
+    * mm：毫米
+    * in：英寸，1 in = 2.54 cm
+    * pt：点，1 pt = 1/72 in
+    * px：像素，1 px = 1/96 in
+    实际开发中，我们唯一常用的绝对长度单位就是px，其它绝对长度单位一般都是用在打印排版时而非开发这种屏幕输出时
+
+    注意：
+    * iOS开发里用的是pt、对应的是逻辑分辨率
+    * CSS开发里用的是px、对应的是逻辑分辨率，CSS里的pt就是一个绝对长度单位、不对应逻辑分辨率
+  -->
+
+  <!--
+    二、相对长度单位
+    相对长度单位是指那些相对于某个参照物的单位，一般用来做屏幕适配，如：
+    * em：无论应用在font-size还是width、height等属性上时，都是相对于元素本身font-size的大小，1em = 1倍元素本身font-size的大小
+    * rem：无论应用在font-size还是width、height等属性上时，都是相对于根元素html font-size的大小，1rem = 1倍根元素html font-size的大小
+    * vm：无论应用在font-size还是width、height等属性上时，都是相对于视口viewport的宽度，1vw = 1%倍视口viewport的宽度
+    * vh：无论应用在font-size还是width、height等属性上时，都是相对于视口viewport的高度，1vh = 1%倍视口viewport的高度
+    实际开发中，以前用rem比较多，现在用vw比较多
+  -->
+</body>
+
+</html>
