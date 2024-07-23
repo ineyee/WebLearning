@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    一、随着前端项目越来越复杂，一个完整的前端项目不是简单几行CSS就能搞定的，可能需要成千上万行CSS才能搞定，因此编写CCS时就会有一些难受的地方，比如：
+    1、因为CSS选择器不能嵌套、没有作用域的概念，所以为了避免命名混淆和样式混淆、我们在给大量选择器命名时真得很头疼——所以很多人把CSS叫做“面向命名编程”，无论我们采用BEM命名法还是一串后代选择器命名法，选择器的名字都非常长，比如下面这样
+      * main__item__match_center__list__item__header {}
+      * main__item__match_schedule__list__item__header {}
+      * .main .item .match_center .list .item .header {}
+      * .main .item .match_schedule .list .item .header {}
+    2、总是会存在大量重复的样式，虽然我们已经通过类似common.css这样抽取的方式来进行管理了，但使用起来依然不是很方便，比如下面这样
+      * <div class="news_item hot nowrap_hidden_ellipsis"></div>
+      * 这个div元素是众多新闻item中的hot类型，因此它具有news_item class的一些公共样式（已经被抽取出来了），然后它有一些自己独特的样式，接下来它又只能“单行显示、显示不下就显示...”（已经被抽取出来了），这样我们就得在HTML代码层面给这个元素写多个class来实现一个元素具备很多样式的效果，从而达到样式复用
+      * 我们用上面这种做法来实现样式复用是没问题的，但它看起来总是不如<div class="news_item_hot"></div>这样在HTML代码层面只给一个样式的class来得爽、然后在news_item_hot这个class里把所有需要的样式都写上，这样写的话就是一个元素对应一个样式class，一对一很符合我们的自然感觉，不过这样做的话，样式的复用性又无法解决
+    3、无法自定义属性（虽然后续已经支持用--来自定义属性，但是存在一定的兼容性问题）——类似于iOS里的宏定义、Flutter里的全局常量，比如类似于主题色这种全局都在用的东西就得散落地写到项目的各个角落，一旦被更换、项目里很多地方都得一个一个改，很麻烦
+    4、等等等等...
+  -->
+
+  <!--
+    二、CSS预处理器
+    所以为了应对编写CSS时一些难受的地方，社区出现了一系列CSS预处理器
+    * 首先，CSS预处理器都有自己独特的语法，我们需要通过它们的语法来编写CSS样式、而不再通过原生CSS来编写CSS样式——这一部分我们称之为“CSS预处理器对原生CSS完全兼容”
+    * 其次，CSS预处理器都会增加一些原生CSS不具备的特性，来解决上面那些难受的问题——这一部分我们称之为“CSS预处理器的特性”
+    * 此外我们需要知道的是：通过CSS预处理器编写的所有CSS样式，最终都会被转换成原生CSS去执行，因为浏览器只识别原生CSS
+
+    常见的CSS预处理器：
+    * Sass、Scss（Sass的最新版）——用的第二多
+    * Less——用的最多
+    * Stylus——用的少很多
+  -->
+
+</body>
+
+</html>
