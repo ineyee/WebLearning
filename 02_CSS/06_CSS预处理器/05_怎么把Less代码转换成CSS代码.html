@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    方式一（实际开发中常用）：下载Node环境，通过npm包管理工具下载less工具，使用less工具对代码进行编译
+      * 因为目前我们还没有学习Node，也没有学习npm包管理工具
+      * 所以现阶段我们先不用less工具来进行编译
+      * 等后续我们学习了webpack，其实这些操作可以自动完成
+
+    方式二：通过VSCode的插件——EasyLess——来编译
+      * 安装这个插件后，只要我们保存一下.less文件，它就会自动给我们生成一份编译好的.css文件，我们去用这份CSS文件就可以了
+      * 但是因为生成了大量多余的文件，所以我们也不用这种方式
+
+    方式三：引入CDN的Less编译代码——就是一些JS代码、会把Less代码转换成CSS代码，对less进行实时编译
+      * 地址：https://cdn.jsdelivr.net/npm/less@4
+      * 但是直接通过远程的方式来编译，效率可能会有点低，所以我们也不用这种方式
+
+    方式四：把CDN的Less编译代码下载到本地，引入本地的Less编译代码——就是一些JS代码、会把Less代码转换成CSS代码，对less进行实时编译
+      * 把上面地址里的代码直接复制粘贴下来，放进lessc.js文件
+      * 通过本地的方式来编译，效率会高点，所以我们后续采用这种方式
+  -->
+</body>
+
+</html>
