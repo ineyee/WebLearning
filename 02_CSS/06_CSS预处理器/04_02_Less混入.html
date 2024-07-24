@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet/less" href="04_02_Less混入.less">
+  <script src="lessc.js"></script>
+</head>
+
+<body>
+  <!--
+    有混入之前我们要这么做，看着不爽，破坏了CSS结构和HTML结构一一对应的关系
+  -->
+  <div class="box nowrap_hidden_ellipsis">我是div元素我是div元素我是div元素</div>
+
+  <!-- 有了混入之后，我们就可以只写一个选择器了，需要复用的样式交给混入去处理 -->
+  <div class="box">我是div元素我是div元素我是div元素</div>
+</body>
+
+</html>

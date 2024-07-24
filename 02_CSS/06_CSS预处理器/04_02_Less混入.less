@@ -1,0 +1,48 @@
+/*
+  1、混入就是为了解决样式复用问题的，有了混入，我们就可以在HTML代码层面只写一个选择器，从而保证CSS结构和HTML的对应关系，然后在CSS代码层面用混入去实现样式复用
+
+  定义混入非常简单，就像一个选择器一样去定义它就行了，当然如果你想在选择器后面加个()也是可以的，下面我们就会知道混入非常像函数，只是无参时可以省略掉()而已
+  使用混入也非常简单，像调用函数那样去使用它就可以了
+
+  注意：
+  1、混入已经不再是一个纯粹的选择器了，它是Less的某个特性，有点像选择器——可以在它里面写CSS样式，又有点像函数——可以调用、可以传参
+  2、这里的东西都属于预处理环节的东西，学过C语言就知道预处理的本质就是完全的替换
+*/
+.nowrap_hidden_ellipsis() {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/*
+  2、混入除了上面的常规使用外，还可以传参，也就是说混入非常像一个函数
+  参数给默认值就是可选参数，参数不给默认值就是必选参数
+*/
+.border(@borderWith: 5px, @borderColor) {
+  border: @borderWith @borderColor solid;
+}
+
+/*
+  3、实际开发中，我们经常会把混入和Map结合使用
+  也就是说调用混入后会返回一个Map，我们就可以访问Map里的key-value了
+*/
+.colors() {
+  // 这里面都是自定义的变量
+  @mainColor: red;
+  @secondColor: green;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+
+  background-color: red;
+
+  // 混入，复用样式
+  // 这行代码经过预处理之后会被完全地替换为上面的三行代码
+  .nowrap_hidden_ellipsis();
+  .border(@borderColor: blue);
+
+  // 混入和Map结合使用
+  color: .colors()[@secondColor];
+}

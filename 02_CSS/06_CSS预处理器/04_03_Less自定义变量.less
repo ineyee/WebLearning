@@ -1,0 +1,30 @@
+/*
+  1、原生CSS里的自定义属性可能会存在兼容性问题，但Less里的自定义变量则绝对不会存在兼容性问题，因为它彻彻底底就像iOS里的宏定义一样，在预处理之后就会被替换成真实的值，Less里的变量名必须以@开头，变量值可以是任意有效的CSS值
+
+  2、Less里的自定义变量的作用域可以搞成全局的，所以只要引入相应的.less文件，那整个网站里就都能访问到这些变量了
+*/
+
+// 自定义变量
+@main_color: #f3C258FF;
+@c_000000FF: #000000FF;
+@c_333333FF: #333333FF;
+@c_666666FF: #666666FF;
+@c_999999FF: #999999FF;
+@c_FFFFFFFF: #FFFFFFFF;
+
+@fs_18px: 18px;
+@fs_16px: 16px;
+@fs_14px: 14px;
+@fs_12px: 12px;
+@fs_10px: 10px;
+
+div {
+  width: 100px;
+  height: 100px;
+
+  // 使用自定义变量
+  background-color: @main_color;
+
+  font-size: @fs_18px;
+  color: @c_666666FF;
+}
