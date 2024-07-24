@@ -1,0 +1,63 @@
+/* 
+  1、原生CSS是不支持选择器嵌套的，所以为了避免命名混淆和样式混淆，我们都会给选择器取很长的名字，取名这件事就很头疼，如下：
+    * main__item__match_center__list__item__header {}
+    * .main .item .match_center .list .item .header {}
+
+  但是Less支持了选择器嵌套，这样一来我们就不用给CSS选择器取那么长的名字了，只需要用嵌套来保持跟HTML的结构一样就可以了，因为作用域的缘故能天然避免命名混淆和样式混淆
+*/
+.main {
+  .item {
+    .match_center {
+      .list {
+        .item {
+          .header {
+            font-size: 18px;
+            font-weight: bold;
+          }
+
+          /*
+            2、那当我们采用了选择器嵌套之后，如果要做动态伪类和结构伪类、伪元素这种效果要怎么实现呢？
+            直接写在对应的选择器里就可以了，&符号就代表当前选择器
+          */
+          .content {
+            font-size: 14px;
+            font-weight: normal;
+
+            &:hover {
+              color: red;
+            }
+
+            &:last-child {
+              font-weight: bold;
+            }
+
+            &::before {
+              content: "1";
+              color: #ff0000ff;
+            }
+          }
+
+          // 之前我们都是单独地写一个选择器，现在如果还这样写的话就破坏了CSS结构和HTML结构的对应关系，所以现在不要再这么写了，直接写在对应的选择器里就可以了
+          // .content:hover {
+          //   color: red;
+          // }
+          // .content:last-child {
+          //   font-weight: bold;
+          // }
+          // .content::before {
+          //   content: "1";
+          //   color: #ff0000ff;
+          // }
+
+          /*
+            3、那当我们采用了选择器嵌套之后，如果要做默认选中效果要怎么实现呢？
+            同样为了不破坏了CSS结构和HTML结构的对应关系，我们就不再单独写一个选择器了，而是用JS去实现，这里就先不实现了
+          */
+          // .content--active {
+          //   color: red;
+          // }
+        }
+      }
+    }
+  }
+}
