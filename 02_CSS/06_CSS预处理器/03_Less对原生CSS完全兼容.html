@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!--
+    我们不能通过内联样式来编写Less的代码
+    我们也不能通过内部样式表来编写Less的代码
+    我们只能通过外部样式表来编写Less的代码——文件后缀名为.less，
+
+    导入.less文件时，rel的值需要是：stylesheet/less
+  -->
+  <link rel="stylesheet/less" href="03_test.less">
+  <!--
+    把CDN的Less编译代码下载到本地，引入本地的Less编译代码——就是一些JS代码、会把Less代码转换成CSS代码，对less进行实时编译
+  -->
+  <script src="03_lessc.js"></script>
+</head>
+
+<body>
+  <div class="box">
+    Hello World!
+  </div>
+</body>
+
+</html>
