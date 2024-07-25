@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <!--
+    1、name="viewport"专门用来设置移动端布局视口的大小，PC端会自动忽略这个东西
+    2、width：用来设置布局视口的宽度，我们设置为可见视口的宽度——device-width就行了，高度不用管，因为竖向一般都是可滚动的，我们只需要管宽度就行了
+    3、initial-scale：布局视口的宽度已经设置成device-width了，要在此基础上缩放几倍？一般情况下我们就保持1倍就可以了
+    4、user-scalable：yes、no，一般情况下我们不允许用户对网页进行缩放，但是有些浏览器会忽略掉这个字段，因此我们一般还会用minimum-scale和maximum-scale来禁止用户缩放
+    5、minimum-scale：最小缩放比例
+    6、maximum-scale：最大缩放比例
+  -->
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+  <title>Document</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    一、视口（viewport）
+    在PC端和移动端浏览器里，body元素就是浏览器的视口，body元素上面的收藏夹、地址栏、标签栏等不属于浏览器视口的一部分
+  -->
+
+  <!--
+    二、可见视口（visual viewport）和布局视口（layout viewport）
+    * 在PC端浏览器里，可见视口和布局视口是同一个东西——即body元素，它们的大小就是显示器的逻辑分辨率，比如我们在系统设置里把逻辑分辨率设置成1920px x 1080px，那我们在编写CSS时设置的样式就是相对于1920px x 1080px来说的
+    * 在移动端浏览器里，我们需要对视口进行区分，body元素仅仅是可见视口而不再同时是布局视口
+      * 可见视口就是手机的逻辑分辨率，比如iPhone4的可见视口大小为320 x 480，iPhone6P的可见视口大小为414 x 736，iPhoneX的可见视口大小为375 x 812
+      * 布局视口默认情况下不等于可见视口的大小，而是一个宽度980 x 高度按屏幕比例缩放的矩形框，我们在编写CSS时设置的样式就是相对于这个布局视口来说的，这就是为什么我们在iPhoneX上放了一个100px x 100px的矩形框，期待它会占据屏幕宽度的1/3左右 ~= 100 / 375，但实际上却远小于1/3，因为它只占据了1/10左右 ~= 100 / 980
+  -->
+
+  <!--
+    三、移动端修改布局视口 = 可见视口
+    但是在移动端实际开发中，UI的标注肯定都是相对于可见视口的大小来的，因此我们就得手动把布局视口搞成跟可见视口一样大，怎么搞呢？这就得靠meta元素name属性的viewport了，详见上面
+  -->
+  <div class="box"></div>
+</body>
+
+</html>
