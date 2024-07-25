@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 后面()里的东西就是媒体查询的条件 */
+    @import url("red_bg.css") (max-width: 1200px);
+    @import url("blue_bg.css") (min-width: 1200px);
+  </style>
+</head>
+
+<body>
+  <!--
+    假设我们有个需求是，屏幕宽度<1200时、背景显示红色，>=1200时、背景显示蓝色
+  -->
+  <div class="box"></div>
+</body>
+
+</html>
