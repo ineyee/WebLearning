@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    @media (min-width: 1000px) and (max-width: 1200px) {
+      .box {
+        width: 100px;
+        height: 100px;
+
+        background-color: red;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    1、媒体查询的条件必须用()括起来，常用的媒体查询条件有：
+    * 宽度相关属性：xxxpx
+    * 高度相关属性：xxxpx
+    * 设备宽度device-width：xxxpx
+    * 设备高度device-height：xxxpx
+    * 设备方向orientation：portrait、landscape
+
+    2、当有多个媒体查询条件时，我们可以用逻辑运算符来把它们连接在一起，常见的逻辑运算符有：
+    * and：且
+    * ,：或
+    * not：非
+  -->
+  <div class="box"></div>
+</body>
+
+</html>
