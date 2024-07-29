@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    /* 适配前 */
+    /* .box {
+      width: 100px;
+      height: 100px;
+
+      background-color: red;
+    } */
+
+    /* 适配后 */
+    @media (min-width: 320px) {
+      html {
+        font-size: 32px;
+      }
+    }
+
+    @media (min-width: 375px) {
+      html {
+        /*
+          这里的font-size可以设置成任何值，只要在真正使用时你能算对就行了
+          经验上来说，都是设置成逻辑分辨率的1/10
+        */
+        font-size: 37.5px;
+      }
+    }
+
+    @media (min-width: 414px) {
+      html {
+        font-size: 41.4px;
+      }
+    }
+
+    /* 宽高间距适配 */
+    .box {
+      /*
+        因为设计稿是基于375 x xxx，也就是说这个100px是相对于375来说的
+        因此这里的计算我们只要保证在375的屏幕上是100px就算算对了，其它屏幕就可以完成屏幕适配了
+
+        奇葩，calc(100 / 37.5)rem竟然不行
+        只能写算出来的值2.666667
+      */
+      width: 2.666667rem;
+      height: 2.666667rem;
+
+      background-color: red;
+    }
+
+    /* 字体大小适配 */
+    body {
+      /*
+        修改了html元素的font-size后，整个网页默认的字体大小就会随之变得很大
+        这里通过适配来保证在375的屏幕上字体大小是默认的16px，其它屏幕就可以完成默认字体大小的适配了
+
+        奇葩，calc(16 / 37.5)rem竟然不行
+        只能写算出来的值0.426667
+      */
+      font-size: 0.426667rem;
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    因为rem单位都是相对于html元素的font-size的，所以我们只要【使用rem单位 + 在不同的屏幕下设置不同的html元素的font-size】就可以完成屏幕适配，具体的适配步骤为：
+    1、通常情况下，UI给到我们的设计稿都是基于375 x xxx的，这是我们做适配的一个前提，不同的前提对应不同的配置，此处我们假定前提就是375 x xxx
+    2、在不同的屏幕下设置不同的html元素的font-size——这里通过【媒体查询】的方式来实现，详见上面
+    3、使用rem单位，详见上面
+      * 手动计算太恐怖了，实际不可能用这种方式
+      * 实际开发中，都是用webpack打包工具的postcss-pxtorem插件来完成自动化转换，我们开发的时候就写100px就行，这个我们后续再说
+      * 所以此处我们主要使用vscode的插件——px to rem & vw...来搞，一边编写就一边帮我们转换了，记得根据设计稿的大小在插件里配置一下html元素的font-size
+
+    劣势：通过【媒体查询】的方式来实现，iOS、安卓设备的逻辑分辨率太多了，我们总不能全部列出来吧，因此实际开发中这种方式非常少用
+  -->
+  <div class="box">我是div元素</div>
+</body>
+
+</html>
