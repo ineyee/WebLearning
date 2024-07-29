@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    /* 适配前 */
+    /* .box {
+      width: 100px;
+      height: 100px;
+
+      background-color: red;
+
+      font-size: 14px;
+    } */
+
+    /* 适配后 */
+    .box {
+      /*
+        宽高间距适配
+
+        设计稿里屏幕宽度是375，所以一个vw就是百分之一的屏幕宽度、即375/100个px，所以1个px就是100/375vw
+        那100px就是10000/375 ~= 26.6667vw
+      */
+      width: 26.6667vw;
+      height: 26.6667vw;
+
+      background-color: red;
+
+      /*
+        字体大小适配
+
+        设计稿里屏幕宽度是375，所以一个vw就是百分之一的屏幕宽度、即375/100个px，所以1个px就是100/375vw
+        那14px就是1400/375 ~= 3.7333vw
+      */
+      font-size: 3.7333vw;
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    因为vw单位都是相对于布局视口——屏幕逻辑分辨率——的宽度的、几个vw就是百分之几的屏幕宽度，所以我们只要【使用vm单位】就可以完成屏幕适配，具体的适配步骤为：
+    1、通常情况下，UI给到我们的设计稿都是基于375 x xxx的，这是我们做适配的一个前提，不同的前提对应不同的配置，此处我们假定前提就是375 x xxx
+    2、使用vw单位，详见上面
+      * 手动计算太恐怖了，实际不可能用这种方式
+      * 实际开发中，都是用webpack打包工具的postcss-px-to-viewport-8-plugin插件来完成自动化转换，我们开发的时候就写100px就行，这个我们后续再说
+      * 所以此处我们主要使用vscode的插件——px to rem & vw...来搞，一边编写就一边帮我们转换了，记得根据设计稿的大小在插件里配置一下的设计稿的宽度，我们开发的时候直接写100px、然后根据弹窗直接替换成插件给我们算出来的值就行
+  -->
+  <div class="box">我是div元素</div>
+</body>
+
+</html>
