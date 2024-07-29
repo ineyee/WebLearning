@@ -1,0 +1,50 @@
+/* 通用样式文件 */
+
+body {
+  /*
+    当前网站内绝大多数元素的字体大小都是14px、行高是字体的1.5，颜色都是#333333
+    抽到这里我们就不用一直重复写了，导入一下就行，其它元素都会继承body元素的样式
+  */
+  font: 14px / 1.5 "Microsoft YaHei", Tahoma, "simsun", sans-serif;
+  color: #333333;
+}
+
+/* 虽然body元素搞了，但是a元素容易被浏览器自动搞成-webkit-link;这种样式，因此对它单独弄一下 */
+a {
+  font-size: 14px;
+  color: #333333;
+}
+
+/*
+  文本过长时不要自动换行、保持一行
+  超出的部分显示...
+  超出的部分截断
+
+  注意：如果父元素是固定宽度，那做了这三步就ok了，但是如果父元素的宽度是flex-grow的，那还得设置一下父元素的overflow: hidden;
+*/
+.nowrap_hidden_ellipsis {
+  /* 文本过长时不要自动换行、保持一行 */
+  white-space: nowrap;
+  /* 超出的部分显示... */
+  text-overflow: ellipsis;
+  /* 超出的部分截断 */
+  overflow: hidden;
+}
+
+/*
+  文本过长时显示两行
+  超出的部分显示...
+  超出的部分截断
+
+  注意：如果父元素是固定宽度，那做了这三步就ok了，但是如果父元素的宽度是flex-grow的，那还得设置一下父元素的overflow: hidden;
+*/
+.twoline_hidden_ellipsis {
+  /* 文本过长时显示两行 */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  /* 超出的部分显示... */
+  text-overflow: ellipsis;
+  /* 超出的部分截断 */
+  overflow: hidden;
+}
