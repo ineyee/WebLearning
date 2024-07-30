@@ -1,0 +1,94 @@
+/* 指定网页里CSS文件的编码方式 */
+@charset "UTF-8";
+
+@import url("../const/const_color.less");
+@import url("../const/const_font_size.less");
+
+.subsidy {
+  height: 44vw;
+  border-radius: 3.2vw;
+  margin: 4.2667vw;
+
+  background-color: @c_FFFFFFFF;
+
+  display: flex;
+  flex-direction: column;
+
+  .header {
+    height: 10.6667vw;
+    padding-left: 4.2667vw;
+    padding-right: 4.2667vw;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .countdown {
+      display: flex;
+      justify-content: space-between;
+
+      img {
+        width: 16.8vw;
+        height: 4.2667vw;
+        margin-right: 1.6vw;
+      }
+
+      .countdown_item {
+        width: 4.2667vw;
+        height: 4.2667vw;
+        padding-left: .5333vw;
+        padding-right: 2px;
+        border-radius: .8vw;
+
+        background-color: @main_color;
+
+        font-size: 3.2vw;
+        font-weight: 500;
+        color: @c_FFFFFFFF;
+        text-align: center;
+        line-height: 4.2667vw;
+      }
+
+      .countdown_colon {
+        width: 2.4vw;
+        height: 4.2667vw;
+
+        font-size: 3.2vw;
+        color: @main_color;
+        text-align: center;
+        line-height: 4.2667vw;
+      }
+    }
+
+    .bottom_price {
+      font-size: 3.2vw;
+      color: @main_color;
+      text-align: center;
+      line-height: 4.2667vw;
+
+      // 伪元素是宿主元素的子元素，所以也可以通过flex布局的方式来设置对齐方式
+      display: flex;
+      align-items: center;
+
+      // 这里的小箭头是用边框来做的
+      &::after {
+        content: "";
+
+        display: inline-block;
+
+        width: 1.6vw;
+        height: 1.6vw;
+        border-top: .2667vw @main_color solid;
+        border-right: .2667vw @main_color solid;
+
+        transform: rotate(45deg);
+      }
+    }
+  }
+
+  .content {
+    background-color: orange;
+
+    flex: 1;
+  }
+}
