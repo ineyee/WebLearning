@@ -9,7 +9,8 @@
   .item {
     .match_center {
       .list {
-        .item {
+        // 当然同一嵌套结构里如果有同名的选择器，还是会出现命名混淆和样式混淆的，我们还是要主动避免一下，可以结合BEM命名法搞一下，所以这里就不能直接取名为item
+        .list__item {
           .header {
             font-size: 18px;
             font-weight: bold;
