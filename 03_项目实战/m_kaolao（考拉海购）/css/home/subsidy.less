@@ -7,7 +7,7 @@
 .subsidy {
   height: 44vw;
   border-radius: 3.2vw;
-  margin: 4.2667vw;
+  margin: 3.2vw;
 
   background-color: @c_FFFFFFFF;
 
@@ -16,8 +16,8 @@
 
   .header {
     height: 10.6667vw;
-    padding-left: 4.2667vw;
-    padding-right: 4.2667vw;
+    padding-left: 3.2vw;
+    padding-right: 3.2vw;
 
     display: flex;
     justify-content: space-between;
@@ -87,8 +87,67 @@
   }
 
   .content {
-    background-color: orange;
+    padding-left: 3.2vw;
+    padding-right: 3.2vw;
 
+    display: flex;
+    justify-content: space-between;
     flex: 1;
+
+    .item {
+      padding-right: .8vw;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+
+      &:nth-child(4) {
+        padding-right: 0vw;
+      }
+
+      .goods_img {
+        // img元素没有background-img contain那种东西
+        // img元素需要设置宽度才能保证图片过大时不至于溢出
+        // 但是这里img元素的父元素是通过flex = 1自适应的，所以没办法固定写死是多少，我们的目标也是撑满父元素，所以只能用百分比了
+        // 宽度设置之后，高度会自适应
+        width: 100%;
+      }
+
+      .strong_price {
+        height: 4.2667vw;
+        margin-top: 1.6vw;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .tip {
+          font-size: 2.6667vw;
+          color: @main_color;
+        }
+
+        .rmb {
+          font-size: 2.6667vw;
+          font-weight: 500;
+          color: @main_color;
+        }
+
+        .price {
+          font-size: 4vw;
+          font-weight: 500;
+          color: @main_color;
+        }
+      }
+
+      .origin_price {
+        height: 4.4vw;
+        margin-top: .2667vw;
+
+        font-size: 3.2vw;
+        color: @c_999999FF;
+        text-decoration: line-through;
+      }
+    }
   }
 }
