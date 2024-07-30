@@ -3,14 +3,13 @@
 
 .tab_bar {
   position: fixed;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
+  right: 0vw;
+  bottom: 0vw;
+  left: 0vw;
 
   // tabBar的高度safeArea + 固定50px，因此这里不需要vw
   height: calc(env(safe-area-inset-bottom) + 50px);
-  // 顶部的线条也不需要vw
-  border-top: 1px #DDDDDD solid;
+  border-top: .2667vw #DDDDDD solid;
 
   background-color: #FFFFFF;
 
@@ -23,6 +22,7 @@
     flex: 1;
 
     img {
+      // 固定48px，因此这里不需要vw
       width: 48px;
     }
   }
