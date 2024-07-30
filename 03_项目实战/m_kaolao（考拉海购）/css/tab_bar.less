@@ -1,0 +1,24 @@
+.tab_bar {
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+
+  height: calc(env(safe-area-inset-bottom) + 50px);
+  border-top: 1px #DDDDDD solid;
+
+  background-color: #FFFFFF;
+
+  display: flex;
+
+  .item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+
+    img {
+      width: 48px;
+    }
+  }
+}
