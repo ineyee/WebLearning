@@ -1,0 +1,62 @@
+/* 指定网页里CSS文件的编码方式 */
+@charset "UTF-8";
+
+@import url("../const/const_color.less");
+
+.home_search {
+  position: sticky;
+  top: 0px;
+
+  height: 10.6667vw;
+  padding: 0vw 4.2667vw;
+  border-bottom: .2667vw #DDDDDD solid;
+
+  background-color: @c_FFFFFFFF;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .search_text_field {
+    height: 7.4667vw;
+    margin-right: 2.1333vw;
+    border: .2667vw @main_color solid;
+    border-radius: 3.7333vw;
+
+    flex: 1;
+
+    .placeholder {
+      margin: 0vw 8.5333vw 0vw 1.6vw;
+
+      font-size: 3.4667vw;
+      color: @c_999999FF;
+      line-height: 7.4667vw;
+
+      &::before {
+        content: "";
+
+        // 伪元素都是行内元素，所以如果我们想设置它们的宽高，就必须先把它们搞成块级元素或行内块级元素，但是伪元素一般都是跟宿主元素在一行显示的，因此实际开发中都是搞成行内块级元素
+        display: inline-block;
+        width: 3.2vw;
+        height: 3.2vw;
+
+        background-image: url("https://kaola-haitao.oss.kaolacdn.com/ffb348d8-f223-4b08-81e1-e26c3c81d59e_36_38.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center .2667vw;
+      }
+    }
+  }
+
+  .sign {
+    width: 16vw;
+    height: 7.4667vw;
+    border: .2667vw @main_color solid;
+    border-radius: 0.8vw;
+
+    font-size: 2.6667vw;
+    color: @main_color;
+    text-align: center;
+    line-height: 7.4667vw;
+  }
+}
