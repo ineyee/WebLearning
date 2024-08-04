@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    JS的3个编写位置：
+    1、（不推荐）编写在HTML代码行内
+    2、（常用）编写在script元素内（建议把script元素放到body子元素的最后）
+    3、（常用）编写在单独的js文件内 + script元素导入（建议把script元素放到body子元素的最后）
+
+    注意：建议把script元素放到body子元素的最后，为什么呢？
+    我们知道浏览器在解析HTML文档时是从上往下一行一行解析的，而script元素也是HTML元素的一种，所以它也遵循这一规则。但是script元素内部又经常编写一些获取其它元素的代码，比如下面获取google元素和bing元素的代码，如果把script元素写到前面去了，那google元素和bing元素都还没写，就已经解析了获取它们的代码、那自然是获取不到，会导致不错，而放到最后就没有这个问题
+  -->
+  <a href="#" onclick="alert('百度一下')">百度一下</a>
+  <a class="google" href="#">Google一下</a>
+  <a class="bing" href="#">必应一下</a>
+
+  <script>
+    const googleEle = document.querySelector(".google")
+    googleEle.onclick = function () {
+      alert('Google一下')
+    }
+  </script>
+  <script src="js/bing.js"></script>
+</body>
+
+</html>
