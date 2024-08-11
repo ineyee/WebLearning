@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    1、常量是什么
+    常量是指第一次赋值后不能再次赋值的量，它由const、常量名、常量值三大部分组成：
+    const 常量名 = 常量值;
+
+    * const：const是constant的缩写，用来表明要定义一个常量
+    * 常量名：拿到常量名就是拿到了常量所对应的内存里的值
+    * 常量值：就是存储在常量所对应的内存里的值
+
+    注意：
+    * JS里const和function关键字一样，只是用来表明要定义一个常量和函数，不需要指定常量的数据类型和函数的类型，因此从这个角度来看，不指定类型反而是统一的
+    * const是ES6推出的、用来定义常量的关键字，它就是C语言里的常变量，关于const更多的东西我们后续会提到、这里就先不说了
+  -->
+
+  <script>
+    // 2、常量的声明及初始化
+    // 常量必须在声明的同时初始化，且初始化后不能再被赋值更改
+    const i = 10;
+    console.log(i) // 10
+  </script>
+</body>
+
+</html>
