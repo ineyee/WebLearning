@@ -29,14 +29,13 @@
         * Boolean：布尔类型，只有两个值true和false
         * Number：数值类型，包含了其它语言里的整型和浮点型
         * String：字符串类型，其它语言里是对象数据类型而非基本数据类型
-      2、对象数据类型（3个）
+      2、对象数据类型/引用数据类型（3个）
         * Array：数组类型
         * Object：对象类型，也就是其它语言里的字典类型
         * Function：函数类型，JS里函数是一等公民
       3、特殊数据类型（2个）
-        * Undefined：只有一个值undefined
-        * Null：只有一个值null
-      4、自定义数据类型
+        * Undefined：未定义类型，只有一个值undefined
+        * Null：空类型，只有一个值null
     */
 
     /*
@@ -60,28 +59,12 @@
     console.log(typeof (undefined)); // "undefined" ✅
     console.log(typeof (null)); // "object" ⚠️
 
-    // 自定义数据类型
-    class Person { }
-    let person = new Person();
-    console.log(typeof (person)); // "object" ⚠️
-    console.log(typeof (Person)); // "function" ⚠️
-    /*
-      我们可以看到数组的数据类型是"object"，而不是"array"，也就是说在JS里数组本质上是一种特殊的对象类型
-      我们可以看到函数的数据类型是"function"，而不是"() => void"这种这个函数真正的类型
-      我们可以看到null的数据类型是"object"，而不是"null"，这是历史遗留问题，较低版本的JS只会把null这个值作为Object对象的一个特殊值来看待，后来才把它拖出来作为一个特殊数据类型Null的值，但是为了兼容低版本，就保持了null的数据类型为Object
-      我们可以看到自定义类的数据类型为"function"，而不是Person类的元类，这是因为JS里的类其实不像OC里的类，它仅仅是对构造函数的封装而已，没有元类这种东西，还有person对象的数据类型也不是Person类，而是Object
-    */
-
     // 对象数据类型（3个）
     console.log(([]) instanceof Array) // true ✅
     console.log(([]) instanceof Object) // true ⚠️ 可见数组本质上的确是一种特殊的对象类型
     console.log(({}) instanceof Object) // true ✅
     console.log((function () { }) instanceof Function) // true ✅
     // console.log((function () { }) instanceof (() => void)) // 报错 ⚠️ TS里才有"() => void"这种这个函数真正的类型
-
-    // 自定义数据类型
-    console.log((Person) instanceof Function) // true ✅
-    console.log((person) instanceof Person) // true ✅
   </script>
 </body>
 
