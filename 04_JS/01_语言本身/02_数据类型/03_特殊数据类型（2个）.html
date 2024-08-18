@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*
+      一、Undefined：未定义类型
+      只有一个值undefined
+        * 我们可以主动给一个变量赋值为undefined，但实际开发中我们一般不会这么做
+        * 实际开发中undefined更多地是一种被动的状态，也就是说我们一旦看到undefined就代表一个变量我们声明了但是没有赋值，以便提醒我们在使用前一定要赋值，否则使用时肯定会出错。不过就现在很多编程语言的风格来说，都是强制要求我们在声明变量时就初始化掉，因此如果我们遵循这个风格的话，实际开发中undefined就更少见了
+    */
+    let v1 = undefined;
+    console.log(v1); // undefined
+    let v2;
+    console.log(v2); // undefined
+  </script>
+
+  <script>
+    /*
+      二、Null：空类型
+      只有一个值null
+      我们可以主动给一个变量赋值为null，实际开发中我们经常会这么做，Null类型其实是对象数据类型的附属类型，一般就是用来给对象数据类型的实例赋值为null，应用场景主要有两个：
+        * 声明变量时能初始化就初始化掉，不方便初始化时或不能初始化时就赋值为null
+        * null有明确的意义时可以把变量赋值为null，比如1代表数学，2代表语文，null代表全部学科
+      
+      注意：在其它编程语言里我们如何初始化一个变量一般分为3步，但是JS里只有2步，因为JS里没有延迟初始化这种东西
+        * 声明变量时能初始化就初始化掉
+        * 不方便初始化时，就延迟初始化，但一定要保证在使用前初始化掉
+        * 不能初始化时，就赋值为null，但使用时一定要判空
+      
+      注意：在其它编程语言里我们如果不给一个对象数据类型的变量初始化，那该变量会被默认初始化为null，而且那些语言的规范也是不让我们显性地给变量初始化为null、全靠自动；但是在JS里我们如果不给一个对象数据类型的变量初始化，那该变量可不是会被默认初始化为null、而是undefined，但是undefined又没有啥用、所以我们反而必须得显性地给变量初始化为null了
+    */
+    let v3 = null;
+    console.log(v3); // null
+  </script>
+</body>
+
+</html>
