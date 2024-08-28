@@ -25,17 +25,17 @@
     /*
       二、数据类型分类
       JS里的数据类型分类为：
-      1、基本数据类型（3个）
-        * Boolean：布尔类型，只有两个值true和false
+      1、基本数据类型 <==> 值类型（3个）
+        * Boolean：布尔类型
         * Number：数值类型，包含了其它语言里的整型和浮点型
-        * String：字符串类型，其它语言里是对象数据类型而非基本数据类型
-      2、对象数据类型/引用数据类型（3个）
+        * String：字符串类型，其它语言里字符串是对象数据类型而非基本数据类型
+      2、对象数据类型 <==> 引用类型（3个）
         * Array：数组类型
         * Object：对象类型，也就是其它语言里的字典类型
         * Function：函数类型
       3、特殊数据类型（2个）
-        * Undefined：未定义类型，只有一个值undefined
-        * Null：空类型，只有一个值null
+        * Undefined：未定义类型
+        * Null：空类型
     */
 
     /*
@@ -65,6 +65,24 @@
     console.log(({}) instanceof Object) // true ✅
     console.log((function () { }) instanceof Function) // true ✅
     // console.log((function () { }) instanceof (() => void)) // 报错 ⚠️ TS里才有"() => void"这种这个函数真正的类型
+
+
+    let num = 10;
+    let str = "hh";
+
+    function change(v) {
+      v = 11;
+    }
+
+    function change1(v1) {
+      v1 += "haha";
+    }
+
+    change(num);
+    change1(str);
+
+    console.log(num); // 10
+    console.log(str); // hh
   </script>
 </body>
 
