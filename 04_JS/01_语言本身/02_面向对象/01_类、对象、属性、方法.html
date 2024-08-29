@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*
+      补充：浏览器全局对象window
+      浏览器给我们提供了一个全局对象window，这个对象有以下作用：
+      1、浏览器会给我们提供一些全局的变量（如name）、函数（如alert）、对象（如console）等，浏览器会把这些东西都放在window对象里
+      2、我们在使用一个变量/函数/对象时的查找链，会先在变量/函数/对象的当前作用域内查找，找不到的话就会去上一层作用域内查找，最终会找到window对象里，如果window对象里也没有这个变量/函数/对象、那代码就会报错
+      3、使用var定义的变量会被添加到window对象里，但这是JS的设计缺陷，我们知道有这么回事就可以了，因为后面我们都是使用let/const来定义变量/常量，它们不会被添加到window对象里
+    */
+    console.log(window);
+
+    // 1、浏览器会给我们提供一些全局的变量（如name）、函数（如alert）、对象（如console）等，浏览器会把这些东西都放在window对象里
+    // 这些东西我们没有定义，但是使用时并不会报错，就是因为浏览器已经定义好并放在window对象里了
+    console.log(name);
+    console.log(alert);
+    console.log(console);
+
+    // 2、我们在使用一个变量/函数/对象时的查找链，会先在变量/函数/对象的当前作用域内查找，找不到的话就会去上一层作用域内查找，最终会找到window对象里，如果window对象里也没有这个变量/函数/对象、那代码就会报错
+    // 比如下面在函数的作用域内我们并没有定义过person对象，上一层作用域也就是script元素所囊括的全局作用域内我们也没有定义过person对象，window对象内也没有定义过person对象，所以在使用person对象时就会报错：person is not defined
+    // 而上面在使用name、alert、console时就不会报错，因为找到window对象里找到了它们三个
+    (function () {
+      console.log(person);
+    })()
+
+    // 3、使用var定义的变量会被添加到window对象里，但这是JS的设计缺陷，我们知道有这么回事就可以了，因为后面我们都是使用let/const来定义变量/常量，它们不会被添加到window对象里
+    var age = 18;
+    let height = 1.88;
+    console.log(window.age); // 18，确实能找到
+    console.log(window.height); // undefined，确实找不到
+  </script>
+</body>
+
+</html>
