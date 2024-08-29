@@ -53,7 +53,7 @@
     // 对象数据类型（3个）
     console.log(typeof ([])) // "object" ⚠️
     console.log(typeof ({})) // "object" ✅
-    console.log(typeof (function () { })) // "function" ⚠️
+    console.log(typeof (function () { })) // "function" ✅
 
     // 特殊数据类型（2个）
     console.log(typeof (undefined)); // "undefined" ✅
@@ -61,9 +61,10 @@
 
     // 对象数据类型（3个）
     console.log(([]) instanceof Array) // true ✅
-    console.log(([]) instanceof Object) // true ⚠️ 可见数组本质上的确是一种特殊的对象类型
+    console.log(([]) instanceof Object) // true ⚠️ 可见数组本质上的确是一种特殊的对象类型，Array继承自Object
     console.log(({}) instanceof Object) // true ✅
     console.log((function () { }) instanceof Function) // true ✅
+    console.log((function () { }) instanceof Object) // true ⚠️ 可见函数本质上的确是一种特殊的对象类型，Function继承自Object
     // console.log((function () { }) instanceof (() => void)) // 报错 ⚠️ TS里才有"() => void"这种这个函数真正的类型
 
 
