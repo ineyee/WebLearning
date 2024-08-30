@@ -92,6 +92,36 @@
           Tree，我们称之为Render Tree——既有结构也有样式，浏览器就会拿着这个Render Tree去渲染了
         </li>
       </ul>
+      <h4>
+        补充：
+      </h4>
+      <div>
+        Web里的三棵树：HTML Tree + CSSOM Tree、DOM Tree、Render Tree
+      </div>
+      <div>
+        1、HTML Tree + CSSOM Tree：我们编写的HTML结构是一个树结构，被称为HTML Tree，是我们开发者手动搭建出来的一棵树；CSSOM Tree：我们编写的CSS结构也是一个树结构，被称为CSSOM
+        Tree，也是我们开发者手动搭建出来的一颗树；这两个我们开发者手动搭建出来的树结构加起来就类似于我们在Flutter里手动搭建出来的Widget Tree（我们在编写Widget
+        Tree的过程中即编写了结构也编写了样式），Widget Tree的作用仅仅是创建一些对象、让这些对象来存储界面的结构和样式，创建和销毁这些对象的资源消耗是非常低的
+      </div>
+      <div>
+        2、DOM Tree：浏览器在解析完HTML Tree之后（此时可能还在异步地加载并解析CSSOM Tree），考虑到将来我们开发者可能会需要通过JS来操作HTML
+        Tree中的HTML元素（注意HTML是一门专门的语言，JS是一门专门的语言，JS无法直接操作HTML Tree中的HTML元素），所以浏览器会帮我们把HTML
+        Tree中的每一个HTML元素都一一对应地创建出来一个DOM对象来，进而形成一个跟HTML Tree结构一模一样的DOM Tree，并且提供了JS的API让我们开发者来操作DOM Tree，也就是说DOM
+        Tree就是JS和HTML
+        Tree之间的桥梁，我们开发者可以通过JS的API去操作DOM Tree，然后浏览器再把这个操作映射到HTML Tree上去。DOM Tree完全是HTML Tree的映射、不包含CSSOM
+        Tree，只有结构、没有样式。这个DOM Tree有点类似于Flutter里的Element Tree，它们都是一些虚拟节点，但又有些区别，DOM Tree的出现是为了作为JS和HTML
+        Tree的桥梁，而Element Tree的出现则是为了作为Widget Tree和RenderObject Tree的桥梁，每一个Element Tree节点都持有着一个Widget
+        Tree节点、并有可能持有着一个RenderObject Tree节点，以此决定着UI如何绘制，比如某个Widget
+        Tree节点的颜色改了、我们rebuild、那Widget Tree节点对象是会被销毁重建的，但是只要Widget的类型和key不变，那对应的Element
+        Tree节点就不会重建，而只是会把变化传递给对应的RenderObject Tree去更新一下，这样的资源消耗就非常小了
+      </div>
+      <div>
+        3、Render Tree：浏览器得到DOM
+        Tree之后，它会等待、会等所有的CSS文件都加载并解析完毕得到CSSOM Tree之后，把CSSOM Tree上的节点一一对应地attach附加到DOM Tree的各个DOM对象节点上去，附加了CSSOM
+        Tree后的DOM
+        Tree，我们称之为Render Tree——既有结构也有样式、也就是说Render Tree = DOM Tree + CSSOM Tree，浏览器就会拿着这个Render Tree去渲染了，这个Render
+        Tree就类似于Flutter里的RenderObject Tree
+      </div>
     </div>
   </div>
 </body>
