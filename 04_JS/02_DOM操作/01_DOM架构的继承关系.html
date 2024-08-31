@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    在DOM架构里，其实除了会把HTML Tree上的HTML元素生成对应的DOM对象外，还会把其它很多东西也生成对应的DOM对象，比如文本、注释，小阿枫；sssfsf、、显性、等等
+  -->
+
+  <!--
+    1、EventTarget父类和Node父类
+    一个HTML文档里所有类型的DOM对象，都叫做HTML文档里的节点，因此它们最终都会继承自Node类
+    而Node类又继承自EventTarget类，这样一来所有的节点就都拥有EventTarget类事件处理相关的API了
+  -->
+
+  <!--
+    3、Element分支（即元素相关）的DOM对象
+    div元素对应的DOM对象就属于HTMLDivElement类
+    img元素对应的DOM对象就属于HTMLImageElement类
+
+    HTMLDivElement类和HTMLImageElement类又有些共性的东西，所以它俩又继承自HTMLElement类
+
+    除了HTMLElement类以外，可能还有其它Element类，所以HTMLElement类又继承自Element类
+  -->
+  <div></div>
+  <img src="" alt="">
+
+  <!--
+    4、CharacterData分支（即字符相关）的DOM对象
+    ”Hello World!“这种不作为某个具体HTML元素内容的文本就属于Text类
+    ”我是注释“这种注释就属于Comment类
+
+    Text类和Comment类又有些共性的东西，所以它俩又继承自CharacterData类
+  -->
+  Hello World!
+  <!-- 我是注释 -->
+</body>
+
+</html>
