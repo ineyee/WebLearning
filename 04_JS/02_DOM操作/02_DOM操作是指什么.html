@@ -12,6 +12,22 @@
     // DOM操作是指：
     // 1、通过JS的代码精准地获取到某个元素（虽然DOM架构里有各种类型的DOM对象，但实际开发中我们最关心的可能还是HTML元素对应的DOM对象）
     // 2、进而再通过JS的代码对元素进行各种操作，因为有些操作通过JS来搞要比通过HTML和CSS来搞简单得多
+
+    // 比如document对象就是当前网页的HTML文档
+    let htmlDocument = document;
+    console.log(htmlDocument);
+    // 获取当前网页的html元素——根元素、root元素
+    let htmlEle = htmlDocument.documentElement;
+    console.log(htmlEle);
+    // 获取当前网页的head元素
+    let headEle = htmlDocument.head;
+    console.log(headEle);
+    // 获取当前网页的body元素
+    let bodyEle = htmlDocument.body;
+    console.log(bodyEle);
+
+    // 修改body元素的背景颜色
+    bodyEle.style.backgroundColor = "red";
   </script>
 </body>
 

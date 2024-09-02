@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  Hello World!
+  <!-- 我是注释 -->
+
+  <div class="box">我是div元素</div>
+
+  <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul>
+
+  <!-- 一、通过元素导航的方式获取元素 -->
+  <script>
+    let bodyEle = document.body;
+
+    // 1、获取某个元素的父元素
+    let parentElement = bodyEle.parentElement;
+    console.log(parentElement); // html
+
+    // 2、获取某个元素的所有子元素
+    let childEleList = bodyEle.children;
+    console.log(childEleList); // [div, ul, script, script]
+
+    // 3、获取某个元素所有子元素中的第一个元素
+    let firstChildEle = bodyEle.firstElementChild;
+    console.log(firstChildEle); // div
+
+    // 4、获取某个元素所有子元素中的最后一个元素
+    let lastChildEle = bodyEle.lastElementChild;
+    console.log(lastChildEle); // script
+
+    // 5、获取某个元素的下一个兄弟元素
+    let nextSiblingEle = firstChildEle.nextElementSibling;
+    console.log(nextSiblingEle); // ul
+
+    // 6、获取某个元素的上一个兄弟元素
+    let previousSiblingEle = lastChildEle.previousElementSibling;
+    console.log(previousSiblingEle); // ul
+  </script>
+
+  <!--
+    二、通过节点导航的方式获取节点
+    正如DOM架构里所展示的，节点包含元素，还包含文本、注释等很多东西
+    这个了解一下就行，实际开发中我们主要还是获取元素而不是获取节点，这里就是跟获取元素做下API对比
+  -->
+  <script>
+    let bodyNode = document.body; // body元素既是一个元素、也是一个节点
+
+    // 1、获取某个节点的父元素
+    let parentNode = bodyNode.parentNode;
+    console.log(parentNode); // html
+
+    // 2、获取某个节点的所有子节点
+    let childNodeList = bodyNode.childNodes;
+    console.log(childNodeList); // [text, comment, text, div, text, ul, text, comment, text, script, text, comment, text, script]，可见里面有很多text节点，是因为HTML代码里的换行符\n也算一个text节点
+
+    // 3、获取某个节点所有子节点中的第一个节点
+    let firstChildNode = bodyNode.firstChild;
+    console.log(firstChildNode); // text
+
+    // 4、获取某个节点所有子节点中的最后一个节点
+    let lastChildNode = bodyNode.lastChild;
+    console.log(lastChildNode); // script
+
+    // 5、获取某个节点的下一个兄弟节点
+    let nextSiblingNode = firstChildNode.nextSibling;
+    console.log(nextSiblingNode); // comment
+
+    // 6、获取某个节点的上一个兄弟节点
+    let previousSiblingNode = lastChildNode.previousSibling;
+    console.log(previousSiblingNode); // text
+  </script>
+</body>
+
+</html>
