@@ -9,13 +9,21 @@
 
 <body>
   <!--
-    在DOM架构里，其实除了会把HTML Tree上的HTML元素生成对应的DOM对象外，还会把其它很多东西也生成对应的DOM对象，比如文本、注释，小阿枫；sssfsf、、显性、等等
+    在DOM架构里，其实除了会把HTML Tree上的HTML元素生成对应的DOM对象外，还会把其它很多东西也生成对应的DOM对象，比如当前网页的HTML文档，文本、注释，小阿枫；sssfsf、、显性、等等，当然实际开发中我们最关心的可能还是HTML元素对应的DOM对象
   -->
 
   <!--
     1、EventTarget父类和Node父类
     一个HTML文档里所有类型的DOM对象，都叫做HTML文档里的节点，因此它们最终都会继承自Node类
     而Node类又继承自EventTarget类，这样一来所有的节点就都拥有EventTarget类事件处理相关的API了
+  -->
+
+  <!--
+    2、Document分支（即文档相关）的DOM对象
+    当前网页的HTML文档对应的DOM对象就属于HTMLDocument类
+    xxx的XML文档对应的DOM对象就属于XMLDocument类
+
+    HTMLDocument类和XMLDocument类又有些共性的东西，所以它俩又继承自Document类
   -->
 
   <!--
