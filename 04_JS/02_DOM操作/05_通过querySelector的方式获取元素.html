@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="box">
+    <h2>我是标题</h2>
+    <div class="container">
+      <p>
+        我是段落，<span class="keyword">kobe</span>哈哈哈
+      </p>
+      <p>
+        我也是段落，<span class="keyword">james</span>呵呵呵
+      </p>
+    </div>
+  </div>
+
+  <!-- 通过querySelector的方式获取元素（使用度很高） -->
+  <script>
+    // 1、querySelector
+    // 选择器的完整名称是.keyword，.代表是个class选择器，keyword是类名
+    // API里只是表明要通过选择器去查询，但是没有表明是什么类型的选择器，所以要填入完整名称，而不能直接填入类名
+    // 如果有很多元素都使用了相同的选择器，querySelector方法只会找到第一个元素就停下来
+    let keywordEle = document.querySelector(".keyword");
+    console.log(keywordEle); // span.keyword
+
+    // 2、querySelectorAll
+    // 选择器的完整名称是.keyword，.代表是个class选择器，keyword是类名
+    // API里只是表明要通过选择器去查询，但是没有表明是什么类型的选择器，所以要填入完整名称，而不能直接填入类名
+    // 如果有很多元素都使用了相同的选择器，querySelectorAll方法会找到所有的元素才停下来
+    let keywordEleList = document.querySelectorAll(".keyword");
+    console.log(keywordEleList); // [span.keyword, span.keyword]
+  </script>
+</body>
+
+</html>
