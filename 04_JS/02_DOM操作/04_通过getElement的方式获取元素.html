@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="box">
+    <h2>我是标题</h2>
+    <div class="container">
+      <p>
+        我是段落，<span class="keyword">kobe</span>哈哈哈
+      </p>
+      <p>
+        我也是段落，<span class="keyword">james</span>呵呵呵
+      </p>
+      <div class="article">
+        <h3 id="title">我是小标题</h3>
+        <p>我是文章的内容</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 通过getElement的方式获取元素（使用度一般） -->
+  <script>
+    // 1、ByClassName
+    // 选择器的完整名称是.keyword，.代表是个class选择器，keyword是类名
+    // 因为API里已经表明是ByClassName了，所以直接填入类名即可，而不用填入完整名称
+    let keywordEleList = document.getElementsByClassName("keyword");
+    console.log(keywordEleList); // [span.keyword, span.keyword]
+
+    // 2、ById
+    // 选择器的完整名称是#title，#代表是个id选择器，title是id名
+    // 因为API里已经表明是ById了，所以直接填入id名即可，而不用填入完整名称
+    let titleEle = document.getElementById("title");
+    console.log(titleEle); // <h3 id="title">我是小标题</h3>
+  </script>
+</body>
+
+</html>
