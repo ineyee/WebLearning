@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .btn {
+      width: 100px;
+      height: 100px;
+
+      background-color: red;
+    }
+
+    .box {
+      width: 10000px;
+      height: 10000px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="btn">回到顶部</div>
+  <div class="box"></div>
+
+  <!-- 因为window对象没有父视图了，它不能再相对于谁了，所以它没有位置的说法，只有宽高的说法 -->
+
+  <script>
+    // window整个宽高（实际开发中不常用，即浏览器的宽高，包含顶部的标签栏、搜索栏、书签栏等）
+    console.log(window.outerWidth); // 1440px
+    console.log(window.outerHeight); // 810px
+
+    // window有效宽高（实际开发中更常用，即网页的宽高，不包含顶部的标签栏、搜索栏、书签栏等）
+    console.log(window.innerWidth); // 732px
+    console.log(window.innerHeight); // 689px
+
+    // window可滚动时、已经滚动出去的偏移量，类似于iOS里的scrollOffset
+    window.onclick = function () {
+      console.log(window.scrollX); // 1075px
+      console.log(window.scrollY); // 958px
+    }
+
+    // 让window滚到动指定的位置
+    const btnEle = document.querySelector(".btn");
+    btnEle.onclick = function () {
+      window.scrollTo(0, 0);
+    }
+  </script>
+</body>
+
+</html>
