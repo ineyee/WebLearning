@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    1、attribute属性：直接写在HTML元素身上的属性，我们称之为attribute属性，也就是说attribute属性是针对HTML元素来说的
+    * 标准attribute属性：HTML自带的attribute属性是标准attribute属性，如class、id、style、title、src、alt等
+    * 非标准attribute属性：我们自定义的attribute属性是非标准attribute属性，如data-name、data-age、data-height等
+  -->
+  <!-- 多对多，多个类名用空格分开就行 -->
+  <h1 class="h1 h11"></h1>
+  <h2 class="h11"></h2>
+  <!-- 一对一 -->
+  <h3 id="h3">我是三级标题</h3>
+  <!-- style设置内联样式 -->
+  <h4 style="background-color: red;">四级标题</h4>
+  <!-- title气泡提示 -->
+  <h5 title="五级标题">五级标题</h5>
+
+  <!-- img元素私有的src属性、alt属性 -->
+  <img src="" alt="图片加载失败时的占位文本">
+
+  <!-- H5新增了一个自定义的全局属性data-xxx -->
+  <div class="box" data-name="ineyee" data-age="18" data-height="180"></div>
+
+  <!--
+    2、attribute属性的相关操作：标准attribute属性和非标准attribute属性都支持下面这些操作
+      * 增某个属性：也是通过ele.setAttribute(attrName, attrValue)来实现
+      * 删某个属性：ele.removeAttribute(attrName)
+      * 改某个属性的值：ele.setAttribute(attrName, attrValue)
+      * 查
+        * 查某个属性的值：ele.getAttribute(attrName)（注意：无论属性的值真正类型是什么，这个方法获取到的 值永远都是String类型，这是这个方法的设计缺陷）
+        * 查所有的属性：ele.attributes
+        * 查有没有某个属性：ele.hasAttribute(attrName)
+  -->
+  <script>
+    // 获取到HTML元素对应的DOM对象
+    let h3Ele = document.querySelector("#h3");
+
+    // 增
+    h3Ele.setAttribute("title", "我是三级标题")
+
+    // 删
+    h3Ele.removeAttribute("id");
+
+    // 改
+    h3Ele.setAttribute("id", "h33");
+
+    // 查
+    console.log(h3Ele.getAttribute("id"));
+    console.log(h3Ele.attributes);
+    console.log(h3Ele.hasAttribute("id"));
+  </script>
+
+  <!--
+    3、property属性：我们已经知道每个HTML元素都有对应的DOM对象，其实浏览器还会把HTML元素身上的标准attribute属性（非标准的不会）一一对应地生成同名的property属性（class的名字比较特殊我们后面详说）挂在对应的DOM对象身上，所以挂在DOM对象身上的属性，我们称之为property属性，也就是说property属性是针对HTML元素对应的DOM对象来说的
+
+    如下面的class、id、style、title、src、alt等标准attribute属性，在DOM对象身上都会有对应的property属性
+    而data-format等非标准attribute属性，在DOM对象身上则没有对应的property属性
+  -->
+  <img class="image" id="hot_image" style="background-color: red;" src="https://picsum.photos/100" alt=""
+    data-format="png">
+
+  <!--
+    4、property属性的相关操作：
+      * 增某个属性：直接点语法增就行
+      * 删某个属性：无，只能通过attribute属性的方法来搞
+      * 改某个属性的值：直接点语法改就行
+      * 查
+        * 查某个属性的值：直接点语法查就行（注意：可以获取到属性值的真实类型，而不是字符串，这也是操作property属性的优势所在）
+        * 查所有的属性：无，只能通过attribute属性的方法来搞
+        * 查有没有某个属性：无，只能通过attribute属性的方法来搞
+  -->
+  <script>
+    // 获取到HTML元素对应的DOM对象
+    let imageEle = document.querySelector(".image");
+
+    // 增
+    imageEle.title = "热图";
+
+    // 改
+    imageEle.title = "非常热图";
+
+    // 查
+    console.log(imageEle.title);
+  </script>
+
+  <!--
+    5、操作attribute属性还是操作property属性的总结
+    首先我们要知道操作attribute属性的JS API是在直接操作HTML元素的属性，而操作property属性的JS API是在直接操作HTML元素对应DOM对象的属性、但是最终也会转换成对HTML元素attribute属性的操作，它们是相通的
+    * （1）如果我们想操作HTML元素的标准attribute属性，建议通过操作property的方式来实现，而不要直接通过操作attribute属性的方式来实现，因为一来API更简洁，二来属性值的真实类型可以拿到、方便我们做开发
+    * （2）如果我们想操作HTML元素的非标准attribute属性，那就只能通过操作attribute属性的方式来实现，因为property属性只是针对标准attribute属性的
+    * （3）有的API只有操作attribute属性的方式才有，那也只能通过操作attribute属性的方式来实现
+  -->
+</body>
+
+</html>
