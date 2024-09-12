@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .h2Ele {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <h1>我是h1元素</h1>
+  </div>
+
+  <script>
+    // 1、创建元素对应的DOM对象（我们知道本质上是在创建DOM对象，但在API层面上看是在创建HTML元素）
+    let h2Ele = document.createElement("h2");
+    h2Ele.classList = ["h2Ele"];
+    h2Ele.textContent = "我是h2元素";
+
+    // 2、把DOM对象插入到DOMTree中（我们知道本质上是把DOM对象插入到DOMTree中，但在API层面上看是把HTML元素插入到ElementTree中）
+    let boxEle = document.querySelector(".box");
+    // （1）append子元素：插入到boxEle所有子元素的最后面，可批量
+    boxEle.append(h2Ele);
+    // （2）prepend子元素：插入到boxEle所有子元素的最前面，可批量
+    // 注意：因为DOM对象和HTML元素是一对一的，所以同一个DOM对象只能在DOM Tree中出现一次，否则和HTML Tree就没法一一对应了，就算你有两个一模一样的DOM对象，也只能复制一份分别插入，而不同插入同一个DOM对象。所以如果像下面这样直接“boxEle.prepend(h2Ele);”，因为“boxEle.append(h2Ele);”和“boxEle.prepend(h2Ele);”插入的是同一个h2Ele，所以只有prepend会生效，append就被覆盖掉了。如果想前后都生效，那就只能创建一个跟h2Ele一模一样的元素再prepend（稍后我们再说元素的拷贝，这里先手动创建一个全新的DOM对象）
+    // boxEle.prepend(h2Ele);
+    let h2Ele1 = document.createElement("h2");
+    h2Ele1.classList = ["h2Ele"];
+    h2Ele1.textContent = "我是h2元素";
+    boxEle.prepend(h2Ele1);
+    // （3）after兄弟元素：插入到boxEle的后面，可批量
+    let h2Ele2 = document.createElement("h2");
+    h2Ele2.classList = ["h2Ele"];
+    h2Ele2.textContent = "我是h2元素";
+    boxEle.after(h2Ele2);
+    // （4）before兄弟元素：插入到boxEle的前面，可批量
+    let h2Ele3 = document.createElement("h2");
+    h2Ele3.classList = ["h2Ele"];
+    h2Ele3.textContent = "我是h2元素";
+    boxEle.before(h2Ele3);
+    // （5）replaceWith当前元素：把boxEle替换掉，可批量
+    let h2Ele4 = document.createElement("h2");
+    h2Ele4.classList = ["h2Ele"];
+    h2Ele4.textContent = "我是被替换的h2元素";
+    boxEle.replaceWith(h2Ele4);
+  </script>
+</body>
+
+</html>
