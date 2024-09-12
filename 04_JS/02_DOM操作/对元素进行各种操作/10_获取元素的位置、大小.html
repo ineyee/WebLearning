@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+
+      background-color: red;
+
+      overflow: scroll;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    科比·比恩·布莱恩特[注 1]（英语：Kobe Bean
+    Bryant，1978年8月23日—2020年1月26日）是前美国职业篮球运动员，主打得分后卫位置。科比1996年直接从高中进入NBA，并效力洛杉矶湖人20年，被认为是史上最伟大的篮球运动员之一[1][2][3][4]。科比替洛杉矶湖人赢得5座NBA总冠军，并入选18次全明星赛、15次NBA最佳阵容、12次NBA最佳防守阵容，以及票选为2008年NBA最有价值球员与2次NBA总决赛最有价值球员。科比共获得NBA得分王两次，并位居联盟生涯常规赛得分第四名和生涯季后赛得分第四名。
+  </div>
+
+  <script>
+    const boxELe = document.querySelector(".box");
+
+    // 元素左上角相对于父元素左上角的偏移量
+    console.log(boxELe.offsetLeft); // 8px
+    console.log(boxELe.offsetTop); // 8px
+
+    // 元素的宽高
+    console.log(boxELe.offsetWidth); // 100px
+    console.log(boxELe.offsetHeight); // 100px
+
+    // 元素可滚动时、已经滚动出去的偏移量，类似于iOS里的scrollOffset
+    console.log(boxELe.scrollLeft); // 0px
+    console.log(boxELe.scrollTop); // 0px
+
+    // 元素可滚动时、可滚动的总宽高，类似于iOS里的contentSize
+    console.log(boxELe.scrollWidth); // 100px
+    console.log(boxELe.scrollHeight); // 900px
+
+  </script>
+</body>
+
+</html>
