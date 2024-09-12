@@ -59,13 +59,15 @@
   </script>
 
   <!--
-    3、property属性：我们已经知道每个HTML元素都有对应的DOM对象，其实浏览器还会把HTML元素身上的标准attribute属性（非标准的不会）一一对应地生成同名的property属性（class的名字比较特殊我们后面详说）挂在对应的DOM对象身上，所以挂在DOM对象身上的属性，我们称之为property属性，也就是说property属性是针对HTML元素对应的DOM对象来说的
+    property属性是用来简化标准attribute属性的操作
 
-    如下面的class、id、style、title、src、alt等标准attribute属性，在DOM对象身上都会有对应的property属性
-    而data-format等非标准attribute属性，在DOM对象身上则没有对应的property属性
+    3、property属性：我们已经知道每个HTML元素都有对应的DOM对象，其实浏览器还会把HTML元素身上的标准attribute属性（非标准的不会）一一对应地生成同名的property属性（class的名字比较特殊）挂在对应的DOM对象身上，所以挂在DOM对象身上的属性，我们称之为property属性，也就是说property属性是针对HTML元素对应的DOM对象来说的
+
+    如下面的class、id、style、title、src、alt等标准attribute属性，在DOM对象身上都会有对应的property属
+
+    注意：HTML元素的class属性，对应DOM对象的属性名叫className，这是历史遗留问题，一开始不允许直接拿关键字作为DOM对象的属性名，因为class关键字是用来定义类的，其它的名字都是同名的
   -->
-  <img class="image" id="hot_image" style="background-color: red;" src="https://picsum.photos/100" alt=""
-    data-format="png">
+  <img class="image" id="hot_image" style="background-color: red;" src="https://picsum.photos/100" alt="">
 
   <!--
     4、property属性的相关操作：
@@ -92,11 +94,32 @@
   </script>
 
   <!--
-    5、操作attribute属性还是操作property属性的总结
-    首先我们要知道操作attribute属性的JS API是在直接操作HTML元素的属性，而操作property属性的JS API是在直接操作HTML元素对应DOM对象的属性、但是最终也会转换成对HTML元素attribute属性的操作，它们是相通的
-    * （1）如果我们想操作HTML元素的标准attribute属性，建议通过操作property的方式来实现，而不要直接通过操作attribute属性的方式来实现，因为一来API更简洁，二来属性值的真实类型可以拿到、方便我们做开发
-    * （2）如果我们想操作HTML元素的非标准attribute属性，那就只能通过操作attribute属性的方式来实现，因为property属性只是针对标准attribute属性的
-    * （3）有的API只有操作attribute属性的方式才有，那也只能通过操作attribute属性的方式来实现
+    dataset自定义属性是用来简化非标准attribute属性的操作
+
+    5、dataset自定义属性：元素的标准attribute属性对应于DOM对象的property属性，而元素的非标准attribute属性则对应于DOM对象的dataset自定义属性，也就是说dataset自定义属性也是针对HTML元素对应的DOM对象来说的，dataset是个字典或对象
+
+    如下面的data-name、data-age、data-height等非标准attribute属性，在DOM对象身上都会存储在dataset这个字典或对象里
+  -->
+  <div class="box" data-name="ineyee" data-age="18" data-height="180"></div>
+
+  <!--
+    6、dataset自定义属性的相关操作：
+      * 增删改查跟字典或对象的操作一模一样
+  -->
+  <script>
+    let boxEle = document.querySelector(".box")
+
+    // 接下来就可以通过这个元素的dataset属性拿到我们想要的所有数据了
+    console.log(boxEle.dataset["name"]); // ineyee，字典式写法
+    console.log(boxEle.dataset.age); // 18，对象式写法
+  </script>
+
+  <!--
+    7、操作attribute属性、还是操作property属性、还是操作dataset自定义属性的总结
+    首先我们要知道操作attribute属性的JS API是在直接操作HTML元素的属性，而操作property属性或操作dataset自定义属性的JS API是在直接操作HTML元素对应DOM对象的属性、但是最终也会转换成对HTML元素attribute属性的操作，它们是相通的
+    * （1）如果我们想操作HTML元素的标准attribute属性，建议优先通过操作property属性的方式来实现，而不要直接通过操作attribute属性的方式来实现，因为一来API更简洁，二来属性值的真实类型可以拿到、方便我们做开发
+    * （2）如果我们想操作HTML元素的非标准attribute属性，建议优先通过操作dataset自定义属性的方式来实现，而不要直接通过操作attribute属性的方式来实现，因为API更简洁
+    * （3）除此之外，有的API只有直接操作attribute属性的方式才有，那就只能通过操作attribute属性的方式来实现
   -->
 </body>
 
