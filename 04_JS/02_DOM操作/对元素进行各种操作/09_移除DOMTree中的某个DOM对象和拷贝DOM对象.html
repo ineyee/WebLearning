@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="box">
+    <h1>我是h1元素</h1>
+  </div>
+
+  <script>
+    // 1、移除DOMTree中的某个DOM对象，会连同子元素一起移除（我们知道本质上是在移除DOM对象，但在API层面上看是在移除HTML元素）
+    let boxEle = document.querySelector(".box");
+    boxEle.remove();
+
+    // 2、拷贝DOM对象，创建DOM对象的另一种方式（我们知道本质上是在拷贝DOM对象，但在API层面上看是在拷贝HTML元素）
+    // （1）浅拷贝，只会拷贝当前元素本身
+    let copiedBoxEle = boxEle.cloneNode();
+    console.log(copiedBoxEle);
+    // （2）深拷贝，会连同子元素一起拷贝
+    let deepCopiedBoxEle = boxEle.cloneNode(true);
+    console.log(deepCopiedBoxEle);
+  </script>
+</body>
+
+</html>
