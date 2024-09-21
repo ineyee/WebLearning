@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    方式1：直接在HTML代码里进行监听（非常不推荐）
+  -->
+  <button class="button1" onclick="console.log('按钮1');">按钮1</button>
+  <button class="button2">按钮2</button>
+  <button class="button3">按钮3</button>
+
+  <script>
+    // 方式2：通过HTML元素对应DOM对象的on事件来监听
+    // 优势：写起来简单
+    // 劣势：不能取消监听
+    let button2 = document.querySelector(".button2");
+    button2.onclick = function () {
+      console.log("按钮2");
+    };
+
+    // 方式3：通过HTML元素对应DOM对象的addEventListener来监听
+    // 优势：能取消监听
+    // 劣势：写起来麻烦点
+    let button3 = document.querySelector(".button3");
+    button3.addEventListener("click", function () {
+      console.log("按钮3");
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .outer_box {
+      width: 200px;
+      height: 200px;
+
+      background-color: red;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .inner_box {
+      width: 100px;
+      height: 100px;
+
+      background-color: orange;
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    1、JS里的事件
+  -->
+
+  <!--
+    2、JS里的响应者和响应者数组
+    * JS里的响应者和Flutter里的比较像，所有的HTML元素都会生成对应的DOM对象，所有的DOM对象都会被渲染到屏幕上，因此可以说“所有的HTML元素”都能传递和响应事件（当然实际上是DOM对象在传递和响应事件、后面为了描述方便就直接叫HTML元素了、自己切换成DOM对象就行了，也只有那些非隐藏的、真正插入了DOM Tree的对象才行），我们把它们称之为响应者、也就是说【JS里所有的HTML元素都是响应者】
+    * 注意这里的事件传递是指下面寻找第一响应者阶段父视图通过hitTest方法把事件（准确地说是点击的位置）传递给子视图，这里的事件响应是指下面事件响应阶段HTML元素通过各种on事件来响应事件
+
+    * JS里的响应者数组和Flutter里的比较像，JS里的响应者数组是指众多的响应者会按顺序放在一个数组里，当前响应者在数组里的下一个元素就是下一个响应者，这个数组的形成时机是hitTest的时候（这里的形成时机是指数组把响应者全都add进去，不是指数组本身的创建），【但凡实现了相应事件的响应者都会被放进响应者数组里】
+  -->
+
+  <!--
+    3、JS里的寻找第一响应者、事件分发、事件响应
+    那在JS里“鼠标点击屏幕后，发生了什么”，答案和Flutter基本一样，还是分三步：
+    第一步：寻找第一响应者
+      JS里寻找第一响应者的过程和Flutter里几乎一模一样，都是一个递归调用hitTest的过程——click事件发生后，就从根视图的hitTest方法开始，倒序递归调用子视图的hitTest方法，如果判断到触摸的点在某个视图内部，就把它放进响应者数组里，【位于视图层级上方的视图会被优先放进响应者数组，最终响应者数组的第一个元素就会成为第一响应者】
+    第二步：事件分发——JS里专业术语叫事件捕获
+      JS里是事件分发——【会遍历响应者数组里所有的响应者，按顺序把触摸事件分发给所有的响应者】
+    第三步：事件响应——JS里专业术语叫事件冒泡
+      JS里因为是一次性给响应者数组里所有的响应者都分发了事件，【所以只要是实现了相应事件的HTML元素都会响应事件】，没实现的就不响应，不存在往下一个响应者传递这么一说，【只不过是第一响应者会第一个响应、第二个响应者会第二个响应等等】
+  -->
+  <!--
+    下面的例子中：
+    ——————————————————————
+    innerBox、outerBox、body都是响应者
+    同时因为它们仨都实现了onclick事件，所以当我们点击innerBox时它们都会被加入到响应者数组里
+    ——————————————————————
+    因为innerBox在视图层级的最上面，所以它是响应者数组的第一个元素——即第一响应者
+    不过它们仨都被分发了onclick事件，所以都会响应事件
+    只不过是innerBox先响应、outerBox后响应、body最后响应
+    ——————————————————————
+  -->
+  <div class="outer_box">
+    <div class="inner_box">
+    </div>
+  </div>
+  <script>
+    let body = document.body;
+    let outerBox = document.querySelector(".outer_box");
+    let innerBox = document.querySelector(".inner_box");
+    body.onclick = function () {
+      console.log("点击了body"); // 最后打印
+    };
+    outerBox.onclick = function () {
+      console.log("点击了outerBox"); // 第二打印
+    };
+    innerBox.onclick = function () {
+      console.log("点击了innerBox"); // 最先打印
+    };
+  </script>
+</body>
+
+</html>
