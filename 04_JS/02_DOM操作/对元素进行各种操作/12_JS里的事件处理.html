@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    .outer {
+    .outer_box {
       width: 100px;
       height: 100px;
 
@@ -17,14 +17,14 @@
       align-items: center;
     }
 
-    .inner {
+    .inner_box {
       width: 50px;
       height: 50px;
 
       background-color: orange;
     }
 
-    .outer_box {
+    .outer_box1 {
       width: 200px;
       height: 200px;
 
@@ -35,7 +35,25 @@
       align-items: center;
     }
 
-    .inner_box {
+    .inner_box1 {
+      width: 100px;
+      height: 100px;
+
+      background-color: green;
+    }
+
+    .outer_box2 {
+      width: 200px;
+      height: 200px;
+
+      background-color: yellow;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .inner_box2 {
       width: 100px;
       height: 100px;
 
@@ -60,18 +78,18 @@
     当我们点击在inner上时，target自然是inner，但是因为inner、outer都在响应者数组里、它们俩都会被分发事件，所以在inner的click回调函数里、currentTarget就是inner，在outer的click回调函数里、currentTarget就是outer
     ——————————————————————
   -->
-  <div class="outer">
-    <div class="inner">
+  <div class="outer_box">
+    <div class="inner_box">
     </div>
   </div>
   <script>
-    let outer = document.querySelector(".outer");
-    let inner = document.querySelector(".inner");
-    outer.onclick = function (event) {
-      console.log("点击了outer", event.type, event.target, event.currentTarget); // 点击了outer, click
+    let outerBox = document.querySelector(".outer_box");
+    let innerBox = document.querySelector(".inner_box");
+    outerBox.onclick = function (event) {
+      console.log("点击了outerBox", event.type, event.target, event.currentTarget); // 点击了outerBox, click
     };
-    inner.onclick = function (event) {
-      console.log("点击了inner", event.type, event.target, event.currentTarget); // 点击了inner, click
+    innerBox.onclick = function (event) {
+      console.log("点击了innerBox", event.type, event.target, event.currentTarget); // 点击了innerBox, click
     };
   </script>
 
@@ -104,18 +122,54 @@
     只不过是innerBox先响应、outerBox后响应
     ——————————————————————
   -->
-  <div class="outer_box">
-    <div class="inner_box">
+  <div class="outer_box1">
+    <div class="inner_box1">
     </div>
   </div>
   <script>
-    let outerBox = document.querySelector(".outer_box");
-    let innerBox = document.querySelector(".inner_box");
-    outerBox.onclick = function () {
+    let outerBox1 = document.querySelector(".outer_box1");
+    let innerBox1 = document.querySelector(".inner_box1");
+    outerBox1.onclick = function () {
       console.log("点击了outerBox"); // 后打印
     };
-    innerBox.onclick = function () {
+    innerBox1.onclick = function () {
       console.log("点击了innerBox"); // 先打印
+    };
+  </script>
+
+  <!--
+    4、阻止默认行为和事件传递
+  -->
+  <!--
+    （1）阻止默认行为
+    比如a元素有它默认的点击跳转行为，但是如果我们想自定义对它的点击行为，那给它添加了点击事件之后，会先触发我们的的自定义事件，然后再触发它默认的点击跳转行为，此时如果我们想阻止它默认的点击跳转行为，可以用“event.preventDefault()”函数来实现
+  -->
+  <a class="" href="https://baidu.com">百度一下</a>
+  <script>
+    let aEle = document.querySelector("a");
+    aEle.onclick = function () {
+      // 阻止元素自带的默认行为
+      event.preventDefault();
+      console.log("点击了a元素");
+    };
+  </script>
+  <!--
+    （2）阻止事件分发
+    默认情况下，一个点击事件发生时，很多元素都会被添加到响应者数组里，同时响应者数组里所有的响应者都会被分发事件，但是如果我们不希望所有的响应者都响应事件，那就可以阻止事件分发，只需要在你希望响应事件的最后一个响应者的事件回调函数里调用一下“event.stopPropagation()”函数就可以了，这个函数的本质就是阻止事件分发
+  -->
+  <div class="outer_box2">
+    <div class="inner_box2">
+    </div>
+  </div>
+  <script>
+    let outerBox2 = document.querySelector(".outer_box2");
+    let innerBox2 = document.querySelector(".inner_box2");
+    outerBox2.onclick = function () {
+      console.log("点击了outerBox1"); // 点击innerBox时不会打印，被拦截了
+    };
+    innerBox2.onclick = function () {
+      event.stopPropagation();
+      console.log("点击了innerBox1"); // 点击innerBox时会打印
     };
   </script>
 </body>
