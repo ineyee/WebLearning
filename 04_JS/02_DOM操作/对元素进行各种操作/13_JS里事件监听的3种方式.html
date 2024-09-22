@@ -31,6 +31,12 @@
     button3.addEventListener("click", function () {
       console.log("按钮3");
     });
+
+    let callback = function () {
+      console.log("还是按钮3，但是这个回调响应一次就会被移除掉");
+      button3.removeEventListener("click", callback);
+    }
+    button3.addEventListener("click", callback);
   </script>
 </body>
 
