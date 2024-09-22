@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .tab_bar {
+      width: 168px;
+
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .tab_bar__tab {
+      background-color: white;
+
+      color: black;
+    }
+
+    .tab_bar__tab--active {
+      background-color: red;
+
+      color: yellow;
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    我们做一个实际开发中很常见的综合Demo：有一个自定义tabBar——UIView，tabBar里有几个tab——UIButton，点击哪个tab就选中哪个tab
+
+    我们先回想一下在iOS和Flutter里的实现方法：
+    * 1、先搞一个tabBar，tabBar里添加几个tab、并给每个tab都添加上点击事件
+    * 2、点击某个item时，取消所有item的选中状态，并选中点击的item
+    * 3、可以根据tab的下标来判断到底是点击了什么内容
+
+    JS里能沿用这套实现方法吗？
+    * 1、第一步是可以的
+    * 2、第二步也是可以的
+    * 3、第三步也是可以的（一般都是通过data-xxx自定义属性来做）
+
+    但是因为在JS里所有的HTML元素都是响应者、并且有event.target这么个东西存在，所以第一步里更常见的做法不是”给每个tab都添加上点击事件“，而是”只给tabBar添加点击事件，这样点击任何一个tab时都会触发tabBar的的点击事件（因为事件分发且默认不会拦截），我们在里面统一处理“，就不用给所有的tab都添加点击事件了，效率稍微高一点，相当于是把所有tab的点击事件代理给它们的父视图tabBar去处理了
+  -->
+  <div class="tab_bar">
+    <div class="tab_bar__tab" data-index="1">美食</div>
+    <div class="tab_bar__tab" data-index="2">酒店</div>
+    <div class="tab_bar__tab" data-index="3">旅游</div>
+    <div class="tab_bar__tab" data-index="4">加油站</div>
+  </div>
+
+  <script>
+    // 标准做法
+    // let itemList = document.querySelectorAll(".tab_bar__tab");
+    // itemList.forEach(function (item, index) {
+    //   item.onclick = function () {
+    //     // 取消所有item的选中状态
+    //     itemList.forEach(function (toCancelItem) {
+    //       toCancelItem.classList.remove("tab_bar__tab--active");
+    //     });
+
+    //     // 并选中点击的item
+    //     item.classList.add("tab_bar__tab--active");
+    //   };
+    // });
+
+    // 高效做法
+    let tabBar = document.querySelector(".tab_bar");
+    tabBar.onclick = function (event) {
+      // 点击到tabBar本身上时，我们不做处理，只有点击到tab时，才做处理
+      if (event.target !== tabBar) {
+        // 取消所有item的选中状态
+        for (let index = 0; index < tabBar.children.length; index++) {
+          tabBar.children[index].classList.remove("tab_bar__tab--active");
+        }
+
+        // 并选中点击的item
+        event.target.classList.add("tab_bar__tab--active");
+
+        // 根据tab的下标来判断到底是点击了什么内容
+        switch (Number(event.target.dataset.index)) {
+          case 1:
+            console.log("请求美食接口");
+            break;
+          case 2:
+            console.log("请求酒店接口");
+            break;
+          case 3:
+            console.log("请求旅游接口");
+            break;
+          case 4:
+            console.log("请求加油站接口");
+            break;
+        }
+      }
+    };
+  </script>
+</body>
+
+</html>
