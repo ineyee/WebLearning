@@ -6,11 +6,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
+    .outer {
+      width: 100px;
+      height: 100px;
+
+      background-color: red;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .inner {
+      width: 50px;
+      height: 50px;
+
+      background-color: orange;
+    }
+
     .outer_box {
       width: 200px;
       height: 200px;
 
-      background-color: red;
+      background-color: yellow;
 
       display: flex;
       justify-content: center;
@@ -21,7 +39,7 @@
       width: 100px;
       height: 100px;
 
-      background-color: orange;
+      background-color: green;
     }
   </style>
 </head>
@@ -29,7 +47,33 @@
 <body>
   <!--
     1、JS里的事件
+    JS里的事件和Flutter里的比较像，它们内部存储着触摸屏幕的时间、位置、type、target、currentTarget等，实际开发中比较常用的就是：
+    （1）type：当前事件的类型
+    （2）target：事件真正发生在了哪个元素身上，这个结果是确定的、比较简单
+    （3）currentTarget：触发的是哪个元素的事件回调函数，这个结果是不确定的、在不同元素的事件回调函数里有不同的结果
   -->
+  <!--
+    下面的例子中：
+    ——————————————————————
+    当我们点击在outer上时，target自然是outer，同时因为只有outer在响应者数组里、只有它会被分发事件，所以在outer的click回调函数里、currentTarget就是outer
+    ——————————————————————
+    当我们点击在inner上时，target自然是inner，但是因为inner、outer都在响应者数组里、它们俩都会被分发事件，所以在inner的click回调函数里、currentTarget就是inner，在outer的click回调函数里、currentTarget就是outer
+    ——————————————————————
+  -->
+  <div class="outer">
+    <div class="inner">
+    </div>
+  </div>
+  <script>
+    let outer = document.querySelector(".outer");
+    let inner = document.querySelector(".inner");
+    outer.onclick = function (event) {
+      console.log("点击了outer", event.type, event.target, event.currentTarget); // 点击了outer, click
+    };
+    inner.onclick = function (event) {
+      console.log("点击了inner", event.type, event.target, event.currentTarget); // 点击了inner, click
+    };
+  </script>
 
   <!--
     2、JS里的响应者和响应者数组
@@ -52,12 +96,12 @@
   <!--
     下面的例子中：
     ——————————————————————
-    innerBox、outerBox、body都是响应者
-    同时因为它们仨都实现了onclick事件，所以当我们点击innerBox时它们都会被加入到响应者数组里
+    innerBox、outerBox都是响应者
+    同时因为它们俩都实现了onclick事件，所以当我们点击innerBox时它们都会被加入到响应者数组里
     ——————————————————————
     因为innerBox在视图层级的最上面，所以它是响应者数组的第一个元素——即第一响应者
-    不过它们仨都被分发了onclick事件，所以都会响应事件
-    只不过是innerBox先响应、outerBox后响应、body最后响应
+    不过它们俩都被分发了onclick事件，所以都会响应事件
+    只不过是innerBox先响应、outerBox后响应
     ——————————————————————
   -->
   <div class="outer_box">
@@ -65,17 +109,13 @@
     </div>
   </div>
   <script>
-    let body = document.body;
     let outerBox = document.querySelector(".outer_box");
     let innerBox = document.querySelector(".inner_box");
-    body.onclick = function () {
-      console.log("点击了body"); // 最后打印
-    };
     outerBox.onclick = function () {
-      console.log("点击了outerBox"); // 第二打印
+      console.log("点击了outerBox"); // 后打印
     };
     innerBox.onclick = function () {
-      console.log("点击了innerBox"); // 最先打印
+      console.log("点击了innerBox"); // 先打印
     };
   </script>
 </body>
