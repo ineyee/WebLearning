@@ -8,9 +8,8 @@
 </head>
 
 <body>
-  <input type="text">
   <!--
-    常见的键盘事件（键盘事件一般应用在input元素或textarea元素身上，当然也可以应用在document对象上）：
+    常见的键盘事件（键盘事件一般应用在input元素或textarea元素身上，当然也可以应用在document对象身上）：
     ———————————第一组———————————
     * onkeydown：某个键被按下（按下不抬起会一直触发回调）
     * onkeyup：某个键被抬起
@@ -19,6 +18,7 @@
     * key：按下键的内容
     这个根据具体情况使用，如果需要区分大小写这类，那就只能用key，如果不需要区分如打游戏按w键发技能就不需要区分大小写，那用code更方便
   -->
+  <input type="text">
   <script>
     let inputEle = document.querySelector("input");
     inputEle.onkeydown = function () {

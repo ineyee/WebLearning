@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    常见的文档（网页）事件（文档（网页）事件一般应用在document对象或window对象身上）：
+    ———————————第一组———————————
+    * DOMContentLoaded（没有on事件，只能通过addEventListener来监听）：DOM Tree加载完毕了，即HTML Tree、DOM Tree加载完毕了，但是CSS Tree、Render Tree、图片等资源尚未加载
+    * onload：文档（网页）彻底加载完毕了，即HTML Tree、DOM Tree、CSS Tree、Render Tree、图片等资源全都加载完毕了
+    ———————————第二组———————————
+    * resize：文档（网页）大小发生改变时触发
+  -->
+  <img src="https://picsum.photos/300/200" alt="">
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      console.log("DOMContentLoaded");
+
+      let imgEle = document.querySelector("img");
+      // 0 0，因为此时图片还没加载完，还没撑起img元素来
+      console.log(imgEle.offsetWidth, imgEle.offsetHeight);
+    });
+
+    window.onload = function () {
+      console.log("onload");
+
+      let imgEle = document.querySelector("img");
+      // 300 200，因为此时图片已经加载完，已经撑起img元素了
+      console.log(imgEle.offsetWidth, imgEle.offsetHeight);
+    };
+
+    window.onresize = function () {
+      console.log("网页大小发生了变化", window.innerWidth, window.innerHeight);
+    };
+  </script>
+</body>
+
+</html>
