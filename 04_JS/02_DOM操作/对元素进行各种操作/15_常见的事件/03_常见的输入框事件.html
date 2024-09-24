@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text">
+  <!--
+    常见的输入框事件（输入框事件一般应用在input元素或textarea元素身上）：
+    ———————————第一组———————————
+    * onfocus：获取焦点时触发
+    * onblur：失去焦点时触发
+    ———————————第二组———————————
+    * oninput：输入内容改变中时触发
+    * onchange：输入内容改变结束时触发（通常都是因为失去焦点而结束）
+    在其它语言里我们通常都是在“输入内容改变中时不断地记录最新的输入内容，然后等输入框失去焦点时（点击键盘右下角按钮使得失去焦点或点击自定义按钮主动失去焦点）拿记录下来的最新的输入内容去做事情”，JS里相当于输入框失去焦点有两个回调了，onblur和onchange都行
+  -->
+  <script>
+    let inputEle = document.querySelector("input");
+
+    // 第一组
+    inputEle.onfocus = function () {
+      console.log("获取焦点");
+    };
+    inputEle.onblur = function () {
+      console.log("失去焦点，可以上传了", [inputEle.value]);
+    };
+
+    // 第二组
+    inputEle.oninput = function () {
+      console.log("输入内容改变中", inputEle.value);
+    };
+    inputEle.onchange = function () {
+      console.log("输入内容改变结束，可以上传了", [inputEle.value]);
+    };
+  </script>
+</body>
+
+</html>
