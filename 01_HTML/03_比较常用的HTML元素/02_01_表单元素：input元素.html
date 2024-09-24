@@ -10,8 +10,8 @@
 <body>
   <!--
     一、input元素可以用来实现很多控件，主要由它的type属性决定：
-    1、text（默认）：单行文本输入框——类似于UITextField
-    2、password：单行密文输入框——类似于UITextField
+    【重要】1、text（默认）：单行文本输入框——类似于UITextField
+    【重要】2、password：单行密文输入框——类似于UITextField
     ——————————————————————
     3、button：按钮——类似于UIButton
     4、submit：定义提交按钮，点击后会把处于同一个form父元素下所有的表单值提交到服务器——类似于UIButton
@@ -61,13 +61,13 @@
 
   <!--
     二、input元素的其它属性：
-    1、placeholder：type=text|password时，占位文本
-    2、autofocus：type=text|password时，是否默认选中
+    【重要】1、placeholder：type=text|password时，占位文本
+    【重要】2、autofocus：type=text|password时，是否默认选中
     3、checked：type=radio|checkbox时，是否默认选中
-    4、readonly：可选中可交互，但是不能输入
-    5、disabled：不可选中不可交互
+    【重要】4、readonly：可选中可交互，但是不能输入
+    【重要】5、disabled：不可选中不可交互
     6、name：提交数据给服务器时，params的key，如account、password这种东西，这样我们在点击提交按钮时，就会自动找到name所对应元素的value属性的值，跟这里的name代表的key拼接起来传递给服务器
-    7、value：input元素的内容
+    【重要】7、value：input元素的内容
   -->
   <div>
     <input type="text" placeholder="请输入账号">
@@ -87,7 +87,7 @@
   <br>
 
   <!--
-    三、lable元素 + input元素使用范式
+    【重要】三、lable元素 + input元素使用范式
     label元素经常用来跟input元素组合使用，用来表示input的标题
     这样组合后label就可以跟input绑定在一起，用户点击lable就可以选中对应的input了，同时点击输入框也可以弹出浏览器记住的账号密码
   -->

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text">
+  <!--
+    常见的键盘事件：
+    ———————————第一组———————————
+    * onkeydown：某个键被按下（按下不抬起会一直触发回调）
+    * onkeyup：某个键被抬起
+    ———————————第二组———————————
+    * event.code：按下键的编码
+    * key：按下键的内容
+    这个根据具体情况使用，如果需要区分大小写这类，那就只能用key，如果不需要区分如打游戏按w键发技能就不需要区分大小写，那用code更方便
+  -->
+  <script>
+    let inputEle = document.querySelector("input");
+    inputEle.onkeydown = function () {
+      console.log("按下了");
+    };
+    inputEle.onkeyup = function (event) {
+      console.log("抬起了", event.code, event.key);
+      /*
+        比如：
+        Digit1 1
+        KeyW W
+        KeyW w
+      */
+    };
+  </script>
+</body>
+
+</html>
