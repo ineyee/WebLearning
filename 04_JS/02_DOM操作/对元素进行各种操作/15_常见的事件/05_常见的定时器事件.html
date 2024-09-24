@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    常见的定时器事件（定时器事件一般应用在window对象身上）：
+    * setTimeout：延迟执行某个函数
+    * clearTimeout：取消timeout定时器
+    * setInterval：每隔一定的时间就执行某个函数
+    * clearInterval：取消interval定时器
+  -->
+  <button class="timeout">取消timeout定时器</button>
+  <button class="interval">取消interval定时器</button>
+  <script>
+    // setTimeout、clearTimeout
+    let timeoutTimerId = window.setTimeout(function () {
+      console.log("延迟3s后执行");
+    }, 3000);
+
+    let timeoutTimerButton = document.querySelector(".timeout");
+    timeoutTimerButton.onclick = function () {
+      clearTimeout(timeoutTimerId);
+    };
+
+    // setInterval、clearInterval
+    let intervalTimerId = window.setInterval(function () {
+      console.log("每隔3s执行");
+    }, 3000);
+
+    let intervalTimerButton = document.querySelector(".interval");
+    intervalTimerButton.onclick = function () {
+      clearInterval(intervalTimerId);
+    };
+  </script>
+</body>
+
+</html>
