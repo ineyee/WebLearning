@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .red_box {
+      width: 200px;
+      height: 200px;
+
+      background-color: red;
+    }
+
+    .orange_box {
+      width: 200px;
+      height: 200px;
+
+      background-color: orange;
+    }
+
+    .tab_bar {
+      width: 168px;
+
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .tab_bar__tab {
+      background-color: white;
+
+      color: black;
+    }
+
+    .tab_bar__tab--active {
+      background-color: red;
+
+      color: yellow;
+    }
+  </style>
+</head>
+
+<body>
+  <!--
+    常见的鼠标事件（当网页运行在移动设备上时，鼠标指的就是手指）：
+    ———————————第一组像是原始指针事件———————————
+    * mousedown：点下去
+    * mouseup：抬起来
+    * mousemove：移动
+    * touchcancel：触摸取消（通常在系统中断当前触摸操作——如来电或多点触控失效——时触发）
+    ———————————第二组像是手势———————————
+    * click：tap
+    * dblclick：doubleTap
+    * contextmenu：右键点击时触发
+    ———————————第三组是JS里特有的———————————
+    * mouseover、mouseout：鼠标进入或离开某个元素时触发（事件分发时，会分发给自己和父视图，所以自己和父视图都有机会响应事件）
+    * mouseenter、mouseleave：鼠标进入或离开某个元素时触发（事件分发时，只会分发给自己，所以只有自己有机会响应事件）
+    两者在应用上的主要区别就是“在实现经典Demo时，mouseover、mouseout既能用标准做法实现，也能用高效做法实现，因为子视图的父视图也会被分发事件，而mouseenter、mouseleave只能用标准做法实现，因为只有子视图会被分发事件”，所以实际开发中mouseover、mouseout用得更多
+  -->
+
+  <!-- 第一组像是原始指针事件 -->
+  <div class="red_box"></div>
+  <script>
+    let isDown = false;
+
+    let redBoxEle = document.querySelector(".red_box");
+
+    redBoxEle.onmousedown = function (event) {
+      isDown = true;
+
+      console.log("点下去的位置", event.offsetX, event.offsetY);
+    };
+    redBoxEle.onmouseup = function (event) {
+      isDown = false;
+
+      console.log("抬起来的位置", event.offsetX, event.offsetY);
+    };
+    redBoxEle.onmousemove = function (event) {
+      if (isDown) {
+        console.log("移动中的位置", event.offsetX, event.offsetY);
+      }
+    };
+    redBoxEle.ontouchcancel = function () {
+      if (isDown) {
+        console.log("触摸被取消了");
+      }
+    }
+  </script>
+
+  <!-- 第二组像是手势 -->
+  <div class="orange_box"></div>
+  <script>
+    let orangeBoxEle = document.querySelector(".orange_box");
+    orangeBoxEle.onclick = function () {
+      console.log("单击");
+    }
+    orangeBoxEle.ondblclick = function () {
+      console.log("双击");
+    }
+    orangeBoxEle.oncontextmenu = function (event) {
+      // 右键单击会默认打开一个小弹窗，如果想阻止掉也可以阻止掉
+      event.preventDefault();
+      console.log("右键");
+    }
+  </script>
+
+  <!-- 第三组是JS里特有的 -->
+  <div class="tab_bar">
+    <div class="tab_bar__tab" data-index="1">美食</div>
+    <div class="tab_bar__tab" data-index="2">酒店</div>
+    <div class="tab_bar__tab" data-index="3">旅游</div>
+    <div class="tab_bar__tab" data-index="4">加油站</div>
+  </div>
+
+  <script>
+    // mouseover、mouseout的标准做法
+    // let itemList = document.querySelectorAll(".tab_bar__tab");
+    // itemList.forEach(function (item, index) {
+    //   item.onmouseover = function () {
+    //     // 取消所有item的选中状态
+    //     itemList.forEach(function (toCancelItem) {
+    //       toCancelItem.classList.remove("tab_bar__tab--active");
+    //     });
+
+    //     // 并选中点击的item
+    //     item.classList.add("tab_bar__tab--active");
+    //   };
+
+    //   item.onmouseout = function () {
+    //     // 取消所有item的选中状态
+    //     itemList.forEach(function (toCancelItem) {
+    //       toCancelItem.classList.remove("tab_bar__tab--active");
+    //     });
+    //   }
+    // });
+
+    // mouseover、mouseout高效做法
+    let tabBar = document.querySelector(".tab_bar");
+    tabBar.onmouseover = function (event) {
+      // 点击到tabBar本身上时，我们不做处理，只有点击到tab时，才做处理
+      if (event.target !== tabBar) {
+        // 取消所有item的选中状态
+        for (let index = 0; index < tabBar.children.length; index++) {
+          tabBar.children[index].classList.remove("tab_bar__tab--active");
+        }
+
+        // 并选中点击的item
+        event.target.classList.add("tab_bar__tab--active");
+
+        // 根据tab的下标来判断到底是点击了什么内容
+        switch (Number(event.target.dataset.index)) {
+          case 1:
+            console.log("请求美食接口");
+            break;
+          case 2:
+            console.log("请求酒店接口");
+            break;
+          case 3:
+            console.log("请求旅游接口");
+            break;
+          case 4:
+            console.log("请求加油站接口");
+            break;
+        }
+      }
+    };
+    tabBar.onmouseout = function () {
+      // 取消所有item的选中状态
+      for (let index = 0; index < tabBar.children.length; index++) {
+        tabBar.children[index].classList.remove("tab_bar__tab--active");
+      }
+    }
+  </script>
+</body>
+
+</html>
