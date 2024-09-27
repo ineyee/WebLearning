@@ -197,7 +197,7 @@
           </li>
         </ul>
         <ul class="nav_wrapper__drop_menu__content__list">
-          <li class="drop_menu__content__item">
+          <li class="nav_wrapper__drop_menu__content__item">
             <a href="https://pvp.qq.com/match/kpl/kingproleague/index.html" target="_blank">KPL</a>
           </li>
           <li class="nav_wrapper__drop_menu__content__item">
@@ -887,9 +887,11 @@
 
   <!-- 用JS搞一下轮播图 -->
   <script>
+    let curIndex = 0;
     let imageList = document.querySelector(".main__news__cycle__img_list");
     let titleList = document.querySelector(".main__news__cycle__title_list");
 
+    // 手动轮播
     titleList.onmouseover = function (event) {
       if (event.target.parentElement.classList.contains("main__news__cycle__title_list__item")) {
         for (const element of Array.from(titleList.children)) {
@@ -901,8 +903,26 @@
         // 这里修改样式就比较适合通过修改内联样式style的方式
         imageList.style.transform = `translate(${index * -604}px, 0px)`;
         imageList.style.transition = "all 250ms ease-in-out";
+
+        curIndex = index;
       }
     };
+
+    // 自动轮播
+    setInterval(() => {
+      curIndex++;
+      if (curIndex >= titleList.children.length) {
+        curIndex = 0;
+      }
+
+      for (const element of Array.from(titleList.children)) {
+        element.classList.remove("main__news__news_center__title_list__item--active");
+      }
+      titleList.children[curIndex].classList.add("main__news__news_center__title_list__item--active");
+
+      imageList.style.transform = `translate(${curIndex * -604}px, 0px)`;
+      imageList.style.transition = "all 250ms ease-in-out";
+    }, 2500);
   </script>
 </body>
 
