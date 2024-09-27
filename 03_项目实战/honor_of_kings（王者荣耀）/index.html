@@ -887,7 +887,9 @@
 
   <!-- 用JS搞一下轮播图 -->
   <script>
+    let timer = null;
     let curIndex = 0;
+    let cycle = document.querySelector(".main__news__cycle");
     let imageList = document.querySelector(".main__news__cycle__img_list");
     let titleList = document.querySelector(".main__news__cycle__title_list");
 
@@ -909,20 +911,39 @@
     };
 
     // 自动轮播
-    setInterval(() => {
-      curIndex++;
-      if (curIndex >= titleList.children.length) {
-        curIndex = 0;
-      }
+    startTimer();
 
-      for (const element of Array.from(titleList.children)) {
-        element.classList.remove("main__news__news_center__title_list__item--active");
-      }
-      titleList.children[curIndex].classList.add("main__news__news_center__title_list__item--active");
+    // 启动或移除定时器
+    // 因为进入image和title都需要移除定时器，出来都需要启动定时器，所以索性交给它们的父视图来做
+    cycle.onmouseover = function () {
+      stopTimer();
+    };
+    cycle.onmouseleave = function () {
+      startTimer();
+    };
 
-      imageList.style.transform = `translate(${curIndex * -604}px, 0px)`;
-      imageList.style.transition = "all 250ms ease-in-out";
-    }, 2500);
+    // 启动定时器
+    function startTimer() {
+      timer = setInterval(() => {
+        curIndex++;
+        if (curIndex >= titleList.children.length) {
+          curIndex = 0;
+        }
+
+        for (const element of Array.from(titleList.children)) {
+          element.classList.remove("main__news__news_center__title_list__item--active");
+        }
+        titleList.children[curIndex].classList.add("main__news__news_center__title_list__item--active");
+
+        imageList.style.transform = `translate(${curIndex * -604}px, 0px)`;
+        imageList.style.transition = "all 250ms ease-in-out";
+      }, 2500);
+    }
+
+    // 移除定时器
+    function stopTimer() {
+      clearInterval(timer);
+    }
   </script>
 </body>
 
