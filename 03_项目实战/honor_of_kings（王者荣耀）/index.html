@@ -884,6 +884,26 @@
       <a class="social_media__list__item social_media__list__item__wechat" href="#"></a>
     </div>
   </div>
+
+  <!-- 用JS搞一下轮播图 -->
+  <script>
+    let imageList = document.querySelector(".main__news__cycle__img_list");
+    let titleList = document.querySelector(".main__news__cycle__title_list");
+
+    titleList.onmouseover = function (event) {
+      if (event.target.parentElement.classList.contains("main__news__cycle__title_list__item")) {
+        for (const element of Array.from(titleList.children)) {
+          element.classList.remove("main__news__news_center__title_list__item--active");
+        }
+        event.target.parentElement.classList.add("main__news__news_center__title_list__item--active");
+
+        let index = Array.from(titleList.children).indexOf(event.target.parentElement);
+        // 这里修改样式就比较适合通过修改内联样式style的方式
+        imageList.style.transform = `translate(${index * -604}px, 0px)`;
+        imageList.style.transition = "all 250ms ease-in-out";
+      }
+    };
+  </script>
 </body>
 
 </html>

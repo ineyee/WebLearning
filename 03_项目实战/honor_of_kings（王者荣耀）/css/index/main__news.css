@@ -13,6 +13,8 @@
 
   display: flex;
   flex-direction: column;
+
+  overflow: hidden;
 }
 
 .main__news__cycle__img_list {
@@ -20,8 +22,6 @@
   height: 298px;
 
   display: flex;
-
-  overflow: hidden;
 }
 
 .main__news__cycle__img_list__item {
@@ -56,7 +56,6 @@
   cursor: pointer;
 }
 
-.main__news__cycle__title_list__item>div:hover,
 .main__news__news_center__title_list__item--active>div>div {
   background-color: rgba(255, 255, 255, 0.15);
 

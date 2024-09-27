@@ -27,7 +27,7 @@
     let parentElement = bodyEle.parentElement;
     console.log(parentElement); // html
 
-    // 2、获取某个元素的所有子元素
+    // 2、获取某个元素的所有子元素，注意这个children不是一个数组，是一个非数组类型的集合，因此不能用for循环，需要用Array.from搞成数组再用
     let childEleList = bodyEle.children;
     console.log(childEleList); // [div, ul, script, script]
 
