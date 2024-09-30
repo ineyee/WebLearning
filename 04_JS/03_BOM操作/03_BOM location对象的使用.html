@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    location对象：用来操作浏览器地址栏里那个地址
+    1、属性
+    * href：整个url
+    * protocol：使用的协议
+    * host：域名或IP地址 = hostname + port
+    * pathname：路径
+    * search：参数，如【https://baidu.com?name=张三&age=18】的【?name=张三&age=18】
+    * hash：哈希值，如【https://baidu.com?name=张三&age=18#main】的【#main】
+    
+    2、方法
+    * assign()：在当前标签内打开一个新网页，浏览器上可以回退到打开之前的网页
+    * replace()：在当前标签内打开一个新网页，浏览器上不可以回退到打开之前的网页
+    * reload()：刷新当前网页
+  -->
+  <button>assign</button>
+  <button>replace</button>
+  <button>reload</button>
+  <script>
+    // 1、属性
+    console.log(location.href); // http://127.0.0.1:5500/04_JS/03_BOM%E6%93%8D%E4%BD%9C/03_BOM%20location%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%BD%BF%E7%94%A8.html
+    console.log(location.protocol); // http:
+    console.log(location.host); // 127.0.0.1:5500
+    console.log(location.hostname); // 127.0.0.1
+    console.log(location.port); // 5500
+    console.log(location.pathname); // /04_JS/03_BOM%E6%93%8D%E4%BD%9C/03_BOM%20location%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%BD%BF%E7%94%A8.html
+    console.log(location.search); // ?name=张三&age=18
+    console.log(location.hash); // #main
+
+    // 2、方法
+    let button = document.querySelectorAll("button");
+    button[0].onclick = function () {
+      location.assign("https://www.baidu.com");
+    };
+    button[1].onclick = function () {
+      location.replace("https://www.baidu.com");
+    };
+    button[2].onclick = function () {
+      location.reload();
+    };
+  </script>
+</body>
+
+</html>
