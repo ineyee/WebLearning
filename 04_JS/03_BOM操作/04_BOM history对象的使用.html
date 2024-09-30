@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    histor对象：用来操作浏览器的页面栈
+    1、属性
+    * length：页面栈里一共有几个页面
+    
+    2、方法
+    * pushState()：网页面栈里加入一个页面，浏览器上自带的返回和前进按钮可以回退到上一个页面
+    * replaceState()：网页面栈里加入一个页面，浏览器上自带的返回和前进按钮不可以回退到上一个页面
+    * back()：回退一个页面 = go(-1)
+    * forward()：前进一个页面 = go(1)
+    * go(N)：前进N个页面或后退N个页面
+
+    这里的history和上一篇的hash是VUE、React等框架实现路由管理的底层原理
+  -->
+  <button class="pushState">pushState</button>
+  <button class="back">back</button>
+  <button class="forward">forward</button>
+  <script>
+    // 1、属性
+    console.log(history.length); // 1
+
+    // 2、方法
+    let button1 = document.querySelector(".pushState");
+    button1.onclick = function () {
+      history.pushState("", "", "/hotNews");
+    };
+
+    let button2 = document.querySelector(".back");
+    button2.onclick = function () {
+      history.back();
+    };
+
+    let button3 = document.querySelector(".forward");
+    button3.onclick = function () {
+      history.forward();
+    };
+  </script>
+</body>
+
+</html>
