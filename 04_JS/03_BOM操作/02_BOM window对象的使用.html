@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    一、window对象和html元素的区别
+    在很多开发里，window都是它们的根视图，而在Web开发里html元素才是根视图，那在Web开发里，window和html是什么关系呢？
+    * 在Web开发里，window这个全局对象代表的是整个浏览器窗口（包含顶部的tab、中间的地址栏、再下面的网页等很多东西），负责管理浏览器级别的事件和功能，允许开发者与整个浏览器环境进行交互
+    * 而html元素则仅仅代表的是网页部分，它才是我们编写的网页的根视图，允许开发者与整个网页进行交互
+    * 两者的联系是：开发者可以通过window.document来访问html及其子元素。简单来说，window对象是顶级环境，html元素是网页内容的根节点
+  -->
+
+  <!--
+    二、window对象：提供了一些控制浏览器窗口的属性和方法
+    1、属性
+    * console属性：用来在控制台打印东西的一个对象，这个我们一直在用
+    * document属性：用来获取网页根节点的一个对象，这个我们一直在用
+    * innerWidth、innerHeight、scrollX、scrollY：前面“获取window对象的大小”已经说过了
+    * location：后面说
+    * history：后面说
+    * localStorage：后面说
+    
+    2、方法
+    * alert()方法：用来弹窗的一个方法，这个我们一直在用
+    * onload：文档（网页）彻底加载完毕了，前面“常见的文档（网页）事件”已经说过了
+    * resize：文档（网页）大小发生改变时触发，前面“常见的文档（网页）事件”已经说过了
+    * scrollTo()：前面“获取window对象的大小”已经说过了  
+    * setTimeout()、setInterval()方法：用来延迟执行和repeat执行的两个方法，这个我们一直在用
+    * addEventListener、removeEventListener：用来添加和移除事件监听，这个我们一直在用
+    * open()：用来打开一个新标签（即新窗口）
+    * haschange事件：当url地址后面的“#xxx”发生变化时会触发该事件，我们一般用这个来实现路由切换
+      比如刚开始的路由是“https://www.baidu.com#home”，后面改成了“https://www.baidu.com#profile”，就会触发这个事件
+  -->
+  <button>百度一下</button>
+  <script>
+    let button = document.querySelector("button");
+    button.onclick = function () {
+      window.open("https://www.baidu.com", "_blank");
+    };
+  </script>
+</body>
+
+</html>
