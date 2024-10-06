@@ -13,6 +13,7 @@
     ———————————第一组———————————
     * DOMContentLoaded（没有on事件，只能通过addEventListener来监听）：DOM Tree加载完毕了，即HTML Tree、DOM Tree加载完毕了，但是CSS Tree、Render Tree、图片等资源尚未加载
     * onload：文档（网页）彻底加载完毕了，即HTML Tree、DOM Tree、CSS Tree、Render Tree、图片等资源全都加载完毕了
+    * onvisibilitychange：文档（网页）的可见性发生了改变，如点击到了别的标签栏或者最小化了浏览器等，只有两个值都是字符串类型——visible、hidden
     ———————————第二组———————————
     * resize：文档（网页）大小发生改变时触发
   -->
@@ -33,6 +34,14 @@
       // 300 200，因为此时图片已经加载完，已经撑起img元素了
       console.log(imgEle.offsetWidth, imgEle.offsetHeight);
     };
+
+    document.onvisibilitychange = function () {
+      if (document.visibilityState === "visible") {
+        console.log("文档可见");
+      } else if (document.visibilityState === "hidden") {
+        console.log("文档不可见");
+      }
+    }
 
     window.onresize = function () {
       console.log("网页大小发生了变化", window.innerWidth, window.innerHeight);
