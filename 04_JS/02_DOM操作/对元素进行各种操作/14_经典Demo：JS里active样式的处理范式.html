@@ -41,7 +41,7 @@
     * 2、第二步也是可以的
     * 3、第三步也是可以的（一般都是通过data-xxx自定义属性来做）
 
-    但是因为在JS里默认情况下事件分发是分发给所有响应者的、而不仅仅是第一响应者，并且还有event.target这么个东西存在，所以第一步里更常见的做法不是”给每个tab都添加上点击事件“，而是”只给tabBar添加点击事件，这样点击任何一个tab时都会触发tabBar的的点击事件（因为事件分发且默认不会拦截），我们在里面统一处理“，就不用给所有的tab都添加点击事件了，效率稍微高一点，相当于是把所有tab的点击事件代理给它们的父视图tabBar去处理了
+    但是因为在JS里默认情况下事件分发是分发给所有响应者的、而不仅仅是第一响应者，并且还有event.target这么个东西存在，所以第一步里更常见的做法不是”给每个tab都添加上点击事件“，而是”只给tabBar添加点击事件，这样点击任何一个tab时都会触发tabBar的的点击事件（因为事件分发且默认不会拦截），我们在里面统一处理“，就不用给所有的tab都添加点击事件了，效率稍微高一点，相当于是把所有tab的点击事件代理给它们的父视图tabBar去处理了（当然也不是所有的场景都能用代理给父视图的方式来实现，总的来说能代理给父视图高效实现的话就用，有问题的话就还用标准做法实现）
   -->
   <div class="tab_bar">
     <div class="tab_bar__tab" data-index="1">美食</div>
@@ -69,7 +69,7 @@
     let tabBar = document.querySelector(".tab_bar");
     tabBar.onclick = function (event) {
       // 点击到tabBar本身上时，我们不做处理，只有点击到tab时，才做处理
-      if (event.target !== tabBar) {
+      if (event.target.classList.contains("tab_bar__tab")) {
         // 取消所有item的选中状态
         for (let index = 0; index < tabBar.children.length; index++) {
           tabBar.children[index].classList.remove("tab_bar__tab--active");
