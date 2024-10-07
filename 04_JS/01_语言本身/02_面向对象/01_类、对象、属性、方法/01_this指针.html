@@ -8,13 +8,8 @@
 </head>
 
 <body>
+  <!-- 1、为什么需要this指针 -->
   <script>
-    /*
-      一、this指针
-    */
-    /*
-      1、为什么需要this指针
-    */
     // 上面我们说到“成员变量的值存储在对象内部，成员函数存储在对象外部的堆区（其它很多语言成员函数都是存储在代码区）”，也就是说下面的代码中"张三"存储在person对象内部、"李四"存储在person1对象内部，run成员函数存储在堆区只有一份，那么问题来了，既然run成员函数不存储在person对象和person1对象内部，那run成员函数执行体里是怎么知道person对象调用的时候就打印"张三"、person1对象调用的时候就打印"李四"的呢，也就是说堆区的run到底是怎么访问到person、person1这两块栈区的内存的呢？
     class Person {
       name;
@@ -26,11 +21,11 @@
 
     let person = new Person();
     person.name = "张三";
-    person.run();
+    person.run(); // 张三 run
 
     let person1 = new Person();
     person1.name = "李四";
-    person1.run();
+    person1.run(); // 李四 run
 
     // 如果让我们自己实现，也很简单，那就是把调用run成员函数的那个对象作为参数传递给run成员函数——当然因为对象占用的内存可能比较大，所以建议通过指针的方式传递，避免过多地消耗栈内存——这样run成员函数执行体里就能知道是打印person对象的"张三"还是打印person1对象的"李四"了，如下：
     class MyPerson {
@@ -43,20 +38,25 @@
 
     let myPerson = new MyPerson();
     myPerson.name = "张三";
-    myPerson.run(person);
+    myPerson.run(myPerson); // 张三 run
 
     let myPerson1 = new MyPerson();
     myPerson1.name = "李四";
-    myPerson1.run(myPerson1);
+    myPerson1.run(myPerson1); // 李四 run
 
     // 其实上面我们已经看到了编译器就是这么做的，编译器已经帮我们做好了这件事，它会为每个成员函数都添加一个隐式参数——this指针——并且这个隐式参数永远位于参数列表的第一位，外界某个对象通过点语法调用成员函数这种高级语言里的写法，在编译的时候编译器其实就是把外界这个对象的内存地址传递给了成员函数的this指针，于是this指针就指向了成员函数的调用者，因此我们就可以在成员函数执行体里通过this指针来访问某个具体对象的成员变量、成员函数了，所有的面向对象语言里对象调用成员函数都是这么设计的，但是在JS里我们不可以省略this、必须显式地写出来。
+  </script>
 
-    /*
-      2、this指针的指向
-      * this指针用在实例方法/对象方法中时，指向实例方法/对象方法的调用者——某个实例/对象
-      * this指针用在静态方法/类方法中时，指向当前类
-      * JS里除了实例方法和静态方法里可以使用this，普通函数里也可以使用this，此时this指向window对象
-    */
+  <!--
+    2、this指针的指向
+    * （1）this指针用在实例方法/对象方法中时，默认指向实例方法/对象方法的调用者——某个实例/对象
+    * （2）this指针用在静态方法/类方法中时，默认指向当前类
+    * （3）JS里除了实例方法和静态方法里可以使用this，普通函数里也可以使用this，此时this指针默认指向window对象
+    * （4）箭头函数里没有this指针，但是当我们在箭头函数里使用this时，会走变量的查找链，即箭头函数本身的作用域、上层作用域、......，如果一直没找到、最终this指针就会找到并指向window对象，跟普通函数不同的是普通函数里的this指针不会走查找链、它就是一直指向window对象 
+    * （5）不过我们也可以通过call、apply来忽略掉上面的默认指向，强制把this指针指向任何我们希望的对象（当然如果我们传入的是undefined或null这种根本没有对应对象的东西，那这个强制指向就会被忽略，还是按照默认指向来）
+  -->
+  <script>
+    // （1）、（2）
     class MyObject {
       test() {
         console.log(this);
@@ -82,40 +82,35 @@
     //   }
     // }
 
+    // （3）
     (function () {
       console.log(this);
-    })()
+    })();
     // 打印：Window {window: Window, self: Window, document: document, name: '', location: Location, …}
-  </script>
 
-  <script>
-    /*
-      二、补充：浏览器全局对象window
-      浏览器给我们提供了一个全局对象window，这个对象有以下作用：
-      1、浏览器会给我们提供一些全局的变量（如name）、函数（如alert）、对象（如console）等，浏览器会把这些东西都放在window对象里
-      2、我们在使用一个变量/函数/对象时的查找链，会先在变量/函数/对象的当前作用域内查找，找不到的话就会去上一层作用域内查找，最终会找到window对象里，如果window对象里也没有这个变量/函数/对象、那代码就会报错
-      3、使用var定义的变量会被添加到window对象里，但这是JS的设计缺陷，我们知道有这么回事就可以了，因为后面我们都是使用let/const来定义变量/常量，它们不会被添加到window对象里
-    */
-    console.log(window);
+    // （4）
+    (() => {
+      console.log(this);
+      // 打印：Window {window: Window, self: Window, document: document, name: '', location: Location, …}
+    })();
 
-    // 1、浏览器会给我们提供一些全局的变量（如name）、函数（如alert）、对象（如console）等，浏览器会把这些东西都放在window对象里
-    // 这些东西我们没有定义，但是使用时并不会报错，就是因为浏览器已经定义好并放在window对象里了
-    console.log(name);
-    console.log(alert);
-    console.log(console);
+    // （5）
+    function test(name, age) {
+      console.log(this);
+      console.log(`参数：${name} ${age}`);
+    }
 
-    // 2、我们在使用一个变量/函数/对象时的查找链，会先在变量/函数/对象的当前作用域内查找，找不到的话就会去上一层作用域内查找，最终会找到window对象里，如果window对象里也没有这个变量/函数/对象、那代码就会报错
-    // 比如下面在函数的作用域内我们并没有定义过person对象，上一层作用域也就是script元素所囊括的全局作用域内我们也没有定义过person对象，window对象内也没有定义过person对象，所以在使用person对象时就会报错：person is not defined
-    // 而上面在使用name、alert、console时就不会报错，因为找到window对象里找到了它们三个
-    (function () {
-      console.log(person);
-    })()
+    // 第一个参数：this指针
+    // 后面的参数：以参数列表的形式传递给原test函数
+    test.call("123", "张三", 18);
+    // 打印：String {'123'}，字符串“123”的包装类对象
+    // 打印：参数：张三 18
 
-    // 3、使用var定义的变量会被添加到window对象里，但这是JS的设计缺陷，我们知道有这么回事就可以了，因为后面我们都是使用let/const来定义变量/常量，它们不会被添加到window对象里
-    var age = 18;
-    let height = 1.88;
-    console.log(window.age); // 18，确实能找到
-    console.log(window.height); // undefined，确实找不到
+    // 第一个参数：this指针
+    // 后面的参数：以数组的形式传递给原test函数
+    test.apply("123", ["张三", 18]);
+    // 打印：String {'123'}，字符串“123”的包装类对象
+    // 打印：参数：张三 18
   </script>
 </body>
 
