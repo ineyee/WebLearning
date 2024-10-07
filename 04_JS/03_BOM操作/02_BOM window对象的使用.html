@@ -44,6 +44,25 @@
       window.open("https://www.baidu.com", "_blank");
     };
   </script>
+
+  <!--
+    三、补充：window对象的其它作用
+    1、我们在使用一个变量/函数/对象时，浏览器会先在变量/函数/对象的当前作用域内查找，找不到的话就会去上一层作用域内查找，最终会找到window对象里，如果window对象里也没有这个变量/函数/对象、那代码就会报错
+    2、使用var定义的变量会被添加到window对象里，但这是JS的设计缺陷，我们知道有这么回事就可以了，因为后面我们都是使用let/const来定义变量/常量，它们不会被添加到window对象里
+  -->
+  <script>
+    // 1、我们在使用一个变量/函数/对象时，浏览器会先在变量/函数/对象的当前作用域内查找，找不到的话就会去上一层作用域内查找，最终会找到window对象里，如果window对象里也没有这个变量/函数/对象、那代码就会报错
+    // 比如下面在函数的作用域内我们并没有定义过person对象，上一层作用域也就是script元素所囊括的全局作用域内我们也没有定义过person对象，window对象内也没有定义过person对象，所以在使用person对象时就会报错：person is not defined
+    (function () {
+      console.log(person);
+    })()
+
+    // 2、使用var定义的变量会被添加到window对象里，但这是JS的设计缺陷，我们知道有这么回事就可以了，因为后面我们都是使用let/const来定义变量/常量，它们不会被添加到window对象里
+    var age = 18;
+    let height = 1.88;
+    console.log(window.age); // 18，确实能找到
+    console.log(window.height); // undefined，确实找不到
+  </script>
 </body>
 
 </html>
