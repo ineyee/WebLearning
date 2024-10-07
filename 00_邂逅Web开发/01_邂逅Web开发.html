@@ -10,38 +10,9 @@
 <body>
   <div>
     <h2>
-      一、邂逅Web开发
+      一、邂逅Web开发：网页的组成
     </h2>
     <div>
-      <h4>
-        1、网页的显示过程
-      </h4>
-      <img src="img/网页的显示过程.png" alt="">
-      <ul>
-        <li>
-          Web开发工程师开发项目（HTML、CSS、JS、VUE、React、TS）
-        </li>
-        <li>
-          Web开发工程师打包、部署项目到服务器
-        </li>
-        <li>
-          用户在浏览器里输入一个网址
-        </li>
-        <li>
-          浏览器会根据这个网址找到对应的服务器，向这台服务器请求对应目录下的静态资源（HTML、CSS、JS）
-        </li>
-        <li>
-          服务器返回静态资源给浏览器
-        </li>
-        <li>
-          浏览器对静态资源进行解析和渲染，就显示在用户眼前了
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h4>
-        2、网页的组成
-      </h4>
       <img src="img/网页的组成部分.png" alt="">
       <ul>
         <li>
@@ -54,74 +25,6 @@
           JS：主要负责网页的交互
         </li>
       </ul>
-    </div>
-    <div>
-      <h4>
-        3、浏览器和浏览器内核
-      </h4>
-      <img src="img/浏览器.png" alt="">
-      <p>
-        我们已经知道了网页是由HTML、CSS、JS组成的，那这些枯燥的代码是如何被显示成多彩的网页的呢？这个工作其实是由浏览器来完成的，浏览器最核心的部分就是浏览器引擎，一般也称为浏览器内核。
-      </p>
-      <p>
-        浏览器引擎又包含渲染引擎（如WebCore）、JS引擎（如JavaScriptCore）两部分，渲染引擎就负责HTML、CSS的解析与渲染，JS引擎就负责JS的解释、以便CPU来执行。
-      </p>
-      <img src="img/浏览器内核.png" alt="">
-      <p>
-        不同的浏览器可能使用了不同的浏览器内核，而不同的浏览器内核有不同的解析和渲染规则，所以我们编写的同一个网页在不同的浏览器里显示的效果可能也不一样，因此要做兼容。
-      </p>
-    </div>
-    <div>
-      <h4>
-        4、浏览器的渲染过程
-      </h4>
-      <img src="img/浏览器的渲染过程.png" alt="">
-      <ul>
-        <li>
-          第一步：当我们通过一个网址访问某个网页时，浏览器会先向服务器请求这个网页所对应的HTML文件
-        </li>
-        <li>
-          第二步：当浏览器把HTML文件加载到浏览器内存中之后，浏览器就会去解析当前HTML文件，解析HTML文件的时候是从上到下一行一行解析的，所以当解析到head元素里的link元素时，如果发现link元素又导入了外部的CSS文件，浏览器就会去加载对应的CSS文件到浏览器内存中并解析，注意加载CSS文件和解析HTML文件是异步的，两者不会阻塞
-        </li>
-        <li>
-          第三步：当浏览器解析完HTML文件之后，它会把所有HTML元素的嵌套结构给我们创建成一个父子节点那样的树结构——我们称之为DOM Tree——此时只有结构
-        </li>
-        <li>
-          第四步：当浏览器得到DOM
-          Tree之后，它还不会渲染，因为此时还没有样式，如果渲染了一遍没有样式很丑的纯结构，一会样式来了还得再重新渲染一遍，那还不如等样式出来统一渲染一次，所以它会等待、会等所有的CSS文件都加载并解析完毕之后，浏览器会把解析完的CSS样式attach附加到各个DOM节点上去，附加了CSS样式后的DOM
-          Tree，我们称之为Render Tree——既有结构也有样式，浏览器就会拿着这个Render Tree去渲染了
-        </li>
-      </ul>
-      <h4>
-        补充：
-      </h4>
-      <div>
-        Web里的三棵树：HTML Tree + CSSOM Tree、DOM Tree、Render Tree
-      </div>
-      <div>
-        1、HTML Tree + CSSOM Tree：我们编写的HTML结构是一个树结构，被称为HTML Tree，是我们开发者手动搭建出来的一棵树；CSSOM Tree：我们编写的CSS结构也是一个树结构，被称为CSSOM
-        Tree，也是我们开发者手动搭建出来的一颗树；这两个我们开发者手动搭建出来的树结构加起来就类似于我们在Flutter里手动搭建出来的Widget Tree（我们在编写Widget
-        Tree的过程中即编写了结构也编写了样式），Widget Tree的作用仅仅是创建一些对象、让这些对象来存储界面的结构和样式，创建和销毁这些对象的资源消耗是非常低的
-      </div>
-      <div>
-        2、DOM Tree：浏览器在解析完HTML Tree之后（此时可能还在异步地加载并解析CSSOM Tree），考虑到将来我们开发者可能会需要通过JS来操作HTML
-        Tree中的HTML元素（注意HTML是一门专门的语言，JS是一门专门的语言，JS无法直接操作HTML Tree中的HTML元素），所以浏览器会帮我们把HTML
-        Tree中的每一个HTML元素都一一对应地创建出来一个DOM对象来，进而形成一个跟HTML Tree结构一模一样的DOM Tree，并且提供了JS的API让我们开发者来操作DOM Tree，也就是说DOM
-        Tree就是JS和HTML
-        Tree之间的桥梁，我们开发者可以通过JS的API去操作DOM Tree，然后浏览器再把这个操作映射到HTML Tree上去。DOM Tree完全是HTML Tree的映射、不包含CSSOM
-        Tree，只有结构、没有样式。这个DOM Tree有点类似于Flutter里的Element Tree，它们都是一些虚拟节点，但又有些区别，DOM Tree的出现是为了作为JS和HTML
-        Tree的桥梁，而Element Tree的出现则是为了作为Widget Tree和RenderObject Tree的桥梁，每一个Element Tree节点都持有着一个Widget
-        Tree节点、并有可能持有着一个RenderObject Tree节点，以此决定着UI如何绘制，比如某个Widget
-        Tree节点的颜色改了、我们rebuild、那Widget Tree节点对象是会被销毁重建的，但是只要Widget的类型和key不变，那对应的Element
-        Tree节点就不会重建，而只是会把变化传递给对应的RenderObject Tree去更新一下，这样的资源消耗就非常小了
-      </div>
-      <div>
-        3、Render Tree：浏览器得到DOM
-        Tree之后，它会等待、会等所有的CSS文件都加载并解析完毕得到CSSOM Tree之后，把CSSOM Tree上的节点一一对应地attach附加到DOM Tree的各个DOM对象节点上去，附加了CSSOM
-        Tree后的DOM
-        Tree，我们称之为Render Tree——既有结构也有样式、也就是说Render Tree = DOM Tree + CSSOM Tree，浏览器就会拿着这个Render Tree去渲染了，这个Render
-        Tree就类似于Flutter里的RenderObject Tree
-      </div>
     </div>
   </div>
 </body>

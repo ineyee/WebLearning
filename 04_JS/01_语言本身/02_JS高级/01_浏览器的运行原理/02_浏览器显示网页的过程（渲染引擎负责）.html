@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <img src="img/02_第一步：请求网页的静态资源.jpg" alt="">
+  <!--
+    第一步：请求网页的静态资源
+    请求：当我们在浏览器里输入一个网页的URL后，浏览器会先向服务器请求这个网页对应的静态资源，所谓静态资源就是指这个网页对应的HTML、CSS、JS、图片、字体等东西（我们在开发完Web项目后，会把项目打包、部署到服务器上去，项目对应的静态资源也就随之存储到服务器上去了）
+
+    响应：但通常情况下服务器只会给我们返回index.html这一个HTML文件类型的静态资源（index.html是整个项目的入口页，index是约定俗成的一个名字），而不会把其它的静态资源一次性全部返回、它们是在解析HTML文件的过程中请求的
+
+    请求其它：当浏览器接收到index.html后，就会把index.html加载到浏览器内存中，浏览器就会去解析index.html。解析index.html的时候是从上往下一行一行解析的，所以当解析到head元素里的link元素时，如果发现link元素又导入了外部的CSS文件，浏览器就会向服务器请求对应的CSS文件并加载到浏览器内存中；当解析到script元素时，如果发现script元素又导入了外部的JS文件，浏览器就会向服务器请求对应的JS文件并加载到浏览器内存中；图片、字体等东西是同理的（注意：请求CSS、JS、图片、字体等东西是个异步操作，请求它们不会阻塞浏览器解析HTML，也就是说在请求其它资源的过程中，HTML文件还在不停地解析）
+  -->
+
+  <img src="img/02_第二步：HTML、CSS解析与渲染（图一）.jpg" alt="">
+  <img src="img/02_第二步：HTML、CSS解析与渲染（图二）.jpg" alt="">
+  <!--
+    第二步：HTML、CSS解析与渲染
+    ① 当浏览器接收到index.html后，就会把index.html加载到浏览器内存中
+    
+    ② 紧接着浏览器就会去解析index.html，解析index.html的时候是从上往下一行一行解析的，所以当解析到head元素里的link元素时，如果发现link元素又导入了外部的CSS文件，浏览器就会向服务器请求对应的CSS文件并加载到浏览器内存中（注意：请求CSS是个异步操作，请求它不会阻塞浏览器解析HTML，也就是说在请求CSS资源的过程中，HTML文件还在不停地解析）
+
+    ③ 当浏览器解析完index.html之后，它会把所有HTML元素的嵌套结构给我们创建成一个父子节点那样的DOM对象树结构——我们称之为DOM Tree——此时只有结构，当然如果有DOM操作插入或删除了一些节点，DOM Tree也会随之发生变化
+
+    ④ 当浏览器得到DOM Tree之后，它还不会渲染，因为此时还没有样式，如果渲染了一遍没有样式的、很丑的纯结构，一会样式来了还得再重新渲染一遍，那还不如等样式出来统一渲染一次，所以浏览器会等待、会等所有的CSS文件都加载并解析完毕之后，浏览器会把解析完的CSS样式attach附加到各个DOM节点上去，附加了CSS样式后的DOM Tree我们称之为Render Tree——既有结构也有样式
+    
+    ⑤ 当浏览器得到Render Tree之后，其实它还是不会渲染，因为在构建Render Tree时，浏览器主要关注的是哪些节点可见、即哪些元素需要渲染，也就是说Render Tree上的各个节点其实没有记录元素的位置和大小这两类样式信息，而是还要执行一步布局操作（Layout），来专门计算一下Render Tree上所有节点的位置和大小信息，确定下来后，Render Tree才算是完整了。那为什么不在DOM Tree生成Render Tree的时候就给Render Tree上的每一个节点都携带上位置和大小信息呢，为啥非要执行一步布局操作呢？这样做的目的就是为了实现构建Render Tree和布局操作解耦，解耦可以带来好处，比如网页窗口尺寸发生变化时，我们并不需要重新构建Render Tree、因为可见的元素并没有改变，而仅仅是元素的大小发生了变化，此时只需要从布局操作开始执行即可
+    
+    ⑥ 布局操作执行完毕后，Render Tree就是完整的了，浏览器就会拿着这个Render Tree去进行绘制（Painting）了，绘制结束后就得到了要显示在屏幕上的最终产物——某一帧所有的像素点
+
+    ⑦ 绘制结束后，浏览器就会拿着绘制的产物上屏（Display）呈现给用户
+
+    ————————————————————————————————————————————
+    渲染（rendering）和绘制（painting）的区别
+    * 渲染：是一个更广泛的过程，包括从构建DOM树、生成Render树、执行布局计算，到最后将页面内容呈现给用户的整个流程，它涵盖了从HTML、CSS的解析到页面布局和绘制的所有步骤
+	  * 绘制：是渲染过程的一个子步骤，专门指根据布局计算后的结果将像素绘制到屏幕上。这是把元素的样式（如颜色、边框、阴影等）转化为图形的过程
+    因此，绘制只是渲染的最后一个阶段
+  -->
+
+  <!--
+    概念补充一：重新构建rebuild
+    第一次构建Render Tree时，我们称之为build
+    之后重新构建Render Tree时，我们称之为rebuild，比如新增或移除某个元素、切换某个元素的显隐就会触发rebuild
+
+    一旦触发rebuild必然会触发后面的relayout和repaint
+    因为会触发relayout、所以很耗性能，所以在实际开发中尽量避免频繁的DOM操作
+  -->
+
+  <!--
+    概念补充二：重布局relayout或回流reflow
+    第一次进行布局操作来确定节点的位置和大小信息时，我们称之为布局layout
+    之后进行布局操作来修改节点的位置和大小信息时，我们称之为重布局relayout，比如修改了元素位置和大小相关的样式信息、改变窗口大小时就会触发relayout
+
+    一旦触发relayout必然会触发后面的repaint，但relayout的触发不一定都是因为rebuild
+    relayout、很耗性能，所以在实际开发中 修改元素位置和大小相关的样式信息时，尽量一次性修改，减少多次修改
+  -->
+
+  <!--
+    概念补充三：重绘repaint 
+    第一次渲染内容时，我们称之为paint
+    之后重新渲染内容时，我们称之为repaint，比如修改了元素位置和大小以外的样式信息就会触发repaint
+
+    repaint的触发不一定都是因为rebuild或relayout
+    repaint、性能消耗较低
+  -->
+
+  <!--
+    概念补充四：Web里的三棵树【HTML Tree + CSSOM Tree、DOM Tree、Render Tree】
+
+    1、HTML Tree + CSSOM Tree
+    我们编写的HTML结构是一个树结构，被称为HTML Tree，是我们开发者手动搭建出来的一棵树
+    我们编写的CSS结构也是一个树结构，被称为CSSOM Tree，也是我们开发者手动搭建出来的一颗树
+    
+    这两个我们开发者手动搭建出来的树结构加起来就类似于我们在Flutter里手动搭建出来的Widget Tree（我们在编写Widget Tree的过程中既编写了结构也编写了样式），Widget Tree的作用仅仅是创建一些对象、让这些对象来存储界面的结构和样式，创建和销毁这些对象的资源消耗是非常低的
+
+    2、DOM Tree
+    浏览器在解析完HTML Tree之后（此时可能还在异步地加载并解析CSSOM Tree），考虑到将来我们开发者可能会需要通过JS来操作HTML Tree中的HTML元素（注意HTML是一门专门的语言，JS是一门专门的语言，JS无法直接操作HTML Tree中的HTML元素），所以浏览器会帮我们把HTML Tree中的每一个HTML元素都一一对应地创建出来一个DOM对象来，进而形成一颗DOM Tree，并且提供了JS的API让我们开发者来操作DOM Tree，也就是说DOM Tree就是JS和HTML Tree之间的桥梁，我们开发者可以通过JS的API去操作DOM Tree，然后浏览器再把这个操作映射到HTML Tree上去，DOM Tree完全是HTML Tree的映射、不包含CSSOM Tree，只有结构、没有样式
+    
+    这个DOM Tree有点类似于Flutter里的Element Tree，但又有些区别，DOM Tree的出现是为了作为JS和HTML Tree的桥梁，而Element Tree的出现则是为了作为Widget Tree和RenderObject Tree的桥梁，每一个Element Tree节点都持有着一个Widget Tree节点、并有可能持有着一个RenderObject Tree节点，以此决定着UI如何绘制，比如某个Widget Tree节点的颜色改了、我们rebuild、那Widget Tree节点对象是会被销毁重建的，但是只要Widget的类型和key不变，那对应的Element Tree节点就不会重建，而只是会把变化传递给对应的RenderObject Tree去更新一下，这样的资源消耗就非常小了
+
+    3、Render Tree：
+    浏览器得到DOM Tree之后，它会等待、会等所有的CSS文件都加载并解析完毕得到CSSOM Tree之后，把CSSOM Tree上的节点一一对应地attach附加到DOM Tree的各个DOM对象节点上去，附加了CSSOM Tree后的DOM Tree，我们称之为Render Tree——既有结构也有样式
+    
+    这个Render Tree就类似于Flutter里的RenderObject Tree
+
+    ————————————————————————————————————————————
+    三棵树的对应关系：
+    （1）DOM Tree和HTML Tree并不是完全一一对应的，因为DOM Tree不仅包括HTML Tree中的元素，还会有动态创建、删除、修改的节点，所以DOM Tree有可能等于、小于、大于HTML Tree
+    （2）Render Tree和DOM Tree并不是完全一一对应的，因为Render Tree不会包括像html、
+      head这类的不可见元素，也会将某些不可见的元素（如display: none的元素）排除在外，所以Render Tree只可能小于或等于DOM Tree，不可能比DOM Tree多
+  -->
+</body>
+
+</html>
