@@ -5,6 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <!-- defer script写到这里来导入js文件 -->
+  <script src="../xxx.js" defer></script>
+  <script src="../xxx.js" defer></script>
 </head>
 
 <body>
@@ -15,7 +18,26 @@
 
     响应：但通常情况下服务器只会给我们返回index.html这一个HTML文件类型的静态资源（index.html是整个项目的入口页，index是约定俗成的一个名字），而不会把其它的静态资源一次性全部返回、它们是在解析HTML文件的过程中请求的
 
-    请求其它：当浏览器接收到index.html后，就会把index.html加载到浏览器内存中，浏览器就会去解析index.html。解析index.html的时候是从上往下一行一行解析的，所以当解析到head元素里的link元素时，如果发现link元素又导入了外部的CSS文件，浏览器就会向服务器请求对应的CSS文件并加载到浏览器内存中；当解析到script元素时，如果发现script元素又导入了外部的JS文件，浏览器就会向服务器请求对应的JS文件并加载到浏览器内存中；图片、字体等东西是同理的（注意：请求CSS、JS、图片、字体等东西是个异步操作，请求它们不会阻塞浏览器解析HTML，也就是说在请求其它资源的过程中，HTML文件还在不停地解析）
+    请求其它：当浏览器接收到index.html后，就会把index.html加载到浏览器内存中，浏览器就会去解析index.html，解析index.html的时候是从上往下一行一行解析的，所以
+    * （1）当解析到head元素里的link元素时，如果发现link元素又导入了外部的CSS文件，浏览器就会向服务器请求对应的CSS文件并加载到浏览器内存中，注意请求CSS是个异步操作，请求它不会阻塞浏览器解析HTML，也就是说在请求CSS资源的过程中，HTML文件还在不停地解析
+    * （2）图片和字体等东西也是同理的，请求它们不会阻塞浏览器解析HTML
+    * （3）唯一不同的就是当解析到script元素时，无论是script元素本身里有代码还是script元素导入了外部的JS文件，浏览器都会停止解析HTML文件，先去下载并执行JS代码，等所有的JS代码全部下载并执行完毕后，再回来继续解析HTML，也就是说加载JS是个同步操作，会阻塞浏览器解析HTML，这么设计主要是因为解析HTML的 同时就在构建DOM Tree，而JS代码里很可能存在DOM操作在改变DOM Tree，所以就设计成同步了
+      * ① 问题：但是在实际开发中，JS的代码量往往要比HTML的代码量重很多，如果都同步下载和执行的话，往往需要很长的时间，这样一来用户就需要很长时间才能看到界面。为了解决这个问题，script元素给我们提供了两个属性：defer和async来实现异步加载JS
+      * ② defer属性的特点：
+        * JS代码的下载时机：defer属性会告诉浏览器在解析HTML时不要等待JS代码的下载，也就是说浏览器会异步地去下载JS代码，与此同时继续解析HTML并构建DOM Tree
+        * JS代码的执行时机：JS代码下载完毕晚于DOM Tree构建完毕就不用说了，如果JS代码下载完毕早于DOM Tree构建完毕，那浏览器也会等待DOM Tree构建完毕后，再去执行下载好的JS代码，然后再触发DOMContentLoaded事件
+        * 多个defer script之间是串行执行的，也就是说在下载阶段写在前面的defer script肯定是早于写在后面的defer script，并且在执行阶段也是先执行完毕写在前面的defer script再执行写在后面的defer script，所以如果多个script之间有先后顺序要求，那用defer也是没问题的
+        * defer属性只作用于外部导入JS文件的script元素，本身写代码的那种script元素会忽略掉这个属性
+        * 由于defer script具备最上面的两个特点，所以我们推荐把defer script的导入写在head元素里跟link导入css一样的位置来导入js文件，这样一来可以保证JS代码尽早地被解析到、尽早地去发起下载，二来JS代码在执行时又因为所有的DOM Tree已经构建完毕了、所以也不会出现写在前面导致获取不到元素的错误
+      * ③ async属性的特点：
+        * （相同）JS代码的下载时机：跟defer一样，async属性也会告诉浏览器异步地去下载JS代码
+        * （不同）JS代码的执行时机：但是async无法保证JS代码一定是在DOM Tree构建完毕后才执行，而是下载完后就立即执行
+        * （不同）多个async script之间是并发执行的，所以如果多个script之间有先后顺序要求，那用async是会出问题的
+        * （相同）async属性也是只作用于外部导入JS文件的script元素，本身写代码的那种script元素会忽略掉这个属性
+        * 由于async script具备最上面的两个特点，所以我们依然推荐把async script的导入写在body元素的最后面来导入js文件，这样才不会出现写在前面导致获取不到元素的错误
+      * ④ defer和async的选择：
+        * defer实现了加载JS代码的异步，同时它还有很多串行的机制，因此defer更多地用于那些有大量DOM操作的JS代码；并且多个defer之间是串行的，所以如果多个script之间有依赖关系，那也只能用defer
+        * async也实现了加载JS代码的异步，它是彻彻底底地异步、没有一点串行机制，因此async更多地用于那些没有DOM操作的、对其它script没有依赖的、功能性独立的JS代码，这种情况下完全地并发效率更高
   -->
 
   <img src="img/02_第二步：HTML、CSS解析与渲染（图一）.jpg" alt="">
@@ -24,9 +46,9 @@
     第二步：HTML、CSS解析与渲染
     ① 当浏览器接收到index.html后，就会把index.html加载到浏览器内存中
     
-    ② 紧接着浏览器就会去解析index.html，解析index.html的时候是从上往下一行一行解析的，所以当解析到head元素里的link元素时，如果发现link元素又导入了外部的CSS文件，浏览器就会向服务器请求对应的CSS文件并加载到浏览器内存中（注意：请求CSS是个异步操作，请求它不会阻塞浏览器解析HTML，也就是说在请求CSS资源的过程中，HTML文件还在不停地解析）
+    ② 紧接着浏览器就会去解析index.html、一边解析HTML一边构建DOM Tree，解析index.html的时候是从上往下一行一行解析的，所以当解析到head元素里的link元素时，如果发现link元素又导入了外部的CSS文件，浏览器就会向服务器请求对应的CSS文件并加载到浏览器内存中（注意：请求CSS是个异步操作，请求它不会阻塞浏览器解析HTML，也就是说在请求CSS资源的过程中，HTML文件还在不停地解析）
 
-    ③ 当浏览器解析完index.html之后，它会把所有HTML元素的嵌套结构给我们创建成一个父子节点那样的DOM对象树结构——我们称之为DOM Tree——此时只有结构，当然如果有DOM操作插入或删除了一些节点，DOM Tree也会随之发生变化
+    ③ 当浏览器解析完index.html之后，所有HTML元素的嵌套结构对应的DOM对象树结构也就构建完成了——我们称之为DOM Tree——此时只有结构，当然如果有JS DOM操作插入或删除了一些节点，DOM Tree也会随之发生相应的变化
 
     ④ 当浏览器得到DOM Tree之后，它还不会渲染，因为此时还没有样式，如果渲染了一遍没有样式的、很丑的纯结构，一会样式来了还得再重新渲染一遍，那还不如等样式出来统一渲染一次，所以浏览器会等待、会等所有的CSS文件都加载并解析完毕之后，浏览器会把解析完的CSS样式attach附加到各个DOM节点上去，附加了CSS样式后的DOM Tree我们称之为Render Tree——既有结构也有样式
     
@@ -95,6 +117,9 @@
     （2）Render Tree和DOM Tree并不是完全一一对应的，因为Render Tree不会包括像html、
       head这类的不可见元素，也会将某些不可见的元素（如display: none的元素）排除在外，所以Render Tree只可能小于或等于DOM Tree，不可能比DOM Tree多
   -->
+
+  <script src="../xxx.js" async></script>
+  <script src="../xxx.js" async></script>
 </body>
 
 </html>
