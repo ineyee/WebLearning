@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    一、纯函数的理解
+    函数式编程里有一个非常重要的概念叫纯函数，而JS是支持函数式编程的，所以也有纯函数的概念
+
+    在程序设计中，如果一个函数同时符合以下两个条件，那这个函数就是一个纯函数：
+    * （1）函数在输入相同的参数时，必须产生相同的输出
+    * （2）函数在执行后不能有任何副作用，副作用是指函数内部不能修改实参的值、也不能修改函数外部变量的值
+  -->
+  <script>
+    // 第（1）个条件举例
+    // 这就是一个纯函数，因为相同的输入肯定会有相同的输出
+    function add1(num1, num2) {
+      return num1 + num2;
+    }
+
+    // 这就不是一个纯函数，因为就算num1和num2每次输入都不变，但是函数外的num一旦在某个时机改成200了，函数的输出就不相同了
+    let num = 100;
+    function add2(num1, num2) {
+      return num1 + num2 + num;
+    }
+
+    // 第（2）个条件举例
+    let obj = {
+      "name": "张三",
+      "age": 18,
+    };
+
+    // 这就是一个纯函数，因为函数内部没有修改实参的值、也没有修改函数外部变量的值
+    function printInfo1(arg) {
+      console.log(arg);
+    }
+    printInfo1(obj);
+
+    // 这就不是一个纯函数，因为函数内部修改了实参的值
+    function printInfo2(arg) {
+      arg.age = 19;
+
+      console.log(arg);
+    }
+    printInfo2(obj);
+  </script>
+
+  <!--
+    二、纯函数的案例
+    截取子数组的两个函数：slice、splice
+    slice：截取子数组后会返回子数组，并且不会修改原数组，所以是个纯函数
+    splice：截取子数组后会返回子数组，但是会修改原数组，所以不是个纯函数
+  -->
+  <script>
+    let array = [1, 2, 3, 4];
+
+    let subArray1 = array.slice(0, 2);
+    console.log(subArray1); // [1, 2]
+    console.log(array); // [1, 2, 3, 4]
+
+    let subArray2 = array.splice(0, 2);
+    console.log(subArray2); // [1, 2]
+    console.log(array); // [3, 4]
+  </script>
+</body>
+
+</html>
