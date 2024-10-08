@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    一、函数柯里化的理解
+    函数柯里化也是函数式编程里一个非常重要的概念，经过柯里化后的函数将非常有利于实践函数式编程
+
+    函数柯里化是指我们把一个接收多个参数的函数，改造成一个接收单个参数————也不一定非得是单个参数、也可以是一部分参数————的函数，并且这个函数又会返回一个函数来处理剩余的参数，直到处理完所有的参数，这个过程我们称之为函数柯里化
+  -->
+
+  <!--
+    二、函数柯里化的案例
+  -->
+  <script>
+    // 这就是正常的函数定义和调用
+    function add1(num1, num2, num3, num4) {
+      return num1 + num2 + num3 + num4;
+    }
+    let ret1 = add1(1, 2, 3, 4);
+    console.log(ret1); // 10
+
+    // 函数柯里化————改造原来的函数
+    function add2(num1) {
+      return function (num2) {
+        return function (num3, num4) {
+          return num1 + num2 + num3 + num4;
+        }
+      }
+    }
+    let ret2 = add2(1)(2)(3, 4);
+    console.log(ret2); // 10
+
+    // 接下来我们尝试把add2一步一步写成箭头函数来玩一下
+    // 第一步：先把所有的function换成=>
+    let add3 = (num1) => {
+      return (num2) => {
+        return (num3, num4) => {
+          return num1 + num2 + num3 + num4;
+        }
+      }
+    }
+
+    // 第二步：只有一个参数的地方，省略掉()
+    let add4 = num1 => {
+      return num2 => {
+        return (num3, num4) => {
+          return num1 + num2 + num3 + num4;
+        }
+      }
+    }
+
+    // 第三步：执行体只有一行代码地地方，省略掉{}，且如果执行体有返回值还可以省略掉return
+    let add5 = num1 => num2 => (num3, num4) => num1 + num2 + num3 + num4;
+
+    // 调用看下，没毛病
+    let ret5 = add5(1)(2)(3, 4);
+    console.log(ret5); // 10
+  </script>
+</body>
+
+</html>
