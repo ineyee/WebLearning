@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 我们已经知道，在JS里函数其实也是一个对象，所以我们也可以像使用对象那样使用函数
+    // 比如我们除了可以直接调用函数以外，还可以通过函数对象的方法来调用函数（这些方法我们在this指针的指向那里已经学过了）
+    function test(v1, v2 = 2, ...args) {
+      console.log(v1 + v2);
+    }
+    test(1);
+    test.call("", 1);
+    test.apply("", [1]);
+
+    // 又比如我们可以访问函数对象的属性
+    console.log(test.name); // 函数名：test
+    console.log(test.length); // 函数形参的个数（但是不包含剩余参数、不包含带默认值的参数）：1
+  </script>
+</body>
+
+</html>
