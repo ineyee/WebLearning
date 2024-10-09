@@ -15,12 +15,14 @@
     /*
       1、字典的定义
     */
+    let weightKey = "weight";
     let person = {
       "name": "张三",
       "age": 18,
       "height": 1.88,
+      [weightKey]: 140, // 字典的属性也可以是个变量
     }
-    console.log(person); // {name: '张三', age: 18, height: 1.88}
+    console.log(person); // {name: '张三', age: 18, height: 1.88, weight: 140}
 
     /*
       2、字典的基本操作
