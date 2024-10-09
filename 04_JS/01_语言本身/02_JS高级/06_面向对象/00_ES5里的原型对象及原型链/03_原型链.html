@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    一、什么是原型链？
+    其实很简单，前面我们已经提到过了
+    
+    JS引擎会为每个对象都内置一个隐藏属性[[Prototype]]，这个隐藏属性会指向另外一个对象————这个对象就是当前对象的原型对象
+
+    可见原型对象也是一个对象，所以原型对象里也内置着一个隐藏属性[[Prototype]]，指向它的原型对象
+
+    这样一层一层往上推，终将有某个对象的[[Prototype]]属性指向基类构造函数function Object(){}的显示原型对象，而基类构造函数function Object(){}的显示原型对象这个对象它自己的原型对象是个null，到此就结束了
+
+    由[[Prototype]]属性串联起来的这个原型对象链条，我们就称之为原型对象链，简称原型链
+  -->
+
+  <!--
+    二、那到底哪个对象的[[Prototype]]属性指向的是基类构造函数function Object(){}的显示原型对象呢？
+    其实只要某个类不继承自别的类，它默认就继承自基类Object，那么这个类对象本身的[[Prototype]]属性就指向的是基类构造函数function Object(){}的显示原型对象
+  -->
+  <script>
+    function Person() { }
+
+    let person = new Person();
+    console.log(Object.getPrototypeOf(person)); // person对象的[[Prototype]]属性指向function Person() { }的显示原型对象
+    console.log(Object.getPrototypeOf(person).__proto__); // Person类这个类对象的[[Prototype]]属性指向基类构造函数function Object(){}的显示原型对象
+    console.log(Object.getPrototypeOf(person).__proto__ === Object.prototype); // 的确一样：true
+  </script>
+</body>
+
+</html>
