@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    一、实现继承前
+    Person类和Student类有很多重复的属性和方法，各自都写了一遍
+  -->
+  <script>
+    // Person类
+    function Person(name, age, height) {
+      this.name = name;
+      this.age = age;
+      this.height = height;
+    }
+
+    Person.prototype.run = function () {
+      console.log(this.name, "run");
+    };
+    Person.prototype.eat = function () {
+      console.log(this.name, "eat");
+    }
+
+    // Student类
+    function Student(name, age, height, no, score) {
+      this.name = name;
+      this.age = age;
+      this.height = height;
+      this.no = no;
+      this.score = score;
+    }
+
+    Student.prototype.run = function () {
+      console.log(this.name, "run");
+    };
+    Student.prototype.eat = function () {
+      console.log(this.name, "eat");
+    }
+    Student.prototype.study = function () {
+      console.log(this.name, "study");
+    };
+  </script>
+
+  <!--
+    二、实现属性继承
+  -->
+  <script>
+    // Person类
+    function Person(name, age, height) {
+      this.name = name;
+      this.age = age;
+      this.height = height;
+    }
+
+    Person.prototype.run = function () {
+      console.log(this.name, "run");
+    };
+    Person.prototype.eat = function () {
+      console.log(this.name, "eat");
+    }
+
+    // Student类
+    function Student(name, age, height, no, score) {
+      /*
+        先调用一下父类的构造函数，但一定要用call或apply的方式来调用，因为要绑定this
+
+        如果直接调用Person(name, age, height)，是没有用的，因为去执行Person构造函数时，函数里面的this指向默认是指向window对象的，所以根本没办法把实参的值赋值到student对象身上
+
+        所以得用call或apply的方式来调用，强制把该函数的this指针绑定为当前创建出来的student对象————构造函数直接调用的情况下、就是一个普通函数、里面的this指针当然指向window，但是如果构造函数前面加了new、那构造函数里面的this指针就会指向创建出来的对象
+      */
+      Person.call(this, name, age, height);
+
+      this.no = no;
+      this.score = score;
+    }
+
+    Student.prototype.run = function () {
+      console.log(this.name, "run");
+    };
+    Student.prototype.eat = function () {
+      console.log(this.name, "eat");
+    }
+    Student.prototype.study = function () {
+      console.log(this.name, "study");
+    };
+  </script>
+
+  <!--
+    三、实现方法继承
+  -->
+  <script>
+    // Person类
+    function Person(name, age, height) {
+      this.name = name;
+      this.age = age;
+      this.height = height;
+    }
+
+    Person.prototype.run = function () {
+      console.log(this.name, "run");
+    };
+    Person.prototype.eat = function () {
+      console.log(this.name, "eat");
+    }
+
+    // Student类
+    function Student(name, age, height, no, score) {
+      Person.call(this, name, age, height);
+
+      this.no = no;
+      this.score = score;
+    }
+
+    /*
+      我们已经知道了Person类里所有的方法都存储在Person类对象里————即Person构造函数的显式原型对象里，Student类里所有的方法都存储在Student类对象里————即Student构造函数的显式原型对象里
+
+      person对象调用方法肯定是去Person构造函数的显式原型对象里去找，student对象调用方法肯定是去Studnet构造函数的显式原型对象里去找，那实现方法继承无非就是想办法让student对象调用某些方法时去父类————即Person构造函数的显式原型对象里去找
+    */
+
+    /*
+      方案一：
+      我们最快能想到的方法就是把”Student构造函数的显式原型对象直接指向Person构造函数的显示原型对象“
+      
+      这种做法可以是可以，但其实是不对的，因为下面子类自己的方法也会添加到父类的原型对象里，那person对象也能调用到study方法了
+    */
+    // Student.prototype = Person.prototype;
+    /*
+      方案二：
+      比较好的一个方案是创建一个中间对象，让”这个对象的原型对象指向Person构造函数的显示原型对象“，然后再让”Student构造函数的显式原型对象指向这个对象“
+
+      这样student在调用方法时就会先去这个中间对象里找，自然是找不到的，于是就会去它的原型对象————即Person构造函数的显示原型对象————里找，也顺利就找到父类里去了
+
+      同时下面子类自己的方法也是指添加到了这个中间对象里，而不会添加到父类里
+
+      【不过从”利用原型链实现继承“的角度来看，构造函数的显式原型对象又不是OC里的类对象、而像是父类对象，对象的[[Prototype]]属性又不是OC里的isa指针、而像是superclass指针。总之，它们是什么就根据不同的场景来理解吧】
+    */
+    let obj = {}; // 创建一个中间对象
+    Object.setPrototypeOf(obj, Person.prototype); // 让”这个对象的原型对象指向Person构造函数的显示原型对象“
+    Student.prototype = obj; // 然后再让”Student构造函数的显式原型对象指向这个对象“
+
+    // 类特有的方法一定要写在上面这坨代码后面，不然会被覆盖掉
+    Student.prototype.study = function () {
+      console.log(this.name, "study");
+    };
+  </script>
+
+  <!--
+    四、最终实现继承的固定写法
+  -->
+  <script>
+    // Person类
+    function Person(name, age, height) {
+      this.name = name;
+      this.age = age;
+      this.height = height;
+    }
+
+    Person.prototype.run = function () {
+      console.log(this.name, "run");
+    };
+    Person.prototype.eat = function () {
+      console.log(this.name, "eat");
+    }
+
+    // Student类
+    function Student(name, age, height, no, score) {
+      Person.call(this, name, age, height);
+
+      this.no = no;
+      this.score = score;
+    }
+
+    inherit(Student, Person);
+
+    Student.prototype.study = function () {
+      console.log(this.name, "study");
+    };
+
+    // 我们提供一个工具方法，来让两个类之间形成继承关系
+    function inherit(childType, parantType) {
+      let bridgeObj = {};
+      Object.setPrototypeOf(bridgeObj, parantType.prototype);
+      childType.prototype = bridgeObj;
+    }
+
+    // 测试效果ok
+    let stu1 = new Student("张三", 18, 1.88, 8, 88);
+    stu1.run();
+    stu1.eat();
+    stu1.study();
+
+    let stu2 = new Student("李四", 19, 1.99, 9, 99);
+    stu2.run();
+    stu2.eat();
+    stu2.study();
+  </script>
+</body>
+
+</html>
