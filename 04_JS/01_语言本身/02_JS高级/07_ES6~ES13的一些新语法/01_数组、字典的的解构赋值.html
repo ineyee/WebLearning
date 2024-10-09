@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    所谓解构赋值，是指当我们需要批量地从一个数组或字典中读取数据赋值给一堆一个一个的变量时采用的赋值方法，这种方法是ES6提供的，要比我们平常使用的赋值方法简便一些，现在解构赋值用的很多，一定要掌握
+
+    它的使用方式也很简单，我们只需要保证等号左边被赋值的一堆一个一个的变量组成的格式和等号右边的数组或字典的格式一样就行了
+  -->
+  <!--
+    一、数组的解构赋值
+    因为数组里的元素是有序的，所以就是按着顺序从数组里拿元素给变量赋值
+  -->
+  <script>
+    let arr = [1, 2, 3, 4, 5];
+
+    // 传统赋值
+    let a = arr[0];
+    let b = arr[1];
+    let c = arr[2];
+    let d = arr[3];
+    let e = arr[4];
+    // a = 1
+    // b = 2
+    // c = 3
+    // d = 4
+    // e = 5
+
+    // 解构赋值
+    let [a1, b1, c1, d1, e1] = arr;
+    // a1 = 1
+    // b1 = 2
+    // c1 = 3
+    // d1 = 4
+    // e1 = 5
+
+    let [a2, , c2, , e2] = arr;
+    // a2 = 1
+    // c2 = 3
+    // e2 = 5
+
+    let [a3, b3, c3] = arr;
+    // a3 = 1
+    // b3 = 2
+    // c3 = 3
+
+    let [a4, b4, c4, d4, e4, f4] = arr;
+    // a4 = 1
+    // b4 = 2
+    // c4 = 3
+    // d4 = 4
+    // e4 = 5
+    // f4 = undefined
+
+    // 嵌套数组的结构赋值
+    let array = [1, [2, 3, 4], 5];
+    let [a5, [b5, c5, d5], e5] = array;
+    // a5 = 1
+    // b5 = 2
+    // c5 = 3
+    // d5 = 4
+    // e5 = 5
+  </script>
+
+  <!--
+    二、字典的解构赋值
+    因为字典里的key是无序的，所以被赋值的变量名必须和字典里的属性名一样才能赋值成功、变量名的顺序倒是无关紧要，当然我们也可以对变量进行重命名
+  -->
+  <script>
+    let person = {
+      "name": "张三",
+      "age": 11,
+      "sex": "男",
+    };
+
+    // 传统赋值
+    let name = person.name;
+    let age = person.age;
+    let sex = person.sex;
+    // name = "张三"
+    // age = 11
+    // sex = "男"
+
+    // 解构赋值（sex: mySex就是变量重命名，也就是说我们的变量名字叫mySex，只不过告诉JS引擎是要把字典里sex对应的value赋值给这个变量）
+    let { sex: mySex, age1, name1 } = person;
+    // name1 = "张三"
+    // age1 = 11
+    // mySex = "男"
+
+    let { sex2, name2 } = person;
+    // name2 = "张三"
+    // sex2 = "男"
+
+    let { sex3, age3, name3, height3 } = person;
+    // name3 = "张三"
+    // age3 = 11
+    // sex3 = "男"
+    // height3 = undefined
+
+    // 嵌套字典的解构赋值
+    let obj = {
+      "p": [
+        "Hello",
+        { "y": "World" }
+      ],
+    };
+    let { p, p: [x, { y }] } = obj;
+    // p = ["Hello", {"y": "World"}]
+    // x = "Hello"
+    // y = "World"
+  </script>
+</body>
+
+</html>
