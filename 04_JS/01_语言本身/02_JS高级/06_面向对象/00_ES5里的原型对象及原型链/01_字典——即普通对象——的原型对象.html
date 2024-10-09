@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*
+      一、下面我们定义了一个普通对象person，它有3个显式属性name、age、height
+
+      但其实JS引擎会为每个普通对象都内置一个隐藏属性[[Prototype]]，这个隐藏属性会指向另外一个对象————这个对象就是当前普通对象的原型对象
+
+      可见普通对象的原型对象也是一个对象，所以原型对象里也内置着一个隐藏属性[[Prototype]]，指向它的原型对象
+    */
+    let person = {
+      "name": "张三",
+      "age": 18,
+      "height": 1.88,
+    };
+    console.log(person); // 控制台的打印里就可以看到普通对象的原型对象
+
+    /*
+      二、获取普通对象的原型对象的两种方式
+      * 通过普通对象的私有属性__proto__来获取（不同的浏览器可能存在兼容性问题，不推荐）
+      * 通过Object.getPrototypeOf()方法来获取（推荐）
+    */
+    console.log(person.__proto__);
+    console.log(Object.getPrototypeOf(person));
+
+    /*
+      三、那JS引擎为什么要给普通对象都内置一个原型对象呢？
+      普通对象的原型对象的唯一用途就是：
+      
+      当我们通过普通对象的key获取相应的value时（字典式获取和对象式获取都行）
+      
+      这个获取操作会首先检查当前普通对象自己是否有这个key，有的话就返回相应的value
+      
+      没有的话就会去当前普通对象的原型对象里检查是否有这个key，有的话就返回相应的value
+      
+      没有的话就会去原型对象的原型对象里检查是否有这个key，有的话就返回相应的value
+      
+      没有的话就继续一层一层往上找，直到找到这个key、返回相应的value，或者直到某个原型对象的原型对象为null————即没有原型对象了————返回undefined
+    */
+    console.log(person.weight); // 这里自然是：undefined
+
+    // 但是如果我们给person对象的原型对象添加一个weight属性（实际开发中不会这么做，这里只是演示一下）
+    Object.getPrototypeOf(person).weight = 140;
+    console.log(person["weight"]); // 那就能获取到了：140
+  </script>
+</body>
+
+</html>
