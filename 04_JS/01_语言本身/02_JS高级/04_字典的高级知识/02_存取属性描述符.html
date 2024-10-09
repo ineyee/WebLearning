@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    我们还可以监听属性的set和get
+  -->
+  <script>
+    let person = {
+      "name": "张三",
+      "age": 18,
+      "height": 1.88,
+    };
+
+    let _name = person["name"];
+    Object.defineProperty(person, "name", {
+      set: newValue => {
+        console.log("setter方法被调用了：", newValue);
+
+        _name = newValue;
+      },
+      get: () => {
+        console.log("getter方法被调用了：", _name);
+
+        return _name;
+      }
+    });
+
+    person["name"] = "李四";
+    person["name"];
+  </script>
+</body>
+
+</html>

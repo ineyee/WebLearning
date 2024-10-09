@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    一、默认情况下，我们定义一个字典，可以对字典进行增删改查等任意操作
+  -->
+  <script>
+    let person = {
+      "name": "张三",
+      "age": 18,
+      "height": 1.88,
+    };
+
+    // 增
+    person["weight"] = 140; // 字典式写法
+    person.weight = 140; // 对象式写法
+    console.log(person); // {name: '张三', age: 18, height: 1.88, weight: 140}
+
+    // 删
+    delete person["weight"]; // 字典式写法
+    delete person.weight; // 对象式写法
+    console.log(person); // {name: '张三', age: 18, height: 1.88}
+
+    // 改
+    person["age"] = 19; // 字典式写法
+    person.age = 19; // 对象式写法
+    console.log(person); // {name: '张三', age: 18, height: 1.88}
+
+    // 查
+    let age = person["age"]; // 字典式写法
+    let age1 = person.age; // 对象式写法
+    console.log(age); // 19
+
+    // for-in遍历法：只能遍历key
+    for (let key in person) {
+      console.log(`key: ${key}, value: ${person[key]}`);
+      // key: name, value: 张三
+      // key: age, value: 19
+      // key: height, value: 1.88
+    }
+  </script>
+
+  <!--
+    二、我们可以通过属性描述符来精准控制字典的属性能被执行哪些操作
+  -->
+  <script>
+    let person1 = {
+      "name": "张三",
+      "age": 18,
+      "height": 1.88,
+    }
+
+    // 增：没有对应的属性描述符，但是preventExtensions方法可以阻止给字典新增属性
+    Object.preventExtensions(person1);
+    person1["weight"] = 140;
+    console.log(person1); // 增不了，还是{name: '张三', age: 18, height: 1.88}
+
+    // 删：configurable属性描述符可以决定一个属性能不能被删
+    Object.defineProperty(person1, "name", {
+      configurable: false,
+    });
+    delete person1["name"];
+    console.log(person1); // 删不掉，还是{name: '张三', age: 18, height: 1.88}
+
+    // 改：writable属性描述符可以决定一个属性能不能被改
+    Object.defineProperty(person1, "age", {
+      writable: false,
+    });
+    person1["age"] = 19;
+    console.log(person1); // 改不掉，还是{name: '张三', age: 18, height: 1.88}
+
+    // 查：value属性描述符用来决定读取某个属性的值时返回什么值
+    Object.defineProperty(person1, "age", {
+      value: 100,
+    });
+    person1["age"] = 19;
+    console.log(person1); // 获取age的值时永远都是100，{name: '张三', age: 100, height: 1.88}
+
+    // 遍历：enumerable属性描述符可以决定一个属性在遍历时能不能被遍历到，包括Object.keys(person1)能不能获取到这个属性
+    Object.defineProperty(person1, "height", {
+      enumerable: false,
+    });
+    for (let key in person1) {
+      console.log(`key: ${key}, value: ${person[key]}`);
+      // key: name, value: 张三
+      // key: age, value: 19
+    }
+  </script>
+</body>
+
+</html>
