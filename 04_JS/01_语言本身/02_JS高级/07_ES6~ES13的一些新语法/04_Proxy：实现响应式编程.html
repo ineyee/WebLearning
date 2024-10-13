@@ -88,11 +88,21 @@
         return new Proxy(this, {
           set(target, property, newValue, receiver) {
             console.log(`设置了${property}属性：${newValue}`);
-            target[property] = newValue; // 注意这里不能用target.property，只能用字典写法
+            /*
+              注意：
+              * 这里不能用target.property，只能用字典写法
+              * 这里还是在直接操作原对象，下一篇我们会用Reflect优化成操作代理对象、然后转化为对原对象的操作、而非直接操作原对象，毕竟使用代理的目的就是操作代理对象、而非操作原对象
+            */
+            target[property] = newValue;
           },
           get(target, property, receiver) {
             console.log(`获取了${property}属性：${target[property]}`);
-            return target[property]; // 注意这里不能用target.property，只能用字典写法
+            /*
+              注意：
+              * 这里不能用target.property，只能用字典写法
+              * 这里还是在直接操作原对象，下一篇我们会用Reflect优化成操作代理对象、然后转化为对原对象的操作、而非直接操作原对象，毕竟使用代理的目的就是操作代理对象、而非操作原对象 
+            */
+            return target[property];
           },
         });
       }

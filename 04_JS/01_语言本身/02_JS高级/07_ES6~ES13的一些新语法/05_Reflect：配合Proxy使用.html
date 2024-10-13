@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    Reflect已经是一个对象了，不是一个类，所以我们不需要再new它了，直接使用它提供的方法即可
+  -->
+  <script>
+    class Person1 {
+      constructor(name, age) {
+        this.#name = name;
+        this.#age = age;
+
+        return new Proxy(this, {
+          set(target, property, newValue, receiver) {
+            console.log(`设置了${property}属性：${newValue}`);
+            /*
+              这里用Reflect优化成操作代理对象、然后转化为对原对象的操作、而非直接操作原对象，毕竟使用代理的目的就是操作代理对象、而非操作原对象
+            */
+            Reflect.set(target, property, newValue);
+          },
+          get(target, property, receiver) {
+            console.log(`获取了${property}属性：${target[property]}`);
+            /*
+              这里用Reflect优化成操作代理对象、然后转化为对原对象的操作、而非直接操作原对象，毕竟使用代理的目的就是操作代理对象、而非操作原对象
+            */
+            return Reflect.get(target, property);
+          },
+        });
+      }
+
+      #name;
+      #age;
+    }
+
+    const person1 = new Person1("王五", 20);
+    person1.name = "赵六";
+    person1.age = 21;
+    person1.name;
+    person1.age;
+  </script>
+</body>
+
+</html>
