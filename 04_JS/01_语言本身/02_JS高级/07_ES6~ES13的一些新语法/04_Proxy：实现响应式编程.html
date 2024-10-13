@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 现在我们提个需求：模拟响应式编程里监听对象属性的set和get（VUE3的响应式编程用的就是Proxy） -->
+  <!--
+    一、传统做法
+    做法：通过每个属性的setter、getter方法来做监听
+
+    劣势：需要给所有要被监听的属性都设置setter、getter方法，略显繁琐
+  -->
+  <script>
+    class Person {
+      constructor(name, age) {
+        this.#name = name;
+        this.#age = age;
+      }
+
+      #name;
+      #age;
+
+      set name(newValue) {
+        console.log(`设置了name属性：${newValue}`);
+        this.#name = newValue;
+      }
+
+      get name() {
+        console.log(`获取了name属性：${this.#name}`);
+        return this.#name;
+      }
+
+      set age(newValue) {
+        console.log(`设置了age属性：${newValue}`);
+        this.#age = newValue;
+      }
+
+      get age() {
+        console.log(`获取了age属性：${this.#age}`);
+        return this.#age;
+      }
+    }
+
+    const person = new Person("张三", 18);
+    person.name = "李四";
+    person.age = 19;
+    person.name;
+    person.age;
+  </script>
+
+  <!--
+    二、Proxy
+    做法：总共有三个对象——原对象、代理对象、handler对象
+      * 第一步：创建原对象的一个代理对象
+      * 第二步：之后就不再是操作原对象了，而是在操作代理对象，代理对象会通过handler对象里的监听器把这些操作都转化到原对象身上
+
+    优势：通过handler对象的监听器减少了setter、getter方法的编写，非常简洁
+  -->
+  <script>
+    class Person1 {
+      constructor(name, age) {
+        /*
+          第一步：创建原对象的一个代理对象
+          
+          默认的构造方法会把原对象this返回，这里我们就不能返回原对象this了，而是返回原对象this的一个代理对象new Proxy(arg1, arg2)
+
+          Proxy(arg1, arg2)构造方法有两个参数，第一个参数就是我们的原对象this，第二个参数是一个handler对象、我们需要把set、get等监听器都写在这个handler对象里（共有13个监听器、后面用到时再查吧）
+
+          set监听器的四个参数：
+          * target：原对象
+          * property：操作的属性
+          * newValue：属性的新值
+          * receiver：代理对象
+          
+          get监听器的三个参数：
+          * target：原对象
+          * property：操作的属性
+          * receiver：代理对象
+        */
+        this.#name = name;
+        this.#age = age;
+
+        return new Proxy(this, {
+          set(target, property, newValue, receiver) {
+            console.log(`设置了${property}属性：${newValue}`);
+            target[property] = newValue; // 注意这里不能用target.property，只能用字典写法
+          },
+          get(target, property, receiver) {
+            console.log(`获取了${property}属性：${target[property]}`);
+            return target[property]; // 注意这里不能用target.property，只能用字典写法
+          },
+        });
+      }
+
+      #name;
+      #age;
+    }
+
+    /*
+      第二步：之后就不再是操作原对象了，而是在操作代理对象，代理对象会通过handler对象里的监听器把这些操作都转化到原对象身上
+
+      当然外界使用起来没什么区别、好像创建和使用的还是Person对象，但实际上创建和使用的却是Person对象的代理对象了
+    */
+    const person1 = new Person1("王五", 20);
+    person1.name = "赵六";
+    person1.age = 21;
+    person1.name;
+    person1.age;
+  </script>
+</body>
+
+</html>
