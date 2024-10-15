@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- Promise的resolve上报是在别的函数里，而不是在定义Promise对象的异步任务函数本身里 -->
+  <script>
+    // 记录所有的Completer对象
+    const _getDeviceBatteryCompleterKey = "260101";
+    const _getDeviceMacAddressCompleterKey = "260102";
+    const _getDeviceFirmwareCompleterKey = "260303";
+    const _completerMap = {};
+
+    function getDeviceBattery() {
+      const promise = new Promise((resolve, reject) => {
+        _completerMap[_getDeviceBatteryCompleterKey] = resolve;
+
+        setTimeout(() => {
+          reject("获取电量超时...");
+        }, 2000);
+      });
+
+      return promise;
+    }
+
+    function getDeviceMacAddress() {
+      const promise = new Promise((resolve, reject) => {
+        _completerMap[_getDeviceMacAddressCompleterKey] = resolve;
+
+        setTimeout(() => {
+          reject("获取Mac地址超时...");
+        }, 2000);
+      });
+
+      return promise;
+    }
+
+    function getDeviceFirmware() {
+      const promise = new Promise((resolve, reject) => {
+        _completerMap[_getDeviceFirmwareCompleterKey] = resolve;
+
+        setTimeout(() => {
+          reject("获取固件版本超时...");
+        }, 2000);
+      });
+
+      return promise;
+    }
+
+    // 无论App给蓝牙设备发送多少条指令
+    // 蓝牙设备给App的响应都是在同一个回调里，这个函数就是模拟那个监听回调
+    function listenDeviceResponse() {
+      // 假设1.5s后收到了获取电量的响应
+      setTimeout(() => {
+        // 那这里得拿到获取电量的那个resolve
+        _completerMap[_getDeviceBatteryCompleterKey](80);
+      }, 1500);
+
+      // 假设1s后收到了获取Mac地址的响应
+      setTimeout(() => {
+        // 那这里得拿到获取Mac地址的那个resolve
+        _completerMap[_getDeviceMacAddressCompleterKey]("AA:BB:CC:DD:EE:FF");
+      }, 1000);
+
+      // 假设5s后收到了获取固件版本的响应
+      setTimeout(() => {
+        // 那这里得拿到获取固件版本的那个resolve
+        _completerMap[_getDeviceFirmwareCompleterKey](0.9);
+      }, 5000);
+    }
+
+    // 监听
+    listenDeviceResponse();
+
+    // 请求
+    getDeviceBattery().then((battery) => {
+      console.log(`===>获取电量成功：${battery}`);
+    }, (errorMsg) => {
+      console.log(`===>获取电量失败：${errorMsg}`);
+    });
+
+    getDeviceMacAddress().then((battery) => {
+      console.log(`===>获取Mac地址成功：${battery}`);
+    }, (errorMsg) => {
+      console.log(`===>获取Mac地址失败：${errorMsg}`);
+    });
+
+    getDeviceFirmware().then((battery) => {
+      console.log(`===>获取固件版本成功：${battery}`);
+    }, (errorMsg) => {
+      console.log(`===>获取固件版本失败：${errorMsg}`);
+    });
+  </script>
+</body>
+
+</html>
