@@ -84,14 +84,14 @@
       console.log(`===>获取电量失败：${errorMsg}`);
     });
 
-    getDeviceMacAddress().then((battery) => {
-      console.log(`===>获取Mac地址成功：${battery}`);
+    getDeviceMacAddress().then((macAddress) => {
+      console.log(`===>获取Mac地址成功：${macAddress}`);
     }, (errorMsg) => {
       console.log(`===>获取Mac地址失败：${errorMsg}`);
     });
 
-    getDeviceFirmware().then((battery) => {
-      console.log(`===>获取固件版本成功：${battery}`);
+    getDeviceFirmware().then((firmware) => {
+      console.log(`===>获取固件版本成功：${firmware}`);
     }, (errorMsg) => {
       console.log(`===>获取固件版本失败：${errorMsg}`);
     });
