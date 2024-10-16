@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../sleep_sync.js"></script>
+</head>
+
+<body>
+  <!--
+    二、async-await实现多个异步任务有顺序
+    既然存在”回调地狱“的困境，那把回调干掉不就完事了嘛，这就是async-await做的事情，async-await确实没回调了！
+  -->
+  <!--
+    1、半async-await实现多个异步任务有顺序和Promise实现多个异步任务有顺序不同的地方
+    这里的”半async-await“是指异步任务函数定义阶段还是用Promise，仅在异步任务函数调用阶段用了async-await，我们一步一步来得出最终的结论
+    ——————————————————————
+    * 异步任务函数定义阶段：
+      * 完全不需要变，可以保持跟使用Promise时
+    ——————————————————————
+    * 调用阶段：
+      * （1）原来我们是通过Promise.then的第一个函数来监听成功的数据，现在是用await来监听，当然await除了具备监听成功的数据这一大功能外，await的第二大功能就是它会卡在这里一直等、直到等到了成功的数据才会放行，这也是为什么await能实现多个异步任务按顺序串行执行的原因
+      * （2）原来我们是通过Promise.then的第二个函数来监听失败的错误，现在用try-catch的catch来监听（也就是说我们一旦使用了await-async这一套，就一定要为await随身绑定一个try-catch，否则耗时操作执行失败的错误没人处理的话代码也会崩溃，这也是为什么我们在使用网络请求、蓝牙等三方库的时候，发现人家的一些异步任务超时后或者访问不到后都是直接给外界throw Error，我们不用try-catch处理 的话代码就会崩溃的原因）
+      综上，也就是说Promise对象的executor函数里一旦调用了resolve（即成功上报函数）函数、就一定会触发await，executor函数里一旦调用了reject（即失败上报函数）函数、就一定会触发try-catch的catch
+  -->
+  <script>
+    function getMtu() {
+      const promise = new Promise((resolve, reject) => {
+        // 这里是耗时操作，我们用延时来模拟耗时操作
+        sleepSync(2000);
+
+        // 2000ms后，耗时操作执行完毕，主动上报结果
+        // 成功时
+        resolve(512);
+        // 失败时
+        // reject("未读取到数据");
+      });
+
+      return promise;
+    }
+
+    function getWiFiList() {
+      const promise = new Promise((resolve, reject) => {
+        // 这里是耗时操作，我们用延时来模拟耗时操作
+        sleepSync(2000);
+
+        // 2000ms后，耗时操作执行完毕，主动上报结果
+        // 成功时
+        // resolve({
+        //   "code": 0,
+        //   "data": ["Wi-Fi01", "Wi-Fi02"],
+        // });
+        // 失败时
+        reject({
+          "code": 404,
+          "data": [],
+        });
+      });
+
+      return promise;
+    }
+
+    async function getDeviceInfo() {
+      try {
+        // 卡在这里等mtu，等到了成功的数据，才会放行去获取Wi-Fi列表
+        const mtu = await getMtu();
+        console.log(`获取MTU成功：${mtu}`);
+
+        const wifiList = await getWiFiList();
+        console.log(`获取Wi-Fi列表成功：${wifiList["data"]}`);
+      } catch (error) {
+        console.log(`获取MTU失败 | 获取Wi-Fi列表失败：${error}`);
+      }
+    };
+    getDeviceInfo();
+  </script>
+
+  <!--
+    2、全async-await实现多个异步任务有顺序和Promise实现多个异步任务有顺序不同的地方
+    实际上async-await除了在调用异步任务函数阶段和Promise有不同之外————即解决回调地狱问题以外，在定义异步任务函数阶段也可以有不同————即async-await的代码可以比Promise简洁清晰很多，因为代码看起来完全没有Promise的痕迹、弱化了Promise这个概念的存在，对于一些没学过Promise的人来说就可以不用学Promise了，直接学回调函数和async-await这两种方法实现异步开发即可，省点劲
+    ——————————————————————
+    * 异步任务函数定义阶段：
+      * （0）上来二话不说，先用async关键字修饰一下异步任务函数
+      * （1）异步任务函数的【参数】：不需要变，保持没有回调函数这样的参数
+      * （2）异步任务函数的【返回值】：不需要变，保持返回一个Promise对象、以便外界监听耗时操作的结果（不过这里不再需要我们显示地返回Promise对象，async函数会帮我们自动返回一个Promise对象）
+      * （3）异步任务函数的【执行体】：需要变、且变得非常彻底、每一步都变了
+        * ① 【创建Promise对象和返回Promise对象的变化】：原来我们是显性地手动创建了一个Promise对象、并返回了这个Promise对象，现在不需要了，async函数内部会隐式地自动创建一个Promise对象、我们只需要返回普通数据类型的值即可、async函数内部会自动把普通数据类型的值包装进Promise对象并返回Promise对象
+        * ② 【耗时操作放在哪里执行的变化】：原来我们是把耗时操作放在Promise对象的executor函数里执行的，现在不需要了，直接把耗时操作放在异步任务函数的执行体里执行就可以了
+        * ③ 【异步任务上报成功和失败数据方式的变化】：原来我们是通过Promise对象的executor函数的resolve上报耗时操作执行成功的数据、reject上报耗时操作执行失败的错误，现在不是了，现在是通过异步任务函数的返回值上报成功的数据————代替resolve，通过在异步任务函数执行体里抛出异常来上报失败的信息————代替reject（此时回想一下网络请求、蓝牙等三方库，人家的一些异步任务超时后或者访问不到后都是直接给外界throw Error，这就是一个标准做法，我们以后在设计async函数时也要这样设计）
+    ——————————————————————
+    * 调用阶段：
+      * （1）原来我们是通过Promise.then的第一个函数来监听成功的数据，现在是用await来监听，当然await除了具备监听成功的数据这一大功能外，await的第二大功能就是它会卡在这里一直等、直到等到了成功的数据才会放行，这也是为什么await能实现多个异步任务按顺序串行执行的原因
+      * （2）原来我们是通过Promise.then的第二个函数来监听失败的错误，现在用try-catch的catch来监听（也就是说我们一旦使用了await-async这一套，就一定要为await随身绑定一个try-catch，否则耗时操作执行失败的错误没人处理的话代码也会崩溃，这也是为什么我们在使用网络请求、蓝牙等三方库的时候，发现人家的一些异步任务超时后或者访问不到后都是直接给外界throw Error，我们不用try-catch处理 的话代码就会崩溃的原因）
+      综上，也就是说Promise对象的executor函数里一旦调用了resolve（即成功上报函数）函数、就一定会触发await，executor函数里一旦调用了reject（即失败上报函数）函数、就一定会触发try-catch的catch
+  -->
+  <script>
+    async function getMtu1() {
+      // 这里是耗时操作，我们用延时来模拟耗时操作
+      sleepSync(2000);
+
+      // 2000ms后，耗时操作执行完毕，主动上报结果
+      // 成功时
+      return 512;
+      // 失败时
+      // throw Error("未读取到数据");
+    }
+
+    async function getWiFiList1() {
+      // 这里是耗时操作，我们用延时来模拟耗时操作
+      sleepSync(2000);
+
+      // 2000ms后，耗时操作执行完毕，主动上报结果
+      // 成功时
+      return {
+        "code": 0,
+        "data": ["Wi-Fi01", "Wi-Fi02"],
+      };
+      // 失败时
+      // throw {
+      //   "code": 404,
+      //   "data": [],
+      // };
+    }
+
+    async function getDeviceInfo1() {
+      try {
+        // 卡在这里等mtu，等到了成功的数据，才会放行去获取Wi-Fi列表
+        const mtu = await getMtu1();
+        console.log(`获取MTU成功：${mtu}`);
+
+        const wifiList = await getWiFiList1();
+        console.log(`获取Wi-Fi列表成功：${wifiList["data"]}`);
+      } catch (error) {
+        console.log(`获取MTU失败 | 获取Wi-Fi列表失败：${error}`);
+      }
+    };
+    getDeviceInfo1();
+  </script>
+
+  <!--
+    3、async-await实现异步开发的固定写法（实际开发中使用async-await时，我们90%都是在写这种固定的写法，一定要特别熟练形成肌肉记忆）
+        ——————————————————————
+    // （1）定义异步任务函数阶段
+    // 第一步：用async修饰一下异步任务函数
+    // 第一步：直接在异步任务函数里执行耗时操作
+    // 第三步：return上报耗时操作执行成功的数据，throw上报耗时操作执行失败的错误
+    async function asyncFunc() {
+      // 执行耗时操作...
+
+      // 耗时操作执行成功时，用return上报数据
+      return data;
+
+      // 耗时操作执行失败时，用throw函数上报错误
+      throw error;
+    }
+    ——————————————————————
+    // （2）调用异步任务函数阶段
+    // * 直接await监听成功的数据
+    // * 直接用try-catch监听失败的错误
+    try {
+      // 异步任务执行成功的监听
+      const value = await asyncFunc();
+    } catch (error) {
+      // 异步任务执行失败的监听
+    }
+    ——————————————————————
+  -->
+
+  <!--
+    4、补充一下
+    前面是为了描述方便，我们才把回调函数、Promise、async-await实现异步开发里的”异步任务函数“叫做了”异步“任务函数，但实际上只有asycn函数才是真正的异步函数，其它两个都是同步函数，也就说只有asycn函数不会阻塞线程，其它两个都会阻塞线程，这个我们要知道
+  -->
+</body>
+
+</html>
