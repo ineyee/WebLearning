@@ -16,9 +16,9 @@
     1、Promise实现异步开发和回调函数实现异步开发不同的地方
     ——————————————————————
     * 定义阶段：
-      * （1）针对异步任务函数的【参数】参来说：原来我们是自定义successCallback、failureCallback等回调函数来上报耗时操作的结果，现在Promise对象的executor函数自带了两个函数resolve（即成功上报函数）和reject（即失败上报函数）来让我们上报耗时操作的结果，所以我们不再需要写回调函数这样的参数了
-      * （2）针对异步任务函数的【返回值】参来说：原来是没有返回值的，现在我们需要返回一个Promise对象、以便外界监听耗时操作的结果
-      * （3）针对异步任务函数的【执行体】参来说：
+      * （1）针对异步任务函数的【参数】来说：原来我们是自定义successCallback、failureCallback等回调函数来上报耗时操作的结果，现在Promise对象的executor函数自带了两个函数resolve（即成功上报函数）和reject（即失败上报函数）来让我们上报耗时操作的结果，所以我们不再需要写回调函数这样的参数了
+      * （2）针对异步任务函数的【返回值】来说：原来是没有返回值的，现在我们需要返回一个Promise对象、以便外界监听耗时操作的结果
+      * （3）针对异步任务函数的【执行体】来说：
         * ① 原来我们是把耗时操作直接放在异步任务函数里执行的，现在需要创建一个Promise对象并把耗时操作放在Promise对象的executor函数里执行（Promise对象一旦创建、就会立即执行它的executor函数）
         * ② 原来我们是通过回调函数上报耗时操作的结果的，现在需要通过Promise对象的executor函数自带的两个函数resolve（即成功上报函数）和reject（即失败上报函数）来上报耗时操作的结果
     ——————————————————————
@@ -67,24 +67,31 @@
     注意：then监听里一定要把成功和失败监听都写上，否则executor函数里触发then监听时项目会崩掉
     ——————————————————————
     // （1）定义异步任务函数阶段
+    // 第一步：new Promise、返回Promise
+    // 第二步：耗时操作放在Promise的executor函数里执行
+    // 第三步：resolve上报耗时操作执行成功的数据，reject上报耗时操作执行失败的错误
     function asyncFunc() {
+      // 创建Promise对象
       const promise = new Promise((resolve, reject) => {
         // 执行耗时操作...
 
-        // 耗时操作执行成功时，用resolve函数上报
+        // 耗时操作执行成功时，用resolve函数上报数据
         resolve(data);
 
-        // 耗时操作执行失败时，用reject函数上报
+        // 耗时操作执行失败时，用reject函数上报错误
         reject(error);
       });
 
+      // 返回Promise对象
       return promise;
     }
     ——————————————————————
     // （2）调用异步任务函数阶段
+    // 第一步：获取到异步任务函数返回的Promise对象
+    // 第二步：then监听成功的数据和失败的错误
     const promise = asyncFunc();
     promise.then(
-      (result) => {
+      (value) => {
         // 异步任务执行成功的监听
       },
       (error) => {
