@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <script src="../sleep_sync.js"></script>
 </head>
 
 <body>
@@ -12,9 +13,72 @@
     一、async-await之前异步开发的困境
   -->
   <!--
-    1、实际开发中，我们经常会面临这样的需求：有好几个异步任务同时要做，但是它们之间有顺序，得等上一个执行才能执行下一个
-    
-    如果用Future来做的话，代码将是下面这样
+    1、实际开发中，我们经常会面临这样的需求：有好几个异步任务同时要做，但是它们之间有顺序，得等上一个执行完才能执行下一个
+
+    假设我们要实现一个蓝牙协议通信，App向蓝牙设备获取附近Wi-Fi列表，但是获取Wi-Fi列表之前必须先获取到MTU，如果用Promise来实现的话，代码将是下面这样：
+  -->
+  <script>
+    function getMtu() {
+      const promise = new Promise((resolve, reject) => {
+        // 这里是耗时操作，我们用延时来模拟耗时操作
+        setTimeout(() => {
+          // 2000ms后，耗时操作执行完毕，主动上报结果
+          // 成功时
+          resolve(512);
+          // 失败时
+          // reject("未读取到数据");
+        }, 2000);
+      });
+
+      return promise;
+    }
+
+    function getWiFiList() {
+      const promise = new Promise((resolve, reject) => {
+        // 这里是耗时操作，我们用延时来模拟耗时操作
+        setTimeout(() => {
+          // 2000ms后，耗时操作执行完毕，主动上报结果
+          // 成功时
+          resolve({
+            "code": 0,
+            "data": ["Wi-Fi01", "Wi-Fi02"],
+          });
+          // 失败时
+          // reject({
+          //   "code": 404,
+          //   "data": [],
+          // });
+        }, 2000);
+      });
+
+      return promise;
+    }
+
+    getMtu().then(
+      (value) => {
+        console.log(`获取MTU成功：${value}`);
+
+        getWiFiList().then(
+          (value) => {
+            console.log(`获取Wi-Fi列表成功：${value["data"]}`);
+          },
+          (error) => {
+            console.log(`获取Wi-Fi列表失败：${error["code"]}`);
+          },
+        );
+      },
+      (error) => {
+        console.log(`获取MTU失败：${error}`);
+      },
+    );
+  </script>
+
+  <!--
+    2、Promise实现多个异步任务有顺序时的困境
+    很长一段时间内我们都是通过Promise实现多个异步任务有顺序的，这样做绝对没问题，但是存在弊端：
+    * 那就是”回调地狱“，看上面请求部分一层一层的嵌套，看着有点难受，如果再多获取几个信息，那将是绝杀
+
+    既然存在”回调地狱“的困境，那把回调干掉不就完事了嘛，这就是async-await做的事情！
   -->
 </body>
 
