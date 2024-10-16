@@ -78,23 +78,29 @@
     listenDeviceResponse();
 
     // 请求
-    getDeviceBattery().then((battery) => {
-      console.log(`===>获取电量成功：${battery}`);
-    }, (errorMsg) => {
-      console.log(`===>获取电量失败：${errorMsg}`);
-    });
+    getDeviceBattery().then(
+      (value) => {
+        console.log(`===>获取电量成功：${value}`);
+      }, (error) => {
+        console.log(`===>获取电量失败：${error}`);
+      },
+    );
 
-    getDeviceMacAddress().then((macAddress) => {
-      console.log(`===>获取Mac地址成功：${macAddress}`);
-    }, (errorMsg) => {
-      console.log(`===>获取Mac地址失败：${errorMsg}`);
-    });
+    getDeviceMacAddress().then(
+      (value) => {
+        console.log(`===>获取Mac地址成功：${value}`);
+      }, (error) => {
+        console.log(`===>获取Mac地址失败：${error}`);
+      },
+    );
 
-    getDeviceFirmware().then((firmware) => {
-      console.log(`===>获取固件版本成功：${firmware}`);
-    }, (errorMsg) => {
-      console.log(`===>获取固件版本失败：${errorMsg}`);
-    });
+    getDeviceFirmware().then(
+      (value) => {
+        console.log(`===>获取固件版本成功：${value}`);
+      }, (error) => {
+        console.log(`===>获取固件版本失败：${error}`);
+      },
+    );
   </script>
 </body>
 

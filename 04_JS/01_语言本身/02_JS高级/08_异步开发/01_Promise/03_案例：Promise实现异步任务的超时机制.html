@@ -33,10 +33,10 @@
     }
 
     const promise = getDeviceBattery();
-    promise.then((battery) => {
-      console.log(`===>获取电量成功：${battery}`);
-    }, (errorMsg) => {
-      console.log(`===>获取电量失败：${errorMsg}`);
+    promise.then((value) => {
+      console.log(`===>获取电量成功：${value}`);
+    }, (error) => {
+      console.log(`===>获取电量失败：${error}`);
     });
   </script>
 </body>

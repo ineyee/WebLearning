@@ -53,8 +53,8 @@
     // 发起异步任务，先拿到Promise对象，然后监听异步任务的结果
     const promise = getWiFiList();
     promise.then(
-      (result) => {
-        console.log(`蓝牙设备响应成功：${result["data"]}`);
+      (value) => {
+        console.log(`蓝牙设备响应成功：${value["data"]}`);
       },
       (error) => {
         console.log(`蓝牙设备响应失败：${error["code"]}`);
