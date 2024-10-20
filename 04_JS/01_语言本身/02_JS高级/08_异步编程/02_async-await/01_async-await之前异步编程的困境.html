@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    一、async-await之前异步编程的困境
+  -->
+  <!--
+    1、实际开发中，我们经常会面临这样的需求：有好几个异步任务同时要做，但是它们之间有顺序，得等上一个执行完才能执行下一个
+
+    比如我们得在接口1请求成功之后才能去请求接口2，如果用Promise来实现的话，代码将是下面这样：
+  -->
+  <script>
+    function getInterface1() {
+      const promise = new Promise((resolve, reject) => {
+        fetch("https://www.bing.com", {
+          mode: 'no-cors', // 设置为 no-cors
+        }).then(
+          (value) => {
+            resolve(value);
+          },
+          (error) => {
+            reject(error);
+          },
+        );
+      });
+
+      return promise;
+    }
+
+    function getInterface2() {
+      const promise = new Promise((resolve, reject) => {
+        fetch("https://www.baidu.com", {
+          mode: 'no-cors', // 设置为 no-cors
+        }).then(
+          (value) => {
+            resolve(value);
+          },
+          (error) => {
+            reject(error);
+          },
+        );
+      });
+
+      return promise;
+    }
+
+    getInterface1().then(
+      (value) => {
+        console.log(`接口1请求成功：${value}`);
+
+        getInterface2().then(
+          (value) => {
+            console.log(`接口2请求成功：${value}`);
+          },
+          (error) => {
+            console.log(`接口2请求失败：${error}`);
+          },
+        );
+      },
+      (error) => {
+        console.log(`接口1请求失败：${error}`);
+      },
+    );
+  </script>
+
+  <!--
+    2、Promise实现多个异步耗时操作有顺序时的困境
+    很长一段时间内我们都是通过Promise来实现多个异步耗时操作有顺序的，这样做绝对没问题，但是存在弊端：
+    * 那就是”回调地狱“，看上面请求部分一层一层的嵌套，看着有点难受，如果再多获取几个信息，那将是绝杀
+
+    既然存在”回调地狱“的困境，那把回调干掉不就完事了嘛，这就是async-await做的事情！
+  -->
+</body>
+
+</html>

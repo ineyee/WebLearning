@@ -10,11 +10,15 @@
 <body>
   <!--
     这个案例模拟的就是“异步耗时操作的结果不是在异步耗时操作函数本身里就能拿到的，而是在其它地方才能拿到，比如蓝牙通信”的场景
+
+    只能用半async-await
+    因为在异步耗时操作函数定义阶段我们根本await不到成功的数据、也捕获不到失败的错误，因为异步耗时操作的结果压根不在异步耗时操作函数，而是在其它地方
+    所以只能在异步耗时操作函数调用阶段用一下async-await了
   -->
   <script>
     // 记录所有的resolve和reject
     const _getDeviceBatteryCompleterKey = "260101";
-    const _getDeviceMacAddressCompleterKey = "260102";
+    const _getDeviceMacAddressCompleterKey = "260202";
     const _getDeviceFirmwareCompleterKey = "260303";
     const _resolveMap = {};
     const _rejectMap = {};
@@ -76,7 +80,7 @@
         // 成功时
         _resolveMap[_getDeviceMacAddressCompleterKey]("AA:BB:CC:DD:EE:FF");
         // 失败时
-        // _rejectMap[_getDeviceBatteryCompleterKey]("读取Mac地址出错");
+        // _rejectMap[_getDeviceMacAddressCompleterKey]("读取Mac地址出错");
       }, 1000);
 
       // 假设5s后收到了获取固件版本的响应
@@ -93,32 +97,36 @@
     listenDeviceResponse();
 
     // 请求
-    getDeviceBattery().then(
-      (value) => {
+    async function exeEnv1() {
+      try {
+        const value = await getDeviceBattery();
         console.log(`===>获取电量成功：${value}`);
-      },
-      (error) => {
+      } catch (error) {
         console.log(`===>获取电量失败：${error}`);
-      },
-    );
+      }
+    }
 
-    getDeviceMacAddress().then(
-      (value) => {
+    async function exeEnv2() {
+      try {
+        const value = await getDeviceMacAddress();
         console.log(`===>获取Mac地址成功：${value}`);
-      },
-      (error) => {
+      } catch (error) {
         console.log(`===>获取Mac地址失败：${error}`);
-      },
-    );
+      }
+    }
 
-    getDeviceFirmware().then(
-      (value) => {
+    async function exeEnv3() {
+      try {
+        const value = await getDeviceFirmware();
         console.log(`===>获取固件版本成功：${value}`);
-      },
-      (error) => {
+      } catch (error) {
         console.log(`===>获取固件版本失败：${error}`);
-      },
-    );
+      }
+    }
+
+    exeEnv1();
+    exeEnv2();
+    exeEnv3();
   </script>
 </body>
 
