@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="cache_util.js"></script>
+</head>
+
+<body>
+  <!--
+    一、 Storage分为localStorage和sessionStorage
+    * localStorage：本地存储，类似于Flutter里的SP，是一种轻量级的持久化方案，在打开新网页、关闭网页后或者关闭浏览器后数据依然存在
+    * sessionStorage：会话存储（打开一个标签栏就算一个新会话），它只有在当前网页内打开新网页时（即target=_self时）数据才会依然存在、主要就是用来在页面之间传递一些参数类型的数据，在新标签内打开新网页时（即target=_blank时）数据不会存在，更别提关闭网页和关闭浏览器了
+  -->
+
+  <!--
+    二、localStorage和sessionStorage的基本使用
+    key和value都只能是字符串
+  -->
+  <script>
+    // set
+    localStorage.setItem("token", "712980qe80kafkj");
+    // get
+    console.log(localStorage.getItem("token"));
+    // 清空某个键值对
+    localStorage.removeItem("token");
+    // 清空所有的键值对
+    localStorage.clear();
+
+    sessionStorage.setItem("recordType", "0");
+    console.log(sessionStorage.getItem("recordType"));
+    sessionStorage.removeItem("recordType");
+    sessionStorage.clear();
+  </script>
+
+  <!--
+    三、自己封装的CacheUtil
+    * key当然只能是字符串
+    * value可以是boolean、number、string、array、object
+  -->
+  <script>
+    localCache.setCache("userInfo", {
+      "name": "张三",
+      "age": 18,
+    });
+    console.log(localCache.getCache("userInfo"));
+  </script>
+</body>
+
+</html>
