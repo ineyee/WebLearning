@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function sum(num1, num2) {
+      if (typeof num1 !== "number") {
+        throw new Error("num1的类型必须是number");
+      }
+
+      if (typeof num2 !== "number") {
+        throw new Error("num2的类型必须是number");
+      }
+
+      return num1 + num2;
+    }
+
+    sum("1", 1);
+  </script>
+</body>
+
+</html>
