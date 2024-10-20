@@ -9,23 +9,25 @@
 
 <body>
   <!--
-    实际开发中，有时我们可能希望多个异步任务都有结果了，我们再统一做成功的处理，而一旦其中任意一个异步任务失败了，我们就视作失败
+    实际开发中，有时我们可能希望多个异步耗时操作都有结果了，我们再统一做成功的处理，而一旦其中任意一个异步耗时操作失败了，我们就视作失败
 
-    比如在蓝牙通信中，我们在获取设备信息时，希望获取设备电量、获取设备Mac地址、获取设备固件版本都成功了，我们才视作设备连接成功，而一旦其中任意一个信息没获取到，我们就视作设备连接失败
+    比如在蓝牙通信中，我们在获取设备信息时，希望获取设备电量、获取设备Mac地址、获取设备固件版本都成功了，我们才视作真正蓝牙连接成功，而一旦其中任意一个信息没获取到，我们就视作蓝牙连接失败
 
     此时就可以用Promise.all来非常爽地实现这个需求
   -->
 
   <script>
-    // 记录所有的Completer对象
+    // 记录所有的resolve和reject
     const _getDeviceBatteryCompleterKey = "260101";
     const _getDeviceMacAddressCompleterKey = "260102";
     const _getDeviceFirmwareCompleterKey = "260303";
-    const _completerMap = {};
+    const _resolveMap = {};
+    const _rejectMap = {};
 
     function getDeviceBattery() {
       const promise = new Promise((resolve, reject) => {
-        _completerMap[_getDeviceBatteryCompleterKey] = resolve;
+        _resolveMap[_getDeviceBatteryCompleterKey] = resolve;
+        _rejectMap[_getDeviceBatteryCompleterKey] = reject;
 
         setTimeout(() => {
           reject("获取电量超时...");
@@ -37,7 +39,8 @@
 
     function getDeviceMacAddress() {
       const promise = new Promise((resolve, reject) => {
-        _completerMap[_getDeviceMacAddressCompleterKey] = resolve;
+        _resolveMap[_getDeviceMacAddressCompleterKey] = resolve;
+        _rejectMap[_getDeviceMacAddressCompleterKey] = reject;
 
         setTimeout(() => {
           reject("获取Mac地址超时...");
@@ -49,7 +52,8 @@
 
     function getDeviceFirmware() {
       const promise = new Promise((resolve, reject) => {
-        _completerMap[_getDeviceFirmwareCompleterKey] = resolve;
+        _resolveMap[_getDeviceFirmwareCompleterKey] = resolve;
+        _rejectMap[_getDeviceFirmwareCompleterKey] = reject;
 
         setTimeout(() => {
           reject("获取固件版本超时...");
@@ -59,7 +63,7 @@
       return promise;
     }
 
-    // 这个异步任务函数里Future.wait这个耗时操作本身就是个Promise
+    // 这个异步耗时操作函数里Promise.all这个异步耗时操作本身就返回一个Promise
     function getAllDeviceInfo() {
       const promise = new Promise((resolve, reject) => {
         const promise1 = getDeviceBattery();
@@ -70,7 +74,7 @@
           Promise.all本身的返回值也是一个Promise、这里我们称之为大Promise对象，我们就是通过这个大Promise对象的then方法来监听所有小Promise的结果的
     
           当所有小Promise对象都走resolve上报时，就会触发大Promise对象then的第一个函数————即成功，且参数是一个数组————里面存放着所有小Promise对象resolve上来的数据，数据的顺序跟[promise1, promise2, promise3]的顺序一样
-          而当任意一个小Promise对象走了reject上报时，就会立即停止其它小Promise对象的任务，并触发大Promise对象then的第二个函数————即失败，且参数不是数组、就是失败的那个小Promise对象reject上来的数据
+          而当任意一个小Promise对象走了reject上报时，就会立即停止其它小Promise对象的任务，并触发大Promise对象then的第二个函数————即失败，且参数不是数组、就是失败的那个小Promise对象reject上来的错误
         */
         Promise.all([promise1, promise2, promise3]).then(
           (valueList) => {
@@ -78,7 +82,8 @@
             console.log(`===>电量：${valueList[0]}`);
             console.log(`===>Mac地址：${valueList[1]}`);
             console.log(`===>固件版本：${valueList[2]}`);
-          }, (error) => {
+          },
+          (error) => {
             console.log("蓝牙连接失败：", error);
           },
         );
@@ -92,26 +97,30 @@
     function listenDeviceResponse() {
       // 假设1.5s后收到了获取电量的响应
       setTimeout(() => {
-        // 那这里得拿到获取电量的那个resolve
-        _completerMap[_getDeviceBatteryCompleterKey](80);
+        // 那这里得拿到获取电量的那个resolve或reject来上报数据或错误
+        // 成功时
+        _resolveMap[_getDeviceBatteryCompleterKey](80);
+        // 失败时
+        // _rejectMap[_getDeviceBatteryCompleterKey]("正在充电，无法获取...");
       }, 1500);
 
       // 假设1s后收到了获取Mac地址的响应
       setTimeout(() => {
-        // 那这里得拿到获取Mac地址的那个resolve
-        _completerMap[_getDeviceMacAddressCompleterKey]("AA:BB:CC:DD:EE:FF");
+        // 那这里得拿到获取Mac地址的那个resolve或reject来上报数据或错误
+        // 成功时
+        _resolveMap[_getDeviceMacAddressCompleterKey]("AA:BB:CC:DD:EE:FF");
+        // 失败时
+        // _rejectMap[_getDeviceBatteryCompleterKey]("读取Mac地址出错");
       }, 1000);
 
-      // 假设5s后收到了获取固件版本的响应，那下面就会连接失败
-      // setTimeout(() => {
-      //   // 那这里得拿到获取固件版本的那个resolve
-      //   _completerMap[_getDeviceFirmwareCompleterKey](0.9);
-      // }, 5000);
-      // 假设1s后收到了获取固件版本的响应，那下面就会连接成功
+      // 假设5s后收到了获取固件版本的响应
       setTimeout(() => {
-        // 那这里得拿到获取固件版本的那个resolve
-        _completerMap[_getDeviceFirmwareCompleterKey](0.9);
-      }, 1000);
+        // 那这里得拿到获取固件版本的那个resolve或reject来上报数据或错误
+        // 成功时
+        _resolveMap[_getDeviceFirmwareCompleterKey](0.9);
+        // 失败时
+        // _rejectMap[_getDeviceFirmwareCompleterKey]("读取固件版本出错");
+      }, 5000);
     }
 
     // 监听

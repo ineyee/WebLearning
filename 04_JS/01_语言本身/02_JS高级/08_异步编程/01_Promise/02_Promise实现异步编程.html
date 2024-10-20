@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    二、Promise实现异步编程
+    既然定义和调用异步耗时操作函数这两步会存在不统一的困境，那让这两步统一不就完事了嘛，这就是Promise做的事情，所有的开发者都得按Promise的固定写法来写！
+  -->
+  <!--
+    1、Promise实现异步编程和回调函数实现异步编程不同的地方
+    ——————————————————————
+    * 定义异步耗时操作函数阶段：
+      * （1）针对异步耗时操作函数的【参数】来说：
+        * 原来我们是自定义successCallback、failureCallback等回调函数来上报异步耗时操作的结果的
+        * 现在Promise对象的executor函数自带了两个函数resolve（即成功上报函数）和reject（即失败上报函数）来让我们上报异步耗时操作的结果，所以我们不再需要写回调函数这样的参数了
+      * （2）针对异步耗时操作函数的【返回值】来说：
+        * 原来是没有返回值的
+        * 现在我们需要返回一个Promise对象，以便外界监听异步耗时操作的结果
+      * （3）针对异步耗时操作函数的【执行体】来说：
+        * 原来我们是把异步耗时操作直接放在异步耗时操作函数里执行的
+        * 现在需要创建一个Promise对象并把异步耗时操作放在Promise对象的executor函数里执行（Promise对象一旦创建、就会立即执行它的executor函数）
+        
+        * 原来我们是通过回调函数上报异步耗时操作的结果的
+        * 现在需要通过Promise对象的executor函数自带的两个函数resolve（即成功上报函数）和reject（即失败上报函数）来上报异步耗时操作的结果
+    ——————————————————————
+    * 调用异步耗时操作函数阶段：
+      * 原来我们是通过回调函数来监听异步耗时操作的结果的
+      * 现在我们是通过调用异步耗时操作函数先拿到一个Promise对象，然后再通过Promise对象的then方法来监听异步耗时操作的结果。那监听什么时候会被触发呢？Promise对象的executor函数里一旦调用了resolve（即成功上报函数）函数、就一定会触发then监听的第一个函数（即成功），executor函数里一旦调用了reject（即失败上报函数）函数、就一定会触发then监听的第二个函数（即失败）
+  -->
+  <script>
+    // 同步函数 + 异步耗时操作 + Promise上报和获取异步耗时操作执行完毕的结果
+    // ① getDeviceBattery本身是个同步函数，我们把这个函数称为“异步耗时操作函数”，因为定义这个函数的目的就是为了执行它里面的“异步耗时操作”
+    function getDeviceBattery() {
+      // ② 创建Promised对象
+      const promise = new Promise((resolve, reject) => {
+        // ③ 这里是异步耗时操作，我们用setTimeout来模拟
+        setTimeout(() => {
+          // ④ 假设2s后，耗时操作执行完毕，通过Promise对象executor函数自带的两个函数来上报结果
+          // 成功时
+          resolve(80);
+          // 失败时
+          // reject("正在充电，无法获取...");
+        }, 2000);
+      });
+
+      // 返回Promised对象
+      return promise;
+    }
+
+    // ⑤ 发起异步耗时操作函数，先拿到Promise对象，然后再通过Promise对象.then来监听异步耗时操作执行完毕的结果
+    const promise = getDeviceBattery();
+    promise.then(
+      (value) => {
+        console.log(`获取电量成功：${value}`);
+      },
+      (error) => {
+        console.log(`获取电量失败：${error}`);
+      },
+    );
+  </script>
+
+  <!--
+    2、Promise实现异步编程的固定写法（实际开发中如果使用Promise，那我们90%都是在写这种固定的写法，一定要特别熟练形成肌肉记忆）
+    注意：then监听里一定要把成功和失败的监听都写上，否则executor函数里触发then监听时项目有可能会崩掉
+    ——————————————————————
+    // （1）定义异步耗时操作函数阶段：
+    // 第一步：创建一个同步函数func————即异步耗时操作函数
+    // 第二步：创建Promise对象、返回Promise对象
+    // 第三步：把异步耗时操作放在Promise对象的executor函数里执行
+    // 第四步：异步耗时操作执行完毕时，通过resolve来上报成功的数据，通过reject来上报失败的错误
+    function func() {
+      // 创建Promise对象
+      const promise = new Promise((resolve, reject) => {
+        // 执行异步耗时操作...
+
+        // 异步耗时操作执行完毕时
+        // 通过resolve来上报成功的数据
+        resolve(value);
+        // 通过reject来上报失败的错误
+        reject(error);
+      });
+
+      // 返回Promise对象
+      return promise;
+    }
+    ——————————————————————
+    // （2）调用异步耗时操作函数阶段：
+    // 第一步：先获取到异步耗时操作函数返回的Promise对象
+    // 第二步：通过Promise对象.then来监听异步耗时操作执行完毕的结果
+    const promise = func();
+    promise.then(
+      (value) => {
+        // 异步耗时操作执行成功的监听
+      },
+      (error) => {
+        // 异步耗时操作执行失败的监听
+      },
+    )
+    ——————————————————————
+  -->
+
+  <!--
+    3、Promise对象的3种状态
+    * pending（待处理状态）：我们创建出来一个Promise对象，如果从来没调用过它的resolve或reject上报数据或错误，那它就会一直处于pending状态
+    * fulfilled（成功状态）：一旦调用resolve上报数据，Promise对象就会由pending状态锁定为fulfilled状态、不会再更改
+    * rejected（失败状态）：一旦调用reject上报错误，Promise对象就会由pending状态锁定为rejected状态、不会再更改
+  -->
+</body>
+
+</html>

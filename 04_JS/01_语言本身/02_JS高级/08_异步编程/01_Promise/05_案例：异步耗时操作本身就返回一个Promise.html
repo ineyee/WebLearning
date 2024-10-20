@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    这个案例模拟的就是“异步耗时操作本身就返回一个Promise，比如网络请求、本地IO操作”的场景
+  -->
+  <script>
+    // 封装一个业务层的get请求
+    function getRequest() {
+      const promise = new Promise((resolve, reject) => {
+        // get请求是个异步耗时操作，并且get请求这个异步耗时操作本身就返回一个Promise
+        // 于是我们就能通过这个异步耗时操作返回的Promise对象.then来监听到它执行成功和失败的时机，然后分别调用resolve和reject了
+        fetch("https://www.baidu.com", {
+          mode: 'no-cors', // 设置为 no-cors
+        }).then(
+          (value) => {
+            resolve(value);
+          },
+          (error) => {
+            reject(error);
+          },
+        );
+      });
+
+      return promise;
+    }
+
+    getRequest().then(
+      (value) => {
+        console.log(`get请求成功：${value}`);
+      },
+      (error) => {
+        console.log(`get请求失败：${error}`);
+      },
+    );
+  </script>
+</body>
+
+</html>

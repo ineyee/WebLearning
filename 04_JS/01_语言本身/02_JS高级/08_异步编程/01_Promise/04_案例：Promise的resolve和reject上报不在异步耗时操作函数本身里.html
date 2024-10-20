@@ -8,17 +8,21 @@
 </head>
 
 <body>
-  <!-- Promise的resolve上报是在别的函数里，而不是在定义Promise对象的异步任务函数本身里 -->
+  <!--
+    这个案例模拟的就是“异步耗时操作的结果不是在异步耗时操作函数本身里就能拿到的，而是在其它地方才能拿到，比如蓝牙通信”的场景
+  -->
   <script>
-    // 记录所有的Completer对象
+    // 记录所有的resolve和reject
     const _getDeviceBatteryCompleterKey = "260101";
     const _getDeviceMacAddressCompleterKey = "260102";
     const _getDeviceFirmwareCompleterKey = "260303";
-    const _completerMap = {};
+    const _resolveMap = {};
+    const _rejectMap = {};
 
     function getDeviceBattery() {
       const promise = new Promise((resolve, reject) => {
-        _completerMap[_getDeviceBatteryCompleterKey] = resolve;
+        _resolveMap[_getDeviceBatteryCompleterKey] = resolve;
+        _rejectMap[_getDeviceBatteryCompleterKey] = reject;
 
         setTimeout(() => {
           reject("获取电量超时...");
@@ -30,7 +34,8 @@
 
     function getDeviceMacAddress() {
       const promise = new Promise((resolve, reject) => {
-        _completerMap[_getDeviceMacAddressCompleterKey] = resolve;
+        _resolveMap[_getDeviceMacAddressCompleterKey] = resolve;
+        _rejectMap[_getDeviceMacAddressCompleterKey] = reject;
 
         setTimeout(() => {
           reject("获取Mac地址超时...");
@@ -42,7 +47,8 @@
 
     function getDeviceFirmware() {
       const promise = new Promise((resolve, reject) => {
-        _completerMap[_getDeviceFirmwareCompleterKey] = resolve;
+        _resolveMap[_getDeviceFirmwareCompleterKey] = resolve;
+        _rejectMap[_getDeviceFirmwareCompleterKey] = reject;
 
         setTimeout(() => {
           reject("获取固件版本超时...");
@@ -57,20 +63,29 @@
     function listenDeviceResponse() {
       // 假设1.5s后收到了获取电量的响应
       setTimeout(() => {
-        // 那这里得拿到获取电量的那个resolve
-        _completerMap[_getDeviceBatteryCompleterKey](80);
+        // 那这里得拿到获取电量的那个resolve或reject来上报数据或错误
+        // 成功时
+        // _resolveMap[_getDeviceBatteryCompleterKey](80);
+        // 失败时
+        _rejectMap[_getDeviceBatteryCompleterKey]("正在充电，无法获取...");
       }, 1500);
 
       // 假设1s后收到了获取Mac地址的响应
       setTimeout(() => {
-        // 那这里得拿到获取Mac地址的那个resolve
-        _completerMap[_getDeviceMacAddressCompleterKey]("AA:BB:CC:DD:EE:FF");
+        // 那这里得拿到获取Mac地址的那个resolve或reject来上报数据或错误
+        // 成功时
+        _resolveMap[_getDeviceMacAddressCompleterKey]("AA:BB:CC:DD:EE:FF");
+        // 失败时
+        // _rejectMap[_getDeviceBatteryCompleterKey]("读取Mac地址出错");
       }, 1000);
 
       // 假设5s后收到了获取固件版本的响应
       setTimeout(() => {
-        // 那这里得拿到获取固件版本的那个resolve
-        _completerMap[_getDeviceFirmwareCompleterKey](0.9);
+        // 那这里得拿到获取固件版本的那个resolve或reject来上报数据或错误
+        // 成功时
+        _resolveMap[_getDeviceFirmwareCompleterKey](0.9);
+        // 失败时
+        // _rejectMap[_getDeviceFirmwareCompleterKey]("读取固件版本出错");
       }, 5000);
     }
 
@@ -81,7 +96,8 @@
     getDeviceBattery().then(
       (value) => {
         console.log(`===>获取电量成功：${value}`);
-      }, (error) => {
+      },
+      (error) => {
         console.log(`===>获取电量失败：${error}`);
       },
     );
@@ -89,7 +105,8 @@
     getDeviceMacAddress().then(
       (value) => {
         console.log(`===>获取Mac地址成功：${value}`);
-      }, (error) => {
+      },
+      (error) => {
         console.log(`===>获取Mac地址失败：${error}`);
       },
     );
@@ -97,7 +114,8 @@
     getDeviceFirmware().then(
       (value) => {
         console.log(`===>获取固件版本成功：${value}`);
-      }, (error) => {
+      },
+      (error) => {
         console.log(`===>获取固件版本失败：${error}`);
       },
     );

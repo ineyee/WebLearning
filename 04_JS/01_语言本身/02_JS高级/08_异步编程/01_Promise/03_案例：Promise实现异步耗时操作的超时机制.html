@@ -8,21 +8,29 @@
 </head>
 
 <body>
+  <!--
+    这个案例模拟的就是“异步耗时操作本身就是个setTimeout————主要是指超时机制那里的setTimeout、不是指模拟其它异步耗时操作那里的setTimeout”的场景
+  -->
   <script>
     function getDeviceBattery() {
       const promise = new Promise((resolve, reject) => {
-        // 假设获取电量这个操作有时1s就能返回结果，有时则需要5s才能返回结果，延时模拟耗时操作
-        // setTimeout(() => {
-        //   // JS里resolve和reject是互斥的，只要成功执行过其中任意一个，就算我们再调用另外一个也不会报错，所以不需要判断Promise对象的状态————而且JS里没有API来获取Promise对象的状态
-        //   resolve(80);
-        // }, 1000);
+        // 假设获取电量这个异步耗时操作有时1s就能返回结果，有时则需要5s才能返回结果，我们用setTimeout来模拟
         setTimeout(() => {
           // JS里resolve和reject是互斥的，只要成功执行过其中任意一个，就算我们再调用另外一个也不会报错，所以不需要判断Promise对象的状态————而且JS里没有API来获取Promise对象的状态
+          // 成功时
           resolve(80);
-        }, 5000);
+          // 失败时
+          // reject("正在充电，无法获取...");
+        }, 1000);
+        // setTimeout(() => {
+        //   // JS里resolve和reject是互斥的，只要成功执行过其中任意一个，就算我们再调用另外一个也不会报错，所以不需要判断Promise对象的状态————而且JS里没有API来获取Promise对象的状态
+        //   // 成功时
+        //   resolve(80);
+        //   // 失败时
+        //   // reject("正在充电，无法获取...");
+        // }, 5000);
 
-        // 但是我们的业务逻辑是2s后如果还拿不到结果就视作超时
-        // 所以实际开发中我们就是像下面这么写
+        // 异步耗时操作的超时机制都是通过下面这种方式实现的，实际开发中我们就是像下面这么写
         // 2s后直接执行reject，如果能执行成功的话，就代表之前肯定没执行过resolve（JS里resolve和reject是互斥的，只要成功执行过其中任意一个，就算我们再调用另外一个也不会报错，所以不需要判断Promise对象的状态————而且JS里没有API来获取Promise对象的状态），也就是代表还没拿到结果，我们就判定为超时，直接reject来结束掉本次Promise，告知外界超时，本次异步任务就算是结束了
         setTimeout(() => {
           reject("获取电量超时...");
@@ -33,11 +41,14 @@
     }
 
     const promise = getDeviceBattery();
-    promise.then((value) => {
-      console.log(`===>获取电量成功：${value}`);
-    }, (error) => {
-      console.log(`===>获取电量失败：${error}`);
-    });
+    promise.then(
+      (value) => {
+        console.log(`===>获取电量成功：${value}`);
+      },
+      (error) => {
+        console.log(`===>获取电量失败：${error}`);
+      },
+    );
   </script>
 </body>
 
