@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    值传递、引用传递和深拷贝、浅拷贝是两个体系的概念，它们之间没有任何联系，只是有些现象比较像而已
+  -->
+
+  <!--
+    一、值传递
+    当我们把基本数据类型的数据赋值给变量或传递给函数的参数时，就是值传递
+    值传递的现象是：修改变量或参数的值，不会影响原数据的值
+  -->
+  <script>
+    // 原数据
+    let str1 = "Hello";
+
+    // 赋值给变量
+    let str2 = str1;
+    str2 = "你好";
+    console.log(str1); // str1依然是：Hello
+
+    // 传递给函数的参数
+    function test1(str) {
+      str = "你好"
+    }
+    test1(str1);
+    console.log(str1); // str1依然是：Hello
+  </script>
+
+  <!--
+    二、引用传递
+    当我们把对象数据类型的数据赋值给变量或传递给函数的参数时，就是引用传递
+    引用传递传递的现象是：修改变量或参数的值，会影响原数据的值
+  -->
+  <script>
+    // 原数据
+    let obj1 = {
+      "name": "张三",
+      "age": 18,
+    };
+
+    // 赋值给变量
+    let obj2 = obj1;
+    obj2["name"] = "李四";
+    obj2["age"] = 19;
+    console.log(obj1); // obj1也变成了：{name: '李四', age: 19}
+
+    // 传递给函数的参数
+    function test2(obj) {
+      obj["name"] = "王五";
+      obj["age"] = 20;
+    }
+    test2(obj1);
+    console.log(obj1); // obj1也变成了：{name: '王五', age: 20}
+  </script>
+</body>
+
+</html>

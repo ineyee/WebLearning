@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    深拷贝、浅拷贝和值传递、引用传递是两个体系的概念，它们之间没有任何联系，只是有些现象比较像而已
+
+    注意：当我们把数组或字典赋值给变量或传递给函数的参数时，不会发生拷贝行为，根本不是走拷贝这套体系，而是走引用传递那套体系，不要搞混了
+  -->
+
+  <!--
+    一、浅拷贝
+    当我们对数组或字典使用展开运算符时，会发生拷贝行为、就是浅拷贝
+    浅拷贝的现象是：
+     * 1、会创建新的数组或字典
+     * 2、但是只会拷贝第一层数据给新数组或字典，并且第一层数据如果是基本数据类型那就拷贝值、第一层数据如果是引用数据类型那就拷贝引用，所以第一层数据中引用数据类型的数据是跟旧数组或字典共享同一份的；不会拷贝嵌套层数据，嵌套层数据全部都是跟旧数组或字典共享同一份的，这也是为什么称它为“浅”拷贝的原因
+     * 3、因此修改浅拷贝数组或字典第一层数据中基本数据类型的数据，不会影响原数组或字典；修改浅拷贝数组或字典第一层数据中引用数据类型的数据，会影响原数组或字典；修改浅拷贝数组或字典嵌套层数据，会影响原数组或字典
+  -->
+  <script>
+    /*
+      原数组：
+      true是第一层数据
+      1是第一层数据
+      "1"是第一层数据
+      [1, 2, 3, [4, 5, 6]]是第一层数据，但[4, 5, 6]是嵌套层数据
+      { "name": "张三", "age": 18, "pet": { "type": "Dog", "age": 1 } }是第一层数据，但{ "type": "Dog", "age": 1 }是嵌套层数据
+    */
+    const array = [
+      true,
+      1,
+      "1",
+      [1, 2, 3, [4, 5, 6]],
+      { "name": "张三", "age": 18, "pet": { "type": "Dog", "age": 1 } },
+    ];
+
+    /*
+      浅拷贝数组：
+      1、shallowCopyArray和array是两个完全独立的数组
+      2、会把第一层数据中true、1、"1"这种基本数据类型的值给拷贝过来，会把第一层数据中[1, 2, 3, [4, 5, 6]]、{ "name": "张三", "age": 18, "pet": { "type": "Dog", "age": 1 } }这种引用数据类型的引用给拷贝过来，不会拷贝[4, 5, 6]、{ "type": "Dog", "age": 1 }这种嵌套层数据
+    */
+    const shallowCopyArray = [...array];
+
+    // 3.1 修改浅拷贝数组第一层数据中基本数据类型的数据，不会影响原数组
+    shallowCopyArray[0] = false;
+    shallowCopyArray[1] = 2;
+    shallowCopyArray[2] = "2";
+    console.log(shallowCopyArray); // shallowCopyArray前三个元素是：[false, 2, '2']
+    console.log(array); // array前三个元素依然是：[true, 1, '1']
+
+    // 3.2 修改浅拷贝数组第一层数据中引用数据类型的数据，会影响原数组
+    shallowCopyArray[3][0] = 11;
+    shallowCopyArray[4]["name"] = "李四";
+    console.log(shallowCopyArray); // shallowCopyArray第四、五个元素是：[11, 2, 3, [4, 5, 6]]、{ "name": "李四", "age": 18, "pet": { "type": "Dog", "age": 1 } }
+    console.log(array); // array第四个元素也变成了：[11, 2, 3, [4, 5, 6]]、{ "name": "李四", "age": 18, "pet": { "type": "Dog", "age": 1 } }
+
+    // 3.3 修改浅拷贝数组嵌套层数据，会影响原数组
+    shallowCopyArray[3][3][0] = 44;
+    shallowCopyArray[4]["pet"]["type"] = "Cat";
+    console.log(shallowCopyArray); // shallowCopyArray第四、五个元素是：[11, 2, 3, [44, 5, 6]]、{ "name": "李四", "age": 18, "pet": { "type": "Cat", "age": 1 } }
+    console.log(array); // array第四个元素也变成了：[11, 2, 3, [44, 5, 6]]、{ "name": "李四", "age": 18, "pet": { "type": "Cat", "age": 1 } }
+  </script>
+
+  <!--
+    二、深拷贝
+    JS里没有提供现成的深拷贝操作，因为深拷贝是一个非常占用内存的操作，如有需要得由我们自己实现
+    深拷贝的现象是：
+     * 1、会创建新的数组或字典
+     * 2、并且会彻彻底底地拷贝一份数据给新数组或字典，无论什么数据类型、无论嵌套多少层，这也是为什么称它为“深”拷贝的原因
+     * 3、因此修改深拷贝数组或字典，不会影响原数组或字典
+  -->
+  <script>
+    // 原字典
+    const map = {
+      "name": "张三",
+      "age": 18,
+      "pets": [
+        {
+          "type": "Dog",
+          "info": {
+            "age": 1,
+            "height": 60,
+            "weight": 80,
+          },
+        },
+        {
+          "type": "Cat",
+          "info": {
+            "age": 2,
+            "height": 30,
+            "weight": 40,
+          },
+        },
+      ],
+    };
+
+    // 深拷贝字典
+    const deepCopyMap = myDeepCopy(map);
+
+    // 修改深拷贝字典任意层的数据，都不会影响原字典
+    deepCopyMap["name"] = "李四";
+    deepCopyMap["pets"][0]["info"]["age"] = 2;
+    console.log(deepCopyMap); // deepCopyMap里的值已经变成了："李四"、2
+    console.log(map); // map里相应的值还是："张三"、1
+
+    // 使用递归遍历数组或字典来实现深拷贝
+    function myDeepCopy(obj) {
+      // 如果外界传进来的是基本数据类型或undefined或null，直接给它原样返回，不需要做深拷贝
+      if (typeof obj !== "object" || obj === null) {
+        return obj;
+      }
+
+      // 先处理数组，因为数组和字典的typeof都是"object"，但是只有数组有额外的方法来判断"object"到底是不是一个数组
+      // 如果obj是数组
+      if (Array.isArray(obj)) {
+        // 创建一个新的数组
+        const deepCopyArray = [];
+        // 遍历obj所有的元素
+        for (let i = 0; i < obj.length; i++) {
+          // 如果元素是基本数据类型或undefined或null、那就会直接赋值，如果还是数组或字典的话、那就得递归一下完成深度赋值
+          deepCopyArray[i] = myDeepCopy(obj[i]);
+        }
+        // 返回深拷贝数组
+        return deepCopyArray;
+      }
+
+      // 如果obj是字典
+      // 创建一个新的字典
+      const deepCopyMap = {};
+      // 遍历obj所有的key
+      for (const key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+          // 如果key对应的value是基本数据类型或undefined或null、那就会直接赋值，如果还是数组或字典的话、那就得递归一下完成深度赋值
+          deepCopyMap[key] = myDeepCopy(obj[key]);
+        }
+      }
+      // 返回深拷贝字典
+      return deepCopyMap;
+    }
+  </script>
+
+  <!--
+    总结，深拷贝和浅拷贝的异同：
+    * 1、首先它俩都会创建新的数组或字典
+    * 2、只不过深拷贝数组或字典是彻彻底底拷贝了一份数据出来、无论嵌套多少层，而浅拷贝数组或字典只会拷贝第一层数据、不会拷贝嵌套层数据
+    * 3、因此修改深拷贝数组或字典，绝对不会影响原数组或字典，但是修改浅拷贝数组或字典，就有可能会影响原数组或字典、也有可能不会影响原数组或字典
+  -->
+</body>
+
+</html>
