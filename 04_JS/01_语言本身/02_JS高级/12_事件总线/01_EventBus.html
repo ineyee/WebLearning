@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    JS、Dart里的EventBus类似于OC、Swift里的Notification，一般用来进行跨组件的通信和数据传递。如果没有EventBus的话，跨组件的通信和数据传递就得通过一层一层的嵌套回调函数来实现，非常繁琐
+
+    JS里没有提供现成的EventBus，如有需要得由我们自己实现
+  -->
+  <button class="page1Pop">退出界面一</button>
+  <button class="page2Pop">退出界面二</button>
+  <button class="login">登录</button>
+  <button class="logout">退出登录</button>
+
+  <script>
+    class EventBus {
+      constructor() {
+        this.#eventMap = {};
+      }
+
+      #eventMap;
+
+      // 监听事件
+      on(eventName, eventCallback) {
+        if (this.#eventMap[eventName] === undefined || this.#eventMap[eventName] === null) {
+          // eventCallback应该用数组来保存，因为同一个eventName可能有好几个地方在监听，是一对多的关系
+          this.#eventMap[eventName] = [];
+        }
+        this.#eventMap[eventName].push(eventCallback);
+      }
+
+      // 取消监听事件
+      off(eventName, eventCallback) {
+        if (this.#eventMap[eventName] === undefined || this.#eventMap[eventName] === null) {
+          return;
+        }
+
+        this.#eventMap[eventName] = this.#eventMap[eventName].filter(callback => callback !== eventCallback);
+
+        if (this.#eventMap[eventName].length === 0) {
+          delete this.#eventMap[eventName];
+        }
+      }
+
+      // 发出事件
+      emit(eventName, ...args) {
+        if (this.#eventMap[eventName] === undefined || this.#eventMap[eventName] === null) {
+          return;
+        }
+
+        for (const eventCallback of this.#eventMap[eventName]) {
+          eventCallback(...args);
+        }
+      }
+    }
+  </script>
+
+  <script>
+    const eventBus = new EventBus();
+
+    // 1.1 假设这是在界面一里【监听】登录事件和退出登录事件
+    const page1LoginEventCallback = (userInfo) => {
+      console.log(`界面一监听到了登录事件，登录用户为：${userInfo["username"]} ${userInfo["password"]}`);
+    };
+    const page1LogoutEventCallback = () => {
+      console.log("界面一监听到了退出登录事件");
+    };
+    eventBus.on("loginEvent", page1LoginEventCallback);
+    eventBus.on("logoutEvent", page1LogoutEventCallback);
+
+    // 1.2 假设这是在pop掉界面一，界面销毁时我们得【取消】事件监听来避免内存泄漏
+    const page1PopButton = document.querySelector(".page1Pop");
+    page1PopButton.onclick = () => {
+      console.log("界面一销毁了");
+
+      eventBus.off("loginEvent", page1LoginEventCallback);
+      eventBus.off("logoutEvent", page1LogoutEventCallback);
+    };
+
+    // 2.1 假设这是在界面二里【监听】登录事件和退出登录事件
+    const page2LoginEventCallback = (userInfo) => {
+      console.log(`界面二监听到了登录事件，登录用户为：${userInfo["username"]} ${userInfo["password"]}`);
+    };
+    const page2LogoutEventCallback = () => {
+      console.log("界面二监听到了退出登录事件");
+    };
+    eventBus.on("loginEvent", page2LoginEventCallback);
+    eventBus.on("logoutEvent", page2LogoutEventCallback);
+
+    // 2.2 假设这是在pop掉界面二，界面销毁时我们得【取消】事件监听来避免内存泄漏
+    const page2PopButton = document.querySelector(".page2Pop");
+    page2PopButton.onclick = () => {
+      console.log("界面二销毁了");
+
+      eventBus.off("loginEvent", page2LoginEventCallback);
+      eventBus.off("logoutEvent", page2LogoutEventCallback);
+    };
+
+    // 3 假设这是在登录界面和退出登录界面里【发出】事件
+    const loginButton = document.querySelector(".login");
+    loginButton.onclick = () => {
+      eventBus.emit("loginEvent", { "username": "张三", "password": "123456" });
+    };
+
+    const logoutButton = document.querySelector(".logout");
+    logoutButton.onclick = () => {
+      eventBus.emit("logoutEvent");
+    };
+  </script>
+</body>
+
+</html>
