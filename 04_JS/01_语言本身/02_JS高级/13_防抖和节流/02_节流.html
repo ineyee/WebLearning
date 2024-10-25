@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <script src="underscore.js"></script>
+</head>
+
+<body>
+  <!--
+    防抖和节流都是用来处理暴力事件的，只不过它们俩的处理方式不同、适用于不同的场景
+  -->
+
+  <!--
+    一、节流的处理方式
+    处理方式：节流的核心思想是“每隔一段时间执行一次”，即它压根不会管事件本身触发得有多频繁，只要事件在不断地发生就行、它有自己的节奏、会在设定的时间间隔处执行一次事件，除非时间间隔到了发现已经没有事件需要执行了才会停下
+    
+    举例来说：支付宝点击咻咻咻按钮抢红包，点一下就能抢到一个红包
+    如果我们不做节流，用户暴力点击咻咻咻按钮时，每点击一次就能抢到一个红包，那不得把支付宝给抢穷了
+    而如果我们做了节流，用户暴力点击咻咻咻按钮时，比如无论用户在1s内点击了多少次咻咻咻按钮，支付宝都会视作用户在这1s内只点击了一次咻咻咻按钮，也就是说只要用户在那不断地点，支付宝就会每隔1s给用户一个红包，除非用户不点了，所以抢红包跟用户点多快其实没关系，人家已经设定好了每隔1s给你一个红包
+
+    此处去体会节流和防抖的区别，同样都是处理按钮的暴力点击，这里如果用防抖的话，用户只要一直点下去、那就只能等点击结束时才能拿到唯一的一个红包了，用户反而得点慢点才能拿到更多的红包
+  -->
+  <button>支付</button>
+  <script>
+    const payButton = document.querySelector("button");
+
+    // 不做节流
+    // payButton.onclick = () => {
+    //   console.log("支付：不做节流");
+    // };
+
+    // 做了节流，使用三方库underscore
+    // payButton.onclick = _.debounce(() => {
+    //   console.log("支付：做了节流");
+    // }, 500);
+
+    // 做了节流，自己实现核心思想（只是核心思想，不健全，实际开发中用三方库）
+    payButton.onclick = debounce(() => {
+      console.log("支付：做了节流");
+    }, 500)
+
+    // 节流函数的核心思想
+    function debounce(executeFn, delayMs) {
+      let timer;
+
+      // 外界onclick绑定的已经不再是原来的executeFn，而是节流函数，所以这里得返回一个函数
+      return function () {
+        // 如果timer已经创建过，代表之前已经触发过一次事件
+        if (timer !== null) {
+          // 那就clearTimeout清掉上一次的定时器、也就会取消掉定时器的事件————即上一次事件，并走下面的代码重新为本次事件延时
+          clearTimeout(timer);
+          timer = null;
+        }
+
+        // 不立即执行executeFn，而是延时多少ms后执行再executeFn
+        timer = setTimeout(() => {
+          executeFn();
+
+          // 执行完后，置位timer
+          clearTimeout(timer);
+          timer = null;
+        }, delayMs);
+      };
+    }
+  </script>
+
+  <!--
+    二、节流的适用场景
+    1、按钮的暴力点击：比如点一下按钮就触发一次支付操作，不做节流的话就会出现重复提交订单的错误，所以得做节流“等用户点完”再发起支付
+    2、输入框的暴力输入：比如输入一个字符就向服务端请求相关的商品，不做节流的话对服务器的压力就太大了、而且频繁的请求界面上的呈现对用户也不太友好，所以得做节流“等用户输完”再发起搜索
+  -->
+</body>
+
+</html>
