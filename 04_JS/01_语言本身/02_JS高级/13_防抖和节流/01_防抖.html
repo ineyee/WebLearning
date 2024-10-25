@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <script src="underscore.js"></script>
+</head>
+
+<body>
+  <!--
+    防抖和节流都是用来处理暴力事件的，只不过它们俩的处理方式不同、适用于不同的场景
+  -->
+
+  <!--
+    一、防抖的处理方式
+    处理方式：防抖的核心思想是“延时一会再执行”，即在事件触发后不是立即执行事件，而是先延时一会，如果在这次“延时”期间内事件又被触发了，则不执行上一次事件并重新开始给本次事件延时，直到某次“延时”期间内没再触发事件，此时才去执行事件
+    
+    举例来说：点击支付按钮发起支付
+    如果我们不做防抖，用户暴力点击支付按钮时，每点击一次就会发起一次支付，这就会导致短时间内用户重复提交很多次支付，容易出现数据错误
+    而如果我们做了防抖，用户暴力点击支付按钮时，比如用户第一次点击支付按钮时我们不是立即“发起支付”，而是延时500ms才“发起支付”，但是如果在这500ms内用户又点击了支付按钮，那我们就会抛弃掉上一次“发起支付”事件，并开始为最新的这次“发起支付”事件延时500ms，如果500ms内用户没再点击支付按钮，我们才会真正“发起支付”，这样就可以实现用户暴力点击时依然只发起一次支付
+  -->
+  <button>支付</button>
+  <script>
+    const payButton = document.querySelector("button");
+
+    // 不做防抖
+    // payButton.onclick = () => {
+    //   console.log("支付：不做防抖");
+    // };
+
+    // 做了防抖，使用三方库underscore
+    // payButton.onclick = _.debounce(() => {
+    //   console.log("支付：做了防抖");
+    // }, 500);
+
+    // 做了防抖，自己实现核心思想（只是核心思想，不健全，实际开发中用三方库）
+    payButton.onclick = debounce(() => {
+      console.log("支付：做了防抖");
+    }, 500)
+
+    // 防抖函数的核心思想
+    function debounce(executeFn, delayMs) {
+      let timer;
+
+      // 外界onclick绑定的已经不再是原来的executeFn，而是防抖函数，所以这里得返回一个函数
+      return function () {
+        // 如果timer已经创建过，代表之前已经触发过一次事件
+        if (timer !== null) {
+          // 那就clearTimeout清掉上一次的定时器、也就会取消掉定时器的事件————即上一次事件，并走下面的代码重新为本次事件延时
+          clearTimeout(timer);
+          timer = null;
+        }
+
+        // 不立即执行executeFn，而是延时多少ms后执行再executeFn
+        timer = setTimeout(() => {
+          executeFn();
+
+          // 执行完后，置位timer
+          clearTimeout(timer);
+          timer = null;
+        }, delayMs);
+      };
+    }
+  </script>
+
+  <!--
+    二、防抖的适用场景
+    1、按钮的暴力点击：比如点一下按钮就触发一次支付操作，不做防抖的话就会出现重复提交订单的错误，所以得做防抖“等用户点完”再发起支付
+    2、输入框的暴力输入：比如输入一个字符就向服务端请求相关的商品，不做防抖的话对服务器的压力就太大了、而且频繁的请求界面上的呈现对用户也不太友好，所以得做防抖“等用户输完”再发起搜索
+  -->
+</body>
+
+</html>
