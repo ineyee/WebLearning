@@ -24,54 +24,52 @@
 
     此处去体会节流和防抖的区别，同样都是处理按钮的暴力点击，这里如果用防抖的话，用户只要一直点下去、那就只能等点击结束时才能拿到唯一的一个红包了，用户反而得点慢点才能拿到更多的红包
   -->
-  <button>支付</button>
+  <button>咻咻咻</button>
   <script>
-    const payButton = document.querySelector("button");
+    const xiuButton = document.querySelector("button");
+    let count = 0;
 
     // 不做节流
-    // payButton.onclick = () => {
-    //   console.log("支付：不做节流");
+    // xiuButton.onclick = () => {
+    //   count++;
+    //   console.log(`咻咻咻：${count}个红包`);
     // };
 
     // 做了节流，使用三方库underscore
-    // payButton.onclick = _.debounce(() => {
-    //   console.log("支付：做了节流");
-    // }, 500);
+    // xiuButton.onclick = _.throttle(() => {
+    //   count++;
+    //   console.log(`咻咻咻：${count}个红包`);
+    // }, 1000);
 
     // 做了节流，自己实现核心思想（只是核心思想，不健全，实际开发中用三方库）
-    payButton.onclick = debounce(() => {
-      console.log("支付：做了节流");
-    }, 500)
+    xiuButton.onclick = throttle(() => {
+      count++;
+      console.log(`咻咻咻：${count}个红包`);
+    }, 1000);
 
     // 节流函数的核心思想
-    function debounce(executeFn, delayMs) {
-      let timer;
+    function throttle(executeFn, intervalMs) {
+      let lastTime = 0;
 
       // 外界onclick绑定的已经不再是原来的executeFn，而是节流函数，所以这里得返回一个函数
       return function () {
-        // 如果timer已经创建过，代表之前已经触发过一次事件
-        if (timer !== null) {
-          // 那就clearTimeout清掉上一次的定时器、也就会取消掉定时器的事件————即上一次事件，并走下面的代码重新为本次事件延时
-          clearTimeout(timer);
-          timer = null;
-        }
-
-        // 不立即执行executeFn，而是延时多少ms后执行再executeFn
-        timer = setTimeout(() => {
+        // 如果这次点击的时间和上次点击的时间之间太短，不够时间间隔那就视作没发生
+        // 这里最好不要用setInterval来实现，因为节流需要不断地触发回调，而setInterval本身可能由于其它耗时操作导致不精准，而且setInterval也可能会因为累积多个未完成的回调一起执行而导致错误，反正这类场景都是用户在不断地手动触发回调嘛、又不是得靠时钟自动触发，所以直接用用户点击时的时间来做就行了
+        const nowTime = Date.now();
+        if (nowTime - lastTime >= intervalMs) {
+          lastTime = nowTime;
           executeFn();
-
-          // 执行完后，置位timer
-          clearTimeout(timer);
-          timer = null;
-        }, delayMs);
+        }
       };
     }
   </script>
 
   <!--
     二、节流的适用场景
-    1、按钮的暴力点击：比如点一下按钮就触发一次支付操作，不做节流的话就会出现重复提交订单的错误，所以得做节流“等用户点完”再发起支付
-    2、输入框的暴力输入：比如输入一个字符就向服务端请求相关的商品，不做节流的话对服务器的压力就太大了、而且频繁的请求界面上的呈现对用户也不太友好，所以得做节流“等用户输完”再发起搜索
+    1、按钮的暴力点击：比如支付宝点击咻咻咻按钮抢红包、点一下就能抢到一个红包，做节流可以避免红包被抢爆
+    2、鼠标移动事件：比如我们白板项目里画线、画图形、拖动元素、拖动画布等，本质上其实都是鼠标移动事件，做节流可以避免记录大量无意义的数据或更新
+    3、调整窗口大小：窗口大小调整会触发大量resize事件，节流让页面在固定时间间隔调整布局，减少重绘和回流，保持流畅体验
+    4、页面滚动：滚动事件频繁触发会导致页面卡顿，用节流限制执行频率，每隔固定时间才执行一次，比如在用户滚动过程中更新导航栏、图片懒加载、定位更新等
   -->
 </body>
 
