@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 纯Promise版 -->
+  <script>
+    fetch("http://123.207.32.32:1888/02_param/postjson", {
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json",
+      },
+      "body": JSON.stringify({
+        "username": "张三",
+        "password": "123456",
+      }),
+      "timeout": 3000,
+    }).then(
+      (value) => {
+        // 获取到响应（是个Stream）
+        const responseStream = value;
+        // 解析成相应的JS对象（responseStream.json()依然是返回一个Promise，所以得继续.then）
+        responseStream.json().then(
+          (value) => {
+            console.log(`请求成功：${value}`);
+          },
+          (error) => {
+            console.log(`请求失败内层：${error}`);
+          },
+        );
+      },
+      (error) => {
+        console.log(`请求失败外层：${error}`);
+      },
+    );
+  </script>
+
+  <!-- async-await版 -->
+  <script>
+    async function envFn() {
+      try {
+        const responseStream = await fetch("http://123.207.32.32:1888/02_param/postjson", {
+          "method": "POST",
+          "headers": {
+            "Content-Type": "application/json",
+          },
+          "body": JSON.stringify({
+            "username": "张三",
+            "password": "123456",
+          }),
+          "timeout": 3000,
+        });
+        const value = await responseStream.json();
+        console.log(`请求成功：${value}`);
+      } catch (error) {
+        console.log(`请求失败：${error}`);
+      }
+    }
+    envFn();
+  </script>
+</body>
+
+</html>

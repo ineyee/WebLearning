@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button>手动取消网络请求</button>
+
+  <script>
+    // 第一步：创建网络请求
+    const xhr = new XMLHttpRequest();
+
+    // 第二步：配置网络请求
+    // method：请求方法
+    // url：请求地址
+    xhr.open("POST", "http://123.207.32.32:1888/02_param/postjson");
+
+    // 第三步：发起网络请求
+    // 设置请求的超时时长（如果过了超时时长还没有拿到响应的话会被视为超时，请求会被自动取消）
+    xhr.timeout = 15000;
+    // 设置请求头为JSON提交
+    xhr.setRequestHeader("Content-Type", "application/json");
+    // 用JSON的格式设置请求体并发起请求（注意：必须先把JS里的Map序列化为JSON字符串，再传递给服务器）
+    xhr.send(JSON.stringify({
+      "username": "张三",
+      "password": "123456",
+    }));
+
+    // 第四步：监听网络请求响应的回调
+    xhr.onload = function () {
+      // 根据响应的状态码判断是请求成功还是请求失败
+      if (xhr.status >= 200 && xhr.status < 300) {
+        // 获取到响应（是个JSON字符串）
+        const responseString = xhr.response;
+        // 解析成相应的JS对象
+        const responseMap = JSON.parse(responseString);
+        console.log(`请求成功：${responseMap}`);
+      } else {
+        console.log(`请求失败：${xhr.status}`);
+      }
+    };
+
+    // 当然我们也可以手动取消网络请求
+    const button = document.querySelector("button");
+    button.onclick = function () {
+      xhr.abort(); 
+    };
+  </script>
+
+  <!--
+    补充：在一个界面里发起了网络请求，但是在拿到响应之前这个界面已经退出并且所有的资源都已经释放了，那后续会发生什么？
+    * 1、服务器的行为：服务器在收到请求后会进行正常处理，最终生成响应并将数据发送给客户端。服务器一般不会主动跟踪客户端的状态（如界面是否已销毁），所以它不会在意客户端是否已经不再需要响应，它该干啥还干啥
+    * 2、客户端的行为：
+      * （1）如果客户端使用的HTTP库支持取消请求并且请求在界面退出时得到了【取消】，那么客户端将【不会收到响应】
+      * （2）但是，如果【没有显式取消请求】，客户端的网络层可能会在后台收到这个响应数据。大多数情况下，如果请求已完成但没有挂钩界面的生命周期，【客户端可能会接收响应但不会有任何后续处理、这是允许发生的】，因为界面相关的资源已经释放或回调已解绑
+    * 3、因此客户端开发需要特别注意：
+      * （1）要么在界面退出时，取消该界面里的所有请求（一般很少这么做）
+      * （2）要么在界面退出时，确保该界面里所有的资源都正常释放了，以确保就算客户端接收到了响应但也不会做任何后续处理，否则由于内存泄漏（例如异步任务未绑定界面的生命周期、网络请求的回调仍在内存中），客户端在收到响应后继续做后续处理会出bug甚至崩溃
+  -->
+</body>
+
+</html>
