@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .h2Ele {
+      color: red;
+    }
+  </style>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+
+<body>
+  <!--
+    现在我们知道了有三种方式可以用来编写HTML结构：
+    1、直接通过HTML代码编写：如果HTML结构是确定的，推荐直接通过HTML代码编写，而且能通过HTML代码编写就尽量通过HTML代码编写，它本来就是负责这个事的
+    2、通过JS的DOM操作创建和插入：对于那些从服务器获取的、大量有规律的、但是数量不确定的数据在展示时，可以通过DOM操作创建和插入
+    3、通过jQuery的DOM操作创建和插入：对于那些从服务器获取的、大量有规律的、但是数量不确定的数据在展示时，可以通过DOM操作创建和插入
+  -->
+
+  <div class="box">
+    <h1>我是h1元素</h1>
+  </div>
+
+  <script>
+    // 1、创建元素
+    // 给jQuery构造函数传入一个标签字符串，就可以创建一个元素
+    const $h2Ele = $("<h2>");
+    $h2Ele.addClass("h2Ele"); // 设置类名
+    $h2Ele.text("我是h2元素"); // 设置文本内内容
+
+    // 2、插入元素
+    const $boxEle = $(".box");
+    // （1）append子元素：插入到boxEle所有子元素的最后面，可批量
+    $boxEle.append($h2Ele);
+    // （2）prepend子元素：插入到boxEle所有子元素的最前面，可批量
+    // 注意：因为DOM对象和HTML元素是一对一的，所以同一个DOM对象只能在DOM Tree中出现一次，否则和HTML Tree就没法一一对应了，就算你有两个一模一样的DOM对象，也只能复制一份分别插入，而不同插入同一个DOM对象。所以如果像下面这样直接“boxEle.prepend(h2Ele);”，因为“boxEle.append(h2Ele);”和“boxEle.prepend(h2Ele);”插入的是同一个h2Ele，所以只有prepend会生效，append就被覆盖掉了。如果想前后都生效，那就只能创建一个跟h2Ele一模一样的元素再prepend（稍后我们再说元素的拷贝，这里先手动创建一个全新的DOM对象）
+    // boxEle.prepend(h2Ele);
+    const $h2Ele1 = $("<h2>");
+    $h2Ele1.addClass("h2Ele");
+    $h2Ele1.text("我是h2元素");
+    $boxEle.prepend($h2Ele1);
+    // （3）after兄弟元素：插入到boxEle的后面，可批量
+    const $h2Ele2 = $("<h2>");
+    $h2Ele2.addClass("h2Ele");
+    $h2Ele2.text("我是h2元素");
+    $boxEle.after($h2Ele2);
+    // （4）before兄弟元素：插入到boxEle的前面，可批量
+    const $h2Ele3 = $("<h2>");
+    $h2Ele3.addClass("h2Ele");
+    $h2Ele3.text("我是h2元素");
+    $boxEle.before($h2Ele3);
+    // （5）replaceWith当前元素：把boxEle替换掉，可批量
+    const $h2Ele4 = $("<h2>");
+    $h2Ele4.addClass("h2Ele");
+    $h2Ele4.text("我是被替换的h2元素");
+    $boxEle.replaceWith($h2Ele4);
+  </script>
+</body>
+
+</html>
