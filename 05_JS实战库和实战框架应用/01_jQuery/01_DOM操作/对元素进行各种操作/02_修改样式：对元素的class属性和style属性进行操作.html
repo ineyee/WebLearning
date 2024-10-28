@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+
+      background-color: red;
+
+      color: black;
+    }
+
+    .box1 {
+      width: 100px;
+      height: 100px;
+
+      background-color: red;
+
+      color: black;
+    }
+
+    .box1--active {
+      background-color: orange;
+
+      color: white;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+
+<body>
+  <!--
+    我们已经知道所谓DOM操作就是通过JS的API获取到HTML元素，然后再通过JS的API对HTML元素进行各种操作
+    实际开发中，我们做得最多的DOM操作其实就是获取到HTML元素，然后修改HTML元素的样式
+    而跟这个DOM操作关联最大的两个属性就是class属性和style属性，class属性一般就是为了给HTML元素一个标识、以便做style用的，因此我们单独把这两个属性拎出来专门说
+  -->
+
+  <!-- 我们写个小demo，模拟之前王者荣耀那个hover状态的变化 -->
+  <!--
+    方式一：通过修改内联样式style的方式来实现修改样式，值都是字符串
+      劣势：当要修改的属性比较多时，相当于是我们要在JS里写大量的CSS样式，JS就负责了太多的事情，这是不推荐的，这种情况下我们还是建议把大量的CSS样式交由CSS代码自己去做
+      优势：有极少数的一些情况，需要精准地修改某个CSS属性的值，如点一下按钮、某个元素的宽度就加100px，这通过添加和移除class的方式就很难实现、因为CSS class里面一般都是把值写死、而不能动态变化，而通过修改内联样式style的方式实现起来却很简单，修改属性的量毕竟也不多
+  -->
+  <div class="box">
+    王者荣耀
+  </div>
+  <script>
+    const $boxEle = $(".box");
+    $boxEle.on("mouseover", function () {
+      $(this).css({
+        backgroundColor: "orange",
+        color: "white",
+      });
+    });
+    // JS中属性赋值为空字符串，将使用默认值（浏览器提供的默认值或上一次使用的值）
+    $boxEle.on("mouseout", function () {
+      $(this).css({
+        backgroundColor: "",
+        color: "",
+      });
+    });
+
+    let clickCount = 0;
+    $boxEle.on("click", function () {
+      clickCount++;
+
+      $boxEle.css({
+        width: `${100 * (clickCount + 1)}px`,
+      });
+    });
+  </script>
+
+  <!--
+    方式二：通过添加和移除class的方式来实现修改样式
+      优势：实际开发中，几乎所有的情况都推荐使用这种方式，这样CSS样式还是可以交由CSS代码自己去做，JS只负责事件跟样式绑定就行
+      式交由CSS代码自己去做
+      劣势：有极少数的一些情况，需要精准地修改某个CSS属性的值，如点一下按钮、某个元素的宽度就加100px，这通过添加和移除class的方式就很难实现、因为CSS class里面一般都是把值写死、而不能动态变化，而通过修改内联样式style的方式实现起来却很简单，修改属性的量毕竟也不多
+
+      * 查询HTML元素有没有某个类：ele.classList.contains(className)
+      * 给HTML元素添加某个类：ele.classList.add(className)
+      * 给HTML元素移除某个类：ele.classList.remove(className)
+      * 给HTML元素切换某个类（不存在就添加、存在就移除，相当于上面三个方法的合并）：ele.classList.toggle(className)
+        注意：className不是class的全名，只写类名就行了，因为这些方法是classList的，明显已经知道是针对class了，不需要.来表明是个类选择器
+  -->
+  <div class="box1">
+    王者荣耀
+  </div>
+  <script>
+    const $box1Ele = $(".box1");
+    $box1Ele.on("mouseover", function () {
+      $box1Ele.toggleClass("box1--active");
+    });
+    $box1Ele.on("mouseout", function () {
+      $box1Ele.toggleClass("box1--active");
+    });
+  </script>
+</body>
+
+</html>
