@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+</head>
+
+<body>
+  <button class="button3">按钮3</button>
+
+  <script>
+    // 通过HTML元素对应jQuery对象的on来监听
+    // 优势：能取消监听
+    // 劣势：写起来麻烦点
+    let $button3 = $(".button3");
+    $button3.on("click", function () {
+      console.log("按钮3");
+    });
+
+    let callback = function () {
+      console.log("按钮3，但是这个回调响应一次就会被移除掉");
+      $button3.off("click", callback);
+    }
+    $button3.on("click", callback);
+  </script>
+</body>
+
+</html>
