@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="box">
+    <h2>我是标题</h2>
+    <div class="container">
+      <p>
+        我是段落，<span class="keyword">kobe</span>哈哈哈
+      </p>
+      <p>
+        我也是段落，<span class="keyword">james</span>呵呵呵
+      </p>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script>
+    // 1、给jQuery构造函数传入一个【元素】，就可以获取到被包装成jQuery对象的该元素（其实是这样的关系：HTML元素对应一个DOM对象，jQuery对象有一个属性指向了这个DOM对象、然后jQuery对象又扩展了很多属性和方法）
+    // 在jQuery中，开发者通常在变量名前加$符号来表示该变量包含的是一个jQuery对象，而不是原生的DOM元素
+
+    // 获取window对象
+    const $window = jQuery(window);
+    console.log($window);
+
+    // 获取document对象
+    const $document = $(document);
+    console.log($document);
+
+    // 2、给jQuery构造函数传入一个【选择器】，就可以获取到所有元素的集合（一个类数组对象），类似于JS原生里的querySelectorAll
+    // 在jQuery中，开发者通常在变量名前加$符号来表示该变量包含的是一个jQuery对象，而不是原生的DOM元素
+
+    // 获取html元素
+    const $html = jQuery("html");
+    console.log($html);
+
+    // 获取head元素
+    const $head = $("head");
+    console.log($head);
+
+    // 获取body元素
+    const $body = jQuery("body");
+    console.log($body);
+
+    // 选择器的完整名称是.keyword，.代表是个class选择器，keyword是类名
+    // API里只是表明要通过选择器去查询，但是没有表明是什么类型的选择器，所以要填入完整名称，而不能直接填入类名
+    // 如果有很多元素都使用了相同的选择器，jQuery构造函数会找到所有的元素才停下来
+    const $keywordEleList = $(".keyword");
+    console.log($keywordEleList); // [span.keyword, span.keyword]
+  </script>
+</body>
+
+</html>
