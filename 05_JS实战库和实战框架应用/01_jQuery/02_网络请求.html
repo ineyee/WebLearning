@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+
+<body>
+  <!--
+    jQuery的网络请求是对XHR的封装
+  -->
+  <script>
+    $.ajax("http://httpbin.org/post", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify({
+        "username": "张三",
+        "password": "123456",
+      }),
+      timeout: 3000,
+      success: function (value) {
+        // 获取到响应（直接就是JS对象）  
+        const response = value;
+        console.log(`请求成功：${response}`);
+      },
+      error: (error) => {
+        console.log(`请求失败：${error}`);
+      },
+    });
+  </script>
+</body>
+
+</html>
