@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .btn {
+      width: 100px;
+      height: 100px;
+
+      background-color: red;
+    }
+
+    .box {
+      width: 10000px;
+      height: 10000px;
+    }
+  </style>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+
+<body>
+  <div class="btn">回到顶部</div>
+  <div class="box"></div>
+
+  <!-- 因为window对象没有父视图了，它不能再相对于谁了，所以它没有位置的说法，只有宽高的说法 -->
+
+  <script>
+    // 获取 window 有效宽高（网页宽高，实际开发中更常用）
+    console.log($(window).width()); // window.innerWidth
+    console.log($(window).height()); // window.innerHeight
+
+    // 获取滚动偏移量
+    $(window).on("click", function () {
+      console.log($(window).scrollLeft()); // window.scrollX
+      console.log($(window).scrollTop());  // window.scrollY
+    });
+
+    // 滚动到指定位置
+    $(".btn").on("click", function () {
+      $(window).scrollTop(0); // 滚动到顶部
+      $(window).scrollLeft(0); // 滚动到左边缘
+    });
+  </script>
+</body>
+
+</html>
