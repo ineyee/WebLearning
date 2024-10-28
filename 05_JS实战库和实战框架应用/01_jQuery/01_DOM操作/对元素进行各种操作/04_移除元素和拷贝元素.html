@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+
+<body>
+  <div class="box">
+    <h1>我是h1元素</h1>
+  </div>
+
+  <script>
+    // 1、移除DOMTree中的某个DOM对象，会连同子元素一起移除（我们知道本质上是在移除DOM对象，但在API层面上看是在移除HTML元素）
+    let $boxEle = $(".box");
+    $boxEle.remove();
+
+    // 2. 拷贝DOM对象，创建DOM对象的另一种方式（我们知道本质上是在拷贝DOM对象，但在API层面上看是在拷贝HTML元素）
+    // （1）浅拷贝，只拷贝当前元素本身
+    let $copiedBoxEle = $boxEle.clone(false);
+    console.log($copiedBoxEle);
+
+    // （2）深拷贝，拷贝当前元素及其子元素
+    let $deepCopiedBoxEle = $boxEle.clone(true);
+    console.log($deepCopiedBoxEle);
+  </script>
+</body>
+
+</html>
