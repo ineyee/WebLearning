@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    jQuery是一个快速、小型且功能丰富的JS库
+    jQuery官网对自己的描述是：使得DOM操作、事件处理、动画和网络请求之类的事情变得更加简单
+  -->
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script>
+    // 引入jQuery后，这个库会自动在window对象上添加一个jQuery构造函数（jQuery本身也是一个对象）
+    console.log(window.jQuery); // function
+    // 我们可以省略window直接拿到这个jQuery构造函数
+    console.log(jQuery); // function
+    // 这个库还提供了用美元符$来作为这个jQuery构造函数的简写
+    console.log($); // function
+
+    console.log(window.jQuery === jQuery); // true
+    console.log(jQuery === $); // true
+  </script>
+</body>
+
+</html>
