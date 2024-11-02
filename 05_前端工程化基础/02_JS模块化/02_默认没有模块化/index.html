@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    所有的JS代码别看着写到了一个一个的js文件里，但其实它们还是共享全局作用域的，所以就算在不同的js文件里我们也不能定义重复的变量名和函数名，一重复就报错
+
+    所以这份代码一跑起来就会报错：personName和run重复定义
+  -->
+  <script src="file1.js"></script>
+  <script src="file2.js"></script>
+  <script>
+    // 全局作用域
+    const personName = "王五";
+
+    function run() {
+      console.log(`${personName} run`);
+    }
+  </script>
+</body>
+
+</html>
