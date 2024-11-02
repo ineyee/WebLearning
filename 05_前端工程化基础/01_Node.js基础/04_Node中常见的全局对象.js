@@ -8,6 +8,7 @@ console.log(__dirname); // /Users/yiyi/Desktop/WebLearning/05_前端工程化基
 console.log(__filename); // /Users/yiyi/Desktop/WebLearning/05_前端工程化基础/01_Node.js基础/01_基础知识/04_Node中常见的全局对象.js
 
 // 3、模块化相关的全局对象，后面模块化时具体学习
+// 注意：module全局对象和exports全局对象是每个模块里都有自己的一个，它们并不像globalThis全局对象一样是整个项目只有一个；require函数这个全局对象倒是整个项目只有一个
 console.log("module = ", module);
 console.log("exports = ", exports);
 console.log("require() = ", require);
