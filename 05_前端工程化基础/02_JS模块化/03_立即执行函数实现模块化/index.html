@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    使用立即执行函数的确可以实现模块化，但是这玩意没个统一的标准，每个人在定义立即执行函数的返回值和接收返回值的变量名时都是千差万别的，协作开发挺费劲
+    因此JS社区里就涌现出了很多模块化方案来制定统一的标准，CommonJS就是其中的代表
+    而直到ES6，ECMA才提出了官方的模块化方案ESModule
+  -->
+  <script src="file1.js"></script>
+  <script src="file2.js"></script>
+  <script>
+    // 全局作用域
+    const personName = "王五";
+    function run() {
+      console.log(`${personName} run`);
+    }
+    run(); // 王五 run
+
+    module1.run(); // 张三 run
+    module2.run(); // 李四 run
+  </script>
+</body>
+
+</html>
