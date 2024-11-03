@@ -1,0 +1,21 @@
+{
+  "name": "npm_demo02",
+  "version": "1.0.0",
+  "description": "这是一个npm的demo项目",
+  "private": true,
+  "author": "qwer@qq.com",
+  "license": "ISC",
+  "keywords": [],
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js",
+    "build": "webpack xxx.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "dayjs": "^1.11.13"
+  },
+  "devDependencies": {
+    "webpack": "^5.73.0"
+  }
+}
