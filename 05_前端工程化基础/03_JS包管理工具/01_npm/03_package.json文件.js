@@ -1,5 +1,7 @@
-// 1、package.json文件是我们项目的配置文件，里面记录着我们项目的很多信息
-// 实际开发中，我们都会在项目的根目录下创建一个package.json文件（见npm_demo02）：cd到项目的根目录，执行命令“npm init --yes”或“npm init -y”来为项目创建一个package.json文件，init代表初始化项目，--yes和-y代表package.json文件里全部采用默认值
+/*
+  1、package.json文件是我们项目的配置文件，里面记录着我们项目的很多信息
+  实际开发中，我们都会在项目的根目录下创建一个package.json文件（见npm_demo02）：cd到项目的根目录，执行命令“npm init --yes”或“npm init -y”来为项目创建一个package.json文件，init代表初始化项目，--yes和-y代表package.json文件里全部采用默认值
+*/
 
 // 2、package.json文件必须是一个标准的json文件，所以里面不能写注释，我们把注释写在这里
 const packageJson = {
