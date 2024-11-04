@@ -40,8 +40,12 @@ const packageJson = {
   // 执行“npm install xxx”命令就会把某个库安装到dependencies下
   // 执行“npm install”命令就会把所有的库安装到dependencies下
   "dependencies": {
+    // 三方库
     "axios": "^1.7.7",
-    "dayjs": "^1.11.13"
+    "dayjs": "^1.11.13",
+    // 私有库（git和path）
+    "base_js_byGit": "git+ssh://git@gitee.com:yourusername/base_js_byGit.git#master",
+    "base_js_byPath": "file:/Users/yourusername/Projects/base_js_byPath"
   },
   // 仅开发环境下，项目所有用到的依赖（三方库、私有库等）
   // 执行“npm install xxx -D”命令就会把某个库安装到devDependencies下
