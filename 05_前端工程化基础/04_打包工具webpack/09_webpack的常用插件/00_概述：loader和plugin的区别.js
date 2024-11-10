@@ -1,0 +1,2 @@
+// webpack里的loader一般用来对特定类型的模块进行处理，感觉比较专业化，比如css-loader专门用来处理.css模块、babel-loader专门用来处理.js模块、type: "asset"专门用来处理图片类型的模块、vue-loader专门用来处理.vue模块等等
+// 而webpack里的plugin处理的内容则更加宽泛、渗透到了webpack的各个环节，也就是说loader以外所有的杂活都由插件来干，比如全局变量注入（DefinePlugin）、资源管理（CleanPlugin）、HTML文件的压缩优化（HtmlWebpackPlugin）等
