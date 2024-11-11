@@ -6,4 +6,6 @@
 // html-webpack-plugin就会被安装到项目的node_modules文件夹下了
 
 // 第二步：为项目配置HtmlWebpackPlugin插件
-// 去webpack.config.js文件里去配置即可，这样webpack打包时就会根据相应的模板为我们生成并压缩HTML文件了
+// 去webpack.config.js文件里去配置即可
+// 这样webpack打包时就会根据相应的模板为我们生成并压缩HTML文件了
+// webpack打包好的JS文件会注入到模版HTML文件中展示
