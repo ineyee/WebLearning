@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--
+    2.3 我们在做vue开发时，一般都会在body元素下面创建一个id为app的div元素
+    vue create的App就会挂载到这个div上，即把app的内容渲染到这个div元素内
+  -->
+  <div id="app"></div>
+
+  <!-- 1、导入vue -->
+  <script src="https://unpkg.com/vue@latest"></script>
+  <!-- 2、使用vue -->
+  <script>
+    // 2.1 创建app
+    const app = Vue.createApp({
+      // 2.1.1 template是视图
+      // 接收一个字符串，字符串的内容就是我们要编写的HTML
+      // 
+      // 可以用插值语法{{}}展示data中的数据
+      // 可以用@事件绑定methods中的事件
+      template: `
+        <h2>我是标题</h2>
+        <p>我是内容：{{ content }}</p>
+        <button @click="changeContent">修改内容</button>
+      `,
+      // 2.1.2 data是数据
+      // 接收一个函数，函数的返回值必须是一个map，map的内容就是我们要展示的数据
+      // 
+      // 注意：这个函数绝对不能使用箭头函数，因为这里箭头函数的this会指向window这个全局对象，而Vue设计这个函数的this得指向当前的Vue对象——app，以确保能访问到当前的Vue对象的属性和方法。只要我们不使用箭头函数，Vue内部就会将this强制指向当前的Vue对象
+      data: function () {
+        return {
+          content: "Hello World",
+        };
+      },
+      // 2.1.3 methods是事件
+      // 接收一个map，map的内容就是我们要处理的事件
+      // 
+      // 注意：这里所有的函数绝对不能使用箭头函数，因为这里箭头函数的this会指向window这个全局对象，而Vue设计这里所有的函数的this得指向当前的Vue对象——app——的代理对象，以确保能访问到当前的Vue对象的data及其他属性和方法，并能使用响应式。只要我们不使用箭头函数，Vue内部就会将this强制指向当前的Vue对象的代理对象
+      methods: {
+        changeContent: function () {
+          this.content = "Hello Vue";
+        },
+      },
+    });
+    // 2.2 挂载app
+    app.mount("#app");
+  </script>
+</body>
+
+</html>
