@@ -30,21 +30,37 @@
         <p>我是内容：{{ content }}</p>
         <button @click="changeContent">修改内容</button>
       `,
+
       // 2.1.2 data是数据
       // 接收一个函数，函数的返回值必须是一个map，map的内容就是我们要展示的数据
       // 
       // 注意：这个函数绝对不能使用箭头函数，因为这里箭头函数的this会指向window这个全局对象，而Vue设计这个函数的this得指向当前的Vue对象——app，以确保能访问到当前的Vue对象的属性和方法。只要我们不使用箭头函数，Vue内部就会将this强制指向当前的Vue对象
-      data: function () {
+      // 
+      // 或者：我们可以直接采用下面的简写方式，函数在类里面定义时不就是这种简写方式嘛
+      // data: function () {
+      //   return {
+      //     content: "Hello World",
+      //   };
+      // },
+      data() {
         return {
           content: "Hello World",
         };
       },
+
       // 2.1.3 methods是事件
       // 接收一个map，map的内容就是我们要处理的事件
       // 
       // 注意：这里所有的函数绝对不能使用箭头函数，因为这里箭头函数的this会指向window这个全局对象，而Vue设计这里所有的函数的this得指向当前的Vue对象——app——的代理对象，以确保能访问到当前的Vue对象的data及其他属性和方法，并能使用响应式。只要我们不使用箭头函数，Vue内部就会将this强制指向当前的Vue对象的代理对象
+      // 
+      // 或者：我们可以直接采用下面的简写方式，函数在类里面定义时不就是这种简写方式嘛
+      // methods: {
+      //   changeContent: function () {
+      //     this.content = "Hello Vue";
+      //   },
+      // },
       methods: {
-        changeContent: function () {
+        changeContent() {
           this.content = "Hello Vue";
         },
       },
