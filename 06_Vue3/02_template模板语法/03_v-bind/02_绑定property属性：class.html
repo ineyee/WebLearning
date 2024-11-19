@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+
+      background-color: red;
+
+      color: black;
+    }
+
+    .active {
+      background-color: orange;
+
+      color: white;
+    }
+  </style>
+</head>
+
+<!--
+  HTML自带的属性是property属性，如src、href、class、style等
+-->
+
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    const app = Vue.createApp({
+      // 视图
+      // 
+      // property属性前面加个”v-bind:“，然后在""里就能绑定data里的数据了
+      // “:”是”v-bind:“的语法糖
+      // 
+      // 当绑定的property属性是class时，""里我们可以传一个map进去，map的key就是class名、map的value是一个bool值代表要不要把这个class添加到元素身上
+      // 并且绑定的class（.active是绑定的class）不会覆盖普通的class（.box是普通的class），而是对普通class的追加
+      template: `
+        <div class="box" :class="{ active: isActive }" @mouseover="mouseover" @mouseout="mouseout">
+          王者荣耀
+        </div>
+      `,
+
+      // 数据
+      data() {
+        return {
+          isActive: false,
+        };
+      },
+
+      // 事件
+      methods: {
+        mouseover() {
+          this.isActive = true;
+        },
+        mouseout() {
+          this.isActive = false;
+        },
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>

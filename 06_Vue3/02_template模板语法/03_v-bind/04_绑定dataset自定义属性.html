@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<!--
+  HTML自定义的属性是dataset自定义属性，如data-name、data-age、data-height等
+-->
+
+<body>
+  <div>
+
+  </div>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    const app = Vue.createApp({
+      // 视图
+      // 
+      // property属性前面加个”v-bind:“，然后在""里就能绑定data里的数据了
+      // “:”是”v-bind:“的语法糖
+      // 
+      // 绑定dataset自定义属性时：
+      // 可以一个一个绑定
+      // 也可以整体绑定，整体绑定就是把一个值直接赋值给v-bind（此时就不能再用语法糖了），会自动打散成一个一个的属性
+      template: `
+        <div :data-name="dataName" :data-age="dataAge" :data-height="dataHeight"></div>
+        <div v-bind="dataInfo"></div>
+      `,
+
+      // 数据
+      data() {
+        return {
+          dataName: "张三",
+          dataAge: 18,
+          dataHeight: "180",
+          dataInfo: {
+            "data-name": "张三",
+            "data-age": 18,
+            "data-height": "180",
+          },
+        };
+      },
+
+      // 事件
+      methods: {
+
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>

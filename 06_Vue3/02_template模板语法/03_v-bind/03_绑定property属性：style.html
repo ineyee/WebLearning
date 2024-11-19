@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+
+      background-color: red;
+
+      color: black;
+    }
+  </style>
+</head>
+
+<!--
+  HTML自带的属性是property属性，如src、href、class、style等
+-->
+
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    const app = Vue.createApp({
+      // 视图
+      // 
+      // property属性前面加个”v-bind:“，然后在""里就能绑定data里的数据了
+      // “:”是”v-bind:“的语法糖
+      // 
+      // 当绑定的property属性是style时，""里我们可以传一个map进去，map的key就是style的属性名（注意如果是类似font-size这种有连接符的，必须用字典式写法搞成字符串，否则无法识别）、map的value就是style的属性值（注意如果是类似30px这种不是一个纯粹值的，必须用字典式写法搞成字符串，否则无法识别）
+      template: `
+        <div class="box" :style="{ width: width }" @click="onclick">
+          王者荣耀
+        </div>
+      `,
+
+      // 数据
+      data() {
+        return {
+          clickCount: 0,
+          width: "100px",
+        };
+      },
+
+      // 事件
+      methods: {
+        onclick() {
+          this.clickCount++;
+          this.width = `${100 * (this.clickCount + 1)}px`;
+        },
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<!--
+  HTML自带的属性是property属性，如src、href、class、style等
+-->
+
+<body>
+  <div>
+
+  </div>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    const app = Vue.createApp({
+      // 视图
+      // 
+      // property属性前面加个”v-bind:“，然后在""里就能绑定data里的数据了
+      // “:”是”v-bind:“的语法糖
+      template: `
+        <img v-bind:src="imgUrl" alt="我是图片">
+        <a :href="linkUrl">百度一下</a>
+      `,
+
+      // 数据
+      data() {
+        return {
+          imgUrl: "https://picsum.photos/200",
+          linkUrl: "https://baidu.com",
+        };
+      },
+
+      // 事件
+      methods: {
+
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>
