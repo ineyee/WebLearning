@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    const app = Vue.createApp({
+      // 视图
+      // 
+      // 除了直接插入data中的数据，还可以插入一个methods中的函数调用
+      template: `
+        <div>当前日期：{{ formatDate(curTimestamp) }}</div>
+      `,
+
+      // 数据
+      data() {
+        return {
+          curTimestamp: 1732008005,
+        };
+      },
+
+      // 事件
+      methods: {
+        formatDate(timestamp) {
+          return "2024-11-19 17:20:05";
+        },
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>

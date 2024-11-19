@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    const app = Vue.createApp({
+      // 视图
+      // 
+      // 除了直接插入data中的数据，还可以插入一个表达式
+      template: `
+        <div>当前计数双倍：{{ count * 2 }}</div>
+        <button @click="add">➕</button>
+      `,
+
+      // 数据
+      data() {
+        return {
+          count: 0,
+        };
+      },
+
+      // 事件
+      methods: {
+        add() {
+          this.count++;
+        },
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>

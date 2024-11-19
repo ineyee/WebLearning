@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    const app = Vue.createApp({
+      // 视图
+      // 
+      // 可以用插值语法{{}}展示data中的数据，并且data中的数据发生变化时，会自动刷新视图
+      template: `
+        <div>当前计数：{{ count }}</div>
+        <button @click="add">➕</button>
+      `,
+
+      // 数据
+      data() {
+        return {
+          count: 0,
+        };
+      },
+
+      // 事件
+      methods: {
+        add() {
+          this.count++;
+        },
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>
