@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    const app = Vue.createApp({
+      // 视图
+      // 
+      // 默认情况下，data里的任一数据发生变化，template里的视图全部都会刷新一遍，类似于Flutter里把Obx包裹在界面的根部
+      // 
+      // 使用v-memo可以实现局部刷新，类似于Flutter里把Obx仅仅包裹在需要刷新的Widget处，可以在一定程度上提高性能
+      // 比如name变化时只刷新name对应的div，而不要刷新age和height对应的div，age、height的变化和刷新也是同理
+      // 
+      // v-memo的格式为：v-memo="[数据1, 数据2, ...]"
+      // 代表接收一个数组，数组中的任一数据发生变化时就会触发对应视图的刷新
+      template: `
+        <div v-memo="[name]">姓名：{{ name }}</div>
+        <div v-memo="[age]">年龄：{{ age }}</div>
+        <div v-memo="[height]">身高：{{ height }}</div>
+        <button @click=changeInfo>修改信息</button>
+      `,
+
+      // 数据
+      data() {
+        return {
+          name: "张三",
+          age: 18,
+          height: 180,
+        };
+      },
+
+      // 事件
+      methods: {
+        changeInfo() {
+          this.name = "李四";
+          // this.age = 19;
+          // this.height = 190;
+        },
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>
