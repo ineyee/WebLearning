@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<!--
+  命令式编程 + 响应式编程
+  命令式编程也可以结合响应式编程来做开发，命令式编程和声明式编程更多的是强调静态数据的编程范式，而响应式编程则更多的强调动态数据的编程范式——如“数据发生变化时，响应式机制自动刷新视图”
+
+  iOS开发里OC、Swift就可以结合ReactiveCocoa和RxSwift这类库来实现响应式编程
+  Web原生开发里就可以结合Proxy和Reflect来实现响应式编程
+-->
+
+<body>
+  <div>
+    <!-- 视图 -->
+    <div class="count">当前计数：0</div>
+    <button class="add">➕</button>
+
+    <script>
+      // 数据
+      // 数据对象
+      const data = {
+        count: 0,
+      };
+      // 数据对象的代理对象
+      const proxyData = new Proxy(data, {
+        set(target, property, newValue) {
+          Reflect.set(target, property, newValue);
+          if (property === "count") {
+            // 响应式机制自动刷新视图
+            document.querySelector(".count").textContent = `当前计数：${newValue}`;
+          }
+        },
+      });
+
+      // 事件
+      document.querySelector(".add").onclick = function () {
+        // 数据发生变化时
+        proxyData.count++;
+      };
+    </script>
+  </div>
+</body>
+
+</html>

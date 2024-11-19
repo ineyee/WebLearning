@@ -7,6 +7,14 @@
   <title>Document</title>
 </head>
 
+<!--
+  声明式编程 + 响应式编程
+  声明式编程也可以结合响应式编程来做开发，声明式编程和命令式编程更多的是强调静态数据的编程范式，而响应式编程则更多的强调动态数据的编程范式——如“数据发生变化时，响应式机制自动刷新视图”
+
+  Flutter开发里就可以结合GetX这类库来实现响应式编程
+  Vue开发里默认就是声明式编程 + 响应式编程
+-->
+
 <body>
   <div id="app"></div>
 
@@ -16,8 +24,7 @@
       // 视图
       template: `
         <div>当前计数：{{ count }}</div>
-        <button @click="add">+1</button>
-        <button @click="sub">-1</button>
+        <button @click="add">➕</button>
       `,
       // 数据
       data: function () {
@@ -29,9 +36,6 @@
       methods: {
         add: function () {
           this.count++;
-        },
-        sub: function () {
-          this.count--;
         },
       },
     });

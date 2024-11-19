@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<!--
+  声明式编程更加强调“描述任务的目标”——即“what to do”，程序员需要告诉计算机“要做成什么样”，而不是“怎么做”
+
+  Flutter开发、Vue开发都是声明式编程
+-->
+
+<body>
+  <div id="app"></div>
+
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    const app = Vue.createApp({
+      // 第1步：搭建视图
+      template: `
+        <div>当前计数：{{ nonReactiveCount }}</div>
+        <button @click="add">➕</button>
+      `,
+
+      // 第2步：初始化数据（这里我们不使用响应式数据，而是使用下面的非响应式数据）
+      data() {
+        return {};
+      },
+
+      // 第3步：处理事件
+      methods: {
+        add: function () {
+          // 3.1 修改数据
+          this.nonReactiveCount++;
+          // 3.2 主动刷新视图
+          this.$forceUpdate();
+        },
+      },
+
+      // 组件挂载时的生命周期钩子
+      mounted() {
+        // 初始化非响应式数据
+        this.nonReactiveCount = 0;
+        // 并让视图显示初始化数据
+        this.$forceUpdate();
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>

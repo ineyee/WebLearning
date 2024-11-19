@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<!--
+  命令式编程更加强调“如何实现任务”——即“how to do”，程序员需要明确告诉计算机如何逐步完成任务
+
+  iOS开发、Web原生开发都是命令式编程
+-->
+
+<body>
+  <div>
+    <!-- 第1步：搭建视图 -->
+    <div class="count">当前计数：0</div>
+    <button class="add">➕</button>
+
+    <script>
+      // 第2步：初始化数据
+      let count = 0;
+
+      // 第3步：处理事件
+      document.querySelector(".add").onclick = function () {
+        // 3.1 修改数据
+        count++;
+        // 3.2 主动刷新视图
+        document.querySelector(".count").textContent = `当前计数：${count}`;
+      };
+    </script>
+  </div>
+</body>
+
+</html>
