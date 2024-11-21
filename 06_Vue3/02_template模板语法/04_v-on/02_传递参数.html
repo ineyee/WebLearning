@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    const app = Vue.createApp({
+      // 视图
+      // 
+      // 1、如果在绑定methods事件的时候，不传递任何参数，那么会默认传递一个event参数过去
+      // 2、我们可以在绑定methods事件的时候，传递自定义参数，不过这种情况下就不会默认传递event参数了，如果我们也想继续传递event参数过去，得用”$event“这个固定的写法
+      template: `
+        <button @click="button1Click">按钮一</button>
+        <button @click="button2Click('张三', 18, $event)">按钮二</button>
+      `,
+
+      // 数据
+      data() {
+        return {
+
+        };
+      },
+
+      // 事件
+      methods: {
+        button1Click(event) {
+          console.log("button1Click", event); // 能正常拿到event
+        },
+        button2Click(name, age, event) {
+          console.log("button2Click", name, age, event); // 能正常拿到event
+        },
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>

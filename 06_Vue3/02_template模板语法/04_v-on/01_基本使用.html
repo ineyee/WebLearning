@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    const app = Vue.createApp({
+      // 视图
+      // 
+      // 使用”v-on:“来监听事件，并绑定methods中的事件
+      // “@”是”v-on:“的语法糖
+      template: `
+        <button v-on:click=button1Click>按钮一</button>
+        <button @click=button2Click @mouseover=button2MouseOver @mouseout=button2MouseOut>按钮二</button>
+      `,
+
+      // 数据
+      data() {
+        return {
+
+        };
+      },
+
+      // 事件
+      methods: {
+        button1Click() {
+          console.log("点击了按钮一");
+        },
+        button2Click() {
+          console.log("点击了按钮二");
+        },
+        button2MouseOver() {
+          console.log("进入了按钮二");
+        },
+        button2MouseOut() {
+          console.log("离开了按钮二");
+        },
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    const app = Vue.createApp({
+      // 视图
+      // 
+      // 1、阻止事件分发，在事件后面加上“.stop”修饰符即可
+      // 本质就是Vue在底层帮我们调用原生里的event.stopPropagation();
+      // 2、阻止默认行为，在事件后面加上“.prevent”修饰符即可
+      // 本质就是Vue在底层帮我们调用原生里的event.preventDefault();
+      template: `
+        <div class="box" @click="divClick">
+          <button @click.stop="buttonClick">按钮</button>
+          <a href="https://baidu.com" @click.prevent.stop="aClick">百度一下</a>
+        </div>
+      `,
+
+      // 数据
+      data() {
+        return {
+
+        };
+      },
+
+      // 事件
+      methods: {
+        divClick() {
+          console.log("divClick");
+        },
+        buttonClick() {
+          console.log("buttonClick");
+        },
+        aClick() {
+          console.log("aClick");
+        },
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>
