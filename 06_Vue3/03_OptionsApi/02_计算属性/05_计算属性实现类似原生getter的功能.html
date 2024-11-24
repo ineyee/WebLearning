@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    const app = Vue.createApp({
+      // 视图
+      template: `
+        <button @click="click">按钮</button>
+      `,
+
+      // 数据
+      data() {
+        return {
+          _message: "Hello Vue",
+        };
+      },
+      computed: {
+        message() {
+          console.log("getter了message");
+          return this._message;
+        },
+      },
+
+      // 事件
+      methods: {
+        click() {
+          console.log(this.message);
+        },
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>
