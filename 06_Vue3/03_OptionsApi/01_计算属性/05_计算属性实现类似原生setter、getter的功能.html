@@ -14,7 +14,8 @@
     const app = Vue.createApp({
       // 视图
       template: `
-        <button @click="click">按钮</button>
+        <button @click="setter">setter</button>
+        <button @click="getter">getter</button>
       `,
 
       // 数据
@@ -23,16 +24,26 @@
           _message: "Hello Vue",
         };
       },
+      // 计算属性只能用在存储属性身上
       computed: {
-        message() {
-          console.log("getter了message");
-          return this._message;
+        message: {
+          set(newValue) {
+            console.log("setter了message", newValue);
+            this._message = newValue;
+          },
+          get() {
+            console.log("getter了message");
+            return this._message;
+          },
         },
       },
 
       // 事件
       methods: {
-        click() {
+        setter() {
+          this.message = "Hello Vue3";
+        },
+        getter() {
           console.log(this.message);
         },
       },
