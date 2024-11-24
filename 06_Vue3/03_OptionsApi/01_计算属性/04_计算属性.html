@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    const app = Vue.createApp({
+      // 视图
+      // 
+      // 在某些场景下，视图里展示的内容不直接是某个数据，而是某些数据结合在一起才能得出来的结果
+      // 最佳实践就是用计算属性来把这些数据给结合起来
+      // Vue建议对于响应式数据的任何复杂逻辑，都通过计算属性来处理
+      // 
+      // 计算属性对比表达式和methods：可以满足“视图层最好是拿到数据直接展示，而不要在视图层里调用函数才能得到这个数据”，同时计算属性会做缓存——当它一来的其它数据不发生变化时、无论我们访问多少次计算属性、计算属性都只是计算一次，而表达式和methods就是用多少次就计算多少次了
+      // 计算属性对比存储属性：存储属性会占用对象的内存，计算属性不会占用对象的内存、因为计算属性在编译后本质其实就是方法、只不过在语法层面“这个方法允许我们像使用属性那样调用它而已”，可以减少我们对关联较强的属性间的维护工作
+      template: `
+        <div>圆的面积：{{ area }}</div>
+      `,
+
+      // 数据
+      data() {
+        return {
+          width: 100,
+          height: 100,
+        };
+      },
+      // 计算属性（我们也认为是数据的一部分，因为对外界使用者来说计算属性就是数据）
+      computed: {
+        // 只有getter时，可以使用语法糖写法
+        // 相当于是在computed里定义了一个方法
+        area() {
+          return this.width * this.height;
+        }
+
+        // 有setter时就只能通过完整写法了，因为setter没有语法糖
+        // area就真的是一个属性的写法了，它的值是一个对象，里面有setter和getter方法
+        // area: {
+        //   get() {
+        //     return this.width * this.height;
+        //   },
+        //   set() {
+        //     this.width = Math.sqrt(area);
+        //     this.height = Math.sqrt(area);
+        //   },
+        // },
+      },
+
+      // 事件
+      methods: {
+
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>

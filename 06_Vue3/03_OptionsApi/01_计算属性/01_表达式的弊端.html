@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    const app = Vue.createApp({
+      // 视图
+      // 
+      // 在某些场景下，视图里展示的内容不直接是某个数据，而是某些数据结合在一起才能得出来的结果
+      // 我们当然可以在插值语法里直接写表达式来把这些数据给结合起来
+      // 
+      // 但是我们从代码设计上来说，视图层最好是拿到数据直接展示，而不要在视图层里做很多数据的操作，这就是在插值语法里直接写表达式的弊端
+      template: `
+        <div>圆的面积：{{ width * height }}</div>
+      `,
+
+      // 数据
+      data() {
+        return {
+          width: 100,
+          height: 100,
+        };
+      },
+
+      // 事件
+      methods: {
+
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>
