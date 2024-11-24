@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    const app = Vue.createApp({
+      // 视图
+      // 
+      // v-if和v-else：满足条件时渲染v-if的元素，不满足时则渲染v-else的元素
+      template: `
+        <div v-if="list.length <= 0">加载数据中...</div>
+        <div v-else>{{ list }}</div>
+        <button @click="changeList">改变数据状态</button>
+      `,
+
+      // 数据
+      data() {
+        return {
+          list: [],
+        };
+      },
+
+      // 事件
+      methods: {
+        changeList() {
+          if (this.list.length <= 0) {
+            this.list = ["假如爱有天意"];
+          } else {
+            this.list = [];
+          }
+        },
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>

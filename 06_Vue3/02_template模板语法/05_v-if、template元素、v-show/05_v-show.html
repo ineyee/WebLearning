@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    const app = Vue.createApp({
+      // 视图
+      // 
+      // v-show：满足条件时才渲染当前元素，不满足时则不渲染
+      // 注意：v-show无论条件满足不满足都会被渲染出来，也就是说无论条件满不满足元素绝对是存在于DomTree中的。只是条件满足时，当前元素会被显示出来；而当条件为false时，元素会被隐藏；v-show的本质是在操作元素的display属性
+      // 
+      // 1、所以当元素的显隐切换非常频繁时，建议使用v-show而不是v-if，因为v-show不会频繁地去更改DomTree、性能会高一些；如果切换不频繁，则可以使用v-if
+      // 2、而当需要与v-else-if、v-else一起使用时再用v-if，因为v-show只能单独使用、不能跟它们组合使用
+      // 3、并且v-show也不能跟template元素一起使用，因为template元素本身就不会被加入到DomTree里，那v-show根本没办法去操作这个元素的display属性，因此当使用template元素时也得用v-if
+      template: `
+        <div>您拥有普通用户权益</div>
+        <div v-show="isPro === true">您拥有会员用户权益</div>
+        <button @click="changePro">改变用户状态</button>
+      `,
+
+      // 数据
+      data() {
+        return {
+          isPro: false,
+        };
+      },
+
+      // 事件
+      methods: {
+        changePro() {
+          this.isPro = !this.isPro;
+        },
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>

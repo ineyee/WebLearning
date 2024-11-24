@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    const app = Vue.createApp({
+      // 视图
+      // 
+      // v-if：满足条件时才渲染当前元素，不满足时则不渲染
+      // 注意：v-if条件满足时，当前元素才会真正被渲染出来；而当条件为false时，元素会被当做不存在，不是隐藏的概念、而是完全不存在于DomTree中
+      template: `
+        <div>您拥有普通用户权益</div>
+        <div v-if="isPro === true">您拥有会员用户权益</div>
+        <button @click="changePro">改变用户状态</button>
+      `,
+
+      // 数据
+      data() {
+        return {
+          isPro: false,
+        };
+      },
+
+      // 事件
+      methods: {
+        changePro() {
+          this.isPro = !this.isPro;
+        },
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>
