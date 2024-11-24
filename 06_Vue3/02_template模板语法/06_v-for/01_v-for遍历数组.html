@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    const app = Vue.createApp({
+      // 视图
+      // 
+      // v-for的基本格式是：v-for="xxx in xxx"或v-for="xxx of xxx"
+      // v-for的in和of是完全一样的，实际开发中用啥都行
+      // v-for要用在我们要创建出来很多的那个元素身上，千万不要用错地方，比如ul和li，我们是要用在li上、而不应该用在ul上，总之”v-for谁，谁就会创建多个 “
+      // 
+      // 如遍历数组时，v-for的基本格式就是：
+      // 1、v-for="item in list"，这个是不带索引的
+      // 2、v-for="(item, index) in list"，这个是带索引的、item和index的顺序是固定的
+      template: `
+        <h2>热门电影</h2>
+        <div v-for="(movie, index) in movies">
+          <div>排名：{{ index + 1 }}</div>
+          <div>名称：{{ movie }}</div>
+        </div>
+      `,
+
+      // 数据
+      data() {
+        return {
+          movies: [
+            "肖申克的救赎",
+            "情书",
+            "假如爱有天意",
+          ],
+        };
+      },
+
+      // 事件
+      methods: {
+
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    const app = Vue.createApp({
+      // 视图
+      // 
+      // 实际开发中，我们在使用v-for的时候，都会给元素绑定一个key属性，key属性要求具备唯一性、所以我们一般都会拿数据的id来作为key
+      // 绑定key，可以帮助Vue在做元素的增加和删除时有更高的性能
+      template: `
+        <h2>热门电影</h2>
+        <div v-for="(movie, index) in movies" :key="movie"> 
+          <div>排名：{{ index + 1 }}</div>
+          <div>名称：{{ movie }}</div>
+        </div>
+      `,
+
+      // 数据
+      data() {
+        return {
+          movies: [
+            "肖申克的救赎",
+            "情书",
+            "假如爱有天意",
+          ],
+        };
+      },
+
+      // 事件
+      methods: {
+
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>
