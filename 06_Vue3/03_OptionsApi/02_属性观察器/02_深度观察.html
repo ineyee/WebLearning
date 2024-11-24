@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    const app = Vue.createApp({
+      // 视图
+      template: `
+        <button @click="click">按钮</button>
+      `,
+
+      // 数据
+      data() {
+        return {
+          info: {
+            name: "张三",
+            age: 18,
+            height: 1.88,
+          },
+        };
+      },
+      // 属性观察器只能用在存储属性身上
+      // 
+      // 默认情况下，属性观察器不是深度观察，即只改变对象的某个属性时是不会触发观察器的，只有在把对象完全指向另外一个对象时才会触发观察器，如有需要我们可以把属性观察器设置成总是深度观察
+      watch: {
+        // 默认情况下不是深度观察
+        // info(newValue, oldValue) {
+        //   console.log(newValue, oldValue);
+        // },
+
+        // 我们可以把属性观察器设置成总是深度观察
+        info: {
+          handler(newValue, oldValue) {
+            console.log(newValue, oldValue);
+          },
+          deep: true,
+        },
+      },
+
+      // 事件
+      methods: {
+        click() {
+          // 把对象完全指向另外一个对象时才会触发观察器
+          // this.info = {
+          //   name: "李四",
+          //   age: 18,
+          //   height: 1.88,
+          // };
+
+          // 默认情况下，只改变对象的某个属性时是不会触发观察器的
+          this.info.name = "李四";
+        },
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>
