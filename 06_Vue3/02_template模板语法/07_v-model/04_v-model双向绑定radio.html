@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    const app = Vue.createApp({
+      // 视图
+      // 
+      // v-model双向绑定radio单选框时，数据就是跟随radio的value的（value可以是任意类型）
+      // 因此使用v-model双向绑定radio单选框时，必须给每个radio设置唯一的value
+      template: `
+        <div>
+          <span>性别：</span>
+          <label for="secrect">
+            <input id="secrect" type="radio" name="gender" value="0" v-model="gender">保密
+          </label>
+          <label for="male">
+            <input id="male" type="radio" name="gender" value="1" v-model="gender">男
+          </label>
+          <label for="female">
+            <input id="female" type="radio" name="gender" value="2" v-model="gender">女
+          </label>
+        </div>
+        <button @click="upload">上传</button>
+      `,
+
+      // 数据
+      data() {
+        return {
+          gender: 0,
+        };
+      },
+
+      // 事件
+      methods: {
+        upload() {
+          console.log(this.gender);
+        },
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>

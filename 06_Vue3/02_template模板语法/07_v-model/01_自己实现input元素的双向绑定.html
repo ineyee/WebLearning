@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    // 前面我们编写的小demo都是单向绑定：
+    // 1、数据被绑定到元素1，用于展示
+    // 2、操作元素2时修改了数据，数据的变化会同步更新到元素1
+    // 数据的流向是【从模型到视图】或【从视图到模型】的一方控制另一方，【数据流是单向的】
+    // 
+    // 双向绑定是指：
+    // 1、数据绑定到视图上展示，如把account、password绑定到input元素上展示
+    // 2、我们在同一个视图（如input元素）上的用户操作引起的数据变化又会实时更新该视图绑定的数据（如account、password）
+    // 数据的流向是【从模型到视图】和【从视图到模型】的互相控制，【模型和视图之间的数据流是双向的】
+    // 
+    // 双向绑定一般发生在input元素、textarea元素身上，我们自己实现的话要用【v-bind + v-on】来实现
+    const app = Vue.createApp({
+      // 视图
+      template: `
+        <div>
+          <label for="account">
+            账号：<input type="text" id="account" :value="account" @input="accountChange">
+          </label>
+        </div>
+        <div>
+          <label for="password">
+            密码：<input type="password" id="password" :value="password" @input="passwordChange">
+          </label>
+        </div>
+        <button @click="login">登录</button>
+      `,
+
+      // 数据
+      data() {
+        return {
+          account: "2487407179@qq.com",
+          password: "",
+        };
+      },
+
+      // 事件
+      methods: {
+        accountChange(event) {
+          this.account = event.target.value;
+        },
+        passwordChange(event) {
+          this.password = event.target.value;
+        },
+        login() {
+          console.log(`账号：${this.account} 密码：${this.password}`);
+        },
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>

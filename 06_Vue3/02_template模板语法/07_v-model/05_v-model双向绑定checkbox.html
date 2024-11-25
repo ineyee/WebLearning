@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    const app = Vue.createApp({
+      // 视图
+      // 
+      // v-model双向绑定checkbox复选框时，数据是一个数组（因为是多选嘛），数组里具体的值就是checkbox的value（value可以是任意类型）
+      // 因此使用v-model双向绑定checkbox复选框时，必须给每个checkbox设置唯一的value
+      template: `
+        <div>
+          <span>哪项是大球运动：</span>
+          <label for="lq">
+            <input id="lq" type="checkbox" name="sports" value="lq" v-model="checkResult">🏀
+          </label>
+          <label for="zq">
+            <input id="zq" type="checkbox" name="sports" value="zq" v-model="checkResult">⚽️
+          </label>
+          <label for="pq">
+            <input id="pq" type="checkbox" name="sports" value="pq" v-model="checkResult">🏐
+          </label>
+          <label for="ppq">
+            <input id="ppq" type="checkbox" name="sports" value="ppq" v-model="checkResult">🏓
+          </label>
+        </div>
+        <button @click="upload">上传</button>
+      `,
+
+      // 数据
+      data() {
+        return {
+          checkResult: [],
+        };
+      },
+
+      // 事件
+      methods: {
+        upload() {
+          console.log(this.checkResult);
+        },
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>

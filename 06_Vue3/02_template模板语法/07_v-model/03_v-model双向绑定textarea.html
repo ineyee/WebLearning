@@ -5,6 +5,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    #feedback {
+      width: 200px;
+      height: 100px;
+
+      /* 禁掉拖动改变大小 */
+      resize: none;
+    }
+  </style>
 </head>
 
 <body>
@@ -13,24 +22,25 @@
   <script>
     const app = Vue.createApp({
       // 视图
-      // 
-      // 可以用插值语法{{}}给【元素的content】插入展示data中的数据，并且data中的数据发生变化时，会自动刷新视图
       template: `
-        <div>当前计数：{{ count }}</div>
-        <button @click="add">➕</button>
+        <label for="feedback">
+          <p>反馈：</p>
+          <textarea id="feedback" placeholder="请输入反馈" v-model="feedback"></textarea>
+        </label>
+        <button @click="upload">上传</button>
       `,
 
       // 数据
       data() {
         return {
-          count: 0,
+          feedback: "我是默认反馈",
         };
       },
 
       // 事件
       methods: {
-        add() {
-          this.count++;
+        upload() {
+          console.log(this.feedback);
         },
       },
     });
