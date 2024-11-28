@@ -1,10 +1,6 @@
 <!-- 这里是子组件 -->
 
 <template>
-  <!--
-    视图里既可以使用data里的数据，也可以使用props里的数据
-    当两者里有重名数据时，会优先使用props里的数据，并且报“重复定义”的警告，所以最好减少这种重复命名
-  -->
   <div>姓名：{{ name }}</div>
   <div>年龄：{{ age }}</div>
   <div>身高：{{ height }}</div>
@@ -16,6 +12,9 @@
 <script>
 export default {
   name: "Info",
+
+  // props和data里的属性名最好不要重名，否则会报“重复定义”的警告
+
   /*
     子组件如何接收参数呢？
 
@@ -59,6 +58,11 @@ export default {
       type: Function,
       default: null,
     }
+  },
+  data() {
+    return {
+
+    };
   },
 }
 </script>

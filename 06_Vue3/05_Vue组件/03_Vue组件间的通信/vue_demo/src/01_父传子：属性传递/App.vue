@@ -23,10 +23,12 @@ export default {
     return {
       friends: [{ name: '王五' }],
       job: { name: '厨师' },
-      jump() {
-        return "2米5";
-      },
     };
+  },
+  methods: {
+    jump() {
+      return "2米5";
+    },
   },
 }
 </script>
