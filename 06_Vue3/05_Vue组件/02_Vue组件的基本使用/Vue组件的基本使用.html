@@ -1,0 +1,76 @@
+<!-- Vue组件的使用分六步： -->
+
+<!--
+  第一步：创建组件
+
+  Vue推荐组件的文件名使用大驼峰，如HelloWorld.vue
+-->
+
+<!--
+  第二步：编写组件
+
+  // 在这里编写UI（即视图）的结构，即HTML
+  <template>
+  </template>
+
+  // 在这里编写UI（即视图）的样式，即CSS
+  // 加上scoped属性可以让样式仅在当前组件内生效
+  <style scoped>
+  </style>
+
+  // 在这里编写组件的状态（即数据）、交互（即事件）等，即JS
+  <script>
+  </script>
+-->
+
+<!--
+  第三步：导出组件（组件本质上就是一个对象，所以导出的是个{}）
+
+  // 在script元素里导出组件，一般都是采用默认导出，因为一个组件一般就是对外暴露一个东西
+  // Vue推荐组件的名称使用大驼峰，如HelloWorld，最好跟文件名保持一致
+  <script>
+  export default {
+    // 组件的名称
+    name: "HelloWorld",
+  }
+  </script>
+-->
+
+<!--
+  第四步：导入组件
+  
+  // 在要使用该组件的那个组件里导入该组件
+  // 在script元素里导入，相应地必须采用默认导入（注意导入时不要加{}）
+  <script>
+    import HelloWorld from './components/HelloWorld.vue'
+  </script>
+-->
+
+<!--
+  第五步：注册组件
+  // 在要使用该组件的那个组件里注册该组件————这是局部注册，即只能在注册该组件的地方使用该组件，其它地方访问不到
+  // 在script元素里注册
+  <script>
+    import HelloWorld from './components/HelloWorld.vue'
+    export default {
+      name: 'App',
+      // 当前组件所依赖的其它组件，在components属性这里注册
+      components: {
+        HelloWorld
+      }
+    }
+  </script>
+
+  // 其实还有一种注册方式是全局注册，即把组件注册在Vue.create创建出来的App对象身上，这样整个项目的任何地方就都能使用这个组件了
+  // 但实际开发中我们一般都是局部注册，哪里用哪里注册，很少乱用全局注册
+-->
+
+<!--
+  第六步：使用组件
+  // 在要使用该组件的那个组件里使用该组件
+  // 在template元素里使用，Vue推荐使用组件时采用中划线分割的方式，这样可以跟HTML元素本来的样子保持一致，Vue内部会自动处理组件名为大驼峰但使用时却是中划线；当然我们在使用时也可以直接使用大驼峰，来表征这个组件就是我们自定义的组件，这就看个人习惯了
+  <template>
+    <hello-world></hello-world>
+    <HelloWorld></HelloWorld>
+  </template>
+-->
