@@ -10,6 +10,7 @@ import { createApp } from 'vue'
 // import App from './01_父传子：属性传递props'
 // import App from './02_子传父：回调函数传递（本质还是属性传递）'
 // import App from './03_子传父：$emit事件传递emits/App.vue'
-import App from './04_跨组件：事件总线mitt库/component/App.vue'
+// import App from './04_跨组件：事件总线mitt库/component/App.vue'
+import App from './05_传递组件：插槽元素slot/App.vue'
 
 createApp(App).mount('#app')
