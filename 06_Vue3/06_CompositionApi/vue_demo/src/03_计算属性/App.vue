@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import Area from './计算属性的优势.vue';
-import SetterGetter from './计算属性实现类似原生setter、getter的功能.vue'
+import Area from './01_计算属性的优势.vue';
+import SetterGetter from './02_计算属性实现类似原生setter、getter的功能.vue'
 
 export default {
   name: "App",
