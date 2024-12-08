@@ -21,6 +21,8 @@ const Resource = () => import("../components/Resource.vue");
 const Company = () => import("../components/Company.vue");
 
 // 1、配置路由并导出
+// router是路由管理器，可以进行push路由、获取路由参数等操作
+// route是路由，每个路由都有自己的路径path和组件component
 const router = createRouter({
   /*
     必须指定切换路由时使用的模式

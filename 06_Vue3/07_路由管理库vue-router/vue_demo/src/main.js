@@ -11,8 +11,11 @@ import { createApp } from 'vue';
 // import App from './03_路由传参/0302_查询字符串的路由传参/App.vue';
 // import ConstRoute from './03_路由传参/0302_查询字符串的路由传参/const/const_route.js'
 
-import App from './04_动态配置路由/App.vue';
-import ConstRoute from './04_动态配置路由/const/const_route.js';
+// import App from './04_动态配置路由/App.vue';
+// import ConstRoute from './04_动态配置路由/const/const_route.js';
+
+import App from './05_路由导航守卫/App.vue';
+import ConstRoute from './05_路由导航守卫/const/const_route.js';
 
 const app = createApp(App);
 // 2、在App启动的地方导入路由并注册
