@@ -1,17 +1,5 @@
 import { createRouter, createWebHashHistory, createWebHistory } from "vue-router";
 
-/*
-  非路由懒加载和路由懒加载：
-  * 当我们使用“import from”的方式导入组件来配置路由时，这些组件在打包时不会分包，都会打在同一个文件里，那用户在访问我们的网页时就必须一次性把所有组件的资源都下载下来才能展示首页，这样首屏渲染速度就非常慢
-  * 当我们使用“import函数”的方式导入组件来配置路由时，这些组件在打包时会分包，不会打在同一个文件里，那用户在访问我们的网页时就只需要把首页的资源下载下来就能很快看到首页，而其它组件的资源只有在用户真正访问相应的组件才会下载，这就是路由懒加载，实际开发中我们总是使用路由懒加载
-*/
-// 非路由懒加载
-// import Downloads from "../components/Downloads.vue";
-// import Products from "../components/Products.vue";
-// import Solutions from "../components/Solutions.vue";
-// import Partners from "../components/Partners.vue";
-// import Resource from "../components/Resource.vue";
-// import Company from "../components/Company.vue";
 // 路由懒加载
 const Downloads = () => import("../components/Downloads.vue");
 const Products = () => import("../components/Products.vue");
@@ -41,7 +29,31 @@ const router = createRouter({
     { path: "/", redirect: "/products" },
     // 其它路由
     // “/products”是根路径下的products路径
-    { path: "/products", component: Products },
+    // 这是一级路由，假设我们在上面下面还有二级路由，比如“http://localhost:8081/products/memPod”这种
+    {
+      path: "/products",
+      component: Products,
+      // 路由的嵌套使用也很简单，我们只需要在相应的父路由里写子路由即可
+      children: [
+        // 如果我们期望用户访问“http://localhost:8081/products”这个一级路由时能默认打开二级路由“hearingAids”的话，也可以做下重定向
+        {
+          path: "/products",
+          redirect: "/products/hearingAids", // 重定向时得写全路径
+        },
+        {
+          path: "/products/hearingAids", // 我们可以主动地写全子路由的路径
+          component: () => import("../components/ProductHearingAids.vue"),
+        },
+        {
+          path: "memPod", // 也可以采用省略的写法（注意前面不能加“/”），vue-router会自动补全为“/products/memPod”
+          component: () => import("../components/ProductMemPod.vue"),
+        },
+        {
+          path: "frame",
+          component: () => import("../components/ProductFrame.vue"),
+        },
+      ],
+    },
     { path: "/solutions", component: Solutions },
     { path: "/downloads", component: Downloads },
     { path: "/partners", component: Partners },

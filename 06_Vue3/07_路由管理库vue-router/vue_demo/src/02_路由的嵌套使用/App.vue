@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="navi">
+      <!-- 4、使用RouterLink元素切换路由，它有一个to属性，填写我们要跳转到的路由即可 -->
       <div class="navi_item" @click="onClick(0)">Products</div>
       <div class="navi_item" @click="onClick(1)">Solutions</div>
       <div class="navi_item" @click="onClick(2)">Downloads</div>
@@ -22,7 +23,6 @@ defineOptions({
 
 const router = useRouter();
 const onClick = (type) => {
-  // 4、使用vue-router提供的router对象来切换路由
   switch (type) {
     case 0:
       router.push("/products");
