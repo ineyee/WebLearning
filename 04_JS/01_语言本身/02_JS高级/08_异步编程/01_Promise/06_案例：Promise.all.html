@@ -82,9 +82,11 @@
             console.log(`===>电量：${valueList[0]}`);
             console.log(`===>Mac地址：${valueList[1]}`);
             console.log(`===>固件版本：${valueList[2]}`);
+            resolve(valueList);
           },
           (error) => {
             console.log("蓝牙连接失败：", error);
+            reject(error);
           },
         );
       });
