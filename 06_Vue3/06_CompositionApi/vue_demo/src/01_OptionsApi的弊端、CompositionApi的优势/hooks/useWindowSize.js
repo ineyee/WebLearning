@@ -1,3 +1,4 @@
+// CompositionApi里的属性默认不是响应式的
 // ref函数是为了把普通值的属性包装成响应式对象的
 import { ref } from 'vue';
 

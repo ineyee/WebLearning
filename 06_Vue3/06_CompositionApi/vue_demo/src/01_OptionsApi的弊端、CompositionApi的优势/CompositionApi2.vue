@@ -7,14 +7,14 @@
   <div>
     <!--
       template模板里在使用属性时，直接使用属性本身即可，不是使用属性.value，因为Vue会自动解包，这一步跟Flutter里不一致
-      但是在模板之外的其它地方使用属性时，同样得使用属性.value，这一步跟Flutter里不一致
+      但是在模板之外的其它地方使用属性时，同样得使用属性.value，这一步跟Flutter里一致
     -->
     <div>当前计数：{{ counter }}</div>
     <button @click="add">➕</button>
 
     <!--
       template模板里在使用属性时，直接使用属性本身即可，不是使用属性.value，因为Vue会自动解包，这一步跟Flutter里不一致
-      但是在模板之外的其它地方使用属性时，同样得使用属性.value，这一步跟Flutter里不一致
+      但是在模板之外的其它地方使用属性时，同样得使用属性.value，这一步跟Flutter里一致
     -->
     <div>窗口当前尺寸：{{ windowWidth }} {{ windowHeight }}</div>
     <button @click="get">获取</button>
