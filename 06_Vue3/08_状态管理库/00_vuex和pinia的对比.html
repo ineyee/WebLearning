@@ -1,0 +1,66 @@
+<!--
+  一、什么是状态管理？
+  所谓状态其实就是数据，但之所以叫它状态管理而不叫它数据管理，是因为状态管理更加强调应用程序的UI如何根据数据的变化而动态变化这件事，而数据管理则单纯是强调数据的变化，跟UI没什么关系，因此从开发者术语习惯的角度，大家一般都称之为状态管理
+
+  当然我们需要知道状态管理不仅是响应式编程里才有的概念，命令式编程里同样有状态管理的概念，只不过命令式编程里需要开发者需要数据变化时手动驱动UI，而响应式编程里都是数据变化时自动驱动UI而已
+-->
+
+<!--
+  二、为什么要进行状态管理？这一篇的学习过程中好好体会这两点，可以跟Flutter里GetX的状态管理做对照思考
+  1、跨组件的数据通信
+    * 前面我们在学习组件间的通信时提到了跨组件的数据通信，那里只学习了事件总线来实现，但其实状态管理也是跨组件数据通信的一个很好实现方式 
+  2、状态与视图分离
+    * 传统上我们的状态和视图是直接写在一个文件里的，这样有可能会造成代码的臃肿和逻辑重复，有了状态管理后我们就可以将状态和视图给分离开来，更便于理解和维护
+    * 同时将状态抽离出来后，我们也可以更好地管理状态的生命周期，比如页面退出后状态是否应该保留、是否需要重置等
+-->
+
+<!--
+  三、如何进行状态管理？
+  Vue里进行状态管理，用的是vuex或pinia
+
+  1、vuex
+  Flutter getx里的状态管理controller是跟Widget的生命周期绑定的（我们可以给不同的Widget创建不同的controller），所以getx里的状态可以随Widget自动销毁
+  但是Vue vuex里的store是个全局单例（一个项目只能创建一个store，所有的组件都共享这同一个store），它的生命周期是跟App的生命周期保持一致的，所以vuex里的状态不会自动销毁，如有需要我们可以调用函数来手动销毁
+  原来我们的视图、数据、事件都是写在一个文件里的（如.dart、.vue文件），现在有了状态管理，我们会【把数据和事件给抽离出去，原来的文件里只保留视图，】getx和vuex里都是这样的思路，这样看来getx里的controller和vuex里的store都有点类似于VM的职责
+
+  vuex的五大核心概念：
+  * （1）state：属性（状态、数据，默认就是响应式的），相当于OptionApi里data的那部分、CompositionApi里直接定义属性的那部分
+  * （2）getters：计算属性（我们也认为是数据的一部分，因为对外界使用者来说计算属性就是数据），相当于OptionApi里computed属性的那部分、CompositionApi里computed函数的那部分
+  * （3）mutations：同步修改属性的方法（事件、交互），相当于OptionApi里methods的那部分（但是只能是同步方法）、CompositionApi里直接定义方法的那部分（同样也只能是同步方法）
+  * （4）actions：异步修改属性的方法（事件、交互），相当于OptionApi里methods的那部分（但是只能是异步方法）、CompositionApi里直接定义方法的那部分（同样也只能是异步方法）
+  * （5）modules：因为vuex里的store是个全局单例，一个项目只能创建一个store，所以项目里所有组件的状态都会写在这个store里，但是为了避免这个store文件里的代码过于臃肿，就提供了一个modules属性来将不同组件的状态拆分到不同的文件里
+
+  vuex的两大核心思想：
+  * （1）组件可以直接读取state来展示
+  * （2）但是组件不能直接修改state，只能通过commit mutation的方式来修改state。但是当修改是个同步行为时可以直接通过commit mutation来修改state，而当修改是个异步行为时又必须先dispatch action + 然后等异步行为执行完毕后再通过commit mutation来修改state
+
+  vuex的安装：
+  * cd到项目根目录
+  * 执行“npm install vuex”即可
+
+  2、pinia
+  Flutter getx里的状态管理controller是跟Widget的生命周期绑定的（我们可以给不同的Widget创建不同的controller），所以getx里的状态可以随Widget自动销毁
+  但是Vue pinia里的store也是一个一个的全局单例（虽然我们可以给不同的组件创建不同的store，但这些store都是的生命周期都是全局的），它的生命周期是跟App的生命周期保持一致的，所以pinia里的状态不会自动销毁，如有需要我们可以调用函数来手动销毁
+  原来我们的视图、数据、事件都是写在一个文件里的（如.dart、.vue文件），现在有了状态管理，我们会【把数据和事件给抽离出去，原来的文件里只保留视图，】getx和pinia里都是这样的思路，这样看来getx里的controller和pinia里的store都有点类似于VM的职责
+
+  pinia的三大核心概念：
+  * （1）state：属性（状态、数据，默认就是响应式的），相当于OptionApi里data的那部分、CompositionApi里直接定义属性的那部分
+  * （2）getters：计算属性（我们也认为是数据的一部分，因为对外界使用者来说计算属性就是数据），相当于OptionApi里computed属性的那部分、CompositionApi里computed函数的那部分
+  * （3）actions：方法（事件、交互），相当于OptionApi里methods的那部分、CompositionApi里直接定义方法的那部分（同步方法异步方法都可以定义）
+
+  pinia的安装：
+  * cd到项目根目录
+  * 执行“npm install pinia”即可
+-->
+
+<!--
+  四、vuex和pinia的对比
+  Vue官方推荐我们的状态管理方式
+  1、如果我们用的是Vue2或者用的是Vue3 + OptionsApi，那就用vuex来做状态管理
+    Vue2里只能用OptionsApi、Vue3里也可以继续用OptionsApi，而vuex就是对OptionsApi支持得比较好，这也是为什么我们发现vuex的Api和OptionsApi写法都非常像的原因
+  2、而如果我们用的是Vue3 + CompositionApi，那就用pinia来做状态管理
+    pinia对CompositionApi支持得比较好，它的Api风格也是CompositionApi的风格
+
+  如果是新项目，我们就推荐使用Vue3 + CompositionApi + pinia，这是趋势
+  不过公司里已有的项目80%都用的还是vuex，pinia还没有那么流行起来，因此我们vuex和pinia都会学习，以应对各种情况
+-->
