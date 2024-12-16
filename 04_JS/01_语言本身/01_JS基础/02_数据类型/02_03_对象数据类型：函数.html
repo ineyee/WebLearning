@@ -185,6 +185,71 @@
     });
     [{ "name": "张三", "age": 18 }, { "name": "李四", "age": 19 }].map(item => item.name);
   </script>
+
+  <!-- 函数可选参数和必选参数定义的最佳实践，axios等很多库的可选参数和必选参数都是这么实现的 -->
+  <script>
+    // 一、可选参数的定义
+    // 
+    // 回顾一下Flutter里是如何定义可选参数的：
+    // 只有一种方式：void test({String param1 = "", String? param2}) {}
+    // （1）以可选参数的形式存在————Flutter里可选参数的形式就是用大括号包住{}可选参数
+    // （2）并且给每个可选参数一个默认值————毕竟可选参数的定义就是有默认值的参数、外界可以不用传值进来的参数，默认值要么是我们确定要赋的值、要么就是null
+    // （3）调用时可以不传这些参数，但如果要传的话就得写参数名
+    // 
+    // 相应地，JS里也可以模拟这种形式
+    // （1）以可选参数的形式存在————JS里可选参数的形式也是用大括号{}包住可选参数 + 赋值一个空对象，只不过Flutter里那个大括号纯粹是个语法，而JS里的这个大括号 + 赋值一个空对象其实用到的技术是对象 + 对象的解构赋值，但大家形式上都是一个大括号了{}，之所以要赋值一个空对象，是因为不赋值的话就与可能是对undefined解构、会报错，但是对空对象解构、不会报错，所以记住这个可选参数的形式
+    // （2）并且给每个可选参数一个默认值————毕竟可选参数的定义就是有默认值的参数、外界可以不用传值进来的参数，默认值要么是我们确定要赋的值、要么就是null
+    // （3）调用时可以不传这些参数，但如果要传的话就得写参数名
+    function add111({ v1 = 0, v2 = null } = {}) {
+      console.log(v1 + v2);
+    }
+    add111(); // 调用时可以不传这些参数
+    add111({
+      v2: 2,
+    }); // 但如果要传的话就得写参数名
+
+    // 二、必选参数的定义
+    // 
+    // 回顾一下Flutter里是如何定义必选参数的：
+    // * 方式一：void test(String param) {}，直接写参数、不给默认值，那这个参数就是个必选参数，调用时不需要写参数名
+    // * 方式二：void test({required String param}) {}，以可选参数的形式存在、不给默认值，但是用required关键字修饰，那这个参数也是一个必选参数，调用时需要写参数名
+    // 
+    // 相应地，JS里也可以模拟这两种方式
+    function add222(v1, v2) { // 直接写参数、不给默认值，那这个参数就是个必选参数
+      console.log(v1 + v2);
+    }
+    add222(1, 2); // 调用时不需要写参数名
+
+    function add333({ v1, v2 } = {}) { // 以可选参数的形式存在、不给默认值，因为没有required关键字、就省略写required关键字这一步了，那这个参数也是个必选参数
+      console.log(v1 + v2);
+    }
+    add333({
+      v1: 1,
+      v2: 2,
+    }); // 调用时需要写参数名
+
+    // 三、可选参数和必选参数的组合定义
+    // url必传
+    // headers、params可选
+    function get(url, { headers = null, params = null } = {}) {
+      console.log(`get请求：url=${url} headers=${headers} params=${params}`);
+    }
+    get("https://xxx");
+
+    // url必传
+    // headers、params、body可选
+    function post({ url, headers = null, params = null, body = null } = {}) {
+      console.log(`post请求：url=${url} headers=${headers} params=${params} body=${body}`);
+    }
+    post({
+      url: "https://xxx",
+      body: {
+        "name": "张三",
+        "age": 18,
+        "height": 1.88,
+      },
+    });
+  </script>
 </body>
 
 </html>
