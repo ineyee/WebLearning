@@ -1,0 +1,40 @@
+<!--
+	v-bind的用途主要有两个：
+	1、将HTML元素属性的值或组件属性的值解析为原类型，而非总是被视作字符串
+	2、给HTML元素属性的值或组件属性的值动态绑定data里的数据（变量、表达式、函数调用），而非在template模板里写死数据
+-->
+
+<!--
+	用途一解释
+
+	我们前面学习的数据类型有：
+	1、基本数据类型：布尔类型、数值类型、字符串类型
+	2、对象数据类型：数组、对象、函数
+	3、特殊数据类型：undefined、null
+
+	在原生开发里，所有HTML元素属性的值都会被视作字符串，比如：
+	<img src="https://picsum.photos/200" alt="我是图片">，src属性的值就是字符串https://picsum.photos/200
+	<a :href="https://baidu.com">百度一下</a>，href属性的值就是字符串https://baidu.com
+	------------------------------------------------------------------------------------
+	<div class="box"></div>，class属性的值就是字符串box
+	<div style="width: 100px;"></div>，style属性的值就是字符串width: 100px;
+	------------------------------------------------------------------------------------
+  <div name="张三" age="18" height="1.88"></div>，name属性的值就是字符串张三、age属性的值就是字符串18（注意不是整数18）、height属性的值就是字符串1.88（注意不是小数1.88）
+
+	而在Vue开发里，为了跟原生的这一设定保持一致，Vue框架的默认行为也会把template模板里的所有HTML元素或组件属性的值都视作字符串，比如：
+	<div name="张三" age="18" height="1.88"></div>，name属性的值就是字符串张三、age属性的值就是字符串18（注意不是整数18）、height属性的值就是字符串1.88（注意不是小数1.88）
+
+	但是实际开发中，我们的确会遇到HTML元素属性的值或组件属性的值需要被解析为原类型，而非总是被视作字符串，比如：
+	（1）<div name="张三" v-bind:age="18" :height="1.88"></div>，name属性的值就是字符串张三、age属性的值就是整数18（注意已经不是字符串"18")、height属性的值就是小数1.88（注意已经不是字符串"1.88"）
+	（2）<div :active="false"></div>，active属性的值就是布尔类型false，而不是字符串"false"
+	（3）<my-component :items="[1, 2, 3]"></my-component>，items属性的值就是数组[1, 2, 3]，而不是字符串"[1, 2, 3]"
+	（4）<my-component :options="{ key: 'value' }"></my-component>，options属性的值就是对象{ key: 'value' }，而不是字符串"{ key: 'value' }"
+	（5）<my-component callback="myFunction"></my-component>，这里的myFunction会被视作字符串”myFunction“、而不是传递函数的引用；<my-component :callback="myFunction"></my-component>，这里的myFunction才会被解析为函数的引用
+	（6）<my-component :value="undefined"></my-component>、<my-component :value="null"></my-component>，这里的value属性的值才会被解析为关键字undefined和null，而不是字符串”undefined“和”null“
+-->
+
+<!--
+	用途二解释
+
+	用途二比较好理解，实际开发中HTML元素数值的值或组件属性的值总不可能全部都是写死在界面里的，很多都是要动态绑定到了某个属性上，属性变化时HTML元素数值的值或组件属性的值也就变化了，进而视图展示也就发生了变化，后面的几篇我们主要演示的就是用途二
+-->

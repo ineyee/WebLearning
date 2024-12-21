@@ -28,7 +28,7 @@
     const app = Vue.createApp({
       // 视图
       // 
-      // property属性前面加个”v-bind:“，然后在""里就能绑定data里的数据了
+      // property属性前面加个”v-bind:“，然后在""里就能动态绑定data里的数据了
       // “:”是”v-bind:“的语法糖
       // 
       // 当绑定的property属性是style时，""里我们可以传一个map进去，map的key就是style的属性名（注意如果是类似font-size这种有连接符的，必须用字典式写法搞成字符串，否则无法识别）、map的value就是style的属性值（注意如果是类似30px这种不是一个纯粹值的，必须用字典式写法搞成字符串，否则无法识别）
