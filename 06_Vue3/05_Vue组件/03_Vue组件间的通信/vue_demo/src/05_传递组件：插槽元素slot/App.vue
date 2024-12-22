@@ -18,6 +18,11 @@
     <template #action>
       <button>🔍</button>
     </template>
+    <!-- 这个组件会被传递给内部的默认插槽 -->
+    <div>搜索</div>
+    <!-- <template #default>
+      <div>搜索</div>
+    </template> -->
   </AppBar>
 </template>
 
