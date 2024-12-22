@@ -1,0 +1,8 @@
+html {
+  /*
+    方案二方式三：全局修改样式变量
+    找到图标元素属性所对应的样式变量--van-tabbar-item-icon-size，在全局样式内部修改样式变量的值
+    记得使用下!important来确保我们这里样式变量的优先级比默认的那个样式变量高
+  */
+  --van-tabbar-item-icon-size: 24px !important;
+}
