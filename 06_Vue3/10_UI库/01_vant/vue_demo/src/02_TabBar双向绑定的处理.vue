@@ -13,10 +13,10 @@
     <!-- 双向绑定的属性名原来叫active，现在改成我们自定义的属性名selectedIndex -->
     <!-- van-tabbar给我们提供了change事件，切换item时就会触发这个事件 -->
     <van-tabbar v-model="selectedIndex" @change="selectedIndexDidChange">
-      <van-tabbar-item icon="home-o">标签</van-tabbar-item>
-      <van-tabbar-item icon="search">标签</van-tabbar-item>
-      <van-tabbar-item icon="friends-o">标签</van-tabbar-item>
-      <van-tabbar-item icon="setting-o">标签</van-tabbar-item>
+      <van-tabbar-item icon="home-o" :name="0">标签</van-tabbar-item>
+      <van-tabbar-item icon="search" :name="1">标签</van-tabbar-item>
+      <van-tabbar-item icon="friends-o" :name="2">标签</van-tabbar-item>
+      <van-tabbar-item icon="setting-o" :name="3">标签</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
@@ -37,3 +37,24 @@ const selectedIndexDidChange = (newSelectedIndex) => {
 </script>
 
 <style lang="less" scoped></style>
+
+<!--
+  额外的补充
+
+  1、我们可以从官方文档里看到三方组件的双向绑定默认绑定的是当前标签的索引值，而具体怎么把当前标签的索引值绑定上去的————其实官方文档里也说明了是通过van-tabbar-item的name属性，这个name属性可以是个number值也可以是个string值
+  所以说默认情况下，上面的代码完整的写法其实如下，也就是给每个van-tabbar-item都加上name属性，因为值是数字，所以用了v-bind
+  <van-tabbar v-model="selectedIndex" @change="selectedIndexDidChange">
+    <van-tabbar-item icon="home-o" :name="0">标签</van-tabbar-item>
+    <van-tabbar-item icon="search" :name="1">标签</van-tabbar-item>
+    <van-tabbar-item icon="friends-o" :name="2">标签</van-tabbar-item>
+    <van-tabbar-item icon="setting-o" :name="3">标签</van-tabbar-item>
+  </van-tabbar>
+
+  2、实际开发中，如果不想绑定当前标签的索引值，而是想直接绑定当前标签的某个文本类的属性，以便在切换时能直接那这个值来请求数据之类，我们也可以修改双向绑定的东西，那就是直接改name就可以了，因为就是通过name来传递要双向绑定什么的，比如我们可以改成下面这样，因为值就是字符串，所以不用v-bind，这样一来，在切换item时，监听回调里给到我们的就直接是选中的字符串了，我们就不用再用index去映射出字符串再发起网络请求了，少了这一步在某些场景下非常有用
+  <van-tabbar v-model="selectedIndex" @change="selectedIndexDidChange">
+    <van-tabbar-item icon="home-o" name="home">标签</van-tabbar-item>
+    <van-tabbar-item icon="search" name="search">标签</van-tabbar-item>
+    <van-tabbar-item icon="friends-o" name="friends">标签</van-tabbar-item>
+    <van-tabbar-item icon="setting-o" name="setting">标签</van-tabbar-item>
+  </van-tabbar>
+-->
