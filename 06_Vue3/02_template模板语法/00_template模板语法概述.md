@@ -1,0 +1,3 @@
+1、template模板语法里只能【直接】使用OptionsApi里的data或者CompositionApi的data
+2、就连状态管理库的数据都是通过const store = useStore()先定义出来个store => OptionsApi里的data或者CompositionApi的data，template模板语法再去【直接】使用store
+3、所以template模板语法里是无法【直接】使用common.css里的样式变量的，也无法直接使用router.js里的路径常量的，想使用的话都得先转换成OptionsApi里的data或者CompositionApi的data，所以Vue开发里硬编码到处都是，因为抽成常量后很多地方都不能直接使用，绕来绕去还不如硬编码写起来简单

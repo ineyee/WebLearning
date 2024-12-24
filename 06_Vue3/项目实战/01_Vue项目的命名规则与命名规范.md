@@ -9,7 +9,7 @@
 * 项目名：使用小写字母加中划线来命名，如“vue-demo”
 * 文件夹名：使用小写字母加中划线来命名，如“view-model”
 * 文件名
-  * 组件文件名：使用大驼峰来命名，如“HomePage.vue”、“SearchComponent.vue”，界面组件后可以加个“Page”后缀来表明是个界面，非界面组件后可以加个“Component”后缀来表明不是个界面、只是个小组件；当然也可以用小写字母加中划线来命名，如“home-page.vue”、“search-component.vue”
+  * 组件文件名：使用大驼峰来命名，如“HomePage.vue”、“SearchComponent.vue”，界面组件后可以加个“Page”后缀来表明是个界面，非界面组件后可以加个“Component”后缀来表明不是个界面、只是个小组件；当然也可以用小写字母加中划线来命名，如“home-page.vue”、“search-component.vue”（导入组件时组件名必须大驼峰或小驼峰，不能有中划线，否则报错）
   * 所有其它非组件文件名：使用小写字母加中划线来命名，如“home-view-model.js”、“search-model.js”、“const-string.js”，view-model后可以加个“view-model”后缀来表明是个ViewModel，model后可以加个“model”后缀来表明是个Model
 -------------------------------------------------------
 * 类名：使用大驼峰来命名，如“MyPerson”

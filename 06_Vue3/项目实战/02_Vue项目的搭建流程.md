@@ -55,7 +55,6 @@
 │  ├─const/(项目里的常量统一放到这个文件夹里，避免硬编码)
 │  ├─hook/(项目里多个组件里公用的代码逻辑可以抽取到这个文件夹里，注意是多个组件里)
 │  ├─router/(项目里路由配置相关的东西都放到这个文件夹里)
-│  │  ├─route.js
 │  │  ├─router.js
 │  ├─store/(项目里pinia配置相关的东西放到这个文件夹里)
 │  │  ├─store.js
@@ -84,14 +83,9 @@
 * 在router.js文件里配置路由并导出路由
 * 在main.js里导入路由并注册
 
-2、route.js
-* 在router文件夹下创建一个route.js文件
-* 在route.js文件里配置路由表并导出
-* 在router.js文件里导入路由表并使用
+2、使用router-view元素占位，这样将来我们切换路由时，路由对应的组件就会替换出现在router-view元素的位置
 
-3、使用router-view元素占位，这样将来我们切换路由时，路由对应的组件就会替换出现在router-view元素的位置
-
-4、使用vue-router提供的router对象来切换路由
+3、使用vue-router提供的router对象来切换路由
   * 导入”useRouter()“hook函数
   * router.push(...)：打开一个新路由，并将其加入到浏览器历史记录中
   * router.back()：返回到浏览器历史记录中的上一页（等价于浏览器的返回按钮）
