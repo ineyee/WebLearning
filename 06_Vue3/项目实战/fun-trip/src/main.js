@@ -5,4 +5,10 @@ import App from './App.vue'
 import 'normalize.css';
 import './asset/css/index.css';
 
-createApp(App).mount('#app')
+// 导入路由
+import router from './router/router.js';
+
+const app = createApp(App);
+// 注册路由
+app.use(router);
+app.mount('#app')

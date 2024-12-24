@@ -74,3 +74,24 @@
 3、common.css：我们自定义的通用样式文件
   * 复制common.css文件到asset/css文件夹下，在index.css里导入common.css
   * 在main.js里导入index.css即可
+
+## 第八步：路由配置
+1、router.js
+* 在router文件夹下创建一个router.js文件
+* 在router.js文件里配置路由并导出路由
+* 在main.js里导入路由并注册
+
+2、route.js
+* 在router文件夹下创建一个route.js文件
+* 在route.js文件里配置路由表并导出
+* 在router.js文件里导入路由表并使用
+
+3、使用router-view元素占位，这样将来我们切换路由时，路由对应的组件就会替换出现在router-view元素的位置
+
+4、使用vue-router提供的router对象来切换路由
+  * 导入”useRouter()“hook函数
+  * router.push(...)：打开一个新路由，并将其加入到浏览器历史记录中
+  * router.back()：返回到浏览器历史记录中的上一页（等价于浏览器的返回按钮）
+  * router.forward()：前进到浏览器历史记录中的下一页（等价于浏览器的前进按钮）
+  * router.replace()：切换路由时就不是类似“push”的操作，而是类似“pushOff”的操作，用户就无法通过浏览器自带的前进后退来切换到相应的页面了
+我们也可以通过手动改变地址栏里的路径来切换路由，组件也会被替换掉，RouterLink元素切换路由的本质就是在改变地址栏里的路径
