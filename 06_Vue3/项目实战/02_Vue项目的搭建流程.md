@@ -63,3 +63,14 @@
 │  │  ├─page/(该模块内用到的page)
 │  │  ├─service/(该模块的业务层，下层是数据层、上层是视图层，从数据层获取数据并处理成上层能直接使用的数据)
 │  │  ├─store/(该模块内用到的view-model)
+
+## 第七步：CSS样式置位 = 重置样式 + 给样式通用默认值
+1、normalize.css库：社区总结出来的、常见的需要重置的CSS样式都写在这个库里了，这个库不仅针对Vue项目，React项目和原生项目都可以用这个库来做一下CSS样式重置
+  * cd到项目根目录，执行”npm install normalize.css“命令来安装normalize.css库
+  * 在main.js里导入normalize.css即可
+2、reset.css：我们自定义的重置样式文件
+  * 复制reset.css文件到asset/css文件夹下，在index.css里导入reset.css
+  * 在main.js里导入index.css即可
+3、common.css：我们自定义的通用样式文件
+  * 复制common.css文件到asset/css文件夹下，在index.css里导入common.css
+  * 在main.js里导入index.css即可

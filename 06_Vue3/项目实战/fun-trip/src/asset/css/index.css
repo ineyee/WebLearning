@@ -1,0 +1,6 @@
+/* 指定网页里CSS文件的编码方式 */
+@charset "UTF-8";
+
+/* 导入其它所有的CSS文件，外界只需要导入index.css就可以了 */
+@import url(reset.css);
+@import url(common.css);

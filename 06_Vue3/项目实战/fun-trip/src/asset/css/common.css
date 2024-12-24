@@ -1,0 +1,22 @@
+/* 通用样式文件 */
+
+body {
+  /*
+    我们一般都会给body设置一个min-width，来处理网页缩小的问题（web端需要给这个值，移动端不需要给这个值）
+    这个值我们一般会取各区域wrapper的最大值
+  */
+  /* min-width: 1300px; */
+
+  /*
+    当前网站内绝大多数元素的字体大小都是14px、行高是字体的1.5，颜色都是#333333
+    抽到这里我们就不用一直重复写了，导入一下就行，其它元素都会继承body元素的样式
+  */
+  font: 14px / 1.5 "Microsoft YaHei", Tahoma, "simsun", sans-serif;
+  color: #333333;
+}
+
+/* 虽然body元素搞了，但是a元素容易被浏览器自动搞成-webkit-link;这种样式，因此对它单独弄一下 */
+a {
+  font: 14px / 1.5 "Microsoft YaHei", Tahoma, "simsun", sans-serif;
+  color: #333333;
+}
