@@ -19,6 +19,16 @@ const useCityStore = defineStore("useCityStore", {
       selectedIndex: 0,
       // 列表数据
       data: {},
+      // 选中的城市
+      selectedCity: {
+        "cityId": 7,
+        "cityName": "杭州",
+        "pinYin": "hangzhou",
+        "gangAoTai": false,
+        "hot": false,
+        "longitude": "120.162",
+        "latitude": "30.279"
+      },
     };
   },
   // 计算属性（我们也认为是数据的一部分，因为对外界使用者来说计算属性就是数据）
@@ -49,7 +59,6 @@ const useCityStore = defineStore("useCityStore", {
     },
 
     indexList() {
-      return this.data[this._cityGroupKeyList[this.selectedIndex]]?.cities?.map((city) => city.group);
       let tempList = ["#"];
       tempList.push(...this.data[this._cityGroupKeyList[this.selectedIndex]]?.cities?.map((city) => city.group));
       return tempList;

@@ -1,6 +1,6 @@
 <template>
   <div class="city-component" @click="onClick">
-    <div class="city">杭州</div>
+    <div class="city">{{ cityStore.selectedCity.cityName }}</div>
     <div class="position">
       <div class="my-position">我的位置</div>
       <img class="position-icon" src="../../asset/image/icon_location.png" alt="">
@@ -10,6 +10,7 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
+import useCityStore from '../store/city-store';
 
 defineOptions({
   name: "city-component"
@@ -19,6 +20,8 @@ const router = useRouter();
 const onClick = () => {
   router.push("/cityPage");
 };
+
+const cityStore = useCityStore();
 </script>
 
 <style lang="less" scoped>

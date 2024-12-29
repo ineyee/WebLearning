@@ -16,13 +16,13 @@
           <van-index-anchor index="热门" />
           <div class="hot-city-list">
             <template v-for="hotCity in cityStore.cityHotList">
-              <div class="hot-city-item">{{ hotCity.cityName }}</div>
+              <div class="hot-city-item" @click="onSelectedCity(hotCity)">{{ hotCity.cityName }}</div>
             </template>
           </div>
 
           <template v-for="cityGroup in cityStore.cityGroupList">
             <van-index-anchor :index="cityGroup.group" />
-            <van-cell v-for="city in cityGroup.cities" :title="city.cityName" />
+            <van-cell v-for="city in cityGroup.cities" :title="city.cityName" @click="onSelectedCity(city)" />
           </template>
         </van-index-bar>
       </template>
@@ -39,13 +39,16 @@ defineOptions({
 });
 
 const router = useRouter();
-
 const onCancel = () => {
   router.back();
 };
 
 const cityStore = useCityStore();
 cityStore.getCityAll();
+const onSelectedCity = (selectedCity) => {
+  cityStore.selectedCity = selectedCity;
+  router.back();
+};
 </script>
 
 <style lang="less" scoped>
