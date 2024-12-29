@@ -18,7 +18,8 @@
       假设选中颜色为橙色，未选中颜色为灰色
       我们直接使用三方组件给我们提供的属性来修改就行了
     -->
-    <van-tabbar v-model="selectedIndex" @change="selectedIndexDidChange" active-color="orange" inactive-color="grey">
+    <van-tabbar v-model="selectedIndex" @change="selectedIndexDidChange" active-color="orange" inactive-color="grey"
+      :safe-area-inset-bottom="true">
       <van-tabbar-item icon="home-o">首页</van-tabbar-item>
       <van-tabbar-item icon="search">搜索</van-tabbar-item>
       <van-tabbar-item>

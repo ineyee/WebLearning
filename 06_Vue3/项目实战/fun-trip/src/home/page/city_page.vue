@@ -1,14 +1,14 @@
 <template>
-  <div class="order-page tab-bar-direct-page">
+  <div class="cityPage tab-bar-indirect-page">
     <div v-for="index in 100">
-      订单：{{ index }}
+      城市：{{ index }}
     </div>
   </div>
 </template>
 
 <script setup>
 defineOptions({
-  name: "order-page"
+  name: "cityPage"
 });
 </script>
 

@@ -57,3 +57,19 @@ a {
   font: 14px / 1.5 "Microsoft YaHei", Tahoma, "simsun", sans-serif;
   color: #333333;
 }
+
+/*
+  tabBar首屏的那几个页面，直接加上这个类即可
+  高度要手动设置一下，才能不被tabBar遮挡
+  并且如果是列表的话，得设置一下overflow，右侧滚动条才不会包含tabBar部分
+*/
+.tab-bar-direct-page {
+  /*
+    100vh：屏幕的高度
+    var(--van-tabbar-height)：van-tabbar的高度
+    env(safe-area-inset-bottom)：底部安全区域的高度
+  */
+  height: calc(100vh - var(--van-tabbar-height) - env(safe-area-inset-bottom));
+  /* 确保内容可滚动 */
+  overflow-y: scroll;
+}

@@ -1,5 +1,5 @@
 <template>
-  <div class="city-component">
+  <div class="city-component" @click="onClick">
     <div class="city">杭州</div>
     <div class="position">
       <div class="my-position">我的位置</div>
@@ -9,9 +9,17 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router';
+
 defineOptions({
   name: "city-component"
 });
+
+const router = useRouter();
+const onClick = () => {
+  console.log(111);
+  router.push("/cityPage");
+};
 </script>
 
 <style lang="less" scoped>

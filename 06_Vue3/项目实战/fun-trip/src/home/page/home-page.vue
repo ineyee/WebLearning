@@ -1,5 +1,5 @@
 <template>
-  <div class="home-page">
+  <div class="home-page tab-bar-direct-page">
     <nav-bar></nav-bar>
     <banner-component></banner-component>
     <city-component></city-component>

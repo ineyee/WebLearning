@@ -1,6 +1,8 @@
 <template>
-  <div class="favor-page">
-    favor-page
+  <div class="favor-page tab-bar-direct-page">
+    <div v-for="index in 100">
+      收藏：{{ index }}
+    </div>
   </div>
 </template>
 

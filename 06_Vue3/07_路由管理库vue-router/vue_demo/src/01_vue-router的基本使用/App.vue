@@ -65,7 +65,7 @@ const onClick = (type) => {
   2、在App启动的地方导入路由并注册
   3、使用RouterView元素占位，这样将来我们切换路由时，路由对应的组件就会替换出现在RouterView元素的位置
   4、使用vue-router提供的router对象来切换路由
-    * 导入”useRouter()“hook函数
+    * 导入”useRouter()“hook函数，并用它创建一个router对象：const router = useRouter();
     * router.push(...)：打开一个新路由，并将其加入到浏览器历史记录中
     * router.back()：返回到浏览器历史记录中的上一页（等价于浏览器的返回按钮）
     * router.forward()：前进到浏览器历史记录中的下一页（等价于浏览器的前进按钮）

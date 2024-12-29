@@ -1,6 +1,8 @@
 <template>
-  <div class="message-page">
-    message-page
+  <div class="message-page tab-bar-direct-page">
+    <div v-for="index in 100">
+      消息：{{ index }}
+    </div>
   </div>
 </template>
 

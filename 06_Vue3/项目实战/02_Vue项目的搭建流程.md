@@ -86,7 +86,7 @@
 2、使用router-view元素占位，这样将来我们切换路由时，路由对应的组件就会替换出现在router-view元素的位置
 
 3、使用vue-router提供的router对象来切换路由
-  * 导入”useRouter()“hook函数
+  * 导入”useRouter()“hook函数并用它创建一个router对象：const router = useRouter();
   * router.push(...)：打开一个新路由，并将其加入到浏览器历史记录中
   * router.back()：返回到浏览器历史记录中的上一页（等价于浏览器的返回按钮）
   * router.forward()：前进到浏览器历史记录中的下一页（等价于浏览器的前进按钮）

@@ -12,7 +12,7 @@
   <div class="tab_bar">
     <!-- 双向绑定的属性名原来叫active，现在改成我们自定义的属性名selectedIndex -->
     <!-- van-tabbar给我们提供了change事件，切换item时就会触发这个事件 -->
-    <van-tabbar v-model="selectedIndex" @change="selectedIndexDidChange">
+    <van-tabbar v-model="selectedIndex" @change="selectedIndexDidChange" :safe-area-inset-bottom="true">
       <van-tabbar-item icon="home-o" :name="0">标签</van-tabbar-item>
       <van-tabbar-item icon="search" :name="1">标签</van-tabbar-item>
       <van-tabbar-item icon="friends-o" :name="2">标签</van-tabbar-item>

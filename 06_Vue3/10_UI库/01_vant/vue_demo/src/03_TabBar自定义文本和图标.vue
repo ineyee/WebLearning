@@ -13,7 +13,7 @@
 -->
 <template>
   <div class="tab_bar">
-    <van-tabbar v-model="selectedIndex" @change="selectedIndexDidChange">
+    <van-tabbar v-model="selectedIndex" @change="selectedIndexDidChange" :safe-area-inset-bottom="true">
       <!-- 如果只需要自定义文本，直接替换item的内容就可以了 -->
       <van-tabbar-item icon="home-o">首页</van-tabbar-item>
       <van-tabbar-item icon="search">搜索</van-tabbar-item>
