@@ -17,7 +17,7 @@ async function getCityAll() {
       } else {
         return response["data"];
       }
-    }
+    } 
   } catch (error) {
     console.log(`getCityAll出错：${error}`);
     return {};

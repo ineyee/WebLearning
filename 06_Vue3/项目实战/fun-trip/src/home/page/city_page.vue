@@ -5,8 +5,7 @@
 
     <!-- tab -->
     <van-tabs v-model:active="selectedIndex" color="#FF9854FF">
-      <van-tab title="国内·港澳台"></van-tab>
-      <van-tab title="海外"></van-tab>
+      <van-tab v-for="item in cityStore.cityGroupTitleList" :title="item"></van-tab>
     </van-tabs>
   </div>
 </template>
@@ -14,6 +13,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import useCityStore from '../store/city-store';
 
 defineOptions({
   name: "cityPage"
@@ -29,6 +29,8 @@ const onCancel = () => {
 
 // tab
 const selectedIndex = ref(0);
+const cityStore = useCityStore();
+cityStore.getCityAll();
 </script>
 
 <style lang="less" scoped>
