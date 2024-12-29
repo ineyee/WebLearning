@@ -17,7 +17,6 @@ defineOptions({
 
 const router = useRouter();
 const onClick = () => {
-  console.log(111);
   router.push("/cityPage");
 };
 </script>
