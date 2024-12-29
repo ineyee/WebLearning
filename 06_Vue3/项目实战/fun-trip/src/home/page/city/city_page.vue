@@ -1,6 +1,13 @@
 <template>
   <div class="city-page tab-bar-indirect-page">
+    <!-- 搜索 -->
     <van-search v-model="searchedText" placeholder="城市/区域/位置" shape="round" :show-action="true" @cancel="onCancel" />
+
+    <!-- tab -->
+    <van-tabs v-model:active="selectedIndex" color="#FF9854FF">
+      <van-tab title="国内·港澳台"></van-tab>
+      <van-tab title="海外"></van-tab>
+    </van-tabs>
   </div>
 </template>
 
@@ -12,12 +19,16 @@ defineOptions({
   name: "cityPage"
 });
 
-const searchedText = ref("");
 const router = useRouter();
 
+// 搜索
+const searchedText = ref("");
 const onCancel = () => {
   router.back();
 };
+
+// tab
+const selectedIndex = ref(0);
 </script>
 
 <style lang="less" scoped>
