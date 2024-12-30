@@ -6,6 +6,7 @@
     <date-component :onConfirm="_dateOnConfirm"></date-component>
     <hot-suggest-component></hot-suggest-component>
     <search-button-component></search-button-component>
+    <category-component></category-component>
   </div>
 </template>
 
@@ -16,6 +17,7 @@ import CityComponent from '../component/city-component.vue';
 import DateComponent from '../component/date-component.vue';
 import HotSuggestComponent from '../component/hot-suggest-component.vue';
 import SearchButtonComponent from '../component/search-button-component.vue';
+import CategoryComponent from '../component/category-component.vue';
 import useHomeStore from '../store/home-store';
 
 defineOptions({
@@ -24,6 +26,7 @@ defineOptions({
 
 const _homeStore = useHomeStore();
 _homeStore.getHotSuggests();
+_homeStore.getCategories();
 
 const _dateOnConfirm = (beginDateString, endDateString) => {
   _homeStore.beginDateString = beginDateString;
