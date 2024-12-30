@@ -35,6 +35,11 @@ html {
   --c-FFFFFFFF: #FFFFFFFF;
 
   --main-color: #FF9854FF;
+
+  --van-nav-bar-title-font-size: 20px !important;
+  --van-nav-bar-title-text-color: #FF9854FF !important;
+  --van-nav-bar-arrow-size: 23px !important;
+  --van-nav-bar-icon-color: #FF9854FF !important;
 }
 
 body {

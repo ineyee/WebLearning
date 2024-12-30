@@ -31,7 +31,8 @@ const router = createRouter({
         showTabBar: true,
       },
     },
-    { path: "/cityPage", component: () => import("../home/page/city_page.vue") },
+    { path: "/cityPage", component: () => import("../home/page/city-page.vue") },
+    { path: "/searchPage", component: () => import("../home/page/search-page.vue") },
 
     {
       path: "/favor",

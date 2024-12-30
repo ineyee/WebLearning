@@ -25,6 +25,13 @@ defineOptions({
   name: "date-component"
 });
 
+const props = defineProps({
+  onConfirm: {
+    type: Function,
+    default: null,
+  },
+});
+
 // 日期信息
 // UI上不展示这两个变量，也就是说这两个变量不直接驱动UI，所以可以定义成非响应式的
 let _beginDateTimestampMs = getCurDateTimestampMs();
@@ -36,6 +43,9 @@ let _totalNight = ref(diffDays(_beginDateTimestampMs, _endDateTimestampMs));
 const _onClickDateInfo = () => {
   _showCalendar.value = true;
 };
+if (props.onConfirm !== null) {
+  props.onConfirm(_beginDateString, _endDateString);
+}
 
 // 日历
 let _showCalendar = ref(false);
@@ -54,7 +64,10 @@ const _onConfirm = (days) => {
   _beginDateString.value = formatTimestampMs("MM月DD日", _beginDateTimestampMs);
   _endDateString.value = formatTimestampMs("MM月DD日", _endDateTimestampMs);
   _totalNight.value = diffDays(_beginDateTimestampMs, _endDateTimestampMs);
-  console.log(days);
+
+  if (props.onConfirm !== null) {
+    props.onConfirm(_beginDateString, _endDateString);
+  }
 };
 </script>
 

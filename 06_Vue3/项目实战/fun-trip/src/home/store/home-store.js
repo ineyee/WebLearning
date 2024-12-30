@@ -13,6 +13,10 @@ const useHomeStore = defineStore("useHomeStore", {
   // 注意：因为我们已经给hotSuggestsList赋了默认值[]，所以在对hotSuggestsList本身做任何操作时都不会报错，但是在对hotSuggestsList的属性做操作时一定要判空，因为那些界面在第一次使用那些数据时网络请求还没请求到，所以会访问到null或undefined而报错，因此要么直接if判断判空，要么?.可选解包访问
   state() {
     return {
+      // 入住时间
+      beginDateString: "",
+      // 离店时间
+      endDateString: "",
       // 热门推荐列表数据
       hotSuggestsList: [],
     };
