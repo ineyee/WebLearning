@@ -67,8 +67,8 @@ const useCityStore = defineStore("useCityStore", {
   // 事件（注意：这里既能定义同步方法也能定义异步方法）
   actions: {
     async getCityAll() {
-      const response = await getCityAll();
-      this.data = response;
+      const data = await getCityAll();
+      this.data = data;
     },
   },
 });

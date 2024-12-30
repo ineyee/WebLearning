@@ -84,8 +84,8 @@ const onSelectedCity = (selectedCity) => {
       padding-right: 25px;
 
       display: flex;
-      justify-content: space-between;
       flex-wrap: wrap;
+      justify-content: space-between;
 
       .hot-city-item {
         width: 70px;

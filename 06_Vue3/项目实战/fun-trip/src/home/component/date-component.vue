@@ -59,29 +59,31 @@ const _onConfirm = (days) => {
 </script>
 
 <style lang="less" scoped>
-.date-info {
+.date-component {
   padding: 10px 20px 10px 20px;
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  .date {
+  .date-info {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 
-    .text {
-      font-size: 12px;
-      color: var(--c-666666FF);
+    .date {
+      display: flex;
+      flex-direction: column;
+
+      .text {
+        font-size: 12px;
+        color: var(--c-666666FF);
+      }
     }
-  }
 
-  .begin {
-    align-items: start;
-  }
+    .begin {
+      align-items: start;
+    }
 
-  .end {
-    align-items: end;
+    .end {
+      align-items: end;
+    }
   }
 }
 </style>

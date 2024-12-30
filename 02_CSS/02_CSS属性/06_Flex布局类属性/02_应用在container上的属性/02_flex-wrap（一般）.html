@@ -43,6 +43,10 @@
     1、nowrap（默认）：不换行、压缩
     2、wrap：换行（Web里的GridView现在一般都是通过这个属性实现的 + 为了item之间的间距平均分布而使用justify-content:space-between。这样一来就容易出现最后一行不够个数，此时一般都是通过补充空的item来实现左对齐的效果）
     3、wrap-reverse：换行、反转
+
+    其实Web开发里类似GridView的效果就经常用flex布局 + flex-wrap: wrap来实现
+    如果我们希望GridView的item是两边对齐那就再加个justify-content: space-between;或space-around或space-evenly
+    如果我们希望GridView的item就是左边对齐放不下自动换行那就保持默认值justify-content: start;
   -->
   <div class="container">
     <div class="item item1">1</div>
