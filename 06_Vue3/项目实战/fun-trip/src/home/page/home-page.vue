@@ -7,17 +7,20 @@
     <hot-suggest-component></hot-suggest-component>
     <search-button-component></search-button-component>
     <category-component></category-component>
+    <house-list-component></house-list-component>
+    <button @click="_loadMore">加载更多</button>
   </div>
 </template>
 
 <script setup>
-import NavBar from '../../component/nav-bar.vue';
+import NavBar from '../component/nav-bar.vue';
 import BannerComponent from '../component/banner-component.vue';
 import CityComponent from '../component/city-component.vue';
 import DateComponent from '../component/date-component.vue';
 import HotSuggestComponent from '../component/hot-suggest-component.vue';
 import SearchButtonComponent from '../component/search-button-component.vue';
 import CategoryComponent from '../component/category-component.vue';
+import HouseListComponent from '../component/house-list-component.vue';
 import useHomeStore from '../store/home-store';
 
 defineOptions({
@@ -27,10 +30,16 @@ defineOptions({
 const _homeStore = useHomeStore();
 _homeStore.getHotSuggests();
 _homeStore.getCategories();
+_homeStore.getHouseList();
 
 const _dateOnConfirm = (beginDateString, endDateString) => {
   _homeStore.beginDateString = beginDateString;
   _homeStore.endDateString = endDateString;
+};
+
+const _loadMore = () => {
+  _homeStore.page++;
+  _homeStore.getHouseList();
 };
 </script>
 

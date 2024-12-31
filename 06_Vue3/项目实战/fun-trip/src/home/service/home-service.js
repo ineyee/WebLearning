@@ -46,3 +46,29 @@ export async function getCategories() {
     return [];
   }
 };
+
+export async function getHouseList(page) {
+  try {
+    const response = await httpRequest.get({
+      url: "http://123.207.32.32:1888/api/home/houselist",
+      params: {
+        page: page,
+      },
+    });
+
+    if (response["errcode"] !== 0) {
+      console.log(`getHouseList失败：${response["errcode"]}`);
+      return [];
+    } else {
+      if (response["data"] === null) {
+        console.log(`getHouseList失败：数据为null`);
+        return [];
+      } else {
+        return response["data"];
+      }
+    }
+  } catch (error) {
+    console.log(`getHouseList出错：${error}`);
+    return [];
+  }
+};

@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { getCategories, getHotSuggests } from "../service/home-service";
+import { getCategories, getHotSuggests, getHouseList } from "../service/home-service";
 
 // 定义store
 // 
@@ -21,6 +21,9 @@ const useHomeStore = defineStore("useHomeStore", {
       hotSuggestsList: [],
       // 分类列表数据
       categories: [],
+      // 房源列表
+      page: 1,
+      houseList: [],
     };
   },
   // 计算属性（我们也认为是数据的一部分，因为对外界使用者来说计算属性就是数据）
@@ -36,6 +39,10 @@ const useHomeStore = defineStore("useHomeStore", {
     async getCategories() {
       const data = await getCategories();
       this.categories = data;
+    },
+    async getHouseList() {
+      const data = await getHouseList(this.page);
+      this.houseList.push(...data);
     },
   },
 });
