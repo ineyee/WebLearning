@@ -1,6 +1,9 @@
 // 实际开发中我们很少直接使用axios实例，这里仅仅是演示用
 // 我们一般都是axios.create()创建自己的axios实例来用
+import useCommonStore from "@/store/common-store";
 import axios from "axios";
+
+const _commonStore = useCommonStore();
 
 const _timeout = 30000;
 const _responseType = "json";
@@ -12,6 +15,8 @@ axios.defaults.responseType = _responseType; // 默认响应体都是采用JSON�
 // 设置请求拦截器
 axios.interceptors.request.use(
   (config) => {
+    _commonStore.showLoading();
+
     // 在请求发送之前进行处理
     console.log(`\n`);
     console.log(`====================== 请求数据 ======================`);
@@ -26,6 +31,8 @@ axios.interceptors.request.use(
     return config; // 必须返回config
   },
   (error) => {
+    _commonStore.hideLoading();
+
     // 请求出错时的处理
     console.log(`\n`);
     console.log(`====================== 请求出错 ======================`);
@@ -38,6 +45,8 @@ axios.interceptors.request.use(
 // 设置响应拦截器
 axios.interceptors.response.use(
   (response) => {
+    _commonStore.hideLoading();
+
     // 对响应数据进行处理
     console.log(`\n`);
     console.log(`====================== 响应数据 ======================`);
@@ -49,6 +58,8 @@ axios.interceptors.response.use(
     return response.data; // 返回响应数据，axios会自动包裹一层、response.data才是我们服务器真正返回的数据，我们可以在这里统一拦截处理后返回
   },
   (error) => {
+    _commonStore.hideLoading();
+
     // 响应出错时的处理
     console.log(`\n`);
     console.log(`====================== 响应出错 ======================`);

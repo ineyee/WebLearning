@@ -29,7 +29,7 @@ export function useElementScroll({scrollingCallback, atBottomCallback}) {
     const contentScrolledHeight = element.scrollTop; // 内容已滚动的高度
     const contentSingleScreenHeight = element.clientHeight; // 单屏能显示下的内容高度
     const isAtBottom =
-      contentScrolledHeight.value + contentSingleScreenHeight.value >= contentTotalHeight.value;
+      contentScrolledHeight + contentSingleScreenHeight >= contentTotalHeight;
 
     if (scrollingCallback !== null && scrollingCallback !== undefined) {
       scrollingCallback({
