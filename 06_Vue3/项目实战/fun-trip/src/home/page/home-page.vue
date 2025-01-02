@@ -21,7 +21,7 @@ import SearchButtonComponent from '../component/search-button-component.vue';
 import CategoryComponent from '../component/category-component.vue';
 import HouseListComponent from '../component/house-list-component.vue';
 import useHomeStore from '../store/home-store';
-import { useElementScrollToBottom } from '@/hook/use-scroll';
+import { useElementScroll } from '@/hook/use-scroll';
 
 defineOptions({
   name: "home-page"
@@ -37,9 +37,15 @@ const _dateOnConfirm = (beginDateString, endDateString) => {
   _homeStore.endDateString = endDateString;
 };
 
-const _scrollElementRef = useElementScrollToBottom(() => {
-  _homeStore.page++;
-  _homeStore.getHouseList();
+
+const _scrollElementRef = useElementScroll({
+  atBottomCallback: () => {
+    _homeStore.page++;
+    _homeStore.getHouseList();
+  },
+  scrollingCallback: ({ contentScrolledHeight }) => {
+    console.log(contentScrolledHeight);
+  },
 });
 </script>
 

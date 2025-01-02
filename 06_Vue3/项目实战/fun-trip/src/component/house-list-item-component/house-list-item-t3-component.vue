@@ -42,6 +42,10 @@ const _props = defineProps({
   background-color: #fff;
 
   .house-image {
+    height: 50%;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+
     :deep(img) {
       border-top-left-radius: 6px;
       border-top-right-radius: 6px;

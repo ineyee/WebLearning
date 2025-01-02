@@ -8,14 +8,16 @@ import { onActivated, onDeactivated, onMounted, onUnmounted, ref } from 'vue';
 // </template>
 // 
 // <script setup>
-// import { useElementScrollToBottom } from '@/hook/use-scroll';
+// import { useElementScroll } from '@/hook/use-scroll';
 // 
-// const _scrollElementRef = useElementScrollToBottom(() => {
-//   console.log("滚动到底部了");
+// const _scrollElementRef = useElementScroll({
+//   atBottomCallback: () => {
+//     console.log("滚动到底部了");
+//   },
 // });
-// </script>
 // ```
-export function useElementScrollToBottom(callback) {
+export function useElementScroll({scrollingCallback, atBottomCallback}) {
+  // 函数里定义的是局部变量，所以不能直接返回非引用类型的数据，否则函数调用结束后局部变量就销毁了，会发生坏内存访问，需要返回引用
   const scrollElementRef = ref(null); // 用于绑定到滚动的元素
 
   const onScroll = (event) => {
@@ -25,10 +27,20 @@ export function useElementScrollToBottom(callback) {
     const contentScrolledHeight = element.scrollTop; // 内容已滚动的高度
     const contentSingleScreenHeight = element.clientHeight; // 单屏能显示下的内容高度
     const isAtBottom =
-      contentScrolledHeight + contentSingleScreenHeight >= contentTotalHeight;
+      contentScrolledHeight.value + contentSingleScreenHeight.value >= contentTotalHeight.value;
+
+    if (scrollingCallback !== null && scrollingCallback !== undefined) {
+      scrollingCallback({
+        contentTotalHeight,
+        contentScrolledHeight,
+        contentSingleScreenHeight,
+      });
+    }
 
     if (isAtBottom) {
-      callback();
+      if (atBottomCallback !== null && atBottomCallback !== undefined) {
+        atBottomCallback();
+      }
     }
   };
 
