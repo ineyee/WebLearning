@@ -55,6 +55,12 @@ const router = createRouter({
         showTabBar: true,
       },
     },
+
+    // 我们这里用下动态路由传参
+    {
+      path: "/houseDetail/:houseId",
+      component: () => import("../house-detail/page/house-detail-page.vue"),
+    },
   ],
 });
 
