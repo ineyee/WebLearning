@@ -1,4 +1,5 @@
 import { onActivated, onDeactivated, onMounted, onUnmounted, ref } from 'vue';
+import { throttle } from 'underscore';
 
 // ```Example
 // 
@@ -20,7 +21,8 @@ export function useElementScroll({scrollingCallback, atBottomCallback}) {
   // 函数里定义的是局部变量，所以不能直接返回非引用类型的数据，否则函数调用结束后局部变量就销毁了，会发生坏内存访问，需要返回引用
   const scrollElementRef = ref(null); // 用于绑定到滚动的元素
 
-  const onScroll = (event) => {
+  // 加个节流
+  const onScroll = throttle((event) => {
     const element = event.target;
 
     const contentTotalHeight = element.scrollHeight; // 内容的总高度
@@ -42,7 +44,7 @@ export function useElementScroll({scrollingCallback, atBottomCallback}) {
         atBottomCallback();
       }
     }
-  };
+  }, 100);
 
   // 只会在组件首次挂载到DOM时触发
   // 如果组件使用了keep-alive，它在组件激活时不会再次触发
