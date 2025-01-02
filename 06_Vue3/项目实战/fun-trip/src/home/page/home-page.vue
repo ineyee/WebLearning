@@ -1,5 +1,5 @@
 <template>
-  <div class="home-page tab-bar-direct-page">
+  <div class="home-page tab-bar-direct-page" ref="_scrollElementRef">
     <nav-bar></nav-bar>
     <banner-component></banner-component>
     <city-component></city-component>
@@ -8,7 +8,6 @@
     <search-button-component></search-button-component>
     <category-component></category-component>
     <house-list-component></house-list-component>
-    <button @click="_loadMore">加载更多</button>
   </div>
 </template>
 
@@ -22,6 +21,7 @@ import SearchButtonComponent from '../component/search-button-component.vue';
 import CategoryComponent from '../component/category-component.vue';
 import HouseListComponent from '../component/house-list-component.vue';
 import useHomeStore from '../store/home-store';
+import { useElementScrollToBottom } from '@/hook/use-scroll';
 
 defineOptions({
   name: "home-page"
@@ -37,10 +37,10 @@ const _dateOnConfirm = (beginDateString, endDateString) => {
   _homeStore.endDateString = endDateString;
 };
 
-const _loadMore = () => {
+const _scrollElementRef = useElementScrollToBottom(() => {
   _homeStore.page++;
   _homeStore.getHouseList();
-};
+});
 </script>
 
 <style lang="less" scoped></style>
