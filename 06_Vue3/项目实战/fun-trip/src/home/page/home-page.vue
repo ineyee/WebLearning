@@ -1,5 +1,6 @@
 <template>
   <div class="home-page tab-bar-direct-page" ref="_scrollElementRef">
+    <search-bar-component v-show="_showSearchBar"></search-bar-component>
     <nav-bar></nav-bar>
     <banner-component></banner-component>
     <city-component></city-component>
@@ -12,6 +13,7 @@
 </template>
 
 <script setup>
+import SearchBarComponent from '../component/search-bar-component.vue';
 import NavBar from '../component/nav-bar.vue';
 import BannerComponent from '../component/banner-component.vue';
 import CityComponent from '../component/city-component.vue';
@@ -22,6 +24,7 @@ import CategoryComponent from '../component/category-component.vue';
 import HouseListComponent from '../component/house-list-component.vue';
 import useHomeStore from '../store/home-store';
 import { useElementScroll } from '@/hook/use-scroll';
+import { ref } from 'vue';
 
 defineOptions({
   name: "home-page"
@@ -37,14 +40,14 @@ const _dateOnConfirm = (beginDateString, endDateString) => {
   _homeStore.endDateString = endDateString;
 };
 
-
+let _showSearchBar = ref(false);
 const _scrollElementRef = useElementScroll({
   atBottomCallback: () => {
     _homeStore.page++;
     _homeStore.getHouseList();
   },
   scrollingCallback: ({ contentScrolledHeight }) => {
-    console.log(contentScrolledHeight);
+    _showSearchBar.value = contentScrolledHeight >= 350;
   },
 });
 </script>
