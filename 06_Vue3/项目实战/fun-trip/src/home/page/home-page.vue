@@ -24,7 +24,7 @@ import CategoryComponent from '../component/category-component.vue';
 import HouseListComponent from '../component/house-list-component.vue';
 import useHomeStore from '../store/home-store';
 import { useElementScroll } from '@/hook/use-scroll';
-import { ref } from 'vue';
+import { onActivated, ref } from 'vue';
 
 defineOptions({
   name: "home-page"
@@ -48,7 +48,17 @@ const _scrollElementRef = useElementScroll({
   },
   scrollingCallback: ({ contentScrolledHeight }) => {
     _showSearchBar.value = contentScrolledHeight >= 350;
+    _contentScrolledHeight = contentScrolledHeight;
   },
+});
+
+// 我们需要自己记录界面的滚动位置，当界面再次出现时让界面滚动到指定的位置
+let _contentScrolledHeight = 0;
+onActivated(() => {
+  console.log(_contentScrolledHeight);
+  _scrollElementRef.value?.scrollTo({
+    top: _contentScrolledHeight,
+  });
 });
 </script>
 

@@ -7,9 +7,9 @@
     <router-view v-slot="props">
       <!--
         使用keep-alive把tabBar的几个直接界面给保活
-        include里对应的就是界面的name属性值，多个界面的用逗号隔开
+        include里对应的就是界面的name属性值
       -->
-      <keep-alive include="home-page, favor-page, order-page, message-page">
+      <keep-alive :include="['home-page', 'favor-page', 'order-page', 'message-page']">
         <component :is="props.Component"></component>
       </keep-alive>
     </router-view>
