@@ -4,7 +4,17 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <!--
+    1、name="viewport"专门用来设置移动端布局视口的大小，PC端会自动忽略这个东西
+    2、width：用来设置布局视口的宽度，我们设置为可见视口的宽度——device-width就行了，高度不用管，因为竖向一般都是可滚动的，我们只需要管宽度就行了
+    3、initial-scale：布局视口的宽度已经设置成device-width了，要在此基础上缩放几倍？一般情况下我们就保持1倍就可以了
+    4、user-scalable：yes、no，一般情况下我们不允许用户对网页进行缩放，但是有些浏览器会忽略掉这个字段，因此我们一般还会用minimum-scale和maximum-scale来禁止用户缩放
+    5、minimum-scale：最小缩放比例
+    6、maximum-scale：最大缩放比例
+  -->
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
   <title>趣旅行</title>
 </head>
@@ -16,7 +26,8 @@
   </noscript>
   <div id="app"></div>
   <!-- 百度地图的配置 -->
-  <script type="text/javascript" src="https://api.map.baidu.com/api?v=1.0&type=webgl&ak=YKEhhYO9Blhaq4JPkXINUWKZMxp4sPPr"></script>
+  <script type="text/javascript"
+    src="https://api.map.baidu.com/api?v=1.0&type=webgl&ak=YKEhhYO9Blhaq4JPkXINUWKZMxp4sPPr"></script>
   <!-- built files will be auto injected -->
 </body>
 
