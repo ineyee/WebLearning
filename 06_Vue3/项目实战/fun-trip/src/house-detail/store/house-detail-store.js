@@ -24,6 +24,9 @@ const useHouseDetailStore = defineStore("useHouseDetailStore", {
     mainPart() {
       return this.houseDetailData.mainPart;
     },
+    topModule() {
+      return this.houseDetailData.mainPart?.topModule;
+    },
     housePics() {
       return this.houseDetailData.mainPart?.topModule?.housePicture?.housePics;
     }
