@@ -7,6 +7,7 @@
     <HouseLandlordComponent></HouseLandlordComponent>
     <HouseCommentComponent></HouseCommentComponent>
     <HouseNoticeComponent></HouseNoticeComponent>
+    <HouseMapComponent :cur-house-position="_houseDetailStore.positionModule"></HouseMapComponent>
   </div>
 </template>
 
@@ -19,6 +20,7 @@ import HouseFacilityComponent from '../component/house-facility-component.vue';
 import HouseLandlordComponent from '../component/house-landlord-component.vue';
 import HouseCommentComponent from '../component/house-comment-component.vue';
 import HouseNoticeComponent from '../component/house-notice-component.vue';
+import HouseMapComponent from '../component/house-map-component.vue';
 
 defineOptions({
   name: "house-detail-page"

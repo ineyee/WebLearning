@@ -29,7 +29,10 @@ const useHouseDetailStore = defineStore("useHouseDetailStore", {
     },
     housePics() {
       return this.houseDetailData.mainPart?.topModule?.housePicture?.housePics;
-    }
+    },
+    positionModule() {
+      return this.houseDetailData.mainPart?.dynamicModule?.positionModule;
+    },
   },
   // 事件（注意：这里既能定义同步方法也能定义异步方法）
   actions: {
