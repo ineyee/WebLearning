@@ -36,10 +36,11 @@ html {
 
   --main-color: #FF9854FF;
 
+  --van-primary-color: var(--main-color) !important;
   --van-nav-bar-title-font-size: 20px !important;
-  --van-nav-bar-title-text-color: #FF9854FF !important;
+  --van-nav-bar-title-text-color: var(--main-color) !important;
   --van-nav-bar-arrow-size: 23px !important;
-  --van-nav-bar-icon-color: #FF9854FF !important;
+  --van-nav-bar-icon-color: var(--main-color) !important;
 }
 
 body {

@@ -1,21 +1,19 @@
 <template>
-  <!--
-    在template中如何获取动态路由里的参数呢？
-    * $route：就是当前路由对象
-    * $route.params：就是动态路由里的所有参数
-    * $route.params.属性名：就能拿到动态路由里属性对应的参数值了
-  -->
-  <div class="house-detail-page">
-    {{ $route.params.houseId }}
-  </div>
+  <van-nav-bar title="房屋详情" safe-area-inset-top left-arrow @click-left="_onClickLeft" />
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 defineOptions({
   name: "house-detail-page"
 });
+
+const _router = useRouter();
+const _onClickLeft = () => {
+  _router.back();
+};
+
 
 /*
   在JS代码里如何获取动态路由里的参数呢？
