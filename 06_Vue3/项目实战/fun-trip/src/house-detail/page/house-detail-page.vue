@@ -3,6 +3,7 @@
     <van-nav-bar class="nav-bar" title="房屋详情" safe-area-inset-top left-arrow @click-left="_onClickLeft" />
     <HouseImageComponent :cur-house-images="_houseDetailStore.housePics"></HouseImageComponent>
     <HouseInfoComponent :cur-house-info="_houseDetailStore.topModule"></HouseInfoComponent>
+    <HouseFacilityComponent></HouseFacilityComponent>
   </div>
 </template>
 
@@ -11,6 +12,7 @@ import { useRoute, useRouter } from 'vue-router';
 import HouseInfoComponent from '../component/house-info-component.vue';
 import HouseImageComponent from '../component/house-image-component.vue';
 import useHouseDetailStore from '../store/house-detail-store';
+import HouseFacilityComponent from '../component/house-facility-component.vue';
 
 defineOptions({
   name: "house-detail-page"
