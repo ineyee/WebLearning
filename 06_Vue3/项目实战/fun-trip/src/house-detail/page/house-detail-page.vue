@@ -1,15 +1,16 @@
 <template>
   <div class="scroll-listen-page" ref="_scrollElementRef">
-    <HouseTabComponent v-if="_showTabs"></HouseTabComponent>
+    <HouseTabComponent v-if="_showTabs" :onClickTab="_onClickTab"></HouseTabComponent>
     <van-nav-bar class="nav-bar" title="房屋详情" safe-area-inset-top left-arrow @click-left="_onClickLeft" />
     <HouseImageComponent ref="_houseImageComponentRef" :cur-house-images="_houseDetailStore.housePics">
     </HouseImageComponent>
     <HouseInfoComponent :cur-house-info="_houseDetailStore.topModule"></HouseInfoComponent>
-    <HouseFacilityComponent></HouseFacilityComponent>
-    <HouseLandlordComponent></HouseLandlordComponent>
-    <HouseCommentComponent></HouseCommentComponent>
-    <HouseNoticeComponent></HouseNoticeComponent>
-    <HouseMapComponent :cur-house-position="_houseDetailStore.positionModule"></HouseMapComponent>
+    <HouseFacilityComponent ref="_houseFacilityComponentRef"></HouseFacilityComponent>
+    <HouseLandlordComponent ref="_houseLandlordComponentRef"></HouseLandlordComponent>
+    <HouseCommentComponent ref="_houseCommentComponentRef"></HouseCommentComponent>
+    <HouseNoticeComponent ref="_houseNoticeComponentRef"></HouseNoticeComponent>
+    <HouseMapComponent ref="_houseMapComponentRef" :cur-house-position="_houseDetailStore.positionModule">
+    </HouseMapComponent>
   </div>
 </template>
 
@@ -42,6 +43,47 @@ const _scrollElementRef = useElementScroll({
     _showTabs.value = contentScrolledHeight >= _showTabsHeight;
   },
 });
+const _onClickTab = (selectedIndex) => {
+  switch (selectedIndex) {
+    case 0:
+      _scrollElementRef.value.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+      break;
+    case 1:
+      _scrollElementRef.value.scrollTo({
+        // 这里的offsetTop跟下面的getBoundingClientRect().top值是一样的
+        top: _houseFacilityComponentRef.value.$el.offsetTop - 40,
+        behavior: "smooth",
+      });
+      break;
+    case 2:
+      _scrollElementRef.value.scrollTo({
+        top: _houseLandlordComponentRef.value.$el.offsetTop - 40,
+        behavior: "smooth",
+      });
+      break;
+    case 3:
+      _scrollElementRef.value.scrollTo({
+        top: _houseCommentComponentRef.value.$el.offsetTop - 40,
+        behavior: "smooth",
+      });
+      break;
+    case 4:
+      _scrollElementRef.value.scrollTo({
+        top: _houseNoticeComponentRef.value.$el.offsetTop - 40,
+        behavior: "smooth",
+      });
+      break;
+    case 5:
+      _scrollElementRef.value.scrollTo({
+        top: _houseMapComponentRef.value.$el.offsetTop - 40,
+        behavior: "smooth",
+      });
+      break;
+  }
+};
 
 const _onClickLeft = () => {
   _router.back();
@@ -57,6 +99,11 @@ const _onClickLeft = () => {
 _houseDetailStore.getHouseDetail(_route.params.houseId);
 
 const _houseImageComponentRef = ref();
+const _houseFacilityComponentRef = ref();
+const _houseLandlordComponentRef = ref();
+const _houseCommentComponentRef = ref();
+const _houseNoticeComponentRef = ref();
+const _houseMapComponentRef = ref();
 onMounted(() => {
   // 注意：lifeCycleCom是一个Vue组件实例，而非一个原生DOM元素，所以我们得进一步通过它的“$el”属性获取到组件对应的原生DOM元素————即组件的根元素（这也是为什么我们前面推荐一个组件最好只有一个根元素的原因）
   const _houseImageComponent = _houseImageComponentRef.value;

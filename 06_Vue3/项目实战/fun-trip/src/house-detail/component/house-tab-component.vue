@@ -1,6 +1,6 @@
 <template>
   <div class="house-tab-component">
-    <van-tabs class="tabs" v-model:active="_active" color="#FF9854FF">
+    <van-tabs class="tabs" v-model:active="_active" color="#FF9854FF" @click-tab="_onClickTab">
       <van-tab title="信息概览"></van-tab>
       <van-tab title="房屋设施"></van-tab>
       <van-tab title="房东介绍"></van-tab>
@@ -18,7 +18,19 @@ defineOptions({
   name: "house-tab-component"
 });
 
+const _props = defineProps({
+  onClickTab: {
+    type: Function,
+    default: () => null,
+  },
+});
+
 const _active = ref(0);
+const _onClickTab = ({ name }) => {
+  if (_props.onClickTab !== null) {
+    _props.onClickTab(name);
+  }
+};
 </script>
 
 <style lang="less" scoped>
