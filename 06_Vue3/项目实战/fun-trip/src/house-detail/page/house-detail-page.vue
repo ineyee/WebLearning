@@ -4,6 +4,9 @@
     <HouseImageComponent :cur-house-images="_houseDetailStore.housePics"></HouseImageComponent>
     <HouseInfoComponent :cur-house-info="_houseDetailStore.topModule"></HouseInfoComponent>
     <HouseFacilityComponent></HouseFacilityComponent>
+    <HouseLandlordComponent></HouseLandlordComponent>
+    <HouseCommentComponent></HouseCommentComponent>
+    <HouseNoticeComponent></HouseNoticeComponent>
   </div>
 </template>
 
@@ -13,6 +16,9 @@ import HouseInfoComponent from '../component/house-info-component.vue';
 import HouseImageComponent from '../component/house-image-component.vue';
 import useHouseDetailStore from '../store/house-detail-store';
 import HouseFacilityComponent from '../component/house-facility-component.vue';
+import HouseLandlordComponent from '../component/house-landlord-component.vue';
+import HouseCommentComponent from '../component/house-comment-component.vue';
+import HouseNoticeComponent from '../component/house-notice-component.vue';
 
 defineOptions({
   name: "house-detail-page"

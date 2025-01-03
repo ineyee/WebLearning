@@ -5,10 +5,12 @@
       <slot name="content">
       </slot>
     </div>
-    <div class="footer">
-      <div class="text">{{ footerText }}</div>
-      <div class="right-arrow"></div>
-    </div>
+    <template v-if="footerText.length > 0">
+      <div class="footer">
+        <div class="text">{{ footerText }}</div>
+        <div class="right-arrow"></div>
+      </div>
+    </template>
   </div>
 </template>
 
