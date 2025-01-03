@@ -46,6 +46,10 @@ const _scrollElementRef = useElementScroll({
   scrollingCallback: ({ contentScrolledHeight }) => {
     _showTabs.value = contentScrolledHeight >= _showTabsHeight;
 
+    if (_tapTab) {
+      return;
+    }
+
     let curSectionIndex = _sectionTopList.length - 1;
     for (let i = 0; i < _sectionTopList.length; i++) {
       const value = _sectionTopList[i];
@@ -61,6 +65,11 @@ const _scrollElementRef = useElementScroll({
   },
 });
 const _onClickTab = (selectedIndex) => {
+  _tapTab = true;
+  setTimeout(() => {
+    _tapTab = false;
+  }, 1000); // 简单延个时，等点击tab导致界面滚动、滚动结束时置位_tapTab
+
   switch (selectedIndex) {
     case 0:
       _scrollElementRef.value.scrollTo({
@@ -140,6 +149,9 @@ onMounted(() => {
 // 界面滚动到不同的section时驱动tabs切换
 const _sectionTopList = [];
 const _houseTabComponentRef = ref();
+
+// 点击tab切换tab和界面滚动切换tab冲突的处理
+let _tapTab = false;
 </script>
 
 <style lang="less" scoped>
