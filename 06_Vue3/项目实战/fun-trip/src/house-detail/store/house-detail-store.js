@@ -20,9 +20,13 @@ const useHouseDetailStore = defineStore("useHouseDetailStore", {
   // 计算属性（我们也认为是数据的一部分，因为对外界使用者来说计算属性就是数据）
   // 因为pinia里的存储属性默认都是响应式的，而计算属性又仅仅是使用了存储属性，所以计算属性本身也都是响应式的
   getters: {
+    // mainPart
     mainPart() {
       return this.houseDetailData.mainPart;
     },
+    housePics() {
+      return this.houseDetailData.mainPart?.topModule?.housePicture?.housePics;
+    }
   },
   // 事件（注意：这里既能定义同步方法也能定义异步方法）
   actions: {

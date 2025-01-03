@@ -1,5 +1,14 @@
 <template>
-  <van-nav-bar title="房屋详情" safe-area-inset-top left-arrow @click-left="_onClickLeft" />
+  <div class="house-detail-page">
+    <van-nav-bar class="nav-bar" title="房屋详情" safe-area-inset-top left-arrow @click-left="_onClickLeft" />
+    <van-swipe class="swipe" :autoplay="3000" indicator-color="white">
+      <template v-for="pic in _houseDetailStore.housePics" :key="pic.orderIndex">
+        <van-swipe-item class="swipe-item">
+          <img class="image" :src="pic.url" alt="">
+        </van-swipe-item>
+      </template>
+    </van-swipe>
+  </div>
 </template>
 
 <script setup>
@@ -28,4 +37,14 @@ const _onClickLeft = () => {
 _houseDetailStore.getHouseDetail(_route.params.houseId);
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.house-detail-page {
+  .swipe {
+    .swipe-item {
+      .image {
+        width: 100%;
+      }
+    }
+  }
+}
+</style>
