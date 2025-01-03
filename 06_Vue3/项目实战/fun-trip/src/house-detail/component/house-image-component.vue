@@ -31,6 +31,8 @@ defineProps({
 
 <style lang="less" scoped>
 .house-image-component {
+  height: 240px;
+
   .swipe {
     .swipe-item {
       .image {
