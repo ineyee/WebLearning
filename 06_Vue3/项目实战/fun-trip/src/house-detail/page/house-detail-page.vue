@@ -1,6 +1,6 @@
 <template>
   <div class="scroll-listen-page" ref="_scrollElementRef">
-    <HouseTabComponent v-if="_showTabs" :onClickTab="_onClickTab"></HouseTabComponent>
+    <HouseTabComponent v-if="_showTabs" ref="_houseTabComponentRef" :onClickTab="_onClickTab"></HouseTabComponent>
     <van-nav-bar class="nav-bar" title="房屋详情" safe-area-inset-top left-arrow @click-left="_onClickLeft" />
     <HouseImageComponent ref="_houseImageComponentRef" :cur-house-images="_houseDetailStore.housePics">
     </HouseImageComponent>
@@ -11,6 +11,10 @@
     <HouseNoticeComponent ref="_houseNoticeComponentRef"></HouseNoticeComponent>
     <HouseMapComponent ref="_houseMapComponentRef" :cur-house-position="_houseDetailStore.positionModule">
     </HouseMapComponent>
+    <div class="bottom">
+      <div>安心订·放心住</div>
+      <div>各种长文本信息</div>
+    </div>
   </div>
 </template>
 
@@ -41,6 +45,19 @@ let _showTabsHeight = 0;
 const _scrollElementRef = useElementScroll({
   scrollingCallback: ({ contentScrolledHeight }) => {
     _showTabs.value = contentScrolledHeight >= _showTabsHeight;
+
+    let curSectionIndex = _sectionTopList.length - 1;
+    for (let i = 0; i < _sectionTopList.length; i++) {
+      const value = _sectionTopList[i];
+      if (value >= contentScrolledHeight) {
+        curSectionIndex = i - 1;
+        break;
+      }
+    }
+
+    if (curSectionIndex !== _houseTabComponentRef.value?.getSelectedIndex()) {
+      _houseTabComponentRef.value?.setSelectedIndex(curSectionIndex);
+    }
   },
 });
 const _onClickTab = (selectedIndex) => {
@@ -110,7 +127,27 @@ onMounted(() => {
   const _houseImageElement = _houseImageComponent.$el;
   const _houseImageElementRect = _houseImageElement.getBoundingClientRect();
   _showTabsHeight = _houseImageElementRect.top + _houseImageElementRect.height - 40;
+
+  // 存储各个section的top
+  _sectionTopList.push(0);
+  _sectionTopList.push(_houseFacilityComponentRef.value.$el.offsetTop + 40);
+  _sectionTopList.push(_houseLandlordComponentRef.value.$el.offsetTop + 40);
+  _sectionTopList.push(_houseCommentComponentRef.value.$el.offsetTop + 40);
+  _sectionTopList.push(_houseNoticeComponentRef.value.$el.offsetTop + 40);
+  _sectionTopList.push(_houseMapComponentRef.value.$el.offsetTop + 40);
 });
+
+// 界面滚动到不同的section时驱动tabs切换
+const _sectionTopList = [];
+const _houseTabComponentRef = ref();
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.scroll-listen-page {
+  .bottom {
+    height: 666px;
+
+    text-align: center;
+  }
+}
+</style>

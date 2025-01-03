@@ -31,6 +31,18 @@ const _onClickTab = ({ name }) => {
     _props.onClickTab(name);
   }
 };
+
+const setSelectedIndex = (index) => {
+  _active.value = index;
+};
+const getSelectedIndex = () => {
+  return _active.value;
+};
+// 把函数暴露出去（但实际开发中我们应该减少这种组件暴露函数出去让父视图调用的行为，这就退回命令式编程了）
+defineExpose({
+  setSelectedIndex,
+  getSelectedIndex,
+});
 </script>
 
 <style lang="less" scoped>
