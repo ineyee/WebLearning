@@ -1,0 +1,11 @@
+<!--index.wxml-->
+<scroll-view class="scrollarea" scroll-y type="list">
+	<view class="container">
+		<!--
+			视图
+			跟Vue里的template模板非常像
+		-->
+		<view>当前计数：{{counter}}</view>
+		<button bind:tap="add">➕</button>
+	</view>
+</scroll-view>
