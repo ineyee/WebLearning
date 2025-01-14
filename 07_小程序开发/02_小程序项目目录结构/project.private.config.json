@@ -3,5 +3,6 @@
   "projectname": "mini-program-demo",
   "setting": {
     "compileHotReLoad": true
-  }
+  },
+  "libVersion": "latest"
 }
