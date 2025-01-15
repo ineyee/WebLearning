@@ -1,4 +1,7 @@
 {
   "usingComponents": {
-  }
+	},
+	"navigationBarTitleText": "日志",
+	"enablePullDownRefresh": true,
+	"onReachBottomDistance": 100
 }
