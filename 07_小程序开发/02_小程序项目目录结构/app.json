@@ -1,13 +1,40 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/logs/logs"
+		"pages/index/index",
+		"pages/logs/logs"
   ],
   "window": {
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "Weixin",
-    "navigationBarBackgroundColor": "#ffffff"
-  },
+		"navigationBarBackgroundColor": "#ff0000",
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "WeChat",
+		"homeButton": false,
+
+		"enablePullDownRefresh": true,
+		"backgroundTextStyle": "dark",
+		"backgroundColor": "#ffff00",
+
+		"onReachBottomDistance": 50
+	},
+	"tabBar": {
+		"backgroundColor": "#0000ff",
+		"color": "#ffffff",
+		"selectedColor": "#ff0000",
+		"borderStyle": "black",
+		"list": [
+			{
+				"text": "首页",
+				"iconPath": "",
+				"selectedIconPath": "",
+				"pagePath": "pages/index/index"
+			},
+			{
+				"text": "日志",
+				"iconPath": "",
+				"selectedIconPath": "",
+				"pagePath": "pages/logs/logs"
+			}
+		]
+	},
   "style": "v2",
   "componentFramework": "glass-easel",
   "sitemapLocation": "sitemap.json",
