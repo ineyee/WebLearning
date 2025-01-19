@@ -1,49 +1,77 @@
 // index.js
-const defaultAvatarUrl = 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
-
+/*
+  当前界面的逻辑文件，每个界面都必须在对应的.js文件中调用Page构造方法创建一个界面实例，Page构造方法接收一个对象作为参数
+*/
 Page({
+  // 界面的属性/状态
   data: {
-    motto: 'Hello World',
-    userInfo: {
-      avatarUrl: defaultAvatarUrl,
-      nickName: '',
-    },
-    hasUserInfo: false,
-    canIUseGetUserProfile: wx.canIUse('getUserProfile'),
-    canIUseNicknameComp: wx.canIUse('input.type.nickname'),
+    _counter: 0,
+    text: "This is page data.",
   },
-  bindViewTap() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
+
+  // 界面的方法
+  _fetchData() {
+    console.log("请求数据");
   },
-  onChooseAvatar(e) {
-    const { avatarUrl } = e.detail
-    const { nickName } = this.data.userInfo
-    this.setData({
-      "userInfo.avatarUrl": avatarUrl,
-      hasUserInfo: nickName && avatarUrl && avatarUrl !== defaultAvatarUrl,
-    })
+
+  onButtonClick() {
+    console.log("点击了按钮");
   },
-  onInputChange(e) {
-    const nickName = e.detail.value
-    const { avatarUrl } = this.data.userInfo
-    this.setData({
-      "userInfo.nickName": nickName,
-      hasUserInfo: nickName && avatarUrl && avatarUrl !== defaultAvatarUrl,
-    })
+
+  /*
+    界面生命周期函数——界面加载完成，只会触发一次
+    类似于iOS里的viewDidLoad、Flutter里的onInitState、Vue CompositionApi里的setup
+  */
+  onLoad() {
+    console.log("界面加载完成");
   },
-  getUserProfile(e) {
-    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
-    wx.getUserProfile({
-      desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-      success: (res) => {
-        console.log(res)
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    })
+
+  /*
+    界面生命周期函数——界面初次渲染完成，只会触发一次
+    类似于Flutter里的addPostFrameCallback、Vue CompositionApi里的onMounted
+  */
+  onReady() {
+    console.log("界面初次渲染完成");
+  },
+
+  /*
+    界面生命周期函数——界面销毁，只会触发一次
+    类似于iOS里的dealloc、Flutter里的onDispose、Vue CompositionApi里的onUnmounted
+  */
+  onUnload() {
+    console.log("界面销毁");
+  },
+
+  /*
+    界面生命周期函数——界面显示，会触发多次
+    类似于iOS里的viewDidAppear
+  */
+  onShow() {
+    console.log("界面显示");
+  },
+
+  /*
+    界面生命周期函数——界面隐藏，会触发多次
+    类似于iOS里的viewDidDisappear
+  */
+  onHide() {
+    console.log("界面隐藏");
+  },
+
+  /*
+    界面监听函数——下拉刷新函数
+  */
+  onPullDownRefresh() {
+    console.log("onPullDownRefresh");
+  },
+  /*
+    界面监听函数——上拉加载函数
+  */
+  onReachBottom() {
+    console.log("onReachBottom");
+  },
+
+  onPageScroll(event) {
+    console.log("onPageScroll", event);
   },
 })
