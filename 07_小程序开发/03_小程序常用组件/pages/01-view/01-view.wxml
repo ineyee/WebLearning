@@ -1,0 +1,30 @@
+<!--pages/01-view/01-view.wxml-->
+
+<!--
+	一、简介
+
+	view 组件类似于 div 元素，是个块级元素、独占一行，所以：
+	* 默认情况下，宽度撑满一行、高度包裹内容
+	* 可以设置宽高，也就是说对于块级元素来说设置width和height属性是生效的；不过就算我们给它们设置了宽高，它们还是会独占一行——因为并没有改变它们是块级元素的本质，也就是说虽然它的宽度变小了，但是它的margin会变大，因为它们的margin-right=auto
+
+
+	一般用来显示文本或包裹其它组件
+-->
+<view class=".view1">
+	我是 view 组件
+</view>
+
+<view class=".view2">
+	<text>我的父组件是 view 组件</text>
+</view>
+
+<!--
+	二、常用属性
+
+	hover-class 属性：指定 view 被点击后没有松开手时的样式类
+	hover-start-time 属性：按住后多久出现点击态，单位毫秒，默认 50
+	hover-stay-time 属性：手指松开后点击态保留时间，单位毫秒，默认 400
+-->
+<view class=".view3" hover-class="active" hover-start-time="0" hover-stay-time="0">
+	我是 view 组件
+</view>
