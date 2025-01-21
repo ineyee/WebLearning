@@ -1,0 +1,28 @@
+<!--pages/04-image/04-image.wxml-->
+<!--
+	一、简介
+
+	image 组件类似于 img 元素，但跟 img 元素不同的是，image 组件默认是个行内块级元素（img 元素是个行内元素、行内替换元素，虽然有这点不同，但行内块级元素和行内替换元素具备同样的行为）、不独占一行，所以：
+	* 默认情况下，image 组件默认有个宽高 320px x 240px，图片的填充模式是 scaleToFill 来拉伸填满整个组件
+	* 行内块级元素可以设置宽高，也就是说对于行内级替换元素来说设置 width 和 height 属性是生效的
+
+	一般用来显示图片
+-->
+<image class="image" src="https://picsum.photos/100" mode="" />
+<image class="image" src="https://picsum.photos/200" mode="" />
+
+<!--
+	二、常用属性
+
+	mode 属性：图片的填充模式
+  * scaleToFill：默认，拉伸来填满 image 组件
+  * aspectFill：等比例缩放来填满 image 组件，图片有可能显示不全
+  * aspectFit：等比例缩放来适应 image 组件，image 组件边上可能会有空白
+  * ...
+-->
+<image src="https://picsum.photos/300/400" mode="scaleToFill" />
+<image src="https://picsum.photos/500/600" mode="aspectFill" />
+<image src="https://picsum.photos/700/800" mode="aspectFit" />
+
+<button bind:tap="selectPhoto">选择照片</button>
+<image class="photo" src="{{ selectedPhotoPath }}" mode="widthFix" />
