@@ -1,0 +1,20 @@
+/* pages/02-text/02-text.wxss */
+.text1 {
+	background-color: red;
+}
+
+.text2 {
+	display: inline-block;
+
+	background-color: orange;
+
+	width: 100px;
+	height: 100px;
+}
+
+.text3 {
+	background-color: yellow;
+
+	width: 100px;
+	height: 100px;
+}

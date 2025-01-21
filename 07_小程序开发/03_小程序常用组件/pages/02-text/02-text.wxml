@@ -1,0 +1,19 @@
+<!--pages/02-text/02-text.wxml-->
+<!--
+	一、简介
+
+	text 组件类似于 span 元素，是个行内级元素、不独占一行，所以：
+	* 默认情况下，宽度包裹内容、高度包裹内容
+	* 行内级非替换元素不可以设置宽高，也就是说对于行内级非替换元素来说设置width和height属性是不生效的，它们的宽高只能由内容决定——即包裹内容；如果想设置它的宽高，可以把它搞成行内块级元素
+
+	一般用来显示文本
+-->
+<text class=".text1">我是 text 组件</text>
+<text class=".text2">我是 text 组件</text>
+
+<!--
+	二、常用属性
+
+	user-select 属性：文本是否可选，默认为 false，该属性会使文本节点显示为 inline-block
+-->
+<text class=".text3" user-select>我是 text 组件我是 text 组件我是 text 组件我是 text 组件我是 text 组件我是 text 组件我是 text 组件我是 text 组件我是 text 组件</text>
