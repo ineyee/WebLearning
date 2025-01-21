@@ -1,0 +1,8 @@
+/* pages/03-button/03-button.wxss */
+.button1 {
+	background-color: red;
+}
+
+.button2 {
+	background-color: orange;
+}

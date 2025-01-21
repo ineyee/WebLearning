@@ -1,5 +1,6 @@
 {
 	"pages": [
+		"pages/03-button/03-button",
 		"pages/02-text/02-text",
 		"pages/01-view/01-view"
 	],

@@ -1,0 +1,32 @@
+<!--pages/03-button/03-button.wxml-->
+<!--
+	一、简介
+
+	button 组件类似于 button 元素，但跟 button 元素不同的是，button 组件默认是个块级元素（因为size = "default"）、独占一行，所以：
+	* 默认情况下，宽度撑满一行、高度包裹内容
+	* 可以设置宽高，也就是说对于块级元素来说设置width和height属性是生效的；不过就算我们给它们设置了宽高，它们还是会独占一行——因为并没有改变它们是块级元素的本质，也就是说虽然它的宽度变小了，但是它的margin会变大，因为它们的margin-right=auto
+
+	如果我们想让 button 组件变成行内块级可以手动设置它的 display CSS属性为 inline-block，也可以直接设置它的 size 属性为 "mini"，size = "mini" 的本质其实就是通过属性选择器把 display CSS属性帮我们设置为 inline-block
+
+	一般用来处理点击事件
+-->
+<button class=".button1">登录</button>
+<button class=".button2">注册</button>
+<button class=".button1" size="mini">登录</button>
+<button class=".button2" size="mini">注册</button>
+
+<!--
+	二、常用属性
+
+	disabled 属性：是否禁用，默认为 false
+	loading  属性：名称前是否带 loading 图标，默认为 false
+	open-type 属性：点击按钮时直接调用微信的开放能力
+		* getUserInfo：以前是通过这个 open-type 来获取用户的微信账号信息的，现在废弃掉了，拆分成了通过 chooseAvatar 来获取用户头像 + input 组件来获取用户昵称（这个后面再说）
+		* chooseAvatar：获取用户头像，可以从 bindchooseavatar 回调中获取到头像信息
+		* getPhoneNumber：获取用户手机号，可以从 bindgetphonenumber 回调中获取到手机号信息。不过个人开发者没法调用这个功能，这个功能是面向企业开发者的收费功能，在 bindgetphonenumber 回调中获取到动态令牌后需要发给我们后台，我们后台在调用小程序的 API 给我们返回手机号
+-->
+<button disabled>登录/注册</button>
+<button loading>登录/注册</button>
+<button open-type="getUserInfo" bindgetuserinfo="getUserInfo">获取用户信息（废弃了）</button>
+<button open-type="chooseAvatar" bindchooseavatar="chooseAvatar">获取用户头像（新方式）</button>
+<button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获取用户手机号</button>
