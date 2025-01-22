@@ -1,0 +1,50 @@
+<!--01_常用组件/pages/07-scroll-view/07-scroll-view.wxml-->
+<!--
+	一、简介
+
+	scroll-view 组件默认是个块级元素、独占一行，所以：
+	* 默认情况下，宽度撑满一行、高度包裹内容
+	* 可以设置宽高，也就是说对于块级元素来说设置width和height属性是生效的；不过就算我们给它们设置了宽高，它们还是会独占一行——因为并没有改变它们是块级元素的本质，也就是说虽然它的宽度变小了，但是它的margin会变大，因为它们的margin-right=auto
+
+	因为在 web 开发和小程序开发里，当界面里的内容过长时，界面本身就会自动滚动起来，所以小程序里的 scroll-view 并不像 iOS、安卓原生开发里的 ScrollView 那样是让整个界面滚动起来，反而一般是用来让某个局部能滚动
+	当然如果我们要做界面滚动到多少就显示某个控件 + 不足时就隐藏、界面滚动到多少就是特殊样式 + 不足时就正常样式，类似这种需要监听界面滚动的需求也可以把界面根组件设置为 scroll-view，因为 scroll-view 已经给我们提供好了很多监听函数，就不用我们像 Vue 里那样还得自己写了
+-->
+<!--
+	上下滚动的三个条件：
+	* 首先设置 scroll-y 属性代表要进行上下滚动
+	* scroll-view 必须有个固定高度，否则 scroll-view 的高度就是默认包裹所有子视图了、导致无法满足第三个条件
+	* 所有子视图的高度必须大于 scroll-view 的高度
+-->
+<scroll-view class="scroll-view" scroll-y>
+	<block wx:for="{{ colors }}" wx:key="*this">
+		<view class="item" style="background: {{ item }};">{{ item }}</view>
+	</block>
+</scroll-view>
+<!--
+	左右滚动的六个条件：
+	* 首先设置 enable-flex 属性以兼容 WebView，这样我们才能做下一个条件
+	* 然后把 scroll-view 搞成 flex 布局 + 横向滚动
+	* 然后把 scroll-view 子视图默认的 flex-shrink 改成 0，不要让子视图自动压缩来挤进 scroll-view，而是要让子视图保留它们原来的宽度，这样才有可能让所有子视图的宽度超出 scroll-view 的宽度
+	* 然后设置 scroll-x 属性代表要进行左右滚动
+	* scroll-view 必须有个固定宽度，当然 scroll-view 默认就有个固定宽度是撑满屏幕
+	* 所有子视图的宽度必须大于 scroll-view 的宽度
+-->
+<scroll-view class="scroll-view scroll-x" enable-flex scroll-x>
+	<block wx:for="{{ colors }}" wx:key="*this">
+		<view class="item" style="background: {{ item }};">{{ item }}</view>
+	</block>
+</scroll-view>
+
+<!--
+	二、常用属性
+	* upper-threshold：距顶部/左边多远时，触发 scrolltoupper 事件，默认 50
+	* lower-threshold：距底部/右边多远时，触发 scrolltolower 事件，默认 50
+	* bindscrolltoupper：滚动到顶部/左边时触发
+	* bindscrolltolower：滚动到底部/右边时触发
+	* bindscroll：滚动过程中触发
+-->
+<scroll-view class="scroll-view" scroll-y bindscrolltoupper="onScrollToUpper" bindscrolltolower="onScrollToLower" bindscroll="onScroll">
+	<block wx:for="{{ colors }}" wx:key="*this">
+		<view class="item" style="background: {{ item }};">{{ item }}</view>
+	</block>
+</scroll-view>

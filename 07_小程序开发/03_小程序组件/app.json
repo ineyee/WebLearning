@@ -1,6 +1,7 @@
 {
   "pages": [
-		"01_常用组件/pages/06-textarea/06-textarea",
+		"01_常用组件/pages/07-scroll-view/07-scroll-view",
+    "01_常用组件/pages/06-textarea/06-textarea",
     "01_常用组件/pages/05-input/05-input",
     "01_常用组件/pages/04-image/04-image",
     "01_常用组件/pages/03-button/03-button",

@@ -1,0 +1,22 @@
+/* 01_常用组件/pages/07-scroll-view/07-scroll-view.wxss */
+.scroll-view {
+	width: 66%;
+	height: 330px;
+
+	border-width: 1px;
+	border-color: red;
+	border-style: solid;
+}
+
+.scroll-x {
+	display: flex;
+
+	flex-direction: row;
+}
+
+.item {
+	width: 100px;
+	height: 100px;
+
+	flex-shrink: 0;
+}
