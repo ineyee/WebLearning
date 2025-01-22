@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@latest"></script>
+  <script>
+    const app = Vue.createApp({
+      // 视图
+      // 
+      // 跟在 v-if 里的场景一样，实际开发中，我们经常会遇到多个内容的 v-for 是同一个数组，就像前面例子中的排名 div 和名称 div 一样，我们给它们包裹了一个 div 组件来专门做 v-for，但其实这种场景用 template 元素来做性能会更高，因为 template 元素，它仅仅承担包裹的作用，不会参与真正的创建和销毁
+      template: `
+        <h2>热门电影</h2>
+        <template v-for="(movie, index) in movies" :key="movie"> 
+          <div>排名：{{ index + 1 }}</div>
+          <div>名称：{{ movie }}</div>
+        </template>
+      `,
+
+      // 数据
+      data() {
+        return {
+          movies: [
+            "肖申克的救赎",
+            "情书",
+            "假如爱有天意",
+          ],
+        };
+      },
+
+      // 事件
+      methods: {
+
+      },
+    });
+    app.mount("#app");
+  </script>
+</body>
+
+</html>
