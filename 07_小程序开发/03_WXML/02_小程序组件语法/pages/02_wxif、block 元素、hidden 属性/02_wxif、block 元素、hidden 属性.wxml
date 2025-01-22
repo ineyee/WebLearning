@@ -1,0 +1,72 @@
+<!--02_小程序组件语法/pages/02_wx:if、block 元素、hidden属性/02_wx:if、block 元素、hidden属性.wxml-->
+<!--
+	1、wx:if
+  wx:if：满足条件时才渲染当前元素，不满足时则不渲染
+  注意：wx:if条件满足时，当前元素才会真正被渲染出来；而当条件为false时，元素会被当做不存在，不是隐藏的概念、而是完全不存在于DomTree中
+
+	wx:if 一定要结合 mustache 插值语法 {{}} 一起使用，否则会被视作字符串
+-->
+<view>您拥有普通用户权益</view>
+<view wx:if="{{ isPro }}">您拥有会员用户权益</view>
+<button type="primary" size="mini" bind:tap="changePro">改变用户状态</button>
+
+<!--
+	2、wx:if 和 wx:else
+	满足条件时渲染 wx:if 的元素，不满足时则渲染 wx:else 的元素
+-->
+<view wx:if="{{ list.length <= 0 }}">加载数据中...</view>
+<view wx:else>{{ list }}</view>
+<button type="primary" size="mini" bind:tap="changeList">改变数据状态</button>
+
+<!--
+	3、wx:if、wx:elif 和 wx:else
+	满足条件时渲染 wx:if、wx:elif 的元素，不满足时则渲染 wx:else 的元素
+-->
+<view wx:if="{{ score < 60 }}">不及格：{{ score }}</view>
+<view wx:elif="{{ score >= 60 && score < 70 }}">及格：{{ score }}</view>
+<view wx:elif="{{ score >= 70 && score < 80 }}">良好：{{ score }}</view>
+<view wx:elif="{{ score >= 80 && score < 90 }}">优秀：{{ score }}</view>
+<view wx:else>卓越：{{ score }}</view>
+<button type="primary" size="mini" bind:tap="changeScore">改变分数</button>
+
+<!--
+	4、block 元素
+	实际开发中，我们经常会遇到多个内容的显隐是同一个条件，那一般有两种做法：
+  * 给每个内容都添加条件（用得少）
+  * 用一个父视图包裹多个内容，然后只给父视图添加条件（用得多）
+   
+  但是第 2 种做法有一个弊端，就是本来没有实际意义的父视图也会频繁地创建和销毁——插入和移除出 DomTree，性能可能会差一点
+  所以小程序给我们提供了一个专门的元素来承担父视图这件事，就是 block 元素，它仅仅承担包裹的作用，不会参与真正的创建和销毁，因此性能会高一些
+-->
+<view wx:if="{{ flag }}">内容一1</view>
+<view wx:if="{{ flag }}">内容二1</view>
+<view wx:if="{{ flag }}">内容三1</view>
+
+<view wx:if="{{ flag }}">
+	<view>内容一2</view>
+	<view>内容二2</view>
+	<view>内容三2</view>
+</view>
+
+<block wx:if="{{ flag }}">
+	<view>内容一3</view>
+	<view>内容二3</view>
+	<view>内容三3</view>
+</block>
+
+<button type="primary" size="mini" bind:tap="changeFlag">改变{{ flag }}状态</button>
+
+<!--
+	5、hidden 属性
+	小程序里没有 v-show，但是我们知道所有的组件都有一个公共属性 hidden，hidden 属性的本质和 v-show 的本质其实是一样的，都是在操作组件的 display 属性来控制显隐，所以可以用 hidden 属性来代替 v-show
+
+	hidden 属性：满足条件时才显示当前元素，不满足时则不显示
+  注意：hidden 属性无论条件满足不满足都会被渲染出来，也就是说无论条件满不满足元素绝对是存在于 DomTree 中的。只是条件满足时，当前元素会被显示出来；而当条件为不满足时，元素会被隐藏
+
+	* 所以当元素的显隐切换非常频繁时，建议使用 hidden 属性而不是 wx:if，因为 hidden 属性不会频繁地去更改 DomTree、性能会高一些；如果切换不频繁，则可以使用 wx:if
+	* 而当需要与 wx:else-if、wx:else 一起使用时再用 wx:if，因为 hidden 属性只能单独使用、不能跟它们组合使用
+	* 并且 hidden 属性也不能跟 block 元素一起使用，因为 block 元素本身就不会被加入到 DomTree 里，那 hidden 属性根本没办法去操作这个元素的 display 属性，因此当使用 block 元素时也得用 wx:if
+-->
+<view>您拥有普通用户权益</view>
+<view hidden="{{ isPro === false }}">您拥有会员用户权益</view>
+<button type="primary" size="mini" bind:tap="changePro">改变用户状态</button>
