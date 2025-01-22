@@ -1,0 +1,53 @@
+<!--02_小程序组件语法/pages/03_wxfor、block 元素/03_wxfor、block 元素.wxml-->
+<!--
+	1、wx:for
+  wx:for 的基本格式是：wx:for="{{ xxx }}"
+  wx:for 要用在我们要创建出来很多的那个元素身上，千万不要用错地方，比如 ul 和 li，我们是要用在 li 上、而不应该用在 ul 上，总之”wx:for 谁，谁就会创建多个”
+
+	如遍历数组时，wx:for 的基本格式就是：
+	* wx:for="{{ 某个数组 }}"
+	* 小程序框架默认给我们提供了当前项的变量名为 item、当前项下标的变量名为 index，我们直接使用即可
+	* 当然我们也可以使用 wx:for-item 来自定义当前项的变量名，使用 wx:for-index 来自定义当前项下标的变量名
+
+	wx:for 一定要结合 mustache 插值语法 {{}} 一起使用，否则会被视作字符串
+-->
+<view>-----------
+	<view wx:for="{{ movies }}">
+		<view>排名：{{ item.rank }}</view>
+		<view>名称：{{ item.name }}</view>
+	</view>
+</view>
+
+<view>-----------
+	<view wx:for="{{ movies }}" wx:for-item="movie">
+		<view>排名：{{ movie.rank }}</view>
+		<view>名称：{{ movie.name }}</view>
+	</view>
+</view>
+
+<!--
+	2、wx:key
+	实际开发中，我们在使用 wx:for 的时候，都会给元素绑定一个 key 属性，key 属性要求具备唯一性、所以我们一般都会拿数据的 id 来作为 key
+  绑定 key，可以帮助小程序框架在做元素的增加和删除时有更高的性能
+
+	小程序里 wx:key 的值只有两种形式：
+	* 保留关键字 *this， 代表 item 本身，这种形式要求 item 本身就是一个唯一的字符串或者数字
+	* item 的某个属性名，该 property 的值需要是列表中唯一的字符串或数字，且不能动态改变。只需要写上属性名就可以了，不需要写 item.属性名这种，小程序框架会自动去 item 里找对应的属性名的值来作为 key
+-->
+<view>-----------
+	<view wx:for="{{ movies }}" wx:for-item="movie" wx:key="id">
+		<view>排名：{{ movie.rank }}</view>
+		<view>名称：{{ movie.name }}</view>
+	</view>
+</view>
+
+<!--
+	3、block 元素
+	跟在 wx:if 里的场景一样，实际开发中，我们经常会遇到多个内容的 wx:for 是同一个数组，就像上面例子中的排名 view 和名称 view 一样，我们给它们包裹了一个 view 组件来专门做 wx:for，但其实这种场景用 block 元素来做性能会更高，因为 block 元素，它仅仅承担包裹的作用，不会参与真正的创建和销毁
+-->
+<view>-----------
+	<block wx:for="{{ movies }}" wx:for-item="movie" wx:key="id">
+		<view>排名：{{ movie.rank }}</view>
+		<view>名称：{{ movie.name }}</view>
+	</block>
+</view>
