@@ -1,0 +1,10 @@
+/* pages/01_rpx 单位/01_rpx 单位.wxss */
+.view {
+	/* 这里的数值都是假设 UI 在标注的时候就是以 750 x xxx 为基准的，那我们在开发的时候直接把标注的那个数搬过来 + rpx 单位即可 */
+	font-size: 32rpx;
+
+	width: 200rpx;
+	height: 200rpx;
+
+	background-color: red;
+}
