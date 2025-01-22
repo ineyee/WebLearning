@@ -1,0 +1,8 @@
+/* 01_常用组件/pages/05-input/05-input.wxss */
+.input {
+	width: 66%;
+
+	border-width: 1px;
+	border-color: red;
+	border-style: solid;
+}

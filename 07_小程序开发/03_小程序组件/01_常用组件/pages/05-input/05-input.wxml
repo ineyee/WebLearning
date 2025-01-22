@@ -1,0 +1,43 @@
+<!--01_常用组件/pages/05-input/05-input.wxml-->
+<!--
+	一、简介
+
+	input 组件类似于 input 元素，但跟 input 元素不同的是，input 组件默认是个块级元素、独占一行（input 元素是个行内块级元素），所以：
+	* 默认情况下，宽度撑满一行、高度包裹内容
+	* 可以设置宽高，也就是说对于块级元素来说设置width和height属性是生效的；不过就算我们给它们设置了宽高，它们还是会独占一行——因为并没有改变它们是块级元素的本质，也就是说虽然它的宽度变小了，但是它的margin会变大，因为它们的margin-right=auto
+
+	一般用来做单行输入
+-->
+<input class="input" type="text" />
+
+<!--
+	二、常用属性
+
+	type 属性：输入框键盘的类型
+		* text：文本输入键盘
+    * number：数字输入键盘
+		* digit：带小数点的数字输入键盘	
+		* idcard：身份证输入键盘
+		* nickname	昵称输入键盘，这个就是我们在 button 组件时提到的，以前是通过 button 组件的 open-type="getUserInfo" 来获取用户的微信账号信息的，现在废弃掉了，拆分成了通过 chooseAvatar 来获取用户头像 + input 组件的 type="nickname" 来获取用户昵称，只需要设置一下这个 type 就可以了，这样用户在输入昵称时，弹出来的键盘上会自动显示用户的微信昵称，点击就可以带入到输入框里
+	value 属性：输入框的初始内容，可以使用 model:value="{{ xxx }}" 来进行双向绑定
+	placeholder 属性：输入框为空时占位符
+	password 属性：是否密文输入
+	disabled 属性：是否禁止编辑
+	maxlength 属性：最大输入长度，默认 140，设置为 -1 的时候不限制最大长度
+	focus 属性：是否自动聚焦
+	confirm-type：键盘右下角类型
+		* send：右下角按钮为“发送”
+		* search：右下角按钮为“搜索”
+		* next：右下角按钮为“下一个”
+		* go：右下角按钮为“前往”
+		* done：右下角按钮为“完成”
+	adjust-position：键盘弹起时，是否自动上推页面，默认 true
+	hold-keyboard：focus时，点击页面的时候不收起键盘，默认 false
+	bindinput：输入改变中的回调
+	bindconfirm：点击键盘右下角按钮的回调
+	onNickNameReviewed：使用微信昵称时，需要微信校验，校验结果的回调
+-->
+<input class="input" type="text" value="{{ account }}" disabled />
+<input class="input" type="nickname" model:value="{{ nickname }}" placeholder="请输入昵称" bindnicknamereview="onNickNameReviewed" />
+<input class="input" type="text" model:value="{{ password }}" placeholder="请输入密码" password maxlength="6" bindinput="onChanged" bindconfirm="onConfirm" />
+<button type="primary" size="mini" bind:tap="onConfirm">提交</button>
