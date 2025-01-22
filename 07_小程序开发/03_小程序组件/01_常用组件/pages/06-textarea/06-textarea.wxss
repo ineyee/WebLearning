@@ -1,0 +1,9 @@
+/* 01_常用组件/pages/06-textarea/06-textarea.wxss */
+.textarea {
+	width: 66%;
+	/* height: 66px; */
+
+	border-width: 1px;
+	border-color: red;
+	border-style: solid;
+}

@@ -1,0 +1,17 @@
+<!--01_常用组件/pages/06-textarea/06-textarea.wxml-->
+<!--
+	一、简介
+
+	textarea 组件类似于 textarea 元素，但跟 textarea 元素不同的是，textarea 组件默认是个块级元素、独占一行（textarea 元素是个行内块级元素），所以：
+	* 默认情况下，宽度撑满一行、高度包裹内容
+	* 可以设置宽高，也就是说对于块级元素来说设置width和height属性是生效的；不过就算我们给它们设置了宽高，它们还是会独占一行——因为并没有改变它们是块级元素的本质，也就是说虽然它的宽度变小了，但是它的margin会变大，因为它们的margin-right=auto
+
+	一般用来做多行输入
+-->
+<textarea class="textarea" value="" />
+
+<!--
+	二、常用属性
+	跟 input 很多是一样的
+-->
+<textarea class="textarea" model:value="{{ feedback }}" placeholder="请输入反馈" />
