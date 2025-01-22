@@ -1,9 +1,9 @@
 {
   "pages": [
-    "pages/04-image/04-image",
-    "pages/03-button/03-button",
-    "pages/02-text/02-text",
-    "pages/01-view/01-view"
+    "01_常用组件/pages/04-image/04-image",
+    "01_常用组件/pages/03-button/03-button",
+    "01_常用组件/pages/02-text/02-text",
+    "01_常用组件/pages/01-view/01-view"
   ],
   "window": {
     "navigationBarTextStyle": "black",
