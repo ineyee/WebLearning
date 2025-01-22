@@ -1,20 +1,23 @@
 {
-	"pages": [
-		"01_小程序常用组件/pages/07-scroll-view/07-scroll-view",
-		"01_小程序常用组件/pages/06-textarea/06-textarea",
-		"01_小程序常用组件/pages/05-input/05-input",
-		"01_小程序常用组件/pages/04-image/04-image",
-		"01_小程序常用组件/pages/03-button/03-button",
-		"01_小程序常用组件/pages/02-text/02-text",
-		"01_小程序常用组件/pages/01-view/01-view"
-	],
-	"window": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "Weixin",
-		"navigationBarBackgroundColor": "#ffffff"
-	},
-	"style": "v2",
-	"componentFramework": "glass-easel",
-	"sitemapLocation": "sitemap.json",
-	"lazyCodeLoading": "requiredComponents"
+  "pages": [
+		"02_小程序组件语法/pages/03_wxfor、block 元素/03_wxfor、block 元素",
+    "02_小程序组件语法/pages/02_wxif、block 元素、hidden 属性/02_wxif、block 元素、hidden 属性",
+    "02_小程序组件语法/pages/01_mustache插值语法/01_mustache插值语法",
+    "01_小程序常用组件/pages/07-scroll-view/07-scroll-view",
+    "01_小程序常用组件/pages/06-textarea/06-textarea",
+    "01_小程序常用组件/pages/05-input/05-input",
+    "01_小程序常用组件/pages/04-image/04-image",
+    "01_小程序常用组件/pages/03-button/03-button",
+    "01_小程序常用组件/pages/02-text/02-text",
+    "01_小程序常用组件/pages/01-view/01-view"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "Weixin",
+    "navigationBarBackgroundColor": "#ffffff"
+  },
+  "style": "v2",
+  "componentFramework": "glass-easel",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
 }
