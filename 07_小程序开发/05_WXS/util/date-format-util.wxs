@@ -1,0 +1,40 @@
+function format(timestampMs, format) {
+	// 如果没有传入 timestampMs 参数，设置默认值
+	if (timestampMs === null || timestampMs === undefined) {
+		timestampMs = timestampMs || getDate();
+	}
+
+	// 如果没有传入 format 参数，设置默认值
+	if (format === null || format === undefined) {
+		format = format || "YYYY-MM-DD HH:mm:ss";
+	}
+
+	// 创建日期对象
+	var date = getDate(timestampMs);
+
+	// 定义替换模板的规则
+	var map = {
+		"YYYY": date.getFullYear(),
+		"MM": ("0" + (date.getMonth() + 1)).slice(-2), // 月份从 0 开始，所以要加 1
+		"DD": ("0" + date.getDate()).slice(-2),
+		"HH": ("0" + date.getHours()).slice(-2),
+		"mm": ("0" + date.getMinutes()).slice(-2),
+		"ss": ("0" + date.getSeconds()).slice(-2),
+		"SSS": ("00" + date.getMilliseconds()).slice(-3) // 毫秒
+	};
+
+	// 手动列举所有键并替换模板中的占位符
+	format = format.replace("YYYY", map["YYYY"]);
+	format = format.replace("MM", map["MM"]);
+	format = format.replace("DD", map["DD"]);
+	format = format.replace("HH", map["HH"]);
+	format = format.replace("mm", map["mm"]);
+	format = format.replace("ss", map["ss"]);
+	format = format.replace("SSS", map["SSS"]);
+
+	return format;
+}
+
+module.exports = {
+	format: format,
+};

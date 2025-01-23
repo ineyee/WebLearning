@@ -1,0 +1,8 @@
+<!--pages/02_WXS 工具函数案例/02_WXS 工具函数案例.wxml-->
+<wxs src="../../util/number-format-util.wxs" module="numberFormatUtil" />
+<wxs src="../../util/time-format-util.wxs" module="timeFormatUtil" />
+<wxs src="../../util/date-format-util.wxs" module="dateFormatUtil" />
+
+<view>歌曲播放量：{{ numberFormatUtil.showUnit(1000000000) }}</view>
+<view>歌曲播放时长：{{ timeFormatUtil.formatMinSec(100) }}/{{ timeFormatUtil.formatMinSec(240) }}</view>
+<view>当前日期：{{ dateFormatUtil.format(1672531199000) }}</view>
