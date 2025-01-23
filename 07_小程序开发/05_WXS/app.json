@@ -1,0 +1,15 @@
+{
+	"pages": [
+		"pages/02_WXS 工具函数案例/02_WXS 工具函数案例",
+		"pages/01_WXS 是干啥用的/01_WXS 是干啥用的"
+	],
+	"window": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "Weixin",
+		"navigationBarBackgroundColor": "#ffffff"
+	},
+	"style": "v2",
+	"componentFramework": "glass-easel",
+	"sitemapLocation": "sitemap.json",
+	"lazyCodeLoading": "requiredComponents"
+}

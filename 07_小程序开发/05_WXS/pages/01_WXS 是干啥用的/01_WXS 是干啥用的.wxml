@@ -1,0 +1,41 @@
+<!--pages/01_WXS 是干啥用的/01_WXS 是干啥用的.wxml-->
+<!--
+	我们前面在学习 mustache 插值语法的时候，提到了 mustache 插值语法内只能插入变量和表达式，不能插入函数调用，这跟小程序是双线程模型有关，在 WXML 里调用函数需要在微信客户端这个宿主在两个线程间进行通信，效率比较低，所以小程序框架直接不让插入函数调用了
+	而在 Vue 开发里的 mustache 插值语法内能插入变量、表达式和函数调用，因为 Vue 是单线程模型的
+
+	但是在小程序实际开发中，某些场景下我们可能的确需要在 mustache 插值语法内插入函数调用来简化代码编写，就像下面的例子一样：
+	* 我们可能希望价格 view 对应的金钱符号不是写死在 view 层的，而是通过封装在一个函数内供 view 直接使用，这样一来我们就不需要在很多 view 的地方分别拼接这个符号，而且万一这个符号发生变化了也只需要在函数那一个地方修改掉就可以了
+	* 总价的计算无法直接在 view 层完成，必须通过一个函数计算好后供 view 层直接使用
+-->
+<block wx:for="{{ books }}" wx:key="id">
+	<view>名称：{{ item.name }}</view>
+	<view>价格：￥{{ item.price }}</view>
+</block>
+<view>总价：</view>
+<view>---------------------------------</view>
+
+<!--
+	你可能想，在 JS 里定义函数、在 WXML 里调用不就行了吗？是不行的！
+	我们尝试在 JS 里定义 getHandledPrice(xxx) 函数和 getTotalPrice(xxx) 函数，在这里调用后没有任何反应！
+-->
+<block wx:for="{{ books }}" wx:key="id">
+	<view>名称：{{ item.name }}</view>
+	<view>价格：{{ getHandledPrice(item.price) }}</view>
+</block>
+<view>总价：{{ getHandledPrice(getTotalPrice()) }}</view>
+<view>---------------------------------</view>
+
+<!--
+	所以小程序框架给我们提供了 WXS 来专门定义这类东西，以配合 WXML 来简化代码编写，编写 WXS 代码有几点需要注意：
+	* 1、创建一个 .wxs 文件，把 WXS 代码都s编写在这个文件内
+	* 2、.wxs 文件跟 .js 文件类似，是一个模块、有自己独立的作用域和命名空间，需要把外界要使用的东西暴露出去才行，但是导出的时候只能使用 CommonJS 来进行导出，不能使用 ESModule；WXML 里导入时需要用 <wxs src="模块路径" module="模块名，建议其值唯一" /> 的方式，类似于在 HTML 里导入 JS 代码时的 <script src="xxx" />
+	* 3、WXS 代码只能是 ES5 的代码，不能高于这个版本，比如定义变量时不能用 let 和 const、只能用 var，定义函数时不能用箭头函数、只能用 function 关键字来定义等
+	* 4、WXS 代码里只能编写纯粹的 JS 代码当工具函数用，不能调用小程序框架里的任何东西
+-->
+<wxs src="./01_WXS 是干啥用的.wxs" module="testModule" />
+<block wx:for="{{ books }}" wx:key="id">
+	<view>名称：{{ item.name }}</view>
+	<view>价格：{{ testModule.getHandledPrice(item.price) }}</view>
+</block>
+<view>总价：{{ testModule.getHandledPrice(testModule.getTotalPrice(books)) }}</view>
+<view>---------------------------------</view>

@@ -1,0 +1,19 @@
+function getHandledPrice(price) {
+	return "￥" + price;
+}
+
+function getTotalPrice(books) {
+	var totalPrice = 0;
+	for (var index = 0; index < books.length; index++) {
+		var element = books[index];
+		totalPrice += element.price;
+	}
+	return totalPrice;
+}
+
+// 注意是 exports，而不是 export
+// 注意对象的增强写法是 ES6 的语法，所以这里就算 key 和 value 同名也不能省略 value
+module.exports = {
+	getHandledPrice: getHandledPrice,
+	getTotalPrice: getTotalPrice,
+};
