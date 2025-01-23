@@ -1,0 +1,2 @@
+<!--03_小程序自定义组件/pages/index.wxml-->
+<hello-world></hello-world>

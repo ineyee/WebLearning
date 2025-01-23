@@ -1,0 +1,13 @@
+<!--03_小程序自定义组件/components/hello-world.wxml-->
+<!--
+	自定义组件分 4 步：
+	1、创建组件对应的文件夹，在该文件夹里右键新建 Component，就会得到组件对应的 4 个文件
+	2、在 wxml 里编写结构、在 wxss 里编写样式、在 js 里编写逻辑、在 json 里编写配置
+	3、在要使用该组件的界面的 json 文件里注册该组件，如：
+		"usingComponents": {
+			// 组件名: 组件路径
+			"hello-world": "../../components/hello-world/hello-world"
+		}
+	4、在要使用该组件的界面里使用该组件即可
+-->
+<view class="container">Hello World!</view>

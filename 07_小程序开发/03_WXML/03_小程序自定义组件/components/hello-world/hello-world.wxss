@@ -1,0 +1,7 @@
+/* 03_小程序自定义组件/components/hello-world.wxss */
+.container {
+	font-size: 20px;
+	font-weight: 500;
+
+	color: red;
+}
