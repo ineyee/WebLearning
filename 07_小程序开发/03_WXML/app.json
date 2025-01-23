@@ -1,6 +1,7 @@
 {
   "pages": [
-		"03_小程序自定义组件/pages/index/index",
+    "04_小程序组件间的通信/01_父传子：属性传递/page/index",
+    "03_小程序自定义组件/pages/index/index",
     "02_小程序组件语法/pages/04_bind/04_bind",
     "02_小程序组件语法/pages/03_wxfor、block 元素/03_wxfor、block 元素",
     "02_小程序组件语法/pages/02_wxif、block 元素、hidden 属性/02_wxif、block 元素、hidden 属性",

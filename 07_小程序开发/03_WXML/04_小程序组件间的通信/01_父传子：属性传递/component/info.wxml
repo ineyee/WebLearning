@@ -1,0 +1,6 @@
+<!--04_小程序组件间的通信/01_父传子：属性传递/component/info.wxml-->
+<view>姓名：{{ name }}</view>
+<view>年龄：{{ age }}</view>
+<view>身高：{{ height }}</view>
+<view>朋友：{{ friends.length > 0 ? friends[0].name : "暂无朋友" }}</view>
+<view>工作：{{ job.name !== undefined && job.name !== null ? job.name : "暂无工作" }}</view>
