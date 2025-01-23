@@ -1,5 +1,6 @@
 {
   "pages": [
+    "04_小程序组件间的通信/02_子传父：triggerEvent事件传递/page/index",
     "04_小程序组件间的通信/01_父传子：属性传递/page/index",
     "03_小程序自定义组件/pages/index/index",
     "02_小程序组件语法/pages/04_bind/04_bind",

@@ -1,0 +1,4 @@
+<!--04_小程序组件间的通信/02_子传父：triggerEvent事件传递/component/tab.wxml-->
+<button bind:tap="onClick" data-type="摘要">摘要</button>
+<button bind:tap="onClick" data-type="转写">转写</button>
+<button bind:tap="onClick" data-type="评论">评论</button>
