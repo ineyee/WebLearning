@@ -1,0 +1,18 @@
+<!--02_小程序组件语法/pages/04_bind/04_bind.wxml-->
+<!--
+	一、基本使用
+	使用”bind:“来监听事件，并绑定 JS 中的事件，这里直接写函数名就行了，就不用使用 mustache 插值语法了，因为已经用”bind:“表明绑定的肯定是个函数了，小程序框架肯定不会把后面的东西解析成字符串
+-->
+<button type="primary" bind:tap="button1Click">按钮一</button>
+<button type="primary" bind:tap="button2Click" bind:touchstart="button2MouseOver" capture-bind:touchend="button2MouseOut">按钮二</button>
+
+<!--
+	二、传递参数
+	1、如果在绑定事件的时候，不传递任何参数，那么会默认传递一个 event 参数过去
+	2、我们可以在绑定事件的时候，传递自定义参数，这里跟 Vue 里传递自定义参数的方式不同，有两种传递方式，任选其一即可：
+		* 通过 data-* 的方式来传递
+		* 通过 mark:* 的方式来传递
+		当然为了保证传递的数据不总是被解析为字符串，我们可以用 mustache 语法来包裹下传递的数据
+-->
+<button type="primary" bind:tap="button3Click">按钮三</button>
+<button type="primary" bind:tap="button4Click" data-name="张三" data-age="{{ 18 }}" data-height="{{ 1.88 }}" mark:info="{{ {name: '张三', age: 18, height: 1.88} }}">按钮四</button>
