@@ -1,0 +1,3 @@
+<!--01_路由的基本使用/b/b.wxml-->
+<button bind:tap="back">返回 A 界面</button>
+<button bind:tap="to">跳转 C 界面</button>

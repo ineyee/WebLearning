@@ -1,0 +1,16 @@
+<!--01_路由的基本使用/a/a.wxml-->
+<!--
+	1、wx.navigateTo({})：类似于 Flutter 里的 push
+		* url：要跳转到界面的路径
+		* events：子界面返回给父界面的数据
+
+	2、wx.navigateBack({})：类似于 Flutter 里的 pop
+		* delta：要返回几级界面，默认 1，如果 delta 大于现有页面数，则返回到首页
+
+	3、wx.redirectTo({})：类似于 Flutter 里的 pushOff
+		* url：要跳转到界面的路径
+
+	4、wx.reLaunch({})：类似于 Flutter 里的 pushOffAll
+		* url：要跳转到界面的路径
+-->
+<button bind:tap="to">跳转 B 界面</button>
