@@ -26,12 +26,12 @@ const useCommonStore = defineStore("useCommonStore", {
   // 事件（注意：这里既能定义同步方法也能定义异步方法）
   actions: {
     showLoading() {
-      if (this._showLoading == false) {
+      if (this._showLoading === false) {
         this._showLoading = true;
       }
     },
     hideLoading() {
-      if (this._showLoading == true) {
+      if (this._showLoading === true) {
         this._showLoading = false;
       }
     },
