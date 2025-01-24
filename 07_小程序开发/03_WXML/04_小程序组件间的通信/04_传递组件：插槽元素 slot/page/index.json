@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+		"app-bar": "../component/app-bar"
+	}
+}

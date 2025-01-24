@@ -1,0 +1,15 @@
+<!--04_小程序组件间的通信/04_传递组件：插槽元素 slot/page/index.wxml-->
+<view class="index-page">
+	<!--
+    那外界在使用有插槽元素的组件时，怎么给组件传递子组件进去呢？
+    1、直接给组件里嵌套子组件就是在给组件传递子组件
+		2、给子组件的 slot 属性指定插槽名来指定子组件具体要替换掉哪个插槽
+  -->
+	<app-bar>
+		<button size="mini" slot="leading">🔙</button>
+		<text slot="title">首页</text>
+		<button size="mini" slot="action">🔍</button>
+		<text>搜</text>	
+		<text>索</text>	
+	</app-bar>
+</view>
