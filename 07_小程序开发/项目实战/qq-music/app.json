@@ -1,7 +1,7 @@
 {
   "pages": [
-    "page/music/music",
-    "page/video/video"
+    "video/page/video/video",
+    "music/page/music/music"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -11,13 +11,13 @@
   "tabBar": {
     "list": [
       {
-        "pagePath": "page/music/music",
+        "pagePath": "music/page/music/music",
         "text": "音乐",
         "iconPath": "asset/image/tab-bar/music_normal.png",
         "selectedIconPath": "asset/image/tab-bar/music_active.png"
       },
       {
-        "pagePath": "page/video/video",
+        "pagePath": "video/page/video/video",
         "text": "视频",
         "iconPath": "asset/image/tab-bar/video_normal.png",
         "selectedIconPath": "asset/image/tab-bar/video_active.png"

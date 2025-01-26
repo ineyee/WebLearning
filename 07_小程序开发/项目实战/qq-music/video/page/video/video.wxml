@@ -1,0 +1,9 @@
+<!--page/video/video.wxml-->
+<view class="video-page">
+  <view class="top-mv-list">
+    <block wx:for="{{ topMvList }}" wx:key="id">
+      <image src="{{ item.cover }}"></image>
+      <view>{{ item.name }}</view>
+    </block>
+  </view>
+</view>
