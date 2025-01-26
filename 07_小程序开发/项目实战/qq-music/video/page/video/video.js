@@ -5,8 +5,12 @@ Page({
     topMvList: [],
   },
 
-  // 生命周期函数
-  async onLoad() {
+  onLoad() {
+    this._getTopMv();
+  },
+
+  // 应该抽取到 vm 里的
+  async _getTopMv() {
     const data = await getTopMv(20, 0);
     this.setData({
       topMvList: data,
