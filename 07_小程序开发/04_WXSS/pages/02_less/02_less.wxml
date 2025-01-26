@@ -1,0 +1,5 @@
+<!--pages/02_less/02_less.wxml-->
+<view class="outer">
+  <view class="inner">
+  </view>
+</view>
