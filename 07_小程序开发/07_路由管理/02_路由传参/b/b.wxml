@@ -1,0 +1,2 @@
+<!--01_路由的基本使用/b/b.wxml-->
+<button bind:tap="back">返回 A 界面</button>
