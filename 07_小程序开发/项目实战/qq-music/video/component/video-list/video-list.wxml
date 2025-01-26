@@ -1,0 +1,25 @@
+<!--video/component/video-list/video-list.wxml-->
+<wxs src="../../../util/number-format-util.wxs" module="numberFormatUtil" />
+<wxs src="../../../util/time-format-util.wxs" module="timeFormatUtil" />
+
+<view class="video-list">
+  <van-grid column-num="{{ 2 }}" border="{{ false }}" center="{{ false }}" gutter="{{ 10 }}">
+    <van-grid-item use-slot wx:for="{{ videoList }}" wx:key="id">
+      <view class="video-item">
+        <view class="top">
+          <image class="cover" src="{{ item.cover }}" mode="aspectFill"></image>
+          <view class="mask">
+            <view class="play-count">
+              <van-icon name="play-circle-o" />
+              <view>{{ numberFormatUtil.showUnit(item.playCount) }}</view>
+            </view>
+            <view class="duration">
+              {{ timeFormatUtil.formatMinSec(item.mv.videos[0].duration / 1000) }}
+            </view>
+          </view>
+        </view>
+        <view class="van-multi-ellipsis--l2">{{ item.name }} - {{ item.artistName }}</view>
+      </view>
+    </van-grid-item>
+  </van-grid>
+</view>

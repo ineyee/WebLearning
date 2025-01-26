@@ -1,1 +1,6 @@
 /**app.wxss**/
+/* 
+  注意 app.wxss 里的样式只会作用于界面里，不会作用于组件里
+  要想在组件里使用，得在组件的 wxss 文件里导入 @import "path/app.wxss"; 文件
+*/
+@import "./miniprogram_npm/@vant/weapp/common/index.wxss";

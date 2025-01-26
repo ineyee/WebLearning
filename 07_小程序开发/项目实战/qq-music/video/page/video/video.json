@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "video-list": "../../component/video-list/video-list"
+  },
   "navigationBarTitleText": "视频"
 }

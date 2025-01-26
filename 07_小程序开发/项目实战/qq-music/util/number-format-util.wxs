@@ -1,0 +1,17 @@
+function showUnit(number) {
+	if (number === null || number === undefined || number < 0) {
+		number = 0;
+	}
+
+	if (number >= 100000000) {
+		return (number / 100000000).toFixed(1) + "亿";
+	} if (number >= 10000) {
+		return (number / 10000).toFixed(1) + "万";
+	} else {
+		return number;
+	}
+}
+
+module.exports = {
+	showUnit: showUnit,
+};
