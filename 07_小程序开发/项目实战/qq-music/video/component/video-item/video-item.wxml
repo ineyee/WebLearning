@@ -1,0 +1,16 @@
+<!--video/component/video-item.wxml-->
+<view class="video-item" bind:tap="onTapVideoItem">
+  <view class="top">
+    <image class="cover" src="{{ video.cover }}" mode="aspectFill"></image>
+    <view class="mask">
+      <view class="play-count">
+        <van-icon name="play-circle-o" />
+        <view>{{ numberFormatUtil.showUnit(video.playCount) }}</view>
+      </view>
+      <view class="duration">
+        {{ timeFormatUtil.formatMinSec(video.mv.videos[0].duration / 1000) }}
+      </view>
+    </view>
+  </view>
+  <view class="van-multi-ellipsis--l2">{{ video.name }} - {{ video.artistName }}</view>
+</view>
