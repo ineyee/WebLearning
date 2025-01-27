@@ -1,0 +1,28 @@
+/* music/component/section-header/section-header.wxss */
+.section-header {
+  height: 88rpx;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-header .title {
+  font-size: 36rpx;
+  font-weight: 500;
+}
+
+.section-header .more {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-header .more .text {
+  color: #666;
+}
+
+.section-header .more .icon {
+  color: #666;
+}
+

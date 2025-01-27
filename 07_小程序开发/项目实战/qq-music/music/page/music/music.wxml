@@ -1,6 +1,7 @@
 <!--page/music/music.wxml-->
 <view class="music">
   <van-search value="" placeholder="搜索你喜欢的歌曲" disabled bind:click-input="onTapSearch" />
+
   <swiper class="swiper" indicator-dots indicator-color="rgba(255, 255, 255, 1)" indicator-active-color="rgba(99, 203, 143, 1)" autoplay interval="{{ 3000 }}" circular>
     <block wx:for="{{ bannerList }}" wx:key="targetId">
       <swiper-item class="swiper-item">
@@ -8,4 +9,6 @@
       </swiper-item>
     </block>
   </swiper>
+
+  <section-header title="歌曲推荐"></section-header>
 </view>

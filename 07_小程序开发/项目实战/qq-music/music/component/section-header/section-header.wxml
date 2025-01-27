@@ -1,0 +1,12 @@
+<!--music/component/section-header/section-header.wxml-->
+<view class="section-header">
+  <view class="title">{{ title }}</view>
+  <block wx:if="{{ showMore }}">
+    <view class="more" bind:tap="onTapMore">
+      <view class="text">更多</view>
+      <view class="icon">
+        <van-icon name="arrow" />
+      </view>
+    </view>
+  </block>
+</view>

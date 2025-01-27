@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "van-search": "@vant/weapp/search/index"
-  },
-  "navigationBarTitleText": "推荐音乐"
+    "van-search": "@vant/weapp/search/index",
+    "section-header": "../../component/section-header/section-header"
+  }
 }
