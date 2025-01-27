@@ -1,2 +1,11 @@
 <!--page/music/music.wxml-->
-<van-search value="" placeholder="搜索你喜欢的歌曲" disabled bind:click-input="onTapSearch" />
+<view class="music">
+  <van-search value="" placeholder="搜索你喜欢的歌曲" disabled bind:click-input="onTapSearch" />
+  <swiper class="swiper" indicator-dots indicator-color="rgba(255, 255, 255, 1)" indicator-active-color="rgba(99, 203, 143, 1)" autoplay interval="{{ 3000 }}" circular>
+    <block wx:for="{{ bannerList }}" wx:key="targetId">
+      <swiper-item class="swiper-item">
+        <image class="image" src="{{ item.imageUrl }}" mode="widthFix" />
+      </swiper-item>
+    </block>
+  </swiper>
+</view>

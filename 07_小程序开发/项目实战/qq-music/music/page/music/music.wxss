@@ -1,1 +1,29 @@
 /* page/music/music.wxss */
+page {
+  --search-padding: 20rpx, 0 !important;
+
+  box-sizing: border-box;
+  padding: 0 20rpx;
+}
+
+/* swiper 组件的高度在不设置时默认为 150px */
+.music .swiper {
+  height: 263rpx;
+  border-radius: 16rpx;
+  margin-top: 20rpx;
+
+  /* 圆角超出的部分隐藏 */
+  overflow: hidden;
+}
+
+/* 
+  swiper-item 组件的高度是由图片撑起来的，图片的高度是根据宽高比自适应出来的
+  我们这个项目里的图片撑起来高度后，swiper-item 组件的高度是不够 150px 的，所以会觉得指示器在图片的下面很多
+
+  所以为了让指示器显示在正确的位置上，我们就得保证 swiper 组件的高度和 swiper-item 组件的高度一样高才行，而为了保证图片完全展示，我们是不能修改 swiper-item 组件的高度的，所以只能修改 swiper 组件的高度
+
+  当然我们可以等 image 渲染完去获取一下图片的高度即 swiper-item 组件的高度，然后再把这个高度设置给swiper 组件，这样比较精确并且当图片换了下一批尺寸的时候，轮播图组件也能自动切换高度，但是比较麻烦，这里我们就根据标注来搞 + rpx 单位了
+*/
+.music .swiper .swiper-item .image {
+  width: 100%;
+}
