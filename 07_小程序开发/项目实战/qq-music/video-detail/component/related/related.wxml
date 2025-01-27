@@ -1,0 +1,17 @@
+<!--video-detail/component/related/related.wxml-->
+<wxs src="../../../util/number-format-util.wxs" module="numberFormatUtil" />
+
+<scroll-view class="related" scroll-y>
+  <view class="title">关联视频</view>
+  <view class="list">
+    <block wx:for="{{ 10 }}" wx:key="*this">
+      <view class="item" bind:tap="onTapRelatedItem">
+        <image class="cover" src="{{ detail.cover }}" mode="aspectFill" />
+        <view class="text">
+          <view class="desc">{{ detail.name }} - {{ detail.artistName }}</view>
+          <view class="countTime">{{ numberFormatUtil.showUnit(detail.playCount) }}次播放 - {{ detail.publishTime }}</view>
+        </view>
+      </view>
+    </block>
+  </view>
+</scroll-view>

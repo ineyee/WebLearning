@@ -1,0 +1,7 @@
+<!--video/page/video-detail/video-detail.wxml-->
+<view class="video-detail-page">
+  <video class="video-component" src="{{ url }}" autoplay muted show-mute-btn />
+  <info detail="{{ detail }}"></info>
+  <!-- 接口没数据了，我们就拿当前视频模拟关联视频 -->
+  <related detail="{{ detail }}"></related>
+</view>

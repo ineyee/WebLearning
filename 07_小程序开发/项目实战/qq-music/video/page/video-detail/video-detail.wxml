@@ -1,4 +1,2 @@
 <!--video/page/video-detail/video-detail.wxml-->
-<view class="video-detail-page">
-  <video class="video-component" src="{{ detail.url }}" autoplay muted show-mute-btn />
-</view>
+<text>video/page/video-detail/video-detail.wxml</text>

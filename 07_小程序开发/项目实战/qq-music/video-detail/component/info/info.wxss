@@ -1,0 +1,16 @@
+/* video-detail/component/info.wxss */
+.info {
+  padding: 20rpx;
+  /* video 组件默认高度 225px */
+  margin-top: 450rpx;
+}
+
+.info .name {
+  font-size: 44rpx;
+  font-weight: 500;
+}
+
+.info .artistName,
+.info .countTime {
+  color: #666;
+}

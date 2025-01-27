@@ -1,4 +1,7 @@
 <!--video/component/video-item.wxml-->
+<wxs src="../../../util/number-format-util.wxs" module="numberFormatUtil" />
+<wxs src="../../../util/time-format-util.wxs" module="timeFormatUtil" />
+
 <view class="video-item" bind:tap="onTapVideoItem">
   <view class="top">
     <image class="cover" src="{{ video.cover }}" mode="aspectFill"></image>

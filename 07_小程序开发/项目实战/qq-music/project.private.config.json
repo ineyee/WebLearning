@@ -9,8 +9,8 @@
     "miniprogram": {
       "list": [
         {
-          "name": "video/page/video-detail/video-detail",
-          "pathName": "video/page/video-detail/video-detail",
+          "name": "video-detail",
+          "pathName": "video-detail/page/video-detail/video-detail",
           "query": "id=22674879",
           "launchMode": "default",
           "scene": null

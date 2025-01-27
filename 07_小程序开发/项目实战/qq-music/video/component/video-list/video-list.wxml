@@ -1,7 +1,4 @@
 <!--video/component/video-list/video-list.wxml-->
-<wxs src="../../../util/number-format-util.wxs" module="numberFormatUtil" />
-<wxs src="../../../util/time-format-util.wxs" module="timeFormatUtil" />
-
 <view class="video-list">
   <van-grid column-num="{{ 2 }}" border="{{ false }}" center="{{ false }}" gutter="{{ 10 }}">
     <van-grid-item use-slot wx:for="{{ videoList }}" wx:key="id">

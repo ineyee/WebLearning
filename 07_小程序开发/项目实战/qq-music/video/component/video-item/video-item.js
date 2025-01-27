@@ -9,9 +9,8 @@ Component({
 
   methods: {
     onTapVideoItem() {
-      console.log(111);
       wx.navigateTo({
-        url: `../../page/video-detail/video-detail?id=${this.properties.video.id}`,
+        url: `../../../video-detail/page/video-detail/video-detail?id=${this.properties.video.id}`,
       });
     },
   },

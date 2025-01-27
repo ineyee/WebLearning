@@ -1,0 +1,8 @@
+<!--video-detail/component/info.wxml-->
+<wxs src="../../../util/number-format-util.wxs" module="numberFormatUtil" />
+
+<view class="info">
+  <view class="name">{{ detail.name }}</view>
+  <view class="artistName">{{ detail.artistName }}</view>
+  <view class="countTime">{{ numberFormatUtil.showUnit(detail.playCount) }}次播放 - {{ detail.publishTime }}</view>
+</view>
