@@ -16,7 +16,7 @@ export async function getTopMv(limit, offset) {
       return [];
     } else {
       if (response.data["data"] === null) {
-        console.log("/top/mv 请求失败：数据为null");
+        console.log("/top/mv 请求失败：数据为 null");
         return [];
       } else {
         console.log("/top/mv 请求成功：", response.data["data"]);
@@ -26,5 +26,32 @@ export async function getTopMv(limit, offset) {
   } catch (error) {
     console.log("/top/mv 请求失败：", error);
     return [];
+  }
+};
+
+export async function getMvDetail(id) {
+  try {
+    const response = await httpRequest.get({
+      url: "http://codercba.com:9002/mv/url",
+      params: {
+        id: id,
+      },
+    });
+
+    if (response.data["code"] !== 200) {
+      console.log("/mv/url 请求失败：", response.data["code"]);
+      return {};
+    } else {
+      if (response.data["data"] === null) {
+        console.log("/mv/url 请求失败：数据为 null");
+        return {};
+      } else {
+        console.log("/mv/url 请求成功：", response.data["data"]);
+        return response.data["data"];
+      }
+    }
+  } catch (error) {
+    console.log("/mv/url 请求失败：", error);
+    return {};
   }
 };

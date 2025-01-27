@@ -1,1 +1,4 @@
 /* video/page/video-detail/video-detail.wxss */
+.video-detail-page .video-component {
+  width: 100%;
+}
