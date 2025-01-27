@@ -1,0 +1,6 @@
+<!--music/component/section-list/section-list.wxml-->
+<view class="section-list">
+  <block wx:for="{{ 6 }}" wx:key="*this">
+    <section-item-v1 song="{{ songList[item] }}"></section-item-v1>
+  </block>
+</view>

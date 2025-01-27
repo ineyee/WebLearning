@@ -19,10 +19,12 @@
 }
 
 .section-header .more .text {
+  font-size: 28rpx;
   color: #666;
 }
 
 .section-header .more .icon {
+  font-size: 36rpx;
   color: #666;
 }
 

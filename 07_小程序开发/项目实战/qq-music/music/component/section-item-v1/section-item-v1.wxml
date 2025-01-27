@@ -1,0 +1,9 @@
+<!--music/component/section-item-v1/section-item-v1.wxml-->
+<view class="section-item-v1" bind:tap="onTap">
+  <image class="cover" src="{{ song.al.picUrl }}" mode="aspectFill" />
+  <view class="desc">
+    <view class="title">{{ song.name }}</view>
+    <view class="subtitle">{{ song.ar[0].name }} - {{ song.al.name }}</view>
+  </view>
+  <van-icon class="icon" name="arrow" />
+</view>

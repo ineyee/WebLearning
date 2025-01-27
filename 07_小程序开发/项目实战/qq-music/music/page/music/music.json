@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "van-search": "@vant/weapp/search/index",
-    "section-header": "../../component/section-header/section-header"
+    "section-header": "../../component/section-header/section-header",
+    "section-list": "../../component/section-list/section-list"
   }
 }

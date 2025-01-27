@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "section-item-v1": "../../component/section-item-v1/section-item-v1"
+  }
+}

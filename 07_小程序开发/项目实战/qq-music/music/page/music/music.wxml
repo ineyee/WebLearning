@@ -10,5 +10,6 @@
     </block>
   </swiper>
 
-  <section-header title="歌曲推荐"></section-header>
+  <section-header title="热歌榜"></section-header>
+  <section-list songList="{{ hotSongList }}"></section-list>
 </view>

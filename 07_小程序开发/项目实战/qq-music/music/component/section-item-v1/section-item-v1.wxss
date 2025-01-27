@@ -1,0 +1,32 @@
+/* music/component/section-item-v1/section-item-v1.wxss */
+.section-item-v1 {
+  margin-bottom: 20rpx;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-item-v1 .cover {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 16rpx;
+}
+
+.section-item-v1 .desc {
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+
+  flex: 1;
+}
+
+.section-item-v1 .desc .subtitle {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.section-item-v1 .icon {
+  font-size: 36rpx;
+  color: #666;
+}

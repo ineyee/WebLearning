@@ -1,12 +1,14 @@
-import { getBanner } from "../../service/music-service";
+import { getBanner, getSongList } from "../../service/music-service";
 
 Page({
   data: {
     bannerList: [],
+    hotSongList: [],
   },
 
   onLoad() {
     this._getBanner();
+    this._getHotSongList();
   },
 
   onTapSearch() {
@@ -21,5 +23,12 @@ Page({
     this.setData({
       bannerList: data,
     });
-  }
+  },
+
+  async _getHotSongList() {
+    const data = await getSongList(3778678);
+    this.setData({
+      hotSongList: data,
+    });
+  },
 })
