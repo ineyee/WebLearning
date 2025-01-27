@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "counter1": "../../component/counter1/counter1",
+    "counter2": "../../component/counter2/counter2"
+  }
+}

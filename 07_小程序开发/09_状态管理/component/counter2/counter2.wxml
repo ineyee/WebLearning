@@ -1,0 +1,5 @@
+<!--component/counter2/counter2.wxml-->
+<view class="counter1">
+  <view>双倍计数：{{ counter }}</view>
+  <button type="primary" size="mini" bind:tap="multi">x2</button>
+</view>

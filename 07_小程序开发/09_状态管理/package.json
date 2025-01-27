@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "hy-event-store": "^1.3.1"
+  }
+}

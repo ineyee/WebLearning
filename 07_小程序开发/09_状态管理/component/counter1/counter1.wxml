@@ -1,0 +1,5 @@
+<!--component/counter/counter.wxml-->
+<view class="counter1">
+  <view>当前计数：{{ counter }}</view>
+  <button type="primary" size="mini" bind:tap="add">+1</button>
+</view>
