@@ -1,2 +1,2 @@
 <!--page/music/music.wxml-->
-<text>page/music/music.wxml</text>
+<van-search value="" placeholder="搜索你喜欢的歌曲" disabled bind:click-input="onTapSearch" />

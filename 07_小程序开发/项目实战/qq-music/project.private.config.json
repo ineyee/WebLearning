@@ -5,5 +5,21 @@
     "compileHotReLoad": true,
     "urlCheck": false
   },
-  "condition": {}
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "music/page/music-search/music-search",
+          "pathName": "music/page/music-search/music-search",
+          "query": "",
+          "launchMode": "default",
+          "scene": null,
+          "partialCompile": {
+            "enabled": true,
+            "pages": []
+          }
+        }
+      ]
+    }
+  }
 }

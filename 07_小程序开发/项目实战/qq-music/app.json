@@ -2,7 +2,8 @@
   "pages": [
     "music/page/music/music",
     "video/page/video/video",
-    "video-detail/page/video-detail/video-detail"
+    "video-detail/page/video-detail/video-detail",
+    "music/page/music-search/music-search"
   ],
   "window": {
     "navigationBarTextStyle": "black",
