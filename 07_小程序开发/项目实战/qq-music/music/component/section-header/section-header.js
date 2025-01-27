@@ -14,7 +14,9 @@ Component({
 
   methods: {
     onTapMore() {
-      console.log("onTapMore", this.properties.title);
+      wx.navigateTo({
+        url: "../../page/music-list/music-list",
+      })
     },
   },
 })
