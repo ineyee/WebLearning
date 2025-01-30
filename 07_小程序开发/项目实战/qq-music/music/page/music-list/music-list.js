@@ -14,10 +14,17 @@ Page({
   },
 
   onLoad() {
+    wx.setNavigationBarTitle({
+      title: "热歌榜",
+    });
+
     /*
       那界面里的数据是如何接收来自 store 共享的数据的呢？
       通过监听，这个监听会返回数据的初始值，后续数据变化也会触发
       记得取消监听
+
+      你可能会问为什么要通过监听的方式来获取 store 共享的数据的呢？
+      主要就是因为状态管理库的主要用途就是数据共享，在自己内部修改来数据我们当然知道什么时候 setData 来刷新界面了，但是别的地方修改了共享的数据，这里怎么知道要刷新界面呢？所以只能通过监听来搞
     */
     useSongListStore.onState("hotSongList", this.hotSongListCallback.bind(this));
   },

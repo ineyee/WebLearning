@@ -1,2 +1,5 @@
 <!--music/page/music-list/music-list.wxml-->
-<text>music/page/music-list/music-list.wxml</text>
+<view class="music-list">
+  <section-list songList="{{ songList }}" showTopTen="{{ false }}"></section-list>
+</view>
+  
