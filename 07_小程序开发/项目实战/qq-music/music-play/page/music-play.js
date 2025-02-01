@@ -4,6 +4,7 @@ import { getSongDetail, getLyric } from "../service/music-play-servcie.js";
 Page({
   data: {
     statusBarHeight: 44,
+    contentHeight: 0,
 
     id: 0,
     songDetail: {},
@@ -15,6 +16,7 @@ Page({
     const app = getApp();
     this.setData({
       statusBarHeight: app.globalData.safeAreaHeightTop,
+      contentHeight: app.globalData.contentHeight,
     });
 
     this._getSongDetail(options.id);
@@ -42,6 +44,12 @@ Page({
 
     this.setData({
       selectedIndex: 1,
+    });
+  },
+
+  onIndexChange(event) {
+    this.setData({
+      selectedIndex: event.detail.current,
     });
   },
 

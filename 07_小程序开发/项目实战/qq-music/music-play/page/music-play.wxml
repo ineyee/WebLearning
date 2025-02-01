@@ -22,4 +22,12 @@
     <view class="right"></view>
   </view>
 
+  <swiper class="content" style="height: {{contentHeight}}px;" bindchange="onIndexChange" current="{{ selectedIndex }}">
+    <swiper-item class="song">
+      歌曲
+    </swiper-item>
+    <swiper-item class="lyric">
+      歌词
+    </swiper-item>
+  </swiper>
 </view>

@@ -31,11 +31,13 @@
 
 .music-play-page .app-bar .left,
 .music-play-page .app-bar .right {
-  width: 190rpx; /* 这个宽度大概就是右侧胶囊按钮的宽度 */
+  width: 190rpx;
+  /* 这个宽度大概就是右侧胶囊按钮的宽度 */
 }
 
 .music-play-page .app-bar .left {
-  padding-left: 20rpx; /* 这个宽度大概就是右侧胶囊按钮的右边距 */
+  padding-left: 20rpx;
+  /* 这个宽度大概就是右侧胶囊按钮的右边距 */
 }
 
 .music-play-page .app-bar .left .icon {
@@ -58,3 +60,5 @@
 
   color: #666;
 }
+
+.music-play-page .content {}

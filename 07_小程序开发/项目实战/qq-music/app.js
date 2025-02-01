@@ -3,6 +3,7 @@ App({
   globalData: {
     screenWidth: 375,
     screenHeight: 812,
+    contentHeight: 812 - (44 + 44),
     // 顶部安全区域高度，包含状态栏高度
     safeAreaHeightTop: 44,
     appBarHeight: 44,
@@ -18,5 +19,6 @@ App({
     this.globalData.safeAreaHeightTop = windowInfo.safeArea.top;
     this.globalData.navigationBarHeight = this.globalData.safeAreaHeightTop + this.globalData.appBarHeight;
     this.globalData.safeAreaHeightBottom = this.globalData.screenHeight - windowInfo.safeArea.bottom;
+    this.globalData.contentHeight = this.globalData.screenHeight - this.globalData.navigationBarHeight;
   },
 })
