@@ -1,5 +1,6 @@
 // music-play/page/music-play.js
 import { getSongDetail, getLyric } from "../service/music-play-servcie.js";
+import { parseLyric } from "../../util/parse-lyric-util.js";
 
 /*
   视频播放界面我们用的是小程序框架自带的视频播放组件
@@ -15,13 +16,17 @@ Page({
 
     id: 0,
     songDetail: {},
-    lyric: {},
+    lyricInfos: [],
     selectedIndex: 0, // 0-歌曲，1-歌词
 
     isPlaying: false,
     curDuration: 0,
     totalDuration: 0,
     userChangingSlider: false,
+
+    curLyricIndex: -1,
+    curLyricText: "",
+    scrollTop: "0rpx",
   },
 
   onLoad(options) {
@@ -98,6 +103,20 @@ Page({
     console.log("跳转播放：", this.data.curDuration);
   },
 
+  onTapLyricItem(event) {
+    if (event.currentTarget.dataset.index === this.data.curLyricIndex) {
+      return;
+    }
+    this.setData({
+      curDuration: event.currentTarget.dataset.time,
+      curLyricIndex: event.currentTarget.dataset.index,
+      curLyricText: this.data.lyricInfos[event.currentTarget.dataset.index].text,
+      scrollTop: `${event.currentTarget.dataset.index * 70}rpx`,
+    });
+    this._seek(this.data.curDuration);
+    console.log("跳转播放：", this.data.curDuration);
+  },
+
   // vm
   async _getSongDetail(id) {
     const data = await getSongDetail(id);
@@ -109,9 +128,41 @@ Page({
 
   async _getLyric(id) {
     const data = await getLyric(id);
+    const list = parseLyric(data.lyric);
     this.setData({
-      lyric: data.lyric,
+      lyricInfos: list,
+      curLyricIndex: list.length - 1,
+      curLyricText: list[0].text,
     });
+  },
+
+  /*
+    匹配当前应该点亮的歌词，歌词匹配算法用一句话来概括，其实就是：
+    * 选中开始时间比当前播放时间大的那一句歌词，firstWhere 即可停止
+    * 然后 index 减 1，就是当前应该点亮的那句歌词
+  */
+  _matchCurLyric(curTime) {
+    // curIndex 的初始值需要设置为数组长度 - 1
+    // 因为下面的 for 循环会使得 index 的值最大为 this.data.lyricInfos.length - 1，也就是说下面的 for 循环只能保证最后一句歌词往前的每句歌词被匹配到
+    // 所以我们索性把初始值设置为最后一句歌词，如果不到最后一句那就正常通过 for 循环去匹配，如果到了最后一句歌词，for 循环执行完毕也不会改变它，于是就选中最后一句歌词了
+    let curIndex = this.data.lyricInfos.length - 1;
+    for (let index = 0; index < this.data.lyricInfos.length; index++) {
+      const lyricInfo = this.data.lyricInfos[index];
+      if (lyricInfo.time > curTime) {
+        curIndex = index - 1;
+        break;
+      }
+    }
+
+    if (this.data.curLyricIndex === curIndex) {
+      return;
+    }
+    this.setData({
+      curLyricIndex: curIndex,
+      curLyricText: this.data.lyricInfos[curIndex].text,
+      scrollTop: `${curIndex * 70}rpx`,
+    });
+    console.log("当前歌词：", this.data.curLyricText);
   },
 
   // =========== _audioPlayer相关 ===========
@@ -135,6 +186,7 @@ Page({
         this.setData({
           curDuration: _audioPlayer.currentTime * 1000,
         });
+        this._matchCurLyric(_audioPlayer.currentTime * 1000);
         console.log("音频播放进度更新：", this.data.curDuration);
       }
     });
@@ -151,6 +203,7 @@ Page({
       this.setData({
         isPlaying: false,
         curDuration: 0,
+        scrollTop: "0rpx",
       });
     });
   },

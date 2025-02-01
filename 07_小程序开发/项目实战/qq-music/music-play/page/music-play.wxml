@@ -32,7 +32,7 @@
         <view class="artist">{{ songDetail.ar[0].name }}</view>
       </view>
       <view class="lyric">
-        啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+        {{ curLyricText }}
       </view>
       <view class="play-progress">
         <slider class="slider" block-size="18" min="{{ 0 }}" max="{{ totalDuration }}" value="{{ curDuration }}" bindchanging="onSliderValueChanging" bindchange="onSliderValueChanged" />
@@ -50,7 +50,13 @@
       </view>
     </swiper-item>
     <swiper-item class="lyric">
-      歌词
+      <scroll-view class="lyric-list" scroll-y scroll-top="{{ scrollTop }}" scroll-with-animation>
+        <block wx:for="{{ lyricInfos }}" wx:key="time">
+          <view class="lyric-item {{ index === curLyricIndex ? 'active' : '' }}" style="padding-top: {{ index === 0 ? (contentHeight / 2 - 88) : 0}}px; padding-bottom: {{ index === lyricInfos.length - 1 ? (contentHeight / 2 + 88) : 0}}px;" bind:tap="onTapLyricItem" data-time="{{ item.time }}" data-index="{{ index }}">
+            {{ item.text }}
+          </view>
+        </block>
+      </scroll-view>
     </swiper-item>
   </swiper>
 </view>

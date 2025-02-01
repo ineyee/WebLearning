@@ -89,6 +89,7 @@
 .music-play-page .content .song .lyric {
   margin-top: 40rpx;
 
+  color: #fff;
   text-align: center;
 
   text-overflow: ellipsis;
@@ -119,4 +120,36 @@
 
 .music-play-page .content .song .control .play-pause {
   font-size: 160rpx;
+}
+
+.music-play-page .content .lyric {
+  box-sizing: border-box;
+  padding: 40rpx 0;
+
+  color: #666;
+  text-align: center;
+}
+
+.music-play-page .content .lyric .lyric-list {
+  /* 设置 scrollView 为固定的高度，这样它的子元素超过这个固定高度后就能滚动了 */
+  height: 100%;
+}
+
+/* 隐藏 scrollView 的滚动条，其实是个伪元素 */
+.music-play-page .content .lyric .lyric-list ::-webkit-scrollbar {
+  display: none;
+}
+
+.music-play-page .content .lyric .lyric-list .lyric-item {
+  height: 70rpx;
+  line-height: 70rpx;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.music-play-page .content .lyric .lyric-list .lyric-item.active {
+  font-size: 32rpx;
+  color: #fff;
 }
