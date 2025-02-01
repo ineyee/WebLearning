@@ -22,9 +22,30 @@
     <view class="right"></view>
   </view>
 
-  <swiper class="content" style="height: {{contentHeight}}px;" bindchange="onIndexChange" current="{{ selectedIndex }}">
+  <swiper class="content" style="height: {{ contentHeight }}px;" bindchange="onIndexChange" current="{{ selectedIndex }}">
     <swiper-item class="song">
-      歌曲
+      <image class="cover" src="{{ songDetail.al.picUrl }}" mode="widthFix" />
+      <view class="info">
+        <view class="name">{{ songDetail.name }}</view>
+        <view class="artist">{{ songDetail.ar[0].name }}</view>
+      </view>
+      <view class="lyric">
+        啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+      </view>
+      <view class="play-progress">
+        <slider class="slider" block-size="18" bindchange="" />
+        <view class="duration">
+          <view class="played-duration">
+            05:25
+          </view>
+          <view class="total-duration">
+            05:25
+          </view>
+        </view>
+      </view>
+      <view class="control">
+        <van-icon class="play-pause" name="play-circle" />
+      </view>
     </swiper-item>
     <swiper-item class="lyric">
       歌词

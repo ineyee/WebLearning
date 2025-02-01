@@ -61,4 +61,62 @@
   color: #666;
 }
 
-.music-play-page .content {}
+.music-play-page .content .song {
+  box-sizing: border-box;
+  padding: 40rpx 60rpx;
+
+  color: #fff;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.music-play-page .content .song .cover {
+  width: 100%;
+  flex: 1;
+  border-radius: 16rpx;
+}
+
+.music-play-page .content .song .info {
+  margin-top: 40rpx;
+}
+
+.music-play-page .content .song .info .name {
+  font-size: 48rpx;
+  font-weight: bold;
+}
+
+.music-play-page .content .song .lyric {
+  margin-top: 40rpx;
+
+  text-align: center;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.music-play-page .content .song .play-progress {
+  margin-top: 40rpx;
+}
+
+.music-play-page .content .song .play-progress .slider {
+  margin-left: 18rpx;
+  margin-right: 18rpx;
+  margin-bottom: 0;
+}
+
+.music-play-page .content .song .play-progress .duration {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.music-play-page .content .song .control {
+  margin-top: 40rpx;
+  text-align: center;
+}
+
+.music-play-page .content .song .control .play-pause {
+  font-size: 160rpx;
+}
