@@ -1,0 +1,5 @@
+<!--music-play/page/music-play.wxml-->
+<view class="music-play-page">
+  {{ id }}
+</view>
+  

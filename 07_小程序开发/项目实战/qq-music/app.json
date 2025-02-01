@@ -4,7 +4,8 @@
     "video/page/video/video",
     "video-detail/page/video-detail/video-detail",
     "music/page/music-search/music-search",
-    "music/page/music-list/music-list"
+    "music/page/music-list/music-list",
+    "music-play/page/music-play"
   ],
   "window": {
     "navigationBarTextStyle": "black",

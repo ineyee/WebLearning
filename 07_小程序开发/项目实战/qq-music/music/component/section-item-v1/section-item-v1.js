@@ -9,7 +9,9 @@ Component({
 
   methods: {
     onTap() {
-      console.log("onTap", this.properties.song.name);
+      wx.navigateTo({
+        url: `../../../music-play/page/music-play?id=${this.properties.song.id}`,
+      });
     },
   },
 })
