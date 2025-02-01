@@ -2,4 +2,24 @@
 <view class="music-play-page">
   <image class="bg-image" src="{{ songDetail.al.picUrl }}" mode="aspectFill" />
   <view class="bg-mask"></view>
+
+  <!--
+    自定义导航栏的话，状态栏也会没掉（虽然依旧在展示东西，但是布局上会没掉），所以得搞个空视图来挤出状态栏的高度来，以便内容能从状态栏下面开始布局
+  -->
+  <view class="status-bar" style="height: {{ statusBarHeight }}px;"></view>
+  <view class="app-bar">
+    <view class="left" bind:tap="onTapBack">
+      <van-icon class="icon" name="arrow-left" />
+    </view>
+    <view class="center">
+      <view class="song" style="color: {{selectedIndex === 0 ? '#fff' : '#666'}};" bind:tap="onTapSong">歌曲</view>
+      <view class="line">|</view>
+      <view class="lyric" style="color: {{selectedIndex === 1 ? '#fff' : '#666'}};" bind:tap="onTapLyric">歌词</view>
+    </view>
+    <!--
+      小程序状态栏右边总是会自带一个胶囊按钮，这个 right 纯粹是用来占位做布局用的
+    -->
+    <view class="right"></view>
+  </view>
+
 </view>

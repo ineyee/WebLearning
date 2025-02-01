@@ -10,9 +10,51 @@
   left: 0;
   width: 100%;
   height: 100%;
+
+  z-index: -1;
 }
 
 .music-play-page .bg-mask {
   background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(20rpx);
+}
+
+.music-play-page .app-bar {
+  height: 44px;
+
+  color: white;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.music-play-page .app-bar .left,
+.music-play-page .app-bar .right {
+  width: 190rpx; /* 这个宽度大概就是右侧胶囊按钮的宽度 */
+}
+
+.music-play-page .app-bar .left {
+  padding-left: 20rpx; /* 这个宽度大概就是右侧胶囊按钮的右边距 */
+}
+
+.music-play-page .app-bar .left .icon {
+  font-size: 48rpx;
+  color: white;
+}
+
+.music-play-page .app-bar .center {
+  flex: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 36rpx;
+}
+
+.music-play-page .app-bar .center .line {
+  margin: 0 8rpx;
+
+  color: #666;
 }
