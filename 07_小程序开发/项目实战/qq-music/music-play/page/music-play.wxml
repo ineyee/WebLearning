@@ -1,8 +1,5 @@
 <!--music-play/page/music-play.wxml-->
 <view class="music-play-page">
-  <image src="{{ songDetail.al.picUrl }}" mode=""/>
-  <view>
-    {{ lyric }}
-  </view>
+  <image class="bg-image" src="{{ songDetail.al.picUrl }}" mode="aspectFill" />
+  <view class="bg-mask"></view>
 </view>
-  
