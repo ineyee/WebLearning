@@ -1,4 +1,6 @@
 <!--music-play/page/music-play.wxml-->
+<wxs src="../../util/time-format-util.wxs" module="timeFormatUtil" />
+
 <view class="music-play-page">
   <image class="bg-image" src="{{ songDetail.al.picUrl }}" mode="aspectFill" />
   <view class="bg-mask"></view>
@@ -33,18 +35,18 @@
         啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
       </view>
       <view class="play-progress">
-        <slider class="slider" block-size="18" bindchange="" />
+        <slider class="slider" block-size="18" min="{{ 0 }}" max="{{ totalDuration }}" value="{{ curDuration }}" bindchanging="onSliderValueChanging" bindchange="onSliderValueChanged" />
         <view class="duration">
           <view class="played-duration">
-            05:25
+            {{ timeFormatUtil.formatMinSec(curDuration / 1000) }}
           </view>
           <view class="total-duration">
-            05:25
+            {{ timeFormatUtil.formatMinSec(totalDuration / 1000) }}
           </view>
         </view>
       </view>
       <view class="control">
-        <van-icon class="play-pause" name="play-circle" />
+        <van-icon class="play-pause" name="{{ isPlaying ? 'pause-circle' : 'play-circle' }}" bind:tap="onTapPlayPause" />
       </view>
     </swiper-item>
     <swiper-item class="lyric">
