@@ -5,5 +5,17 @@
     "compileHotReLoad": true,
     "urlCheck": false
   },
-  "condition": {}
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "音乐播放",
+          "pathName": "music-play/page/music-play",
+          "query": "id=2083785152",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
+  }
 }
