@@ -1,11 +1,23 @@
 {
   "pages": [
     "music/page/music/music",
-    "video/page/video/video",
-    "video-detail/page/video-detail/video-detail",
     "music/page/music-search/music-search",
     "music/page/music-list/music-list",
-    "music-play/page/music-play"
+    "video/page/video/video"
+  ],
+  "subPackages": [
+    {
+      "root": "video-detail",
+      "pages": [
+        "page/video-detail/video-detail"
+      ]
+    },
+    {
+      "root": "music-play",
+      "pages": [
+        "page/music-play"
+      ]
+    }
   ],
   "window": {
     "navigationBarTextStyle": "black",
