@@ -8,12 +8,17 @@ const fs = require("fs");
 
 // 1、同步读取
 // 同步读取的 API 是 readFileSync，它接收两个参数：
-// 第一个参数是文件的路径，必传
-// 第二个参数是可选的，表示文件的编码方式。默认是 null，读取成功时返回的是 Buffer 对象；如果指定编码方式，读取成功时则返回的是字符串
+// 第一个参数是文件的路径，必传。如果文件不存在，会抛出异常
+// 第二个参数是选项参数，可选
+//    encoding：表示文件的编码方式。默认是 null，读取成功时会返回 Buffer 对象；如果指定编码方式，读取成功时会返回字符串
+//    flag：表示文件的打开方式。默认是 "r"，表示只读；如果指定 "r+"，表示读写
 // console.log("同步读取===========");
 // try {
-//   const resultBuffer = fs.readFileSync("./test.txt");
-//   const resultString = fs.readFileSync("./test.txt", "utf-8");
+//   const resultBuffer = fs.readFileSync("./test_read.txt");
+//   const resultString = fs.readFileSync("./test_read.txt", {
+//     encoding: "utf-8",
+//     flag: "r+",
+//   });
 //   console.log("读取成功", resultBuffer);
 //   console.log("读取成功", resultString);
 // } catch (err) {
@@ -23,15 +28,20 @@ const fs = require("fs");
 
 // 2、异步读取（回调函数的方式）
 // 异步读取的 API 是 readFile，它接收三个参数：
-// 第一个参数是文件的路径，必传
-// 第二个参数是可选的，表示文件的编码方式。默认是 null，读取成功时返回的是 Buffer 对象；如果指定编码方式，读取成功时则返回的是字符串
-// 第三个参数是可选的，表示回调函数。回调函数接收两个参数：
+// 第一个参数是文件的路径，必传。如果文件不存在，会抛出异常
+// 第二个参数是选项参数，可选
+//    encoding：表示文件的编码方式。默认是 null，读取成功时会返回 Buffer 对象；如果指定编码方式，读取成功时会返回字符串
+//    flag：表示文件的打开方式。默认是 "r"，表示只读；如果指定 "r+"，表示读写
+// 第三个参数是回调函数，可选。回调函数接收两个参数：
 //    第一个参数是错误对象，如果读取失败，则错误对象不为 null
 //    第二个参数是读取到的数据，如果读取成功，则数据为 Buffer 对象或字符串
 // console.log("异步读取（回调函数的方式）===========");
 // fs.readFile(
-//   "./test.txt", 
-//   "utf-8", 
+//   "./test_read.txt",
+//   {
+//     encoding: "utf-8",
+//     flag: "r+",
+//   },
 //   (err, resultString) => {
 //     if (err) {
 //       console.log("读取失败", err);
@@ -43,7 +53,10 @@ const fs = require("fs");
 
 // 3、异步读取（Promise 的方式）
 // console.log("异步读取（Promise 的方式）===========");
-// fs.promises.readFile("./test.txt", "utf-8").then(
+// fs.promises.readFile("./test_read.txt", {
+//   encoding: "utf-8",
+//   flag: "r+",
+// }).then(
 //   (resultString) => {
 //     console.log("读取成功", resultString);
 //   },
@@ -56,7 +69,10 @@ const fs = require("fs");
 console.log("异步读取（async/await 的方式）===========");
 async function readFile() {
   try {
-    const resultString = await fs.promises.readFile("./test.txt", "utf-8");
+    const resultString = await fs.promises.readFile("./test_read.txt", {
+      encoding: "utf-8",
+      flag: "r+",
+    });
     console.log("读取成功", resultString);
   } catch (err) {
     console.log("读取失败", err);
