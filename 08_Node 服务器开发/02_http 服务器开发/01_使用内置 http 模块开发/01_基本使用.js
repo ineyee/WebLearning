@@ -22,7 +22,7 @@ httpServer.on("request", (req, res) => {
   // 比如获取请求方法
   console.log(req.method);
 
-  // 比如返回响应
+  // 比如返回响应、结束本次请求
   res.end("Hello World");
 });
 
