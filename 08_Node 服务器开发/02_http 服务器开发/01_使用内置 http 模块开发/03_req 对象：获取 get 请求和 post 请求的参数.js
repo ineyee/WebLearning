@@ -65,6 +65,7 @@ httpServer.on("request", (req, res) => {
         }
       });
     } else {
+      res.statusCode = 405;
       res.end(JSON.stringify({
         "code": 405,
         "message": "Method Not Allowed"
@@ -87,12 +88,14 @@ httpServer.on("request", (req, res) => {
         },
       }));
     } else {
+      res.statusCode = 405;
       res.end(JSON.stringify({
         "code": 405,
         "message": "Method Not Allowed"
       }));
     }
   } else {
+    res.statusCode = 404;
     res.end(JSON.stringify({
       "code": 404,
       "message": "Not Found"
