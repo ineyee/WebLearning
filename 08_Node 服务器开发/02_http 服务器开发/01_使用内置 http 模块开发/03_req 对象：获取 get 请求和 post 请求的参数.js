@@ -47,6 +47,7 @@ httpServer.on("request", (req, res) => {
       // 监听流的 end 事件，当读取数据完毕后，就会触发该事件
       req.on("end", () => {
         if (jsonObj.username === "watson" && jsonObj.password === "123456") {
+          res.statusCode = 200;
           res.end(JSON.stringify({
             "code": 200,
             "message": "登录成功",
@@ -55,6 +56,7 @@ httpServer.on("request", (req, res) => {
             },
           }));
         } else {
+          res.statusCode = 200;
           res.end(JSON.stringify({
             "code": 200,
             "message": "登录失败",
@@ -78,6 +80,7 @@ httpServer.on("request", (req, res) => {
       const qsObj = qsModule.parse(qsString);
       console.log("请求参数：", qsObj);
 
+      res.statusCode = 200;
       res.end(JSON.stringify({
         "code": 200,
         "message": "获取歌单成功",
