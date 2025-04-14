@@ -31,6 +31,7 @@ httpServer.on("request", (req, res) => {
 
   if (pathName === "/login") {
     if (method === "POST") {
+      res.statusCode = 200;
       res.end(JSON.stringify({
         "code": 200,
         "message": "登录成功",
@@ -47,6 +48,7 @@ httpServer.on("request", (req, res) => {
     }
   } else if (pathName === "/songList") {
     if (method === "GET") {
+      res.statusCode = 200;
       res.end(JSON.stringify({
         "code": 200,
         "message": "获取歌单成功",
