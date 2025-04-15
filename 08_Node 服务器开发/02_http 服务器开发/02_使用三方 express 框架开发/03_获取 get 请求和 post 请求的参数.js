@@ -45,8 +45,8 @@ app.post("/login", (req, res, next) => {
   });
 });
 
-// 1.2 使用 express 内置的 json() 中间件解析 post 请求的请求体
-// * 注册一下中间件：express.json()
+// 1.2 使用 express 内置的 json() 中间件（json 提交时）或 urlencoded() 中间件（表单提交时）解析 post 请求的请求体
+// * 注册一下中间件：express.json() 或 express.urlencoded()
 // * 这个中间件内部就是在解析 post 请求体里的数据，解析成 jsonObj 后，会把 jsonObj 赋值给 req 对象的 body 属性，然后调用 next() 函数，所以我们直接使用 req.body 就可以了
 app.use("/login1", express.json());
 app.post("/login1", (req, res, next) => {
