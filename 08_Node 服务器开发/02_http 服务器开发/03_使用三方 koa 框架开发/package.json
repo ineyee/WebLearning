@@ -4,6 +4,8 @@
     "@koa/router": "^13.1.0",
     "koa": "^2.16.1",
     "koa-bodyparser": "^4.4.1",
+    "koa-mount": "^4.0.0",
+    "koa-static": "^5.0.0",
     "multer": "^1.4.5-lts.2"
   }
 }
