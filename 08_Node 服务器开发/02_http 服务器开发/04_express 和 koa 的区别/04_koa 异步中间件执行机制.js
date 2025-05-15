@@ -14,7 +14,6 @@ app.use(async (ctx, next) => {
 app.use(async (ctx, next) => {
   console.log("中间件 2 before next");
 
-  c
   await next();
 
   console.log("中间件 2 after next");
