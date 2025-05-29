@@ -58,37 +58,3 @@ async function transferMoney(sender, receiver, amount) {
 
 // 使用示例
 transferMoney('张三', '李四', 200);
-
-
-async function transferMoney(sender, receiver, amount) {  
-  // 从池中获取一个连接
-  const connection = await connectionPool.promise().getConnection();
-
-  try {
-    // 1. 开启事务（必须在该连接上调用）
-    await connection.beginTransaction();
-
-    // 2. 执行扣款（使用同一连接）
-    await connection.query(
-      'UPDATE accounts SET balance = balance - ? WHERE user = ?',
-      [amount, sender]
-    );
-
-    // 3. 执行收款（继续使用同一连接）
-    await connection.query(
-      'UPDATE accounts SET balance = balance + ? WHERE user = ?',
-      [amount, receiver]
-    );
-
-    // 4. 提交事务
-    await connection.commit();
-    console.log("转账成功");
-  } catch (err) {
-    // 5. 回滚事务
-    await connection.rollback();
-    console.error('转账失败:', err.message);
-  } finally {
-    // 6. 无论成功与否，必须释放连接回池中！
-    connection.release();
-  }
-}
