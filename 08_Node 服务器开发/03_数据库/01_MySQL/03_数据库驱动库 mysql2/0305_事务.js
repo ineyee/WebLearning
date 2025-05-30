@@ -11,7 +11,7 @@
 const mysql = require("mysql2");
 
 // 第三步：新建一个连接池，连接上我们已启动的某个 MySQL 服务及数据库（同步操作）
-const  connectionPool = mysql.createPool({
+const connectionPool = mysql.createPool({
   host: "localhost",
   port: 3306,
   user: "root",
@@ -19,26 +19,43 @@ const  connectionPool = mysql.createPool({
   database: "test_db",
   connectionLimit: 10, // 最大连接数
 });
+// 我们无法直接监听某一条连接是否成功，因为实际执行 SQL 语句时 mysql2 会自动从连接池里获取一个可用的连接来执行，到底用的是连接池里的哪个连接我们无法控制，所以顶多是验证一下“连接池里的连接是否可用”（同步操作）
+connectionPool.getConnection((err, tempConn) => {
+  if (err) {
+    console.error("连接池里的连接不可用：", err.stack);
+    return;
+  }
+
+  // 尝试用从连接池里获取到一个临时连接连接一下数据库，来验证连接池里的连接是否可用（同步操作）
+  tempConn.connect((err) => {
+    if (err) {
+      console.error("连接池里的连接连接不到数据库：", err.stack);
+      return;
+    }
+
+    console.log("连接池里的连接可用且可以连接到数据库");
+  });
+});
 
 // 第四步：创建和执行 SQL 语句
 async function transferMoney(sender, receiver, amount) {
   // 从连接池里获取一个连接，确保事务里的所有操作都在同一个连接上执行，事务里的操作如果在不同的连接上执行，那数据就会出错，就失去了事务的意义
-  // 使用事务的场景，一定要通过获取一个连接的方式来做
+  // 使用事务的场景，一定要通过获取一个连接的方式来做，但是一旦我们手动获取了连接，就必须手动释放连接，否则连接就会泄漏，导致连接池耗尽
   const connection = await connectionPool.promise().getConnection();
-  
+
   try {
     // 开启事务
     await connection.beginTransaction();
 
     // 1. 扣款
-    await connection.query(
-      'UPDATE accounts SET balance = balance - ? WHERE user = ?',
+    await connection.execute(
+      "UPDATE accounts SET balance = balance - ? WHERE user = ?",
       [amount, sender]
     );
 
     // 2. 收款
-    await connection.query(
-      'UPDATE accounts SET balance = balance + ? WHERE user = ?',
+    await connection.execute(
+      "UPDATE accounts SET balance = balance + ? WHERE user = ?",
       [amount, receiver]
     );
 
@@ -46,7 +63,7 @@ async function transferMoney(sender, receiver, amount) {
     // 提交事务
     await connection.commit();
   } catch (err) {
-    console.error('转账失败:', err.message);
+    console.error("转账失败:", err.message);
     // 回滚事务
     await connection.rollback();
   } finally {
@@ -57,4 +74,4 @@ async function transferMoney(sender, receiver, amount) {
 }
 
 // 使用示例
-transferMoney('张三', '李四', 200);
+transferMoney("张三", "李四", 200);

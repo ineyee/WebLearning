@@ -4,13 +4,30 @@
 const mysql = require("mysql2");
 
 // 第三步：新建一个连接池，连接上我们已启动的某个 MySQL 服务及数据库（同步操作）
-const  connectionPool = mysql.createPool({
+const connectionPool = mysql.createPool({
   host: "localhost",
   port: 3306,
   user: "root",
   password: "Mysqlyiyi0202!",
   database: "test_db",
   connectionLimit: 10, // 最大连接数
+});
+// 我们无法直接监听某一条连接是否成功，因为实际执行 SQL 语句时 mysql2 会自动从连接池里获取一个可用的连接来执行，到底用的是连接池里的哪个连接我们无法控制，所以顶多是验证一下“连接池里的连接是否可用”（同步操作）
+connectionPool.getConnection((err, tempConn) => {
+  if (err) {
+    console.error("连接池里的连接不可用：", err.stack);
+    return;
+  }
+
+  // 尝试用从连接池里获取到一个临时连接连接一下数据库，来验证连接池里的连接是否可用（同步操作）
+  tempConn.connect((err) => {
+    if (err) {
+      console.error("连接池里的连接连接不到数据库：", err.stack);
+      return;
+    }
+
+    console.log("连接池里的连接可用且可以连接到数据库");
+  });
 });
 
 // 第四步：创建和执行 SQL 语句
@@ -43,7 +60,9 @@ const selectStatement = `
 */
 async function selectSongs() {
   try {
-    const result = await connectionPool.promise().query(selectStatement, [3]);
+    // 这样写的话，connectionPool.promise().query() 函数内部会自动从连接池获取连接，并在查询完成后自动释放连接，因此我们不需要手动获取连接和释放连接
+    // 如果我们需要手动获取连接和释放连接，可以使用 connectionPool.promise().getConnection() 函数获取连接，然后在查询完成后调用 connection.release() 释放连接
+    const result = await connectionPool.promise().execute(selectStatement, [3]);
     console.log("查询数据成功：", result[0]);
   } catch (error) {
     console.log("查询数据失败：", error);
