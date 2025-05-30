@@ -1,42 +1,29 @@
 ## 第一步：创建项目
-你想把项目创建到哪个目录下，就cd到哪个目录，然后执行“vue create {项目名}”命令，选择相应的preset来创建项目（暂时包含babel）
+Node 开发时：
+  * 如果我们使用的是 Express 框架来做 http 服务器开发，那么也有一个名字叫做 Express Generator 的脚手架来创建项目，你想把项目创建到哪个目录下，就cd到哪个目录，然后执行“express {项目名}”命令即可（更具体的使用方法可以 deepseek 一把），脚手架也会自动为我们创建一个 package.json 文件
+  * 如果我们使用的是 Koa 框架来做 http 服务器开发，那么就没有脚手架来创建项目了（因为 Koa 框架的设计哲学就是极简，很多库都不内置，它啥也不管），你想把项目创建到哪个目录下，就进入该目录，创建一个 {项目名} 的文件夹就是我们的项目了，此时我们还需要自己创建一个 package.json 文件，因为没有谁会帮我们自动生成，创建方式详见“05_前端工程化基础/03_包管理工具npm和pnpm/01_npm/03_package.json文件”
 
 ## 第二步：为项目安装必备的三方库
-0、先添加一下 gitignore 文件
-1、less-loader（打包less用）：cd到项目根目录，执行”npm install less-loader -D“命令
-  * 我们只需要执行安装命令、脚手架会自动帮我们配置less-loader，并且脚手架也已经帮我们安装并配置好了其它需要的样式loader
-  * 因为只在打包的时候用，线上环境不用，所以安装到开发环境即可，加“-D”；因为这个库仅仅是我们这个项目内部使用的，并不是所有的项目都用less，所以不能加“-g”
-2、vue-router（路由管理库）：cd到项目根目录，执行”npm install vue-router“命令
-  * 我们只需要执行安装命令，不需要做其它配置
-  * 因为开发环境和发布环境，网页都需要做跳转，所以不能加“-D”；并且因为这个库仅仅是我们这个项目内部使用的，并不是所有的项目都用这个路由管理库，所以也不能加“-g”
-3、pinia（状态管理库）：cd到项目根目录，执行”npm install pinia“命令
-  * 我们只需要执行安装命令，不需要做其它配置
-  * 因为开发环境和发布环境，网页都需要做状态管理，所以不能加“-D”；并且因为这个库仅仅是我们这个项目内部使用的，并不是所有的项目都用这个状态管理库，所以也不能加“-g”
-4、axios（网络请求库）：cd到项目根目录，执行”npm install axios“命令
-  * 我们只需要执行安装命令，不需要做其它配置
-  * 因为开发环境和发布环境，网页都需要做网络请求，所以不能加“-D”；并且因为这个库仅仅是我们这个项目内部使用的，并不是所有的项目都用这个网络请求库，所以也不能加“-g”
-5、要用的UI库（这里以vant为例）：cd到项目根目录，执行”npm install vant“命令
-  * 我们只需要执行安装命令，不需要做其它配置
-  * 因为开发环境和发布环境，网页都需要用这些UI，所以不能加“-D”；并且因为这个库仅仅是我们这个项目内部使用的，并不是所有的项目都用这个UI库，所以也不能加“-g”
-  -----------
-  * 根据UI库官方文档的提示，安装按需导入组件的插件以减少包体积，cd到项目根目录，执行“npm i @vant/auto-import-resolver unplugin-vue-components unplugin-auto-import -D”命令
-  * 根据UI库官方文档的提示，复制那段代码去vue.config.js里配置插件
+0、先添加一下 gitignore 文件：https://github.com/github/gitignore/blob/main/Node.gitignore
+1、koa（http 服务器框架）：cd 到项目根目录，执行命令：npm install koa
+  * 此外我们需要知道：koa 跟 express 有一个很大的区别是，express 内置了很多常用的中间件，我们安装完 express 就能直接使用这些中间件了，而 koa 没有内置中间件，我们用到某些中间件时需要手动安装
+2、@koa/router（路由管理库）：cd 到项目根目录，执行命令：npm install @koa/router
+3、koa-bodyparser（解析 post 请求的请求体库）：cd 到项目根目录，执行命令：npm install koa-bodyparser
+4、multer（文件上传库）：cd 到项目根目录，执行命令：npm install @koa/multer multer
+5、mysql2（数据库驱动库）：cd 到项目根目录，执行命令：npm install mysql2
 
-## 第三步：删掉项目里默认的多余文件夹和文件，只保留main.js和App.vue，保证项目的干净
+## 第三步：删掉项目里默认的多余文件夹和文件，只保留main.js，保证项目的干净
+  * 在项目的根目录先先创建一个 src 文件夹，代表我们编写的源码
+  * 在 src 文件夹里先创建一个 main.js 文件，代表我们项目的入口文件
+  * 在 main.js 文件里先写一条打印语句
 
 ## 第四步：把项目跑起来
-此时我们可以去项目的package.json文件里看一下，会发现vue-cli脚手架已经默认为我们创建好了两个脚本，“vue-cli-service”是对“webpack”的封装，可以视作就是我们前面自己配置的打包脚本“webpack serve”和“webpack”
-"scripts": {
-  "serve": "vue-cli-service serve",
-  "build": "vue-cli-service build"
-},
-
-因此cd到项目根目录，执行“npm run serve”命令就可以把项目跑起来了
-1、底层就会走“webpack-dev-server”那一套，为我们搭建了一个开发服务器，以便我们在修改了代码之后，能实时地显示在浏览器里让我们看到效果，【类似于Flutter里的热重启或热更新】，那无疑将大大提升我们的开发效率，主要做了两件事：
-  （1）当我们修改代码后实时打包 + 实时刷新浏览器呈现修改
-  （2）注意这里的“实时打包”并非“真正地”打包，它不会产出可以部署到服务器的产物，而只是把打包的东西放在项目内存中，方便我们开发过程中中快速频繁地打包并访问
-2、等打包成功后，终端会给到我们一个地址如：http://localhost:8081/，在浏览器里打开这个地址就能看到我们开发的东西了
-3、开发过程中，大多数情况我们不需要关掉原来的服务，然后重新执行“npm run serve”启动一个新服务，一般就是改了配置文件的时候才需要重新启动一个新服务
+  * 此时我们就可以 cd 到项目根目录， 用“node ./src/main.js”把项目跑一下，看到打印后就代表项目正常跑起来了
+  * 当然为了避免每次跑项目我们都得输入“node ./src/main.js”这么长的命令，我们可以在 package.json 文件里配置一下运行项目的脚本“"start": "nodemon ./src/main.js"”，这样一来用“npm run start”就可以运行项目了
+  * 此外为了让服务器能在修改代码后自动更新，我们可以使用 nodemon 工具来运行服务器（记得全局安装 nodemon 工具），所以把运行项目的脚本换成“"start": "nodemon ./src/main.js"”
+  "scripts": { 
+    "start": "nodemon ./src/main.js"
+  },
 
 ## 第五步：修改站点图标和站点标题
 1、修改站点图标：直接用我们的图标替换掉public文件夹里的”favicon.ico“图标即可

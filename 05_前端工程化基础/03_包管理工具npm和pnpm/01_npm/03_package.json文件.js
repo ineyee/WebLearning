@@ -1,6 +1,9 @@
 /*
   1、package.json文件是我们项目的配置文件，里面记录着我们项目的很多信息
   实际开发中，我们都会在项目的根目录下创建一个package.json文件（见npm_demo02）：cd到项目的根目录，执行命令“npm init --yes”或“npm init -y”来为项目创建一个package.json文件，init代表初始化项目，--yes和-y代表package.json文件里全部采用默认值，后续再自己做修改
+
+  Vue 开发时，我们都是用 VueCLI 脚手架创建项目，而 VueCLI 脚手架会自动为我们创建一个package.json文件，所以我们就不用自己创建了
+  Node 开发时，如果我们使用的是 Express 框架来做 http 服务器开发，那么也有一个名字叫做 Express Generator 的脚手架来创建项目，它也会自动为我们创建一个 package.json 文件；但如果我们使用的是 Koa 框架来做 http 服务器开发，那么就没有脚手架来创建项目了（因为 Koa 框架的设计哲学就是极简，很多库都不内置，它啥也不管），我们就需要自己创建一个 package.json 文件
 */
 
 // 2、package.json文件必须是一个标准的json文件，所以里面不能写注释，我们把注释写在这里
@@ -24,7 +27,10 @@ const packageJson = {
   "keywords": [],
 
   // 指定项目的入口文件
-  "main": "index.js",
+  // 注意：这个字段只在你将项目发布为 npm 包时才有意义。当其他用户通过 require('coder-hub') 引用你的包时，Node.js 就会查找 node_modules/coder-hub/index.js（即 main 字段指定的文件）
+  // 但如果你的项目是一个应用程序（Application）​，而不是一个库（Library）​。这意味着其他项目不会通过 require('coder-hub') 来引用你的代码，此时 main 字段就没有意义了
+  // 但建议把这个字段的值改成项目的真实入口文件名，这样可以让其他人更容易理解你的项目结构
+  "main": "./index.js",
   // 指定项目的一些脚本命令，如运行项目、打包项目等
   // 配置后我们就可以通过”npm run 脚本的key“来执行某个具体的命令了，而不用总是敲那么长的命令
   "scripts": {
