@@ -9,12 +9,12 @@
 * 项目名：使用小写字母加中划线来命名，如"node-server"
 * 文件夹名：使用小写字母加中划线来命名，如"controllers"、"service"、"middleware"
 * 文件名
-  * 路由文件：使用小写字母加中划线来命名，后缀为.router.js，如"user.router.js"、"moment.router.js"
+  * 配置文件：使用小写字母加中划线来命名，后缀为.config.js，如"server.config.js"、"database.config.js"
+  * 路由文件：使用小写字母加中划线来命名，后缀为.router.js，如"user.router.js"
   * 控制器文件：使用小写字母加中划线来命名，后缀为.controller.js，如"user.controller.js"、"moment.controller.js"
   * 服务层文件：使用小写字母加中划线来命名，后缀为.service.js，如"user.service.js"、"file.service.js"
   * 中间件文件：使用小写字母加中划线来命名，后缀为.middleware.js，如"auth.middleware.js"、"file.middleware.js"
   * 工具类文件：使用小写字母加中划线来命名，后缀为.utils.js，如"password.utils.js"、"error.utils.js"
-  * 配置文件：使用小写字母加中划线来命名，后缀为.config.js，如"database.config.js"
   * 所有其它文件：使用小写字母加中划线来命名，如"app.js"、"main.js"
 -------------------------------------------------------
 * 类名：使用大驼峰来命名，如"UserController"、"MomentService"

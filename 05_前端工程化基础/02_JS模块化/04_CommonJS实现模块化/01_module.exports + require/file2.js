@@ -19,6 +19,9 @@ module.exports = {
   run,
 };
 
+// 没有 {} 的导出就类似于 ESModule 的默认导出，导入时就不用加大括号了——类似于 ESModule 的默认导入
+// module.exports = personName;
+
 console.log("file2 module = ", module);
 /*
   module = {

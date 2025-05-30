@@ -9,4 +9,7 @@
   * 如果要在同一个作用域里使用重复的变量名和函数名也没问题，因为我们在使用require导入时必然得给导入的东西取个名字、否则就没法使用导入的东西，相当于强制我们实现了Dart里的“import as”来避免冲突
   * 使用module.exports、exports导出，要导出哪些变量和函数在此刻做决定
   * 使用require导入，可以访问被导出来的变量和函数
+  
+  浏览器开发里模块化主要用 ESModule（import、export 等）
+  Node 开发里模块化主要用 CommonJS（require、module.exports 等），虽然 Node 开发里也可以使用 ESModule，但是需要额外的配置，所以主要还是使用 CommonJS
 */

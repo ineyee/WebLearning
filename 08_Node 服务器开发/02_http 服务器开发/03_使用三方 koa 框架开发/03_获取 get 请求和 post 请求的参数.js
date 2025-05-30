@@ -7,6 +7,7 @@ app.listen("8000", () => {
   console.log("🚀服务器启动成功🚀");
 });
 
+// bodyParser 中间件必须写在路由中间件前面，因为 bodyParser 是用来解析 post 请求的请求体的，所以得先使用它，路由中间件里处理请求时才能正常解析 post 请求的请求体
 app.use(bodyParser());
 
 const userRouter = new KoaRouter({
