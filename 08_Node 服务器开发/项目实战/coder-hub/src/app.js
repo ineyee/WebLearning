@@ -4,7 +4,7 @@ const Koa = require("koa");
 // 导入 bodyParser 中间件来解析 post 请求的请求体
 // 注意：koa-bodyparser 是 koa 框架的一个中间件——即一个函数，所以我们用小驼峰来命名
 const bodyParser = require("koa-bodyparser");
-// 导入路由中间件
+// 导入用户模块的路由配置
 const userRouter = require("./router/user.router");
 
 // 第二步：创建一个 koa 服务器实例
@@ -16,8 +16,9 @@ const app = new Koa();
 // bodyParser 中间件必须写在路由中间件前面，因为 bodyParser 是用来解析 post 请求的请求体的，所以得先使用它，路由中间件里处理请求时才能正常解析 post 请求的请求体
 app.use(bodyParser());
 
+// 注册用户模块的路由中间件
 app.use(userRouter.routes());
-// allowedMethods() 是 koa-router 提供的一个中间件方法，建议在每个路由后面都跟一个
+// allowedMethods() 是 koa-router 提供的一个中间件方法，建议在每个路由中间件后面都跟一个
 // 
 // 如果不使用这个中间件，那么当客户端发送不支持的 HTTP 方法时：
 // - 默认返回 404 Not Found（错误信息不准确）
