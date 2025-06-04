@@ -1,0 +1,105 @@
+/*
+  用户模块接口的表现层
+
+  表现层（controller）的职责就是直接与客户端打交道，如接收客户端的请求参数、对客户端的请求参数进行基础有效性校验、调用业务层的 API 拿到客户端直接能用 JSON 或 HTML 等数据、给客户端返回响应。换句话说，表现层要对客户端负责，负责的体现就是返回给客户端直接能用的有效数据或错误信息；表现层要对业务层负责，负责的体现就是传递给业务层的参数必须是有效的；其它的表现层就不用关心了。在表现层进行参数的基础有效性校验是为了在请求进入业务逻辑前就拒绝非法格式，避免无效数据渗透到下层，主要包含：必填字段校验、字段长度校验、字段格式校验等，其它跟业务相关的校验就交给业务层去校验
+
+  实践经验：
+    * 调用业务层的 API 时一定要用 try-catch 来捕获错误信息并返回给客户端，因为业务层的错误是通过抛出异常来实现的，数据层的错误也是通过抛出异常经业务层透传到表现层来实现的
+    * 基础有效性的校验如果出错了，我们才是手动返回错误信息给客户端
+    * 其它情况正常执行即可，表现层的最后肯定是返回成功响应给客户端，代表所有判断都通过了
+    * 表现层函数就不需要什么返回值了，因为它只跟客户端打交道，返回给客户端的响应数据就放在 ctx.body 里
+*/
+
+// 导入验证库
+const validator = require("validator");
+// 导入业务层
+const userService = require("../service/user.service");
+
+// 第一步：创建 Controller 类
+class UserController {
+  // 第二步：创建一个实例方法，来实现某个接口的表现层逻辑
+  // 因为这个实例方法的定位是个中间件，所以它的参数必须和中间件的参数一样
+  async register(ctx, next) {
+    // 1、接收客户端的请求参数
+    // bodyParser 中间件内部就是在解析 post 请求体里的数据，解析成 jsonObj 后，会把 jsonObj 赋值给 ctx.request.body 属性
+    const params = ctx.request.body;
+
+    // 2、对客户端的请求参数进行基础有效性校验
+    // 2.1 参数校验失败，返回错误信息
+    // 2.2 参数校验成功，执行后续逻辑
+    /*
+      必填字段校验
+
+      !params.email 可以校验：
+        * 是否传了 email 字段
+        * email 字段是不是 undefined
+        * email 字段是不是 null
+        * email 字段是不是 ""
+    */
+    if (!params.email) {
+      // 给客户端返回错误信息
+      ctx.body = {
+        code: -1001,
+        message: "邮箱不能为空",
+      };
+      // 结束当前中间件的执行
+      return;
+    }
+
+    if (!params.username) {
+      ctx.body = {
+        code: -1002,
+        message: "用户名不能为空",
+      };
+      return;
+    }
+
+    if (!params.password) {
+      ctx.body = {
+        code: -1003,
+        message: "密码不能为空",
+      };
+      return;
+    }
+
+    // 字段长度校验
+    if (params.username.length > 100 || params.password.length > 100) {
+      ctx.body = {
+        code: -1004,
+        message: "用户名或密码长度不能大于 100 个字符",
+      };
+      return;
+    }
+
+    // 字段格式校验
+    if (validator.isEmail(params.email) === false) {
+      ctx.body = {
+        code: -1005,
+        message: "邮箱格式不正确",
+      };
+      return;
+    }
+
+    // 3、调用业务层的 API，将客户端传递过来的参数存储到数据库中
+    // 3.1 存储数据库操作失败，返回错误信息
+    // 3.2 存储数据库操作成功，执行后续逻辑
+    try {
+      await userService.register(params);
+      // 4、将注册成功的结果返回给客户端
+      ctx.body = {
+        code: 0,
+        message: "注册成功",
+      };
+    } catch (error) {
+      ctx.body = {
+        code: error.code,
+        message: error.message,
+      };
+      return;
+    }
+  }
+}
+
+// 第三步：创建并导出 Controller 实例
+// 不用大括号的导出类似于 ESModule 里的默认导出，那在导入时也得用类似于 ESModule 里的默认导入——不能使用大括号
+module.exports = new UserController();

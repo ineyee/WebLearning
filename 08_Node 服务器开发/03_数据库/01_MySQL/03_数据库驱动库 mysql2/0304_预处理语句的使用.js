@@ -62,8 +62,9 @@ async function selectSongs() {
   try {
     // 这样写的话，connectionPool.promise().query() 函数内部会自动从连接池获取连接，并在查询完成后自动释放连接，因此我们不需要手动获取连接和释放连接
     // 如果我们需要手动获取连接和释放连接，可以使用 connectionPool.promise().getConnection() 函数获取连接，然后在查询完成后调用 connection.release() 释放连接
-    const result = await connectionPool.promise().execute(selectStatement, [3]);
-    console.log("查询数据成功：", result[0]);
+    // 这里是解构赋值获取到执行结果的第一项，因为 execute 方法返回的是一个数组，第一项是执行结果，第二项是执行结果的元数据
+    const [result] = await connectionPool.promise().execute(selectStatement, [3]);
+    console.log("查询数据成功：", result);
   } catch (error) {
     console.log("查询数据失败：", error);
   }
