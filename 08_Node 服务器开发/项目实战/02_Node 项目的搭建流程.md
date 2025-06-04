@@ -38,7 +38,7 @@ Node 开发时：
 ├─src/（我们编写的源文件）
 │  ├─main.js（项目的入口文件）
 │  ├─app.js（服务器实例）
-│  ├─database.js（服务器实例）
+│  ├─database.js（数据库连接池实例）
 │  ├─config/（项目里的配置都放到这个文件夹里，如常量避免硬编码）
 │  │  ├─xxx.config.js（某个模块的配置）
 │  ├─router/（路由配置）
@@ -51,6 +51,7 @@ Node 开发时：
 │  │  ├─xxx.repository.js（某个模块接口的数据库操作）
 │  ├─middleware/（中间件）
 │  │  ├─xxx.middleware.js（某个模块接口的中间件，有的中间件类似于 VM 为 Controller 减负、比如“对客户端的请求参数进行基础有效性校验”的中间件）
+│  ├─util/（工具函数）
 ```
 
 `Node 开发也有三层架构：`
@@ -67,10 +68,12 @@ Node 开发时：
 
 按照我们的技术设计，先在 Navicat 里创建好数据库和表
 
-## 第七步：准备好服务器和数据库的一些配置
+## 第七步：准备好项目的一些配置
 
 * config/server.config.js 添加一下服务器的配置
 * config/database.config.js 添加一下数据库的配置
+* config/response-success.config.js 添加一下响应成功的配置
+* config/response-error.config.js 添加一下响应错误的配置
 
 ## 第八步：在 app.js 文件里基于 koa 框架创建 app
 
@@ -89,24 +92,39 @@ main.js 文件里只做两件事：
 
 ## 第十一步：开发接口
 
-接下来就是开发每个模块对应的接口了（`每个接口都至少对应一个 router、一个 controller、一个 service、一个 dio 这四个东西`，还有可能会包含一个 middleware 来为 controller 减负），这里以用户模块的注册接口为例：
+接下来就是开发每个模块对应的接口了（`每个接口都至少对应一个 router、一个 controller、一个 service、一个 dio 这四个东西，还有可能会包含一个 middleware 来为 controller 减负`），这里以用户模块的注册接口为例：
 
 #### 1、在 postman 里设计下注册接口
   * method: post
   * url: http://localhost:8000/user/register
-  * params json: email（必传且唯一）、username（必传）、password（必传）
+  * params json: email（string 必传且唯一）、username（string 必传）、password（string 必传）
 
 #### 2、注册接口的路由配置
   * 在 router 文件夹下创建一个 user.router.js 文件
-  * 在 user.router.js 文件里编写注册接口的请求路径和控制器中间件的映射关系并导出路由
+  * 在 user.router.js 文件里编写注册接口的请求路径和表现层中间件的映射关系并导出路由
   * 在 app.js 里导入路由并注册路由中间件
 
-#### 3、业务层，在代码里搞个专属于用户模块接口的控制器文件
+#### 3、表现层
   * 在 controller 文件夹下创建一个 user.controller.js 文件
-  * 在 user.controller.js 文件里编写接口的业务逻辑并导出控制器实例（注意业务层将调用数据层的 API）
-  * 在 user.router.js 里导入业务逻辑中间件并跟请求路径建立映射
+  * 在 user.controller.js 文件里编写表现层应该负责的逻辑
+  * 在 user.router.js 里导入表现层中间件并建立跟请求路径的映射关系
 
+#### 4、业务层
+  * 在 service 文件夹下创建一个 user.service.js 文件
+  * 在 user.service.js 文件里编写业务层应该负责的逻辑
+  * 在 user.controller.js 里导入业务层 API 并调用
 
-#### 在 postman 里测试就扣
+#### 5、数据层
+  * 在 repository 文件夹下创建一个 user.repository.js 文件
+  * 在 user.repository.js 文件里编写数据层应该负责的逻辑
+  * 在 user.service.js 里导入数据层 API 并调用
 
-#### 在 postman 里导出接口文档交给客户端开发
+#### 6、减负中间件
+  * 根据需求创建减负中间件为 Controller 减负
+
+#### 7、工具函数
+  * 根据需求创建工具函数
+
+#### 8、在 postman 里测试并导出接口文档
+  * 在 postman 里测试接口的各种情况，确保全部通过
+  * 导出接口文档交给客户端开发
