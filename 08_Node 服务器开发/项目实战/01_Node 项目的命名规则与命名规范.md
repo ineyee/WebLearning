@@ -15,7 +15,7 @@
   * 业务层文件：使用小写字母加中划线来命名，后缀为 .service.js，如"user.service.js"
   * 数据层文件：使用小写字母加中划线来命名，后缀为 .dio.js，如"user.dio.js"
   * 中间件文件：使用小写字母加中划线来命名，后缀为 .middleware.js，如"user.middleware.js"
-  * 工具类文件：使用小写字母加中划线来命名，后缀为 .utils.js，如"error.utils.js"、"password.utils.js"
+  * 工具类文件：使用小写字母加中划线来命名，后缀为 .utils.js，如"md5-password.utils.js"
   * 所有其它文件：使用小写字母加中划线来命名，如"main.js"、"app.js"、"database.js"
 -------------------------------------------------------
 * 类名：使用大驼峰来命名，如"UserController"

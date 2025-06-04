@@ -14,6 +14,8 @@
 const userRepository = require("../repository/user.repository");
 // 导入用户模块响应错误的状态码和消息
 const userError = require("../config/response-error.config").USER;
+// 导入加密工具函数
+const { md5Password } = require("../util/md5-password.utils");
 
 // 第一步：创建 Service 类
 class UserService {
@@ -32,6 +34,7 @@ class UserService {
     }
 
     // 2、调用数据层的 API，将客户端传递过来的参数存储到数据库中
+    params.password = md5Password(params.password); // 这里可以加密密码
     await userRepository.createUser(params);
   }
 }
