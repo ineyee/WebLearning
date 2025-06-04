@@ -4,6 +4,8 @@
 const validator = require("validator");
 
 // 因为这个方法的定位是个中间件，所以它的参数必须和中间件的参数一样
+// 
+// 上一个中间件里如果是【返回响应、结束本次请求】，下一个中间件不会被执行；上一个中间件里如果【调用 next 函数执行下一个中间件】，下一个中间件才会被执行
 const verifyRegisterParams = async (ctx, next) => {
   // 1、接收客户端的请求参数
   // bodyParser 中间件内部就是在解析 post 请求体里的数据，解析成 jsonObj 后，会把 jsonObj 赋值给 ctx.request.body 属性
