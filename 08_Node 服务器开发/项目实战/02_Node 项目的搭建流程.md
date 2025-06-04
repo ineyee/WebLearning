@@ -49,6 +49,8 @@ Node 开发时：
 │  │  ├─xxx.service.js（某个模块接口的业务逻辑）
 │  ├─repository/（数据层）
 │  │  ├─xxx.repository.js（某个模块接口的数据库操作）
+│  ├─middleware/（中间件）
+│  │  ├─xxx.middleware.js（某个模块接口的中间件，有的中间件类似于 VM 为 Controller 减负、比如“对客户端的请求参数进行基础有效性校验”的中间件）
 ```
 
 `Node 开发也有三层架构：`
@@ -87,7 +89,7 @@ main.js 文件里只做两件事：
 
 ## 第十一步：开发接口
 
-接下来就是开发每个模块对应的接口了（`每个接口都至少对应一个 router、一个 controller、一个 service、一个 dio 这四个东西`），这里以用户模块的注册接口为例：
+接下来就是开发每个模块对应的接口了（`每个接口都至少对应一个 router、一个 controller、一个 service、一个 dio 这四个东西`，还有可能会包含一个 middleware 来为 controller 减负），这里以用户模块的注册接口为例：
 
 #### 1、在 postman 里设计下注册接口
   * method: post

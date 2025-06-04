@@ -10,8 +10,6 @@
     * 表现层函数就不需要什么返回值了，因为它只跟客户端打交道，返回给客户端的响应数据就放在 ctx.body 里
 */
 
-// 导入验证库
-const validator = require("validator");
 // 导入业务层
 const userService = require("../service/user.service");
 
@@ -19,7 +17,8 @@ const userService = require("../service/user.service");
 class UserController {
   // 第二步：创建一个实例方法，来实现某个接口的表现层逻辑
   // 因为这个实例方法的定位是个中间件，所以它的参数必须和中间件的参数一样
-  async register(ctx, next) {
+  // 废弃方法，请使用 register 方法
+  async register1(ctx, next) {
     // 1、接收客户端的请求参数
     // bodyParser 中间件内部就是在解析 post 请求体里的数据，解析成 jsonObj 后，会把 jsonObj 赋值给 ctx.request.body 属性
     const params = ctx.request.body;
@@ -95,7 +94,35 @@ class UserController {
         code: error.code,
         message: error.message,
       };
-      return;
+    }
+  }
+
+  // 上面这样实现表现层中间件是没有问题的，但是我们会发现“对客户端的请求参数进行基础有效性校验”的代码太多了，导致这个中间件过于臃肿，难以维护
+  // 所以最佳实践是：
+  // 1、把“对客户端的请求参数进行基础有效性校验”的代码抽取到一个专门的中间件里（类似于 VM 给 Controller 减负），这样一来校验逻辑也可以复用
+  // 2、在路由文件里把这个专门的中间件挂载到对应的路由上，确保在表现层中间件之前执行
+  // 3、在表现层中间件里去掉基础有效性验证的代码、直接调用业务层的 API 即可，更加专注于接收参数和响应数据
+  // 这样就可以把表现层中间件的代码量大大减少，变得更清晰、更易维护
+  async register(ctx, next) {
+    // 1、接收客户端的请求参数
+    // bodyParser 中间件内部就是在解析 post 请求体里的数据，解析成 jsonObj 后，会把 jsonObj 赋值给 ctx.request.body 属性
+    const params = ctx.request.body;
+
+    // 2、调用业务层的 API，将客户端传递过来的参数存储到数据库中
+    // 2.1 存储数据库操作失败，返回错误信息
+    // 2.2 存储数据库操作成功，执行后续逻辑
+    try {
+      await userService.register(params);
+      // 3、将注册成功的结果返回给客户端
+      ctx.body = {
+        code: 0,
+        message: "注册成功",
+      };
+    } catch (error) {
+      ctx.body = {
+        code: error.code,
+        message: error.message,
+      };
     }
   }
 }

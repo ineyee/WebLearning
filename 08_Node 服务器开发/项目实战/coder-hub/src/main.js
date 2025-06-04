@@ -15,3 +15,10 @@ const {SERVER_PORT} = require('./config/server.config.js');
 app.listen(SERVER_PORT, () => {
   console.log("🚀服务器启动成功🚀");
 });
+
+
+
+
+
+
+// coder-hub 这个项目只通过注册接口来演示整个项目的目录结构和架构设计，完整的项目见 coder-hub-full
