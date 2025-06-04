@@ -12,6 +12,8 @@
 
 // 导入业务层
 const userService = require("../service/user.service");
+// 导入响应成功的状态码和消息
+const responseSuccess = require("../config/response-success.config");
 
 // 第一步：创建 Controller 类
 class UserController {
@@ -115,8 +117,8 @@ class UserController {
       await userService.register(params);
       // 3、将注册成功的结果返回给客户端
       ctx.body = {
-        code: 0,
-        message: "注册成功",
+        code: responseSuccess.code,
+        message: responseSuccess.message,
       };
     } catch (error) {
       ctx.body = {

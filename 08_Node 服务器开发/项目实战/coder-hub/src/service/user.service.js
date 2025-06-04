@@ -12,6 +12,8 @@
 
 // 导入数据层
 const userRepository = require("../repository/user.repository");
+// 导入用户模块响应错误的状态码和消息
+const userError = require("../config/response-error.config").USER;
 
 // 第一步：创建 Service 类
 class UserService {
@@ -24,8 +26,8 @@ class UserService {
     const readUserResult = await userRepository.readUserByEmail(params.email);
     if (readUserResult.length > 0) {
       throw {
-        code: -1006,
-        message: "邮箱已被注册",
+        code: userError.EMAIL_IS_ALREADY_EXISTS.code,
+        message: userError.EMAIL_IS_ALREADY_EXISTS.message,
       };
     }
 

@@ -2,9 +2,11 @@
 
 // 导入验证库
 const validator = require("validator");
+// 导入用户模块错误码
+const userError = require("../config/response-error.config").USER;
 
 // 因为这个方法的定位是个中间件，所以它的参数必须和中间件的参数一样
-// 
+//
 // 上一个中间件里如果是【返回响应、结束本次请求】，下一个中间件不会被执行；上一个中间件里如果【调用 next 函数执行下一个中间件】，下一个中间件才会被执行
 const verifyRegisterParams = async (ctx, next) => {
   // 1、接收客户端的请求参数
@@ -26,8 +28,8 @@ const verifyRegisterParams = async (ctx, next) => {
   if (!params.email) {
     // 给客户端返回错误信息
     ctx.body = {
-      code: -1001,
-      message: "邮箱不能为空",
+      code: userError.EMAIL_IS_REQUIRED.code,
+      message: userError.EMAIL_IS_REQUIRED.message,
     };
     // 结束当前中间件的执行
     return;
@@ -35,16 +37,16 @@ const verifyRegisterParams = async (ctx, next) => {
 
   if (!params.username) {
     ctx.body = {
-      code: -1002,
-      message: "用户名不能为空",
+      code: userError.USERNAME_IS_REQUIRED.code,
+      message: userError.USERNAME_IS_REQUIRED.message,
     };
     return;
   }
 
   if (!params.password) {
     ctx.body = {
-      code: -1003,
-      message: "密码不能为空",
+      code: userError.PASSWORD_IS_REQUIRED.code,
+      message: userError.PASSWORD_IS_REQUIRED.message,
     };
     return;
   }
@@ -52,8 +54,8 @@ const verifyRegisterParams = async (ctx, next) => {
   // 字段长度校验
   if (params.username.length > 100 || params.password.length > 100) {
     ctx.body = {
-      code: -1004,
-      message: "用户名或密码长度不能大于 100 个字符",
+      code: userError.USERNAME_OR_PASSWORD_IS_TOO_LONG.code,
+      message: userError.USERNAME_OR_PASSWORD_IS_TOO_LONG.message,
     };
     return;
   }
@@ -61,8 +63,8 @@ const verifyRegisterParams = async (ctx, next) => {
   // 字段格式校验
   if (validator.isEmail(params.email) === false) {
     ctx.body = {
-      code: -1005,
-      message: "邮箱格式不正确",
+      code: userError.EMAIL_FORMAT_IS_INCORRECT.code,
+      message: userError.EMAIL_FORMAT_IS_INCORRECT.message,
     };
     return;
   }
