@@ -92,6 +92,8 @@ main.js 文件里只做两件事：
 
 ## 第十一步：开发接口
 
+`接口请求和响应流程：客户端发起请求 -> router -参数-> controller + 减负 middleware -> service -> repository -数据-> service -> controller -> 给客户端返回响应`
+
 接下来就是开发每个模块对应的接口了（`每个接口都至少对应一个 router、一个 controller、一个 service、一个 dio 这四个东西，还有可能会包含一个 middleware 来为 controller 减负`），这里以用户模块的注册接口为例：
 
 #### 1、在 postman 里设计下注册接口
