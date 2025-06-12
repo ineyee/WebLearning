@@ -5,7 +5,7 @@ const Koa = require("koa");
 // 注意：koa-bodyparser 是 koa 框架的一个中间件——即一个函数，所以我们用小驼峰来命名
 const bodyParser = require("koa-bodyparser");
 // 导入用户模块的路由配置
-const userRouter = require("./router/user.router");
+const userRouter = require("./router/register.router");
 
 // 第二步：创建一个 koa 服务器实例
 // 约定俗成地我们会把这个服务器实例命名为 app

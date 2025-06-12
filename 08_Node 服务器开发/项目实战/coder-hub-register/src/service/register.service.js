@@ -11,7 +11,7 @@
 */
 
 // 导入数据层
-const userRepository = require("../repository/user.repository");
+const userRepository = require("../repository/register.repository");
 // 导入用户模块响应错误的状态码和消息
 const userError = require("../config/response-error.config").USER;
 // 导入加密工具函数

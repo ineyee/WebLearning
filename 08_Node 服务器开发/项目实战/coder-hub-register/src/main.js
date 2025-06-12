@@ -21,4 +21,4 @@ app.listen(SERVER_PORT, () => {
 
 
 
-// coder-hub 这个项目只通过注册接口来演示整个项目的目录结构和架构设计，完整的项目见 coder-hub-full
+// coder-hub-register 这个项目只通过注册接口来演示整个项目的目录结构和架构设计，完整的项目见 coder-hub-full

@@ -11,7 +11,7 @@
 */
 
 // 导入业务层
-const userService = require("../service/user.service");
+const userService = require("../service/register.service");
 // 导入响应成功的状态码和消息
 const responseSuccess = require("../config/response-success.config");
 

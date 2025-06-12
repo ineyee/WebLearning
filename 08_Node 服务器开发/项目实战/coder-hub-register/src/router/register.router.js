@@ -8,9 +8,9 @@
 // 注意：KoaRouter 导出的是一个类而不是一个函数，所以这里我们用大驼峰来命名
 const KoaRouter = require("@koa/router");
 // 导入表现层中间件
-const userController = require("../controller/user.controller");
+const userController = require("../controller/register.controller");
 // 导入中间件为表现层减负
-const { verifyRegisterParams } = require("../middleware/user.middleware");
+const { verifyRegisterParams } = require("../middleware/register.middleware");
 
 // 第二步：创建路由实例
 // @koa/router 导出的是一个类而不是一个函数，所以得用 new 来创建实例
