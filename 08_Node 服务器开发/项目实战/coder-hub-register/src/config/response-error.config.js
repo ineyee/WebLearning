@@ -1,5 +1,5 @@
-// 注册模块错误码（-1001到-1999）
-const registerError = {
+const responseError = {
+  // 注册模块错误码（-1001到-1999）
   REGISTER: {
     EMAIL_IS_REQUIRED: {
       code: -1001,
@@ -29,5 +29,5 @@ const registerError = {
 };
 
 module.exports = {
-  ...registerError,
+  ...responseError,
 };
