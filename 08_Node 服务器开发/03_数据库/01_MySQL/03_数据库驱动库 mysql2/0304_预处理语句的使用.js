@@ -11,6 +11,11 @@ const connectionPool = mysql.createPool({
   password: "Mysqlyiyi0202!",
   database: "test_db",
   connectionLimit: 10, // 最大连接数
+  /*
+    推荐设置当前会话时区为零时区，以便 MySQL 能正确处理 TIMESTAMP 字段
+    因为 TIMESTAMP 字段的默认值是获取服务器所在时区的时间，如服务器 1 部署在东八区，那么用户 1 通过东八区的服务器注册时存储在数据库的 createTime 就是东八区的时间 "2025-06-17 17:59:00"、并且没有携带时区信息，用户 2 通过西八区的服务器注册时存储在数据库的 createTime 就是西八区的时间 "2025-06-17 09:59:00"、并且没有携带时区信息，这样在西八区展示东八区用户的 createTime 就会有问题，因为我们不知道 "2025-06-17 17:59:00" 是东八区的、也没法转换为西八区对应的时间，因此我们统一把 TIMESTAMP 字段都设置成零时区的，各个区在拿到时间后转换成自己时区的时间展示即可
+  */
+  timezone: "+00:00",
 });
 // 我们无法直接监听某一条连接是否成功，因为实际执行 SQL 语句时 mysql2 会自动从连接池里获取一个可用的连接来执行，到底用的是连接池里的哪个连接我们无法控制，所以顶多是验证一下“连接池里的连接是否可用”（同步操作）
 connectionPool.getConnection((err, tempConn) => {
@@ -63,7 +68,9 @@ async function selectSongs() {
     // 这样写的话，connectionPool.promise().query() 函数内部会自动从连接池获取连接，并在查询完成后自动释放连接，因此我们不需要手动获取连接和释放连接
     // 如果我们需要手动获取连接和释放连接，可以使用 connectionPool.promise().getConnection() 函数获取连接，然后在查询完成后调用 connection.release() 释放连接
     // 这里是解构赋值获取到执行结果的第一项，因为 execute 方法返回的是一个数组，第一项是执行结果，第二项是执行结果的元数据
-    const [result] = await connectionPool.promise().execute(selectStatement, [3]);
+    const [result] = await connectionPool
+      .promise()
+      .execute(selectStatement, [3]);
     console.log("查询数据成功：", result);
   } catch (error) {
     console.log("查询数据失败：", error);

@@ -9,7 +9,12 @@ const connection = mysql.createConnection({
   port: 3306,
   user: "root",
   password: "Mysqlyiyi0202!",
-  database: "test_db"
+  database: "test_db",
+  /*
+    推荐设置当前会话时区为零时区，以便 MySQL 能正确处理 TIMESTAMP 字段
+    因为 TIMESTAMP 字段的默认值是获取服务器所在时区的时间，如服务器 1 部署在东八区，那么用户 1 通过东八区的服务器注册时存储在数据库的 createTime 就是东八区的时间 "2025-06-17 17:59:00"、并且没有携带时区信息，用户 2 通过西八区的服务器注册时存储在数据库的 createTime 就是西八区的时间 "2025-06-17 09:59:00"、并且没有携带时区信息，这样在西八区展示东八区用户的 createTime 就会有问题，因为我们不知道 "2025-06-17 17:59:00" 是东八区的、也没法转换为西八区对应的时间，因此我们统一把 TIMESTAMP 字段都设置成零时区的，各个区在拿到时间后转换成自己时区的时间展示即可
+  */
+  timezone: "+00:00",
 });
 // 发起连接并监听连接结果
 connection.connect((err) => {
