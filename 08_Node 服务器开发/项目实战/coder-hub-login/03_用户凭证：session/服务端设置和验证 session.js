@@ -1,5 +1,6 @@
 const Koa = require("koa");
 const KoaRouter = require("@koa/router");
+// 安装并导入 koa-session 库
 const koaSession = require("koa-session");
 
 const app = new Koa();
