@@ -19,6 +19,8 @@ Node 开发时：
 
 5、mysql2（数据库驱动库）：cd 到项目根目录，执行命令：npm install mysql2
 
+6、jsonwebtoken（token 生成和校验库）：cd 到项目根目录，执行命令：npm install jsonwebtoken
+
 ## 第三步：删掉项目里默认的多余文件夹和文件，只保留main.js，保证项目的干净
   * 在项目的根目录先先创建一个 src 文件夹，代表我们编写的源码
   * 在 src 文件夹里先创建一个 main.js 文件，代表我们项目的入口文件
