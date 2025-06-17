@@ -39,7 +39,7 @@ router.get("/info", (ctx, next) => {
 
   ctx.body = {
     code: 0,
-    message: "获取用户信息成功",
+    message: "获取用户信息成功"
   };
 });
 app.use(router.routes());
