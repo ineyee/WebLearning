@@ -29,6 +29,14 @@ const responseError = {
       code: -2006,
       message: "密码错误",
     },
+    TOKEN_IS_REQUIRED: {
+      code: -2007,
+      message: "token 不能为空",
+    },
+    TOKEN_IS_INVALID: {
+      code: -2008,
+      message: "token 无效",
+    },
   },
 };
 
