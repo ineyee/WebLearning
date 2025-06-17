@@ -1,6 +1,6 @@
-// 用户模块错误码（-1001到-1999）
-const userError = {
-  USER: {
+// 注册模块错误码（-1001到-1999）
+const registerError = {
+  REGISTER: {
     EMAIL_IS_REQUIRED: {
       code: -1001,
       message: "邮箱不能为空",
@@ -29,5 +29,5 @@ const userError = {
 };
 
 module.exports = {
-  ...userError,
+  ...registerError,
 };

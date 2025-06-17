@@ -2,8 +2,8 @@
 
 // 导入验证库
 const validator = require("validator");
-// 导入用户模块错误码
-const userError = require("../config/response-error.config").USER;
+// 导入注册模块错误码
+const registerError = require("../config/response-error.config").REGISTER;
 
 // 因为这个方法的定位是个中间件，所以它的参数必须和中间件的参数一样
 //
@@ -28,8 +28,8 @@ const verifyRegisterParams = async (ctx, next) => {
   if (!params.email) {
     // 给客户端返回错误信息
     ctx.body = {
-      code: userError.EMAIL_IS_REQUIRED.code,
-      message: userError.EMAIL_IS_REQUIRED.message,
+      code: registerError.EMAIL_IS_REQUIRED.code,
+      message: registerError.EMAIL_IS_REQUIRED.message,
     };
     // 结束当前中间件的执行
     return;
@@ -37,16 +37,16 @@ const verifyRegisterParams = async (ctx, next) => {
 
   if (!params.username) {
     ctx.body = {
-      code: userError.USERNAME_IS_REQUIRED.code,
-      message: userError.USERNAME_IS_REQUIRED.message,
+      code: registerError.USERNAME_IS_REQUIRED.code,
+      message: registerError.USERNAME_IS_REQUIRED.message,
     };
     return;
   }
 
   if (!params.password) {
     ctx.body = {
-      code: userError.PASSWORD_IS_REQUIRED.code,
-      message: userError.PASSWORD_IS_REQUIRED.message,
+      code: registerError.PASSWORD_IS_REQUIRED.code,
+      message: registerError.PASSWORD_IS_REQUIRED.message,
     };
     return;
   }
@@ -54,8 +54,8 @@ const verifyRegisterParams = async (ctx, next) => {
   // 字段长度校验
   if (params.username.length > 100 || params.password.length > 100) {
     ctx.body = {
-      code: userError.USERNAME_OR_PASSWORD_IS_TOO_LONG.code,
-      message: userError.USERNAME_OR_PASSWORD_IS_TOO_LONG.message,
+      code: registerError.USERNAME_OR_PASSWORD_IS_TOO_LONG.code,
+      message: registerError.USERNAME_OR_PASSWORD_IS_TOO_LONG.message,
     };
     return;
   }
@@ -63,8 +63,8 @@ const verifyRegisterParams = async (ctx, next) => {
   // 字段格式校验
   if (validator.isEmail(params.email) === false) {
     ctx.body = {
-      code: userError.EMAIL_FORMAT_IS_INCORRECT.code,
-      message: userError.EMAIL_FORMAT_IS_INCORRECT.message,
+      code: registerError.EMAIL_FORMAT_IS_INCORRECT.code,
+      message: registerError.EMAIL_FORMAT_IS_INCORRECT.message,
     };
     return;
   }

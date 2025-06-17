@@ -1,5 +1,5 @@
 /*
-  用户模块接口的表现层
+  注册模块接口的表现层
 
   表现层（controller）的职责就是直接与客户端打交道，如接收客户端的请求参数、对客户端的请求参数进行基础有效性校验、调用业务层的 API 拿到客户端直接能用 JSON 或 HTML 等数据、给客户端返回响应。换句话说，表现层要对客户端负责，负责的体现就是返回给客户端直接能用的有效数据或错误信息；表现层要对业务层负责，负责的体现就是传递给业务层的参数必须是有效的；其它的表现层就不用关心了。在表现层进行参数的基础有效性校验是为了在请求进入业务逻辑前就拒绝非法格式，避免无效数据渗透到下层，主要包含：必填字段校验、字段长度校验、字段格式校验等，其它跟业务相关的校验就交给业务层去校验
 
@@ -11,12 +11,12 @@
 */
 
 // 导入业务层
-const userService = require("../service/register.service");
+const registerService = require("../service/register.service");
 // 导入响应成功的状态码和消息
 const responseSuccess = require("../config/response-success.config");
 
 // 第一步：创建 Controller 类
-class UserController {
+class RegisterController {
   // 第二步：创建一个实例方法，来实现某个接口的表现层逻辑
   // 因为这个实例方法的定位是个中间件，所以它的参数必须和中间件的参数一样
   // 废弃方法，请使用 register 方法
@@ -50,7 +50,7 @@ class UserController {
     if (!params.username) {
       ctx.body = {
         code: -1002,
-        message: "用户名不能为空",
+        message: "注册名不能为空",
       };
       return;
     }
@@ -67,7 +67,7 @@ class UserController {
     if (params.username.length > 100 || params.password.length > 100) {
       ctx.body = {
         code: -1004,
-        message: "用户名或密码长度不能大于 100 个字符",
+        message: "注册名或密码长度不能大于 100 个字符",
       };
       return;
     }
@@ -85,7 +85,7 @@ class UserController {
     // 3.1 存储数据库操作失败，返回错误信息
     // 3.2 存储数据库操作成功，执行后续逻辑
     try {
-      await userService.register(params);
+      await registerService.register(params);
       // 4、将注册成功的结果返回给客户端
       ctx.body = {
         code: 0,
@@ -114,7 +114,7 @@ class UserController {
     // 2.1 存储数据库操作失败，返回错误信息
     // 2.2 存储数据库操作成功，执行后续逻辑
     try {
-      await userService.register(params);
+      await registerService.register(params);
       // 3、将注册成功的结果返回给客户端
       ctx.body = {
         code: responseSuccess.code,
@@ -131,4 +131,4 @@ class UserController {
 
 // 第三步：创建并导出 Controller 实例
 // 不用大括号的导出类似于 ESModule 里的默认导出，那在导入时也得用类似于 ESModule 里的默认导入——不能使用大括号
-module.exports = new UserController();
+module.exports = new RegisterController();

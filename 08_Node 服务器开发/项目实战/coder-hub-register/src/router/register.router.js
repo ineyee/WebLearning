@@ -1,5 +1,5 @@
 /*
-  用户模块接口的路由配置
+  注册模块接口的路由配置
 
   路由配置（router）里只负责维护接口的请求路径和表现层中间件的映射关系
 */
@@ -8,7 +8,7 @@
 // 注意：KoaRouter 导出的是一个类而不是一个函数，所以这里我们用大驼峰来命名
 const KoaRouter = require("@koa/router");
 // 导入表现层中间件
-const userController = require("../controller/register.controller");
+const registerController = require("../controller/register.controller");
 // 导入中间件为表现层减负
 const { verifyRegisterParams } = require("../middleware/register.middleware");
 
@@ -48,8 +48,8 @@ const router = new KoaRouter({
 // });
 //
 // 写法二：我们把拆分后的逻辑抽取到专门的文件里去实现，【路由文件里只负责维护接口的请求路径和表现层中间件的映射关系】
-// “/register”就是请求接口的路径，“userController.register”就是请求接口的表现层中间件
-router.post("/register", verifyRegisterParams, userController.register);
+// “/register”就是请求接口的路径，“registerController.register”就是请求接口的表现层中间件
+router.post("/register", verifyRegisterParams, registerController.register);
 
 // 第四步：导出路由实例
 // 不用大括号的导出类似于 ESModule 里的默认导出，那在导入时也得用类似于 ESModule 里的默认导入——不能使用大括号
