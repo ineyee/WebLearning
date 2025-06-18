@@ -9,6 +9,8 @@ const router = new KoaRouter({
 // 发布评论
 // 得验证登录身份
 router.post("/createComment", verifyToken, commentController.createComment);
+// 回复评论
+router.post("/replyComment", verifyToken, commentController.replyComment);
 
 module.exports = router;
 
@@ -26,10 +28,10 @@ CREATE TABLE IF NOT EXISTS t_comment (
 	-- 必须与 t_user.id 类型一致，代表是谁发表的评论
   userId BIGINT NOT NULL,
 	
-	-- 必须与 t_moment.id 类型一致，代表是针对哪条动态发表的评论，当为空时代表当前评论是回复评论的评论
-	momentId BIGINT,
+	-- 必须与 t_moment.id 类型一致，代表是针对哪条动态发表的评论
+	momentId BIGINT NOT NULL,
 	
-	-- 必须与 t_comment.id 类型一致，代表是针对哪条评论发表的评论，当为空时代表当前评论是回复动态的评论（可以指向当前表自己）
+	-- 必须与 t_comment.id 类型一致，代表是针对某条动态下的评论所回复的评论，为空时就代表某条动态下的评论没有其它回复（外键可以指向当前表自己）
 	commentId BIGINT,
 
   -- 该字段我们定义为必传，即 TIMESTAMP 类型而非 TIMESTAMP? 类型，因此我们需要提供默认值

@@ -4,10 +4,32 @@ const commentService = require("../../service/comment/comment.service");
 class CommentController {
   async createComment(ctx, next) {
     const { id } = ctx.tokenInfo;
+    const { content, momentId } = ctx.request.body;
+
+    try {
+      const result = await commentService.createComment(id, content, momentId);
+
+      ctx.body = {
+        code: responseSuccess.code,
+        message: responseSuccess.message,
+        data: {
+          id: result.insertId,
+        },
+      };
+    } catch (error) {
+      ctx.body = {
+        code: error.code,
+        message: error.message,
+      };
+    }
+  }
+
+  async replyComment(ctx, next) {
+    const { id } = ctx.tokenInfo;
     const { content, momentId, commentId } = ctx.request.body;
 
     try {
-      const result = await commentService.createComment(
+      const result = await commentService.replyComment(
         id,
         content,
         momentId,
