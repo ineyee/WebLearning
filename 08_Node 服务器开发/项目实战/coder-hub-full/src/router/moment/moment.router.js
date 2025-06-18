@@ -1,19 +1,19 @@
-/*
-  moment 模块接口的路由配置
-*/
 const KoaRouter = require("@koa/router");
 const { verifyToken } = require("../../middleware/user/user.middleware");
-const { verifyMomentParams } = require("../../middleware/moment/moment.middleware");
+const {
+  verifyMomentParams,
+} = require("../../middleware/moment/moment.middleware");
+const momentController = require("../../controller/moment/moment.controller");
 
 const router = new KoaRouter({
   prefix: "/moment",
 });
 
-router.post("/createMoment", verifyToken, verifyMomentParams, (ctx, next) => {
-  ctx.body = {
-    code: 0,
-    message: "创建动态成功",
-  };
-});
+router.post(
+  "/createMoment",
+  verifyToken,
+  verifyMomentParams,
+  momentController.createMoment
+);
 
 module.exports = router;
