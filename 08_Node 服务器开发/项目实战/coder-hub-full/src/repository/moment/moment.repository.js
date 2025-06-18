@@ -95,6 +95,29 @@ class MomentRepository {
 
     return result;
   }
+
+  async deleteMoment(momentId) {
+    const statement = `
+      DELETE FROM t_moment WHERE id = ?;
+    `;
+
+    const [result] = await connectionPool.execute(statement, [momentId]);
+
+    return result;
+  }
+
+  async batchDeleteMoment(momentIdList) {
+    const momentIds = momentIdList
+      .map((momentId) => parseInt(momentId))
+      .join(",");
+    const statement = `
+      DELETE FROM t_moment WHERE id IN (${momentIds});
+    `;
+
+    const [result] = await connectionPool.execute(statement);
+
+    return result;
+  }
 }
 
 module.exports = new MomentRepository();

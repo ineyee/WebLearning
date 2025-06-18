@@ -80,6 +80,42 @@ class MomentController {
       };
     }
   }
+
+  async deleteMoment(ctx, next) {
+    const { momentId } = ctx.request.body;
+
+    try {
+      await momentService.deleteMoment(momentId);
+      ctx.body = {
+        code: responseSuccess.code,
+        message: responseSuccess.message,
+        data: null,
+      };
+    } catch (error) {
+      ctx.body = {
+        code: error.code,
+        message: error.message,
+      };
+    }
+  }
+
+  async batchDeleteMoment(ctx, next) {
+    const { momentIdList } = ctx.request.body;
+
+    try {
+      await momentService.batchDeleteMoment(momentIdList);
+      ctx.body = {
+        code: responseSuccess.code,
+        message: responseSuccess.message,
+        data: null,
+      };
+    } catch (error) {
+      ctx.body = {
+        code: error.code,
+        message: error.message,
+      };
+    }
+  }
 }
 
 module.exports = new MomentController();

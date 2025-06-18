@@ -28,6 +28,16 @@ class MomentService {
     const result = await momentRepository.getMomentExistState(momentId, userId);
     return result.length > 0;
   }
+
+  async deleteMoment(momentId) {
+    const result = await momentRepository.deleteMoment(momentId);
+    return result;
+  }
+
+  async batchDeleteMoment(momentIdList) {
+    const result = await momentRepository.batchDeleteMoment(momentIdList);
+    return result;
+  }
 }
 
 module.exports = new MomentService();

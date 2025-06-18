@@ -41,7 +41,34 @@ const verifyMomentPermission = async (ctx, next) => {
   }
 };
 
+const verifyMomentsPermission = async (ctx, next) => {
+  const { momentIdList } = ctx.request.body;
+  const { id } = ctx.tokenInfo;
+
+  try {
+    for (let index = 0; index < momentIdList.length; index++) {
+      const momentId = momentIdList[index];
+      const result = await momentService.getMomentExistState(momentId, id);
+      if (!result) {
+        ctx.body = {
+          code: responseErrorCommon.NO_OPERATION_PERMISSION.code,
+          message: responseErrorCommon.NO_OPERATION_PERMISSION.message,
+        };
+        return;
+      }
+    }
+
+    await next();
+  } catch (error) {
+    ctx.body = {
+      code: error.code,
+      message: error.message,
+    };
+  }
+};
+
 module.exports = {
   verifyMomentParams,
   verifyMomentPermission,
+  verifyMomentsPermission,
 };

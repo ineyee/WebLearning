@@ -3,6 +3,7 @@ const { verifyToken } = require("../../middleware/user/user.middleware");
 const {
   verifyMomentParams,
   verifyMomentPermission,
+  verifyMomentsPermission,
 } = require("../../middleware/moment/moment.middleware");
 const momentController = require("../../controller/moment/moment.controller");
 
@@ -29,6 +30,22 @@ router.get("/getMomentList", momentController.getMomentList);
 router.get("/getMomentDetail", momentController.getMomentDetail);
 // 这个是 http://xxx/getMomentDetail/1 这样请求
 router.get("/getMomentDetail/:momentId", momentController.getMomentDetail);
+
+// 删除动态
+// 得验证登录身份 + 只能删除自己的状态（即管理权限校验，扩展开来思考的话就是一个系统里管理员身份、成员身份那种管理权限校验）
+// 其它参数严谨来说验证一下最好，但是不想验证的话也无伤大雅，只去做那些关键的验证就行了，其它的靠接口文档约束也行，因为客户端也会做好很多校验工作
+router.post(
+  "/deleteMoment",
+  verifyToken,
+  verifyMomentPermission,
+  momentController.deleteMoment
+);
+router.post(
+  "/batchDeleteMoment",
+  verifyToken,
+  verifyMomentsPermission,
+  momentController.batchDeleteMoment
+);
 
 // 修改动态
 // 得验证登录身份 + 只能修改自己的状态（即管理权限校验，扩展开来思考的话就是一个系统里管理员身份、成员身份那种管理权限校验）
