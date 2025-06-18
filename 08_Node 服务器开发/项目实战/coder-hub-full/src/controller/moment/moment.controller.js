@@ -62,6 +62,24 @@ class MomentController {
       };
     }
   }
+
+  async updateMoment(ctx, next) {
+    const { momentId, content } = ctx.request.body;
+
+    try {
+      await momentService.updateMoment(momentId, content);
+      ctx.body = {
+        code: responseSuccess.code,
+        message: responseSuccess.message,
+        data: null,
+      };
+    } catch (error) {
+      ctx.body = {
+        code: error.code,
+        message: error.message,
+      };
+    }
+  }
 }
 
 module.exports = new MomentController();

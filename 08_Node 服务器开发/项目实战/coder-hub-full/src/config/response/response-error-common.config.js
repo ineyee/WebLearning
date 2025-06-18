@@ -29,5 +29,9 @@ module.exports = {
       code: -7,
       message: "token 无效",
     },
+    NO_OPERATION_PERMISSION: {
+      code: -8,
+      message: "没有操作权限",
+    },
   },
 };

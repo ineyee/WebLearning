@@ -66,6 +66,35 @@ class MomentRepository {
 
     return result;
   }
+
+  async updateMoment(momentId, content) {
+    const statement = `
+      UPDATE t_moment SET content = ? WHERE id = ?;
+    `;
+
+    const [result] = await connectionPool.execute(statement, [
+      content,
+      momentId,
+    ]);
+
+    return result;
+  }
+
+  async getMomentExistState(momentId, userId) {
+    const statement = `
+      SELECT
+      *
+      FROM t_moment
+      WHERE id = ? AND userId = ?;
+    `;
+
+    const [result] = await connectionPool.execute(statement, [
+      momentId,
+      userId,
+    ]);
+
+    return result;
+  }
 }
 
 module.exports = new MomentRepository();

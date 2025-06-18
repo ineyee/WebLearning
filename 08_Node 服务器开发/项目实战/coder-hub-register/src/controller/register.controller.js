@@ -89,6 +89,7 @@ class RegisterController {
       ctx.body = {
         code: 0,
         message: "注册成功",
+        data: null,
       };
     } catch (error) {
       ctx.body = {

@@ -18,6 +18,16 @@ class MomentService {
     }
     return result[0];
   }
+
+  async updateMoment(momentId, content) {
+    const result = await momentRepository.updateMoment(momentId, content);
+    return result;
+  }
+
+  async getMomentExistState(momentId, userId) {
+    const result = await momentRepository.getMomentExistState(momentId, userId);
+    return result.length > 0;
+  }
 }
 
 module.exports = new MomentService();

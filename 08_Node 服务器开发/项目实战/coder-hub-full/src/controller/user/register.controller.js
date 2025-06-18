@@ -38,6 +38,7 @@ class RegisterController {
       ctx.body = {
         code: responseSuccess.code,
         message: responseSuccess.message,
+        data: null,
       };
     } catch (error) {
       ctx.body = {
