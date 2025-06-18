@@ -41,6 +41,27 @@ class MomentController {
       };
     }
   }
+
+  async getMomentDetail(ctx, next) {
+    var { momentId } = ctx.query;
+    if (!momentId) {
+      momentId = ctx.params.momentId;
+    }
+
+    try {
+      const result = await momentService.getMomentDetail(momentId);
+      ctx.body = {
+        code: responseSuccess.code,
+        message: responseSuccess.message,
+        data: result,
+      };
+    } catch (error) {
+      ctx.body = {
+        code: error.code,
+        message: error.message,
+      };
+    }
+  }
 }
 
 module.exports = new MomentController();

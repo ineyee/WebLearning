@@ -10,6 +10,14 @@ class MomentService {
     const result = await momentRepository.getMomentList(pageSize, pageIndex);
     return result;
   }
+
+  async getMomentDetail(momentId) {
+    const result = await momentRepository.getMomentDetail(momentId);
+    if (result.length <= 0) {
+      return {};
+    }
+    return result[0];
+  }
 }
 
 module.exports = new MomentService();
