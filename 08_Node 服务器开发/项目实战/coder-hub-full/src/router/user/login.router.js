@@ -10,10 +10,8 @@ const KoaRouter = require("@koa/router");
 // 导入表现层中间件
 const loginController = require("../../controller/user/login.controller");
 // 导入中间件为表现层减负
-const {
-  verifyLoginParams,
-  verifyToken,
-} = require("../../middleware/user/login.middleware");
+const { verifyToken } = require("../../middleware/user/user.middleware");
+const { verifyLoginParams } = require("../../middleware/user/login.middleware");
 
 // 第二步：创建路由实例
 // @koa/router 导出的是一个类而不是一个函数，所以得用 new 来创建实例

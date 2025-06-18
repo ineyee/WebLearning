@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const validator = require("validator");
 // 导入登录模块错误码
 const loginError = require("../config/response-error.config").LOGIN;
-// 导入私钥
+// 导入公钥
 const { PUBLIC_KEY } = require("../config/secret.config");
 
 // 因为这个方法的定位是个中间件，所以它的参数必须和中间件的参数一样

@@ -1,5 +1,5 @@
 // 通用错误码（-1到-999）
-const commonResponseError = {
+module.exports = {
   COMMON: {
     EMAIL_IS_REQUIRED: {
       code: -1,
@@ -21,9 +21,13 @@ const commonResponseError = {
       code: -5,
       message: "邮箱格式不正确",
     },
+    TOKEN_IS_REQUIRED: {
+      code: -6,
+      message: "token 不能为空",
+    },
+    TOKEN_IS_INVALID: {
+      code: -7,
+      message: "token 无效",
+    },
   },
-};
-
-module.exports = {
-  commonResponseError,
 };

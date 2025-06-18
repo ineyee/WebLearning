@@ -3,7 +3,8 @@
 // 导入验证库
 const validator = require("validator");
 // 导入错误码模块
-const commonError = require("../../config/response/response-error.config").COMMON;
+const responseErrorCommon =
+  require("../../config/response/response-error.config").COMMON;
 
 // 因为这个方法的定位是个中间件，所以它的参数必须和中间件的参数一样
 //
@@ -28,8 +29,8 @@ const verifyRegisterParams = async (ctx, next) => {
   if (!params.email) {
     // 给客户端返回错误信息
     ctx.body = {
-      code: commonError.EMAIL_IS_REQUIRED.code,
-      message: commonError.EMAIL_IS_REQUIRED.message,
+      code: responseErrorCommon.EMAIL_IS_REQUIRED.code,
+      message: responseErrorCommon.EMAIL_IS_REQUIRED.message,
     };
     // 结束当前中间件的执行
     return;
@@ -37,16 +38,16 @@ const verifyRegisterParams = async (ctx, next) => {
 
   if (!params.username) {
     ctx.body = {
-      code: commonError.USERNAME_IS_REQUIRED.code,
-      message: commonError.USERNAME_IS_REQUIRED.message,
+      code: responseErrorCommon.USERNAME_IS_REQUIRED.code,
+      message: responseErrorCommon.USERNAME_IS_REQUIRED.message,
     };
     return;
   }
 
   if (!params.password) {
     ctx.body = {
-      code: commonError.PASSWORD_IS_REQUIRED.code,
-      message: commonError.PASSWORD_IS_REQUIRED.message,
+      code: responseErrorCommon.PASSWORD_IS_REQUIRED.code,
+      message: responseErrorCommon.PASSWORD_IS_REQUIRED.message,
     };
     return;
   }
@@ -54,8 +55,8 @@ const verifyRegisterParams = async (ctx, next) => {
   // 字段长度校验
   if (params.username.length > 100 || params.password.length > 100) {
     ctx.body = {
-      code: commonError.USERNAME_OR_PASSWORD_IS_TOO_LONG.code,
-      message: commonError.USERNAME_OR_PASSWORD_IS_TOO_LONG.message,
+      code: responseErrorCommon.USERNAME_OR_PASSWORD_IS_TOO_LONG.code,
+      message: responseErrorCommon.USERNAME_OR_PASSWORD_IS_TOO_LONG.message,
     };
     return;
   }
@@ -63,8 +64,8 @@ const verifyRegisterParams = async (ctx, next) => {
   // 字段格式校验
   if (validator.isEmail(params.email) === false) {
     ctx.body = {
-      code: commonError.EMAIL_FORMAT_IS_INCORRECT.code,
-      message: commonError.EMAIL_FORMAT_IS_INCORRECT.message,
+      code: responseErrorCommon.EMAIL_FORMAT_IS_INCORRECT.code,
+      message: responseErrorCommon.EMAIL_FORMAT_IS_INCORRECT.message,
     };
     return;
   }

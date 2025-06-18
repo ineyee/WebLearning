@@ -1,13 +1,10 @@
 // 中间件里一般是直接定义函数，不再定义类了
 
-const jwt = require("jsonwebtoken");
 // 导入验证库
 const validator = require("validator");
 // 导入错误码模块
-const commonError = require("../../config/response/response-error.config").COMMON;
-const loginError = require("../../config/response/response-error.config").LOGIN;
-// 导入私钥
-const { PUBLIC_KEY } = require("../../config/secret-key/secret-key.config");
+const responseErrorCommon =
+  require("../../config/response/response-error.config").COMMON;
 
 // 因为这个方法的定位是个中间件，所以它的参数必须和中间件的参数一样
 //
@@ -32,8 +29,8 @@ const verifyLoginParams = async (ctx, next) => {
   if (!params.email) {
     // 给客户端返回错误信息
     ctx.body = {
-      code: commonError.EMAIL_IS_REQUIRED.code,
-      message: commonError.EMAIL_IS_REQUIRED.message,
+      code: responseErrorCommon.EMAIL_IS_REQUIRED.code,
+      message: responseErrorCommon.EMAIL_IS_REQUIRED.message,
     };
     // 结束当前中间件的执行
     return;
@@ -41,16 +38,16 @@ const verifyLoginParams = async (ctx, next) => {
 
   if (!params.username) {
     ctx.body = {
-      code: commonError.USERNAME_IS_REQUIRED.code,
-      message: commonError.USERNAME_IS_REQUIRED.message,
+      code: responseErrorCommon.USERNAME_IS_REQUIRED.code,
+      message: responseErrorCommon.USERNAME_IS_REQUIRED.message,
     };
     return;
   }
 
   if (!params.password) {
     ctx.body = {
-      code: commonError.PASSWORD_IS_REQUIRED.code,
-      message: commonError.PASSWORD_IS_REQUIRED.message,
+      code: responseErrorCommon.PASSWORD_IS_REQUIRED.code,
+      message: responseErrorCommon.PASSWORD_IS_REQUIRED.message,
     };
     return;
   }
@@ -58,8 +55,8 @@ const verifyLoginParams = async (ctx, next) => {
   // 字段长度校验
   if (params.username.length > 100 || params.password.length > 100) {
     ctx.body = {
-      code: commonError.USERNAME_OR_PASSWORD_IS_TOO_LONG.code,
-      message: commonError.USERNAME_OR_PASSWORD_IS_TOO_LONG.message,
+      code: responseErrorCommon.USERNAME_OR_PASSWORD_IS_TOO_LONG.code,
+      message: responseErrorCommon.USERNAME_OR_PASSWORD_IS_TOO_LONG.message,
     };
     return;
   }
@@ -67,8 +64,8 @@ const verifyLoginParams = async (ctx, next) => {
   // 字段格式校验
   if (validator.isEmail(params.email) === false) {
     ctx.body = {
-      code: commonError.EMAIL_FORMAT_IS_INCORRECT.code,
-      message: commonError.EMAIL_FORMAT_IS_INCORRECT.message,
+      code: responseErrorCommon.EMAIL_FORMAT_IS_INCORRECT.code,
+      message: responseErrorCommon.EMAIL_FORMAT_IS_INCORRECT.message,
     };
     return;
   }
@@ -77,46 +74,6 @@ const verifyLoginParams = async (ctx, next) => {
   await next();
 };
 
-// 因为这个方法的定位是个中间件，所以它的参数必须和中间件的参数一样
-//
-// 上一个中间件里如果是【返回响应、结束本次请求】，下一个中间件不会被执行；上一个中间件里如果【调用 next 函数执行下一个中间件】，下一个中间件才会被执行
-const verifyToken = async (ctx, next) => {
-  // 获取 token
-  const token = ctx.request.header["token"];
-
-  // token 是否为空
-  // !token 可以校验：
-  // * 是否传了 token 字段
-  // * token 字段是不是 undefined
-  // * token 字段是不是 null
-  // * token 字段是不是 ""
-  if (!token) {
-    ctx.body = {
-      code: loginError.TOKEN_IS_REQUIRED.code,
-      message: loginError.TOKEN_IS_REQUIRED.message,
-    };
-    return;
-  }
-
-  // 检验 token
-  try {
-    const tokenInfo = jwt.verify(token, PUBLIC_KEY, {
-      algorithms: ["RS256"],
-    });
-    // 把 token 里的用户信息赋值给 ctx.tokenInfo 属性，以备后续其它地方读取使用
-    ctx.tokenInfo = tokenInfo;
-
-    // 所有检验通过，则调用 next() 继续执行下一个中间件
-    await next();
-  } catch (error) {
-    ctx.body = {
-      code: loginError.TOKEN_IS_INVALID.code,
-      message: loginError.TOKEN_IS_INVALID.message,
-    };
-  }
-};
-
 module.exports = {
   verifyLoginParams,
-  verifyToken,
 };
