@@ -148,8 +148,7 @@ SELECT
 -- `t_song`是从表
 FROM `t_song`
 -- `t_singer`是主表
-LEFT JOIN `t_singer`
-ON `t_song`.`singerId` = `t_singer`.`id`;
+LEFT JOIN `t_singer` ON `t_song`.`singerId` = `t_singer`.`id`;
 ```
 
 查询结果（`默认的查询语句会把两张表的数据组合起来，平铺成一张表返回给我们`）：
@@ -303,8 +302,7 @@ SELECT
 -- `t_song`是从表
 FROM `t_song`
 -- `t_singer`是主表
-LEFT JOIN `t_singer`
-ON `t_song`.`singerId` = `t_singer`.`id`;
+LEFT JOIN `t_singer` ON `t_song`.`singerId` = `t_singer`.`id`;
 ```
 
 ## 三、多对多表结构的查询
@@ -416,11 +414,9 @@ SELECT
 -- `t_song`是主表2
 FROM `t_song`
 -- 中间表
-LEFT JOIN `t_singer_song`
-ON `t_singer_song`.`songId` = `t_song`.`id`
+LEFT JOIN `t_singer_song` ON `t_singer_song`.`songId` = `t_song`.`id`
 -- `t_singer`是主表1
-LEFT JOIN `t_singer`
-ON `t_singer_song`.`singerId` = `t_singer`.`id`;
+LEFT JOIN `t_singer` ON `t_singer_song`.`singerId` = `t_singer`.`id`;
 ```
 
 查询结果（`默认的查询语句会把三张表的数据组合起来，平铺成一张表返回给我们`）：
@@ -600,28 +596,26 @@ SELECT
 -- t_singer 的字段对应 LEFT JOIN `t_singer`，代表是从 t_singer 里的查询
 -- 这里就是在把主表1——歌手表——对象合并成一个数组，数组里又放的是一个一个的主表1对象
 -- 格式：JSON_ARRAYAGG(主表1对象) AS '数组的 key'
-JSON_ARRAYAGG(
-  -- 这里就是在把主表1里的字段搞成一个对象，而不再是平铺
-  -- 格式：JSON_OBJECT(
-  --        '对象的自定义属性名1', 表里对应字段1的值,
-  --        '对象的自定义属性名2', 表里对应字段2的值,
-  --        '对象的自定义属性名3', 表里对应字段3的值
-  --        ...
-  --      ) 注意数组里放对象时就不再需要 AS '对象的 key' 了，直接放对象即可
-  JSON_OBJECT(
-    'id', `t_singer`.`id`,
-    'name', `t_singer`.`name`,
-    'sex', `t_singer`.`sex`
-  )
-) AS 'singers'
+  JSON_ARRAYAGG(
+    -- 这里就是在把主表1里的字段搞成一个对象，而不再是平铺
+    -- 格式：JSON_OBJECT(
+    --        '对象的自定义属性名1', 表里对应字段1的值,
+    --        '对象的自定义属性名2', 表里对应字段2的值,
+    --        '对象的自定义属性名3', 表里对应字段3的值
+    --        ...
+    --      ) 注意数组里放对象时就不再需要 AS '对象的 key' 了，直接放对象即可
+    JSON_OBJECT(
+      'id', `t_singer`.`id`,
+      'name', `t_singer`.`name`,
+      'sex', `t_singer`.`sex`
+    )
+  ) AS 'singers'
 -- `t_song`是主表2
 FROM `t_song`
 -- 中间表
-LEFT JOIN `t_singer_song`
-ON `t_singer_song`.`songId` = `t_song`.`id`
+LEFT JOIN `t_singer_song` ON `t_singer_song`.`songId` = `t_song`.`id`
 -- `t_singer`是主表1
-LEFT JOIN `t_singer`
-ON `t_singer_song`.`singerId` = `t_singer`.`id`
+LEFT JOIN `t_singer` ON `t_singer_song`.`singerId` = `t_singer`.`id`
 -- 通过主表2——歌曲表——的主键进行分组（即主要查询、外层对象的主键）
 GROUP BY `t_song`.`id`;
 ```
