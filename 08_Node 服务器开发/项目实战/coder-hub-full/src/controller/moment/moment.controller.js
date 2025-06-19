@@ -29,6 +29,7 @@ class MomentController {
 
     try {
       const result = await momentService.getMomentList(pageSize, pageIndex);
+
       ctx.body = {
         code: responseSuccess.code,
         message: responseSuccess.message,
@@ -50,6 +51,7 @@ class MomentController {
 
     try {
       const result = await momentService.getMomentDetail(momentId);
+
       ctx.body = {
         code: responseSuccess.code,
         message: responseSuccess.message,
@@ -68,6 +70,7 @@ class MomentController {
 
     try {
       await momentService.updateMoment(momentId, content);
+
       ctx.body = {
         code: responseSuccess.code,
         message: responseSuccess.message,
@@ -86,6 +89,7 @@ class MomentController {
 
     try {
       await momentService.deleteMoment(momentId);
+
       ctx.body = {
         code: responseSuccess.code,
         message: responseSuccess.message,
@@ -104,6 +108,26 @@ class MomentController {
 
     try {
       await momentService.batchDeleteMoment(momentIdList);
+
+      ctx.body = {
+        code: responseSuccess.code,
+        message: responseSuccess.message,
+        data: null,
+      };
+    } catch (error) {
+      ctx.body = {
+        code: error.code,
+        message: error.message,
+      };
+    }
+  }
+
+  async addLabel(ctx, next) {
+    const { momentId, labelIdList } = ctx.request.body;
+
+    try {
+      await momentService.addLabel(momentId, labelIdList);
+
       ctx.body = {
         code: responseSuccess.code,
         message: responseSuccess.message,

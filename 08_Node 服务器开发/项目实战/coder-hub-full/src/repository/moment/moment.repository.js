@@ -212,6 +212,29 @@ class MomentRepository {
 
     return result;
   }
+
+  // 这里用一下事务，确保所有标签都添加成功，我们才给客户端返回成功，写入期间任意一个标签添加失败，我们都视作失败
+  async addLabel(momentId, labelIdList) {
+    const connection = await connectionPool.getConnection();
+    try {
+      await connection.beginTransaction();
+
+      const statement = `
+        INSERT INTO t_moment_label (momentId, labelId) VALUES (?, ?);
+      `;
+      for (const labelId of labelIdList) {
+        await connection.execute(statement, [momentId, labelId]);
+      }
+
+      await connection.commit();
+      return true;
+    } catch (error) {
+      await connection.rollback();
+      throw error;
+    } finally {
+      connection.release();
+    }
+  }
 }
 
 module.exports = new MomentRepository();

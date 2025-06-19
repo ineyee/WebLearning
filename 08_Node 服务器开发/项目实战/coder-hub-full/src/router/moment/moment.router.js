@@ -57,6 +57,14 @@ router.post(
   momentController.updateMoment
 );
 
+// 给动态添加标签
+router.post(
+  "/addLabel",
+  verifyToken,
+  verifyMomentPermission,
+  momentController.addLabel
+);
+
 module.exports = router;
 
 /*

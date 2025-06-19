@@ -38,6 +38,11 @@ class MomentService {
     const result = await momentRepository.batchDeleteMoment(momentIdList);
     return result;
   }
+
+  async addLabel(momentId, labelIdList) {
+    const result = await momentRepository.addLabel(momentId, labelIdList);
+    return result;
+  }
 }
 
 module.exports = new MomentService();
