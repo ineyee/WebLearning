@@ -65,7 +65,7 @@ class MomentRepository {
     //   LIMIT ? OFFSET ?;
     // `;
 
-    // 第二版查询语句是：查询动态的时候，把动态所属的用户也给查询出来，还要把动态表的从表————评论表里的数据给查出来，而且还要把每条动态所有的标签给查询出来
+    // 第三版查询语句是：查询动态的时候，把动态所属的用户也给查询出来，还要把动态表的从表————评论表里的数据给查出来，而且还要把每条动态所有的标签给查询出来
     // 这里用到了 SQL 语句嵌套查询，是允许在 SELECT 语句里嵌套 SELECT 语句的，实现方式也很简单
     //    * 保证每层 SELECT 语句的结构都是基本结构：SELECT + FROM（单表查询）、SELECT + FROM + JOIN（一对多查询）、SELECT + FROM + JOIN + JOIN（多对多查询），千万不要超出这个基本结构，否则查询结果很有可能出错
     //    * 先独立的写好外层 SELECT 语句，再独立的写好内层 SELECT 语句，然后把内层 SELECT 语句复制一份放到外层 SELECT 语句里面用括号括起来就行了
@@ -79,7 +79,8 @@ class MomentRepository {
         JSON_OBJECT(
           'id', t_user.id,
           'username', t_user.username,
-          'email', t_user.email
+          'email', t_user.email,
+          'avatarUrl', t_user.avatarUrl
         ) AS 'user',
         (
           SELECT
@@ -227,7 +228,8 @@ class MomentRepository {
         JSON_OBJECT(
           'id', t_user.id,
           'username', t_user.username,
-          'email', t_user.email
+          'email', t_user.email,
+          'avatarUrl', t_user.avatarUrl
         ) AS 'user',
         (
           SELECT
@@ -239,7 +241,8 @@ class MomentRepository {
                   'user', JSON_OBJECT(
                       'id', t_user.id,
                       'username', t_user.username,
-                      'email', t_user.email
+                      'email', t_user.email,
+                      'avatarUrl', t_user.avatarUrl
                   ),
                   'content', t_comment.content,
                   'createTime', t_comment.createTime,

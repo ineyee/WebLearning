@@ -32,6 +32,24 @@ class UserRepository {
     // 返回执行结果
     return result;
   }
+
+  async updateAvatarUrl(userId, avatarUrl) {
+    const statement = `
+      UPDATE
+      t_user
+      SET
+      avatarUrl = ?
+      WHERE
+      id = ?;
+    `;
+
+    const [result] = await connectionPool.execute(statement, [
+      avatarUrl,
+      userId,
+    ]);
+
+    return result;
+  }
 }
 
 // 第三步：创建并导出 Repository 实例
