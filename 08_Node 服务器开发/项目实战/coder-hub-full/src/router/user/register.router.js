@@ -33,7 +33,10 @@ router.post("/register", verifyRegisterParams, registerController.register);
 module.exports = router;
 
 /*
-用户表
+用户表：
+* 一个用户可以发表多个动态、一个动态只能属于一个用户，所以用户表和动态表是一对多的关系，用户表是一、主表，动态表是多、从表
+* 一个用户可以发表多个评论、一个评论只能属于一个用户，所以用户表和评论表是一对多的关系，用户表是一、主表，评论表是多、从表
+
 ```SQL
 CREATE TABLE IF NOT EXISTS `t_user` (
   -- 主键、自增

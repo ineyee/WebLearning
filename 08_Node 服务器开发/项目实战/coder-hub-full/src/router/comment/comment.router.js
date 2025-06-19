@@ -16,6 +16,7 @@ module.exports = router;
 
 /*
 评论表
+* 一条评论下可以有多条回复型评论、一条回复型评论只能属于一条评论，所以评论表和评论表本身是一对多的关系，评论表是一、主表，评论表是多、从表
 
 ```SQL
 CREATE TABLE IF NOT EXISTS t_comment (

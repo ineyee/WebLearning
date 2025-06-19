@@ -60,7 +60,8 @@ router.post(
 module.exports = router;
 
 /*
-动态表
+动态表：
+* 一条动态下可以有多条评论、一条评论只能属于一条动态，所以动态表和评论表是一对多的关系，动态表是一、主表，评论表是多、从表
 
 ```SQL 
 CREATE TABLE IF NOT EXISTS `t_moment` (
