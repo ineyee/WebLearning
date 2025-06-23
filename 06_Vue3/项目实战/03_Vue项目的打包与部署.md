@@ -111,6 +111,8 @@ server {
 
 #### 3、把我们的项目部署到服务器
 
+> `无论手动部署还是自动部署，建议第一次部署时采用手动部署，因为手动部署的第一次部署必然是手动部署，而自动部署的第一次采用手动部署也可以避免后续自动部署时jenkins报各种文件夹和文件无法创建的问题`
+
 ###### 3.1 手动部署
 * VSCode里安装”Remote -SSH“插件（也可以直接在阿里云的那个连接远程里做，那个里面也能打开文件夹）
 * 左侧侧边栏选中该插件
@@ -249,18 +251,19 @@ systemctl restart jenkins
 
 打包脚本
 ```shell
-pwd # 查看当前所在目录，确保打包的项目没错
+pwd # 检查当前所在目录，应该都是在jenkins目录下
 
-node -v # 查看一下服务器node版本，确认打包环境
-npm -v # 查看一下服务器npm版本，确认打包环境
+node -v # 检查打包环境，查看一下服务器node版本
+npm -v # 检查打包环境，查看一下服务器npm版本
 
 npm install # 安装依赖
 npm run build # 打包
-
 echo '🚀打包成功🚀'
 
 ls # 查看当前目录有没有多出来打包产物的目录
 
 rm -rf /root/$ProjectName/* # 移除上一个版本 /root/fun-trip/ 文件夹里所有的内容
-cp -rf ./dist/* /root/$ProjectName/ # 把最新打包的 dist 文件夹里的内容移动到 /root/fun-trip/ 文件夹
+cp -rf ./dist/* /root/$ProjectName/ # 把jenkins目录下最新打包的 dist 文件夹里的内容移动到 /root/fun-trip/ 文件夹
+
+echo '🚀 部署完成 🚀'
 ```
