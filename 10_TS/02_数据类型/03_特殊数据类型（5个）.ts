@@ -26,4 +26,32 @@ console.log(v2); // undefined
 let v3: null = null;
 console.log(v3); // null
 
+/*
+  三、any：任意类型
+  有些场景某些数据的类型我们无法确定时就可以用 any，比如 Record<string, any>，能确定的情况下尽量用确定的数据类型而不要用 any
+*/
+let map: Record<string, any> = {
+  name: "张三",
+  age: 18,
+  height: 1.88,
+  wife: undefined,
+  job: null,
+};
+console.log(map); // undefined
+
+/*
+  四、unknown：任意类型
+  习惯用 any 的话就用 any 吧，其它语言里都是类似 any 这种类型，unknown 的话更加安全，但是判断起来稍显麻烦
+*/
+let v4: unknown = "hello";
+// console.log(v4.length); // 直接使用 unknown 类型的变量编译报错
+if (typeof v4 === "string") {
+  console.log(v4.length); // 编码阶段必须判断好类型才能使用，所以更加安全
+}
+
+/*
+  五、void：函数无返回值类型
+*/
+function v5(): void { }
+
 export { };
