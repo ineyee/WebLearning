@@ -13,3 +13,5 @@ class Person {
 let person = new Person();
 person.age = 10;
 person.run();
+
+export { };
