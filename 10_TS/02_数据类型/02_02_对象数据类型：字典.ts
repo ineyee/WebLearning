@@ -13,12 +13,12 @@
     "height": 1.88
   };
 
-  实际开发中我们也会给这么长的对象类型去个别名来使用，如：
+  实际开发中我们也会给这么长的对象类型取个别名来使用，如：
   type PersonType = {
     name: string,
     age: number,
     height: number
-  }
+  };
   let person: PersonType = {
     "name": "张三",
     "age": 18,

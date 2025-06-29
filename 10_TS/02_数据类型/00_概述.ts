@@ -1,3 +1,5 @@
+// TS 是空安全的，比如 string 类型肯定只能赋值字符串、而不能赋值为 null，如果想赋值为 null，那就使用联合类型 string | null，类似于 String?
+
 /*
   一、自动类型推断和动态类型语言
   Swift里定义一个变量的格式为[var name: String = "zhangsan";]或[var name = "zhangsan";]，可以不指定变量的数据类型、不指定数据类型不代表变量没有数据类型，因为Swift里有自动类型推断，Swift里的自动类型推断是在【编译时】进行的
