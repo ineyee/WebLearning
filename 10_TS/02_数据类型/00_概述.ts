@@ -28,7 +28,7 @@
   2、对象数据类型 <==> 引用类型（3个）
     * array：数组类型，TS里的数组是个泛型集合，它的类型为T[]或Array<T>，T[]为语法糖
     * object：对象类型，也就是其它语言里的字典类型，TS里的字典是个泛型集合，它的类型为{[key: T1]: T2;}或Record<T1, T2>，Record<T1, T2>为语法糖，代表字典里的key是T1类型、value是T2类型，如{[key: string]: any}和Record<string, any>类似于别的语言里的Dictionary<String, Any>、Map<String, dynamic>...；而如果把它不从字典的角度而是从对象的角度考虑时，它的类型为：{属性名1: 属性1的类型, 属性名2: 属性2的类型...}
-    * function：函数类型
+    * function：函数类型，(形参1: 参数类型T1, 形参2: 参数类型T2) -> 返回值类型T，注意 TS 函数的类型里不能省略形参，而 Swift 里是不写形参的
   3、特殊数据类型（5个）
     * undefined：未定义类型
       * 没有对应的包装类型
