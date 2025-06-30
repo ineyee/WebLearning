@@ -12,7 +12,7 @@ class Person {
     // 构造方法里不给默认值，就是必选参数
     sex: string,
     // 构造方法里给个默认值，就是可选参数
-    height: number = 0,
+    height: number = 0
   ) {
     this.height = height;
     // 这里是真正的初始化操作
@@ -42,4 +42,4 @@ let person = new Person(66, "女");
 person.car = new Car();
 console.log(person);
 
-export { };
+export {};

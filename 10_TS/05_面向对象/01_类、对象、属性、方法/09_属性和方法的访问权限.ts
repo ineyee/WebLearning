@@ -10,4 +10,4 @@ class Person {
   private height: number = 0;
 }
 
-export { };
+export {};
