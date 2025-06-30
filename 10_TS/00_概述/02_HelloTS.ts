@@ -5,18 +5,26 @@
     * 所以跟 JS 里一样，实际开发中我们应该总是使用原始类型而非包装类型，包装类型交由 JS 引擎自动去搞
 */
 
-let a: boolean = true;
+// 导入非内置数据类型
+// 推荐在导入数据类型时添加 type 关键字，这样编译器在把 TS 代码编译成 JS 代码时，就可以快速放心大胆的移除这些类型相关的代码了
+import {
+  type BoolNull,
+  type NumberNull,
+  type StringNull,
+} from "./03_custom-types";
+
+let a: BoolNull = true;
 console.log(a.valueOf());
 
-let b: number = 123;
+let b: NumberNull = 123;
 console.log(b.toString());
 
-let c: string = "Hello TS";
+let c: StringNull = "Hello TS";
 console.log(c.length);
 
 /*
   注意：
-    * 一个 ts 文件里如果没有 export 或 import，TS 会默认将此文件视为脚本文件而非模块文件
+    * JS 规范声明如果一个 js/ts 文件里没有 export 或 import，会默认将此文件视为脚本文件而非模块文件
     * 而脚本文件里的变量都是全局变量、会污染全局命名空间、会出现命名冲突等问题，模块文件就有自己独立的作用域、不会污染全局命名空间、不会出现命名冲突等问题
     * 所以实际开发中我们应该添加 export {} 强制让文件成为模块
 */
