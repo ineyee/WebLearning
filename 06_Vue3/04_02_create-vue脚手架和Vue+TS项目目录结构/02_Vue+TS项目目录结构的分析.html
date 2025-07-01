@@ -1,0 +1,202 @@
+<!--
+  ✅ 1、.vscode 文件夹
+  跟 VSCode IDE 相关的东西，extension.json 里是推荐我们安装的 VSCode 插件，直接复制里面推荐的插件去搜索安装即可
+-->
+
+<!--
+  ✅ 2、node_modules文件夹
+  我们很熟悉，包管理工具安装的包都存放在这个目录下
+-->
+
+<!--
+  ✅ 3、public文件夹
+  favicon.ico：站点图标，可以替换为我们项目的
+-->
+
+<!--
+  ✅ 4、src文件夹
+  我们很熟悉，我们的源代码
+-->
+
+<!--
+  ✅ 5、.editorconfig文件（没有的话，自己创建一个）
+  * 当多人使用不同的编辑器编写代码时，可以统一代码风格（比如有的 IDE 可能默认是 2 个空格作为缩进，有的可能默认是 4 个空格作为缩进，这* * 需要编辑器安装插件支持（如 VSCode 的 EditorConfig for VS Code）
+
+  ```
+    // 代表下面的配置适用于哪些文件
+    [*.{js,jsx,mjs,cjs,ts,tsx,mts,cts,vue,css,scss,sass,less,styl}]
+
+    // 代码采用什么编码方式
+    charset = utf-8
+
+    // 代码缩进空格数
+    indent_size = 2
+    // 代码缩进一格就是按了一下空格
+    indent_style = space
+
+    // 文件末尾自动插入空行
+    insert_final_newline = true
+    
+    // 自动删除行尾多余空格
+    trim_trailing_whitespace = true
+
+    // 使用 Linux/macOS 风格的 LF 换行符——即\n（而非 Windows 的 CRLF——即\r\n）
+    end_of_line = lf
+
+    // 建议每行代码不超过 100 个字符（需配合 ESLint/Prettier 等工具生效）
+    max_line_length = 100
+  ```
+-->
+
+<!--
+  ✅ 6、.gitattributes文件
+  用途：定义 Git 版本控制中的文件处理规则
+  作用场景：控制换行符转换、二进制文件处理、语言差异合并策略等
+  核心功能：
+    ​* 换行符标准化：通过 text=auto 或 eol=lf 避免跨平台换行符问题
+-->
+
+<!--
+  ✅ 7、.gitignore文件
+  我们很熟悉，不把哪些东西添加到版本管理
+-->
+
+<!--
+  ✅ 8、.prettierrc.json文件
+  * 代码格式化工具，使得代码更规范更整齐，比自带的格式化更强大一些，我们可以自定义很多格式化的规则，.prettierrc.json 文件
+    ```
+      {
+        // 指定 JSON 配置的 Schema 定义文件（提供自动补全和校验支持）
+        "$schema": "https://json.schemastore.org/prettierrc",
+
+        // 是否在语句末尾添加分号
+        "semi": true,
+
+        // 是否使用单引号替代双引号
+        "singleQuote": false,
+
+        // 每行代码的最大宽度（超出会自动换行）
+        "printWidth": 100,
+
+        // 是否使用 tab 而不是 space 来缩进
+        "useTabs": false,
+        // 2 个空格来缩进
+        "tabWidth": 2,
+
+        // 是否在对象/数组末尾添加逗号（可选值："none"/"es5"/"all"），比如对象类型的最后一个属性后面是否加一个逗号
+        "trailingComma": "all",
+
+        // 对象括号间是否加空格（例如 { foo: bar } vs {foo: bar}）。
+        "bracketSpacing": true,
+
+        换行符类型（可选值："lf"/"crlf"/"auto"，默认跟随操作系统）。
+        "endOfLine": "lf"
+      }
+    ```
+  * 实际开发中我们会配置为保存文件时就自动代码格式化或者通过 alt+cmd+l 快捷键来格式化
+    * 安装插件 Prettier - Code formatter
+    * 打开【首选项】-【设置】-【搜索 format】-【常用设置】
+      * 【默认格式化工具】选择为 Prettier - Code formatter，这样就可以通过 alt+cmd+l 快捷键来格式化代码了
+      * 勾选【保存代码时格式化】，这样都不用手动通过 alt+cmd+l 快捷键来格式化代码了，编写完代码直接 cmd+s 一下就可以格式化代码了
+      * 勾选【粘贴代码时格式化】，这样从别的地方复制过来乱七八糟的代码，粘贴到我们的代码里时也会自动格式化了
+      * 当然如果我们要对整个项目进行一次格式化，比如老代码之前没格式化过，就可以通过做一次“npm run format”统一代码格式
+-->
+
+<!--
+  ✅ 9、.env.d.ts文件
+  自定义一些类型，都写在这个文件里，TS 编译器会自动根据这个文件里的内容来做静态类型检测
+
+  我们用 TS 开发的核心目标就是做静态类型检测，但是默认情况下只有 .ts 文件里的东西有类型，所以默认情况下 TS 编译器只会对 .ts 文件进行类型检测，项目里的其它非代码文件如 css文件、图片文件、json 文件等静态资源文件里是没有类型的概念的，那怎么对这些文件进行静态类型检测呢？
+
+  其实就像 JS 开发那样，直接导入这些文件来使用也是没有问题的，只不过加上 TS 的静态类型检测会更安全
+  
+  比如我们在导入 css 文件后，使用类名时写错了，button -> buton
+  ```js
+    import styles from './styles.css';
+    console.log(styles.wrongClass);
+  ```
+  JS 开发编译时是不会报错的、运行时才会报错，但是如果用 TS 做一下静态类型检测、编译时直接就报类名不存在了、的确更加安全
+
+  比如我们在导入图片资源文件时发生了拼写错误，logo -> loogo
+  ```js
+    import logo from './loogo.png';
+  ```
+  JS 开发编译时是不会报错的、运行时才会报错，但是如果用 TS 做一下静态类型检测、编译时直接就报图片路径错误了、的确更加安全
+
+  比如我们在导入 json 文件后，使用了 json 文件里压根不存在的一个 key
+  ```js
+    import data from './data.json';
+    console.log(data.nonExistentField);
+  ```
+  JS 开发编译时是不会报错的、运行时才会报错，但是如果用 TS 做一下静态类型检测、编译时直接就报 key 不存在了、的确更加安全
+
+  而要想让这些静态资源文件参与 TS 的静态类型检测，我们就得手动在 .env.d.ts 文件里定义这些资源的类型，好让 TS 编译器知道遇到这些文件时该把它们当做什么类型来解析
+  
+  比如
+  ```js
+    // declare: 是声明的意思
+    // module: 表示声明为一个模块（因为我们将来在使用这些静态资源时都是把它们当做模块 import 导入使用的）
+    // *.png: 表示所以 png 结尾的文件
+    declare module '*.png' {
+      const src: string; // 图片的路径
+      export default src; // 代表这个模块最终导出的是个 string 类型的变量 src——即图片的路径
+    }
+  ```
+  当我们在代码中这样使用图片时
+  ```js
+    import logo from './logo.png';
+  ```
+  打包工具最终会将 logo 转换为一个 string 类型，并且 logo 的值就是图片的绝对路径如 dist/assets/logo.123abc.png
+
+  有很多的静态资源文件都需要这样指定类型，好在脚手架已经帮我们弄好了绝大多数常用静态资源文件的类型，并且在 .env.d.ts 文件里引入了：<reference types="vite/client" />，可以点击跳转进去查看都指定了哪些静态资源文件对应的类型
+
+  但是 .vue 文件，脚手架没有帮我们配置，所以需要我们自己在 .env.d.ts 文件里配置一下，告诉 TS 编译器 .vue 文件导出的都是一个 Vue 组件，编译器就会联合 volar 插件来解析并检查 .vue 文件了：
+  ```js
+    declare module '*.vue' {
+      import { DefineComponent } from 'vue'
+      const component: DefineComponent
+      export default component
+    }
+  ```
+-->
+
+<!--
+  ✅ 10、index.html：HTML模版文件
+  打包工具会根据这个HTML模板文件生成用户最终访问的那个HTML文件——项目入口页面，并把打包好的CSS和JS静态资源注入其中
+  用户最终访问的那个HTML文件是Vue项目运行时的唯一HTML页面，它就是Vue项目的入口页面、也就是说浏览器加载Vue应用时会先加载这个文件————就像我们之前写王者荣耀和考拉海购项目的项目入口页面index.html文件一样
+-->
+
+<!--
+  ✅ 11、package-lock.json文件
+  我们很熟悉，也是我们项目的配置文件，里面记录最重要的就是我们的项目真正安装了哪个版本的依赖
+-->
+
+<!--
+  ✅ 12、package.json文件
+  我们很熟悉，我们项目的配置文件，里面记录着我们项目的很多信息
+-->
+
+<!--
+  ✅ 13、README.md文件
+  我们很熟悉，介绍我们项目的一个文件
+-->
+
+<!--
+  ✅ 14、tsconfig.app.json文件
+  app 的编译配置
+-->
+
+<!--
+  ✅ 15、tsconfig.json文件
+  在其中配置编译选项、让编译器知道该如何编译 TS 代码，引用着 tsconfig.app.json 文件和 tsconfig.node.json 文件，默认都配好了
+-->
+
+<!--
+  ✅ 16、tsconfig.node.json文件
+  ssr 的编译配置
+-->
+
+<!--
+  ✅ 17、vite.config.ts文件
+  vite.config.ts 类似于 vue.config.js、webpack.config.js的用途，我们可以在里面修改打包配置等各种配置
+-->
