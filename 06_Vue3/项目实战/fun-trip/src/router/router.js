@@ -61,8 +61,17 @@ const router = createRouter({
       path: "/houseDetail/:houseId",
       component: () => import("../house-detail/page/house-detail-page.vue"),
     },
+
+    // 用户瞎输入路径，没有匹配到对应的路由时，可以给个自定的 404 not-found 页面
+    {
+      path: "/:pathMatch(.*)",
+      component: () => import("../not-found/NotFoundPage.vue"),
+    },
   ],
 });
 
 // 2、导出路由
 export default router;
+
+// 导航守卫：比如无论在哪个界面，检测到没有登录的情况下就跳转到登录界面，这个实际做到时去搜索一下即可
+// 二级路由：很多门户网站或后台管理系统，主路由比如只有两个：登录页面和登录成功后的主页面，而主页面里要么是顶部菜单栏在切换菜单栏下面的内容区域，要么是侧边菜单栏在切换菜单栏右边的内容区域，也就是说主页面的路由是没变化的，但是主页面里的内容部分在随着菜单变化，地址栏的路径也随着发生了变化，这其实就用到了子路由，这个实际做到时去搜索一下即可

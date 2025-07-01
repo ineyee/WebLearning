@@ -1,0 +1,116 @@
+@charset "UTF-8";
+/* 指定网页里CSS文件的编码方式 */
+/* 导入其它所有的CSS文件，外界只需要导入index.css就可以了 */
+/* 重置样式文件 */
+/* 重置掉自带的padding、margin */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li {
+  padding: 0px;
+  margin: 0px;
+}
+/* 重置掉img元素的vertical-align，否则图片下面可能会有条线 */
+img {
+  vertical-align: top;
+}
+/* 重置掉自带的下划线 */
+a {
+  text-decoration: none;
+}
+/* 重置掉自带的列表样式 */
+ul,
+ol,
+li {
+  list-style: none;
+}
+/* 重置掉自带的表格样式 */
+table {
+  /* 边框合并：把中间部分单元格的相邻边框给合并掉，否则会有间距或者双份厚度的边框 */
+  border-collapse: collapse;
+}
+/* 通用样式文件 */
+/*
+  定义一些全局样式变量，将来直接用var()函数就能直接使用，连导入都不用导入
+  当然用less也可以定义全局样式变量，但是使用less全局样式变量的地方总是得导入一下相应的less文件，不如原生css样式变量使用起来方便，但是less的兼容性更好
+
+  注意：这些全局样式变量只能用在CSS里————也就是<style></style>元素内部，不能直接在template模板里使用它们
+*/
+html {
+  --fs-24: 24px;
+  --fs-22: 22px;
+  --fs-20: 20px;
+  --fs-18: 18px;
+  --fs-16: 16px;
+  --fs-14: 14px;
+  --fs-12: 12px;
+  --fs-10: 10px;
+  --fs-23: 23px;
+  --fs-21: 21px;
+  --fs-19: 19px;
+  --fs-17: 17px;
+  --fs-15: 15px;
+  --fs-13: 13px;
+  --fs-11: 11px;
+  --fs-9: 9px;
+  --fw-normal: 400;
+  --fw-medium: 500;
+  --fw-bold: 700;
+  --c-000000FF: #000000FF;
+  --c-333333FF: #333333FF;
+  --c-666666FF: #666666FF;
+  --c-999999FF: #999999FF;
+  --c-FFFFFFFF: #FFFFFFFF;
+  --main-color: #FF9854FF;
+  --van-primary-color: var(--main-color) !important;
+  --van-nav-bar-title-font-size: 20px !important;
+  --van-nav-bar-title-text-color: var(--main-color) !important;
+  --van-nav-bar-arrow-size: 23px !important;
+  --van-nav-bar-icon-color: var(--main-color) !important;
+}
+body {
+  /*
+    我们一般都会给body设置一个min-width，来处理网页缩小的问题（web端需要给这个值，移动端不需要给这个值）
+    这个值我们一般会取各区域wrapper的最大值
+  */
+  /* min-width: 1300px; */
+  /*
+    当前网站内绝大多数元素的字体大小都是14px、行高是字体的1.5，颜色都是#333333
+    抽到这里我们就不用一直重复写了，导入一下就行，其它元素都会继承body元素的样式
+  */
+  font: 14px / 1.5 "Microsoft YaHei", Tahoma, "simsun", sans-serif;
+  color: #333333;
+}
+/* 虽然body元素搞了，但是a元素容易被浏览器自动搞成-webkit-link;这种样式，因此对它单独弄一下 */
+a {
+  font: 14px / 1.5 "Microsoft YaHei", Tahoma, "simsun", sans-serif;
+  color: #333333;
+}
+/*
+  tabBar首屏的那几个页面，直接加上这个类即可
+  高度要手动设置一下，才能不被tabBar遮挡
+  并且如果是列表的话，得设置一下overflow，右侧滚动条才不会包含tabBar部分
+*/
+.tab-bar-direct-page {
+  /*
+    100vh：屏幕的高度
+    var(--van-tabbar-height)：van-tabbar的高度
+    env(safe-area-inset-bottom)：底部安全区域的高度
+  */
+  height: calc(100vh - var(--van-tabbar-height) - env(safe-area-inset-bottom));
+  /* 确保内容可滚动 */
+  overflow-y: scroll;
+}
+.scroll-listen-page {
+  /* 100vh：屏幕的高度 */
+  height: 100vh;
+  /* 确保内容可滚动 */
+  overflow-y: scroll;
+}
